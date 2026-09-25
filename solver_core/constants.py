@@ -23,6 +23,8 @@ MIN_NONZERO_INPUT: Final = 1e-100
 # Applies to each reduced numerator/denominator, including future intermediates.
 MAX_RATIONAL_BITS: Final = 4096
 MAX_DISPLAY_DENOMINATOR: Final = 10_000
+# Cumulative scalar text across full trace snapshots/factors; no silent truncation.
+MAX_TRACE_VALUE_CHARS: Final = 1_000_000
 MIN_ITERATIVE_TOLERANCE: Final = 1e-14
 MAX_ITERATIVE_TOLERANCE: Final = 1e-2
 DEFAULT_ITERATIVE_TOLERANCE: Final = 1e-8

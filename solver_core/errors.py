@@ -18,6 +18,9 @@ class ErrorCode(StrEnum):
     RATIONAL_GROWTH_LIMIT = "rational_growth_limit"
     NON_FINITE_VALUE = "non_finite_value"
     INVALID_TOLERANCE = "invalid_tolerance"
+    RANK_UNCERTAIN = "rank_uncertain"
+    ZERO_PIVOT = "zero_pivot"
+    TRACE_LIMIT = "trace_limit"
 
 
 class SolverError(ValueError):

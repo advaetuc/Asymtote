@@ -96,3 +96,10 @@ validated domain values instead of limiting models to standard dataclasses.
 It remains independent of FastAPI, HTTP, and Vercel. Input models preserve token
 strings; parsed models use float or Fraction explicitly. No solver methods or
 classification implementation have been added at this verification gate.
+
+The next approved batch adds `classify_system`, `solve_gaussian`, and
+`solve_gauss_jordan`, plus their unit/property tests. `_elimination.py` owns
+handwritten guarded row operations; `_direct.py` assembles solutions, parametric
+expressions, traces, and original-system residual diagnostics. Classification
+depends on the reduction primitive, never on a public solver, avoiding circular
+dependencies. No API or frontend changes are part of this batch.

@@ -2,8 +2,9 @@
 
 Educational linear equation solver. Phase 0 provides the application scaffold.
 Phase 1 foundations now include strict numeric parsing, immutable domain models,
-resource bounds, and tolerance policy. The four numerical methods await the next
-approved implementation stages.
+resource bounds, and tolerance policy. Gaussian elimination, Gauss-Jordan RREF,
+and rank classification are implemented and tested in float64 and exact modes.
+Iterative methods and the solver API/UI await the next approved stages.
 
 ## Requirements
 

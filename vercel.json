@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "rewrites": [{ "source": "/api/:path*", "destination": "/api" }],
+  "functions": {
+    "api/index.py": {
+      "excludeFiles": "{.tools/**,.venv/**,venv/**,tests/**,docs/**,playwright-report/**,test-results/**}"
+    }
+  }
+}

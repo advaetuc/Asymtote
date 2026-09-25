@@ -1,0 +1,46 @@
+[build-system]
+requires = ["hatchling==1.32.4"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tulya"
+version = "0.1.0"
+description = "Stateless educational linear equation solver"
+readme = "README.md"
+requires-python = "~=3.12.0"
+dependencies = [
+  "fastapi==0.141.1",
+  "pydantic==2.13.5",
+  "numpy==2.5.3",
+]
+
+[dependency-groups]
+dev = [
+  "httpx2==2.13.1",
+  "hypothesis==6.168.1",
+  "mypy==2.3.1",
+  "pytest==9.1.1",
+  "ruff==0.16.9",
+  "uvicorn==0.54.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["api", "api_app", "api_models", "solver_core"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests/python"]
+addopts = "-ra --strict-config --strict-markers"
+filterwarnings = ["error"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+extend-exclude = ["venv", ".tools", "node_modules"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["api", "api_app", "api_models", "solver_core"]

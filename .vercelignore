@@ -1,0 +1,8 @@
+.tools/
+.venv/
+venv/
+.vscode/
+.git/
+tests/
+playwright-report/
+test-results/

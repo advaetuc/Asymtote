@@ -134,3 +134,21 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Python environments and tool caches
+venv/
+.venv/
+.tools/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.hypothesis/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+
+# Local editor/deployment state and browser-test output
+.vscode/
+.vercel/
+playwright-report/
+test-results/

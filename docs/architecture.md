@@ -103,3 +103,21 @@ handwritten guarded row operations; `_direct.py` assembles solutions, parametric
 expressions, traces, and original-system residual diagnostics. Classification
 depends on the reduction primitive, never on a public solver, avoiding circular
 dependencies. No API or frontend changes are part of this batch.
+
+## Phase 1 completion
+
+`permutations.py` supplies independent bipartite matching utilities for strict
+dominance and safe non-zero diagonals. `diagnostics.py` owns original-system
+residual metrics for direct and iterative solvers, plus float conditioning.
+`convergence.py` supplies method-specific iteration matrices, spectral and SPD
+diagnostics, and the dual stopping test. `_iterative.py` manages preconditions,
+accepted row reordering, guarded sweeps, risk consent, and bounded histories;
+`jacobi.py` and `gauss_seidel.py` expose the public solver entry points.
+
+All results and trace records are immutable Pydantic domain models. `trace.py`
+serializes complete versioned numerical records, and `report.py` combines a
+source system and result without duplicating trace snapshots. The numerical core
+imports neither FastAPI nor API models. It accepts typed values and reports
+transport-independent errors. The future Phase 2 boundary will parse user tokens,
+map domain outcomes to HTTP contracts, and generate frontend types. Phase 4 will
+render report data into Markdown and LaTeX. No solver HTTP routes were added here.

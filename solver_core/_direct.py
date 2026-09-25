@@ -3,7 +3,6 @@
 from typing import Literal
 
 from solver_core._elimination import (
-    Matrix,
     Reduction,
     Scalar,
     System,
@@ -11,16 +10,15 @@ from solver_core._elimination import (
     checked,
     divide,
     forward_reduce,
-    magnitude,
     multiply,
     reduce_above_pivots,
     total,
 )
 from solver_core.classification import classify_system
+from solver_core.diagnostics import solution_diagnostics
 from solver_core.errors import ErrorCode, NumericBreakdownError
 from solver_core.models import (
     ClassificationKind,
-    DirectDiagnostics,
     DirectResult,
     ParameterTerm,
     ParametricSolution,
@@ -46,23 +44,6 @@ def _back_substitute(work: Reduction, free_column: int | None = None) -> tuple[S
         )
         vector[column] = divide(add(rhs, checked(-contribution)), work.matrix[row][column])
     return tuple(vector)
-
-
-def _diagnostics(system: System, vector: tuple[Scalar, ...], zero: Scalar) -> DirectDiagnostics:
-    coefficients: Matrix = system.a
-    rhs_values: tuple[Scalar, ...] = system.b
-    residual = tuple(
-        add(total((multiply(a, x) for a, x in zip(row, vector, strict=True)), zero), -b)
-        for row, b in zip(coefficients, rhs_values, strict=True)
-    )
-    residual_inf = max(magnitude(value) for value in residual)
-    norm_a = max(total((magnitude(value) for value in row), zero) for row in coefficients)
-    norm_x = max(magnitude(value) for value in vector)
-    norm_b = max(magnitude(value) for value in rhs_values)
-    denominator = add(multiply(norm_a, norm_x), norm_b)
-    # The only zero-denominator case is a zero residual for the zero system.
-    backward_error = zero if denominator == 0 else divide(residual_inf, denominator)
-    return DirectDiagnostics(residual_inf=residual_inf, backward_error=backward_error)
 
 
 def solve_direct(system: System, *, method: Literal["gaussian", "gauss_jordan"]) -> DirectResult:
@@ -91,7 +72,7 @@ def solve_direct(system: System, *, method: Literal["gaussian", "gauss_jordan"])
     diagnostics = None
     if not inconsistent:
         particular = _back_substitute(work)
-        diagnostics = _diagnostics(system, particular, work.zero)
+        diagnostics = solution_diagnostics(system, particular)
         if not free:
             solution = particular
         else:

@@ -395,3 +395,194 @@ class DirectResult(DomainModel):
         elif self.solution is not None or self.parametric_solution is None:
             raise ValueError("Infinite results require a parametric solution.")
         return self
+
+
+class IterationOptions(IterationSettings):
+    initial_guess: (
+        Annotated[tuple[FloatScalar, ...], Field(min_length=1, max_length=MAX_UNKNOWNS)] | None
+    ) = None
+    auto_reorder_for_diagonal_dominance: bool = True
+    auto_reorder_for_nonzero_diagonal: bool = False
+    run_despite_convergence_risk: bool = False
+
+
+type IterativeMethod = Literal["jacobi", "gauss_seidel"]
+type FloatVector = tuple[FloatScalar, ...]
+type NonnegativeFloat = Annotated[FloatScalar, Field(ge=0)]
+
+
+class RowPermutation(DomainModel):
+    """order[j] is the original equation moved to row j; variables never move."""
+
+    order: Annotated[tuple[int, ...], Field(min_length=1, max_length=MAX_EQUATIONS)]
+    purpose: Literal["identity", "strict_diagonal_dominance", "nonzero_diagonal"]
+
+    @model_validator(mode="after")
+    def validate_order(self) -> Self:
+        if sorted(self.order) != list(range(len(self.order))):
+            raise ValueError("Row order must be a permutation of consecutive indices.")
+        if self.purpose == "identity" and self.order != tuple(range(len(self.order))):
+            raise ValueError("Identity reordering cannot move rows.")
+        return self
+
+
+class ReorderingDiagnostics(DomainModel):
+    permutation: RowPermutation
+    dominance_search_attempted: bool
+    dominance_matching_found: bool | None
+    nonzero_search_attempted: bool
+
+    @model_validator(mode="after")
+    def validate_search(self) -> Self:
+        if self.dominance_search_attempted != (self.dominance_matching_found is not None):
+            raise ValueError("Dominance matching must record the outcome of an attempted search.")
+        if (
+            self.permutation.purpose == "strict_diagonal_dominance"
+            and not self.dominance_matching_found
+        ):
+            raise ValueError("Dominance reordering requires a successful search.")
+        if self.permutation.purpose == "nonzero_diagonal" and not self.nonzero_search_attempted:
+            raise ValueError("Non-zero reordering requires an explicit search.")
+        return self
+
+
+class ConditionDiagnostic(DomainModel):
+    status: Literal["finite", "singular", "unavailable"]
+    condition_number: NonnegativeFloat | None = None
+    approximate_digit_loss: NonnegativeFloat | None = None
+
+    @model_validator(mode="after")
+    def validate_status(self) -> Self:
+        if self.status == "finite":
+            if self.condition_number is None or self.approximate_digit_loss is None:
+                raise ValueError("Finite conditioning requires both diagnostic values.")
+        elif self.condition_number is not None or self.approximate_digit_loss is not None:
+            raise ValueError("Unavailable/singular conditioning cannot expose numeric values.")
+        return self
+
+
+class SpectralDiagnostic(DomainModel):
+    status: Literal["computed", "unavailable"]
+    radius: NonnegativeFloat | None = None
+
+    @model_validator(mode="after")
+    def validate_status(self) -> Self:
+        if (self.status == "computed") != (self.radius is not None):
+            raise ValueError("Only a computed spectral diagnostic has a radius.")
+        return self
+
+
+class ConvergenceDiagnostics(DomainModel):
+    method: IterativeMethod
+    strict_diagonal_dominance: bool
+    weak_diagonal_dominance: bool
+    symmetric_positive_definite: bool | None
+    symmetry_tolerance: NonnegativeFloat
+    spectral: SpectralDiagnostic
+    assessment: Literal["sufficient_condition", "spectral_radius_below_one", "convergence_risk"]
+    explanation: str
+
+
+class IterationMetrics(DomainModel):
+    residual_inf: NonnegativeFloat
+    backward_error: NonnegativeFloat
+
+
+class IterationRecord(IterationMetrics):
+    index: Annotated[int, Field(ge=1, le=MAX_ITERATIONS)]
+    vector: Annotated[FloatVector, Field(min_length=1, max_length=MAX_UNKNOWNS)]
+    delta_inf: NonnegativeFloat
+    normalized_step_change: NonnegativeFloat
+    converged: bool
+
+
+class IterationStatus(StrEnum):
+    CONVERGED = "converged"
+    MAX_ITERATIONS_REACHED = "max_iterations_reached"
+    NUMERIC_BREAKDOWN = "numeric_breakdown"
+    CONVERGENCE_RISK_DECLINED = "convergence_risk_declined"
+
+
+class IterativeResult(DomainModel):
+    method: IterativeMethod
+    arithmetic_mode: Literal[ArithmeticMode.FLOAT64] = ArithmeticMode.FLOAT64
+    classification: ClassificationResult
+    options: IterationOptions
+    initial_guess: FloatVector
+    reordering: ReorderingDiagnostics
+    convergence: ConvergenceDiagnostics
+    conditioning: ConditionDiagnostic
+    status: IterationStatus
+    last_iterate: FloatVector
+    solution: FloatVector | None
+    history: Annotated[tuple[IterationRecord, ...], Field(max_length=MAX_ITERATIONS)]
+    diagnostics: IterationMetrics | None
+    breakdown_reason: str | None = None
+    warnings: tuple[str, ...] = ()
+
+    @model_validator(mode="after")
+    def validate_iteration_result(self) -> Self:
+        n = self.classification.shape.unknowns
+        if (
+            not self.classification.shape.is_square
+            or self.classification.classification is not ClassificationKind.UNIQUE
+            or self.classification.arithmetic_mode is not ArithmeticMode.FLOAT64
+        ):
+            raise ValueError("Iterations require a square, unique float64 system.")
+        if self.convergence.method != self.method:
+            raise ValueError("Convergence diagnostics must describe the selected method.")
+        if any(len(v) != n for v in (self.initial_guess, self.last_iterate)):
+            raise ValueError("Iterate lengths must match the unknown count.")
+        if len(self.reordering.permutation.order) != n:
+            raise ValueError("Row mapping length must match the equation count.")
+        if (
+            self.options.initial_guess is not None
+            and self.options.initial_guess != self.initial_guess
+        ):
+            raise ValueError("Initial vector must agree with options.")
+        if len(self.history) > self.options.max_iterations:
+            raise ValueError("History exceeds the requested iteration limit.")
+        for index, record in enumerate(self.history, start=1):
+            expected = (
+                record.backward_error <= self.options.tolerance
+                and record.normalized_step_change <= self.options.tolerance
+            )
+            if record.index != index or len(record.vector) != n or record.converged != expected:
+                raise ValueError(
+                    "Iteration trace violates dimensions, indices, or stopping policy."
+                )
+            if record.converged and index != len(self.history):
+                raise ValueError("Iteration must stop after convergence.")
+        if self.history:
+            last = self.history[-1]
+            if self.last_iterate != last.vector or self.diagnostics != IterationMetrics(
+                residual_inf=last.residual_inf, backward_error=last.backward_error
+            ):
+                raise ValueError(
+                    "Final diagnostics and vector must match the last complete record."
+                )
+        elif self.last_iterate != self.initial_guess:
+            raise ValueError("Without completed iterations, preserve the initial guess.")
+        converged = bool(self.history and self.history[-1].converged)
+        if (self.status is IterationStatus.CONVERGED) != converged:
+            raise ValueError("Status must agree with trace convergence.")
+        if self.solution != (self.last_iterate if converged else None):
+            raise ValueError("Only a converged iterate is reported as a solution.")
+        if (
+            self.status is IterationStatus.MAX_ITERATIONS_REACHED
+            and len(self.history) != self.options.max_iterations
+        ):
+            raise ValueError("Iteration-limit status requires exhausting the requested budget.")
+        if self.status is IterationStatus.CONVERGENCE_RISK_DECLINED and (
+            self.history
+            or self.convergence.assessment != "convergence_risk"
+            or self.options.run_despite_convergence_risk
+        ):
+            raise ValueError("Declined risk requires no history, a risk, and no override.")
+        if self.diagnostics is None and self.status is not IterationStatus.NUMERIC_BREAKDOWN:
+            raise ValueError("Only an initial numeric breakdown can omit final metrics.")
+        if (self.status is IterationStatus.NUMERIC_BREAKDOWN) != (
+            self.breakdown_reason is not None
+        ):
+            raise ValueError("Only numeric breakdown requires a reason.")
+        return self

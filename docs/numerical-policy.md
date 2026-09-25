@@ -1,10 +1,10 @@
-# Numerical policy — Phase 1 foundations
+# Numerical policy — Phase 1
 
 Implemented: resource constants, Pydantic domain models, strict token parsing,
 floating comparison tolerances, rank classification, Gaussian elimination,
-Gauss-Jordan reduction, and direct-method residual/backward-error diagnostics.
-Iterative methods, condition-number diagnostics, and iteration stopping remain
-for subsequent approved work.
+Gauss-Jordan reduction, row matching, Jacobi and Gauss-Seidel iteration,
+residual/backward-error and convergence diagnostics, trace serialization,
+and structured report data.
 
 ## Fixed specification limits
 
@@ -142,10 +142,97 @@ on unrounded float products. If the denominator is zero, the zero system has
 zero residual and backward error is defined as zero. Arithmetic overflow raises
 a controlled error; no NaN or Infinity is serialized.
 
-Future iterative stopping must require small normalized residual and complementary
-normalized step change. Budget exhaustion and numerical breakdown must be explicit
-outcomes, not successful solutions. Jacobi and Gauss-Seidel require separate
-iteration matrices.
+Iterative solvers accept `FloatSystem` only. Exact input requires an explicit
+separate parse into float mode; Fraction values never enter an iteration. Python
+floats on the supported CPython 3.12 runtime are IEEE binary64, matching NumPy
+float64. Jacobi reads only the previous immutable vector; Gauss-Seidel reads its
+partially updated buffer. Neither method rounds values or calls a library solver.
+
+Every complete iteration records the vector, residual norm, backward error,
+step norm, normalized step, and convergence boolean:
+
+```text
+delta_inf = max_i abs(x_new[i] - x_old[i])
+normalized_step_change = delta_inf / max(1, max_i abs(x_new[i]))
+converged = backward_error <= tolerance AND normalized_step_change <= tolerance
+```
+
+The denominator floor applies only to step normalization, never matrix pivot
+tests. It gives an absolute step test near the zero vector. The residual test
+still prevents a tiny step with a large relative residual from claiming success.
+At least one sweep is performed, including when the initial guess is already a
+solution. Default initial guess is zero, tolerance is 1e-8, and budget is 25.
+The existing tolerance and iteration caps are enforced by `IterationOptions`.
+
+Only `converged` populates `solution`. Budget exhaustion returns
+`max_iterations_reached`, with a `last_iterate` and its diagnostics. Arithmetic
+overflow in a product, sum, vector update, norm, or backward-error denominator,
+and violations of iteration shape/trace invariants, return `numeric_breakdown`.
+The last complete finite record is preserved; a partial sweep or a candidate
+whose diagnostics failed is discarded. If the initial residual cannot be
+computed, history is empty and diagnostics are absent. No NaN/Infinity enters
+serialized output. Invalid preconditions (non-square/non-unique systems,
+wrong initial length, or an unsafe diagonal) raise domain errors before iteration.
+
+## Row matching and iteration risk
+
+`permutations.py` uses augmenting-path bipartite matching, bounded by O(n^3),
+with positions on one side and equation rows on the other. For strict matching,
+an edge exists exactly when `abs(A[row,j]) > sum(k != j, abs(A[row,k]))`.
+Weak dominance does not satisfy this test. Float sums use `math.fsum`; exact
+systems use bounded rational sums. For non-zero matching, float edges require
+`abs(A[row,j]) > pivot_abs`; exact edges require an exactly nonzero coefficient.
+There is no permutation enumeration or column reordering.
+
+`RowPermutation.order[j]` identifies the original equation moved to working row
+j. The same map moves the RHS. The source model remains immutable. Identity is
+preferred when it already satisfies the matching criterion.
+
+By default, `auto_reorder_for_diagonal_dominance=True` searches only when the
+current matrix is not strictly dominant. Failure preserves the original order.
+The separate `auto_reorder_for_nonzero_diagonal=False` option explicitly permits
+fallback matching if a safe diagonal is still missing. A non-zero match does not
+imply dominance or convergence. Search outcomes and the accepted permutation are
+stored in the result.
+
+`convergence.py` builds Jacobi's `-D^-1(L+U)` by row division and Gauss-Seidel's
+`-(D+L)^-1 U` by handwritten forward substitution. It never constructs an inverse.
+NumPy eigenvalues provide a method-specific spectral-radius diagnostic.
+Symmetry is tested with absolute cutoff `pivot_abs`; Cholesky is applied to the
+symmetric part `(A/2 + A.T/2)` to avoid relying on just one triangle. This is a
+floating SPD diagnostic, not a symbolic proof. SPD supports Gauss-Seidel; it is
+not treated as sufficient for Jacobi.
+
+Strict row dominance, the Gauss-Seidel SPD diagnostic, or a computed spectral
+radius below one allows execution. A computed radius at least one, conflicting
+numerical evidence, or unavailable spectral information with no sufficient
+condition is treated as convergence risk. The default result is
+`convergence_risk_declined`. `run_despite_convergence_risk=True` allows a bounded
+run whose status follows the actual trace. A particular initial guess may still
+converge even when convergence from all initial guesses is not guaranteed.
+
+## Conditioning, traces, and report data
+
+`condition_diagnostic` uses NumPy's 2-norm condition number on the original float
+coefficient matrix. Finite values include `max(0, log10(kappa))` as approximate
+potential decimal digit loss, not a universal error bound or a bad-condition
+threshold. Infinite condition values yield structured `singular` status;
+failed/NaN computations yield `unavailable`, with no non-finite JSON number.
+Spectral failures likewise produce `unavailable` without fabricating a radius.
+
+`trace.py` emits version-1 direct and iterative trace envelopes. Exact entries
+retain structured numerator/denominator decimal strings. Float values serialize
+at full precision; display settings never affect raw data. Iteration histories
+contain at most 500 records of at most 12 values plus four scalar metrics, which
+stay below the existing million-character numeric budget. Standalone trace
+serialization also enforces that budget and never silently truncates.
+
+`report.py` assembles version-1 immutable report data: the original system,
+validated result (including options, accepted row order, classification,
+solution or parametric outcome, diagnostics, warnings, and trace), and separate
+display settings. It checks shape and arithmetic-mode compatibility; callers
+must pair a result with the system that produced it. The result owns the single
+trace copy. Markdown/LaTeX rendering and user-facing exports belong to Phase 4.
 
 ## Strict parsing and exact arithmetic
 

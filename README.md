@@ -7,7 +7,9 @@ and rank classification are implemented and tested in float64 and exact modes.
 Phase 1 now also includes row matching, float64 Jacobi and Gauss-Seidel, convergence
 diagnostics, complete traces, and structured report data. Phase 2 adds typed
 analysis/solve endpoints, correlated request logs, and generated API contracts.
-The interactive solver UI awaits Phase 3.
+Phase 3 adds the interactive `/solve` workspace and `/learn` primer, with typed
+requests, editable matrices, analysis, method settings, and educational results.
+See [Phase 3 verification](docs/phase-3-completion-report.md) for coverage and scope.
 
 ## Requirements
 

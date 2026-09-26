@@ -1,0 +1,5233 @@
+{
+  "analysisUnique": {
+    "status": "analyzed",
+    "request_id": "fixture-analysisUnique",
+    "shape": {
+      "equations": 2,
+      "unknowns": 2
+    },
+    "is_square": true,
+    "classification": {
+      "shape": {
+        "equations": 2,
+        "unknowns": 2
+      },
+      "arithmetic_mode": "float64",
+      "rank_a": 2,
+      "rank_augmented": 2,
+      "classification": "unique",
+      "rank_tolerance": 3.3306690738754696e-15,
+      "tolerance_policy": "float64-coefficient-scale-v1"
+    },
+    "conditioning": {
+      "status": "finite",
+      "condition_number": 2.6180339887498945,
+      "approximate_digit_loss": 0.4179752804999574
+    },
+    "conditioning_arithmetic_mode": "float64",
+    "strict_diagonal_dominance": true,
+    "dominance_permutation": {
+      "order": [
+        0,
+        1
+      ],
+      "purpose": "strict_diagonal_dominance"
+    },
+    "nonzero_permutation": {
+      "order": [
+        0,
+        1
+      ],
+      "purpose": "nonzero_diagonal"
+    },
+    "methods": [
+      {
+        "method": "gaussian",
+        "eligible": true,
+        "code": "available",
+        "reason": "Direct row reduction supports every validated rectangular system.",
+        "requires_row_reordering": false,
+        "requires_risk_override": false,
+        "row_permutation": null,
+        "convergence": null
+      },
+      {
+        "method": "gauss_jordan",
+        "eligible": true,
+        "code": "available",
+        "reason": "Direct row reduction supports every validated rectangular system.",
+        "requires_row_reordering": false,
+        "requires_risk_override": false,
+        "row_permutation": null,
+        "convergence": null
+      },
+      {
+        "method": "jacobi",
+        "eligible": true,
+        "code": "available",
+        "reason": "The method satisfies its execution preconditions.",
+        "requires_row_reordering": false,
+        "requires_risk_override": false,
+        "row_permutation": null,
+        "convergence": {
+          "method": "jacobi",
+          "strict_diagonal_dominance": true,
+          "weak_diagonal_dominance": true,
+          "symmetric_positive_definite": false,
+          "symmetry_tolerance": 2.220446049250313e-15,
+          "spectral": {
+            "status": "computed",
+            "radius": 0.408248290463863
+          },
+          "assessment": "sufficient_condition",
+          "explanation": "Strict row diagonal dominance is a sufficient convergence condition."
+        }
+      },
+      {
+        "method": "gauss_seidel",
+        "eligible": true,
+        "code": "available",
+        "reason": "The method satisfies its execution preconditions.",
+        "requires_row_reordering": false,
+        "requires_risk_override": false,
+        "row_permutation": null,
+        "convergence": {
+          "method": "gauss_seidel",
+          "strict_diagonal_dominance": true,
+          "weak_diagonal_dominance": true,
+          "symmetric_positive_definite": false,
+          "symmetry_tolerance": 2.220446049250313e-15,
+          "spectral": {
+            "status": "computed",
+            "radius": 0.16666666666666666
+          },
+          "assessment": "sufficient_condition",
+          "explanation": "Strict row diagonal dominance is a sufficient convergence condition."
+        }
+      }
+    ],
+    "warnings": []
+  },
+  "analysisInfinite": {
+    "status": "analyzed",
+    "request_id": "fixture-analysisInfinite",
+    "shape": {
+      "equations": 2,
+      "unknowns": 3
+    },
+    "is_square": false,
+    "classification": {
+      "shape": {
+        "equations": 2,
+        "unknowns": 3
+      },
+      "arithmetic_mode": "float64",
+      "rank_a": 2,
+      "rank_augmented": 2,
+      "classification": "infinite",
+      "rank_tolerance": 2.6645352591003757e-15,
+      "tolerance_policy": "float64-coefficient-scale-v1"
+    },
+    "conditioning": {
+      "status": "finite",
+      "condition_number": 2.923987610591257,
+      "approximate_digit_loss": 0.46597552811371257
+    },
+    "conditioning_arithmetic_mode": "float64",
+    "strict_diagonal_dominance": null,
+    "dominance_permutation": null,
+    "nonzero_permutation": null,
+    "methods": [
+      {
+        "method": "gaussian",
+        "eligible": true,
+        "code": "available",
+        "reason": "Direct row reduction supports every validated rectangular system.",
+        "requires_row_reordering": false,
+        "requires_risk_override": false,
+        "row_permutation": null,
+        "convergence": null
+      },
+      {
+        "method": "gauss_jordan",
+        "eligible": true,
+        "code": "available",
+        "reason": "Direct row reduction supports every validated rectangular system.",
+        "requires_row_reordering": false,
+        "requires_risk_override": false,
+        "row_permutation": null,
+        "convergence": null
+      },
+      {
+        "method": "jacobi",
+        "eligible": false,
+        "code": "requires_square",
+        "reason": "Iteration requires a square matrix.",
+        "requires_row_reordering": false,
+        "requires_risk_override": false,
+        "row_permutation": null,
+        "convergence": null
+      },
+      {
+        "method": "gauss_seidel",
+        "eligible": false,
+        "code": "requires_square",
+        "reason": "Iteration requires a square matrix.",
+        "requires_row_reordering": false,
+        "requires_risk_override": false,
+        "row_permutation": null,
+        "convergence": null
+      }
+    ],
+    "warnings": []
+  },
+  "analysisExact": {
+    "status": "analyzed",
+    "request_id": "fixture-analysisExact",
+    "shape": {
+      "equations": 2,
+      "unknowns": 2
+    },
+    "is_square": true,
+    "classification": {
+      "shape": {
+        "equations": 2,
+        "unknowns": 2
+      },
+      "arithmetic_mode": "exact",
+      "rank_a": 2,
+      "rank_augmented": 2,
+      "classification": "unique",
+      "rank_tolerance": null,
+      "tolerance_policy": "exact-rational-v1"
+    },
+    "conditioning": {
+      "status": "finite",
+      "condition_number": 2.6180339887498945,
+      "approximate_digit_loss": 0.4179752804999574
+    },
+    "conditioning_arithmetic_mode": "float64",
+    "strict_diagonal_dominance": true,
+    "dominance_permutation": {
+      "order": [
+        0,
+        1
+      ],
+      "purpose": "strict_diagonal_dominance"
+    },
+    "nonzero_permutation": {
+      "order": [
+        0,
+        1
+      ],
+      "purpose": "nonzero_diagonal"
+    },
+    "methods": [
+      {
+        "method": "gaussian",
+        "eligible": true,
+        "code": "available",
+        "reason": "Direct row reduction supports every validated rectangular system.",
+        "requires_row_reordering": false,
+        "requires_risk_override": false,
+        "row_permutation": null,
+        "convergence": null
+      },
+      {
+        "method": "gauss_jordan",
+        "eligible": true,
+        "code": "available",
+        "reason": "Direct row reduction supports every validated rectangular system.",
+        "requires_row_reordering": false,
+        "requires_risk_override": false,
+        "row_permutation": null,
+        "convergence": null
+      },
+      {
+        "method": "jacobi",
+        "eligible": false,
+        "code": "requires_float64",
+        "reason": "Re-analyze in float64 mode for iterative methods.",
+        "requires_row_reordering": false,
+        "requires_risk_override": false,
+        "row_permutation": null,
+        "convergence": null
+      },
+      {
+        "method": "gauss_seidel",
+        "eligible": false,
+        "code": "requires_float64",
+        "reason": "Re-analyze in float64 mode for iterative methods.",
+        "requires_row_reordering": false,
+        "requires_risk_override": false,
+        "row_permutation": null,
+        "convergence": null
+      }
+    ],
+    "warnings": [
+      "Conditioning is estimated in float64; ranks and classification are exact."
+    ]
+  },
+  "analysisRisk": {
+    "status": "analyzed",
+    "request_id": "fixture-analysisRisk",
+    "shape": {
+      "equations": 2,
+      "unknowns": 2
+    },
+    "is_square": true,
+    "classification": {
+      "shape": {
+        "equations": 2,
+        "unknowns": 2
+      },
+      "arithmetic_mode": "float64",
+      "rank_a": 2,
+      "rank_augmented": 2,
+      "classification": "unique",
+      "rank_tolerance": 1.9984014443252818e-15,
+      "tolerance_policy": "float64-coefficient-scale-v1"
+    },
+    "conditioning": {
+      "status": "finite",
+      "condition_number": 2.9999999999999996,
+      "approximate_digit_loss": 0.4771212547196624
+    },
+    "conditioning_arithmetic_mode": "float64",
+    "strict_diagonal_dominance": false,
+    "dominance_permutation": {
+      "order": [
+        1,
+        0
+      ],
+      "purpose": "strict_diagonal_dominance"
+    },
+    "nonzero_permutation": {
+      "order": [
+        0,
+        1
+      ],
+      "purpose": "nonzero_diagonal"
+    },
+    "methods": [
+      {
+        "method": "gaussian",
+        "eligible": true,
+        "code": "available",
+        "reason": "Direct row reduction supports every validated rectangular system.",
+        "requires_row_reordering": false,
+        "requires_risk_override": false,
+        "row_permutation": null,
+        "convergence": null
+      },
+      {
+        "method": "gauss_jordan",
+        "eligible": true,
+        "code": "available",
+        "reason": "Direct row reduction supports every validated rectangular system.",
+        "requires_row_reordering": false,
+        "requires_risk_override": false,
+        "row_permutation": null,
+        "convergence": null
+      },
+      {
+        "method": "jacobi",
+        "eligible": true,
+        "code": "requires_row_reordering",
+        "reason": "Enable the indicated row-reordering option before solving.",
+        "requires_row_reordering": true,
+        "requires_risk_override": false,
+        "row_permutation": {
+          "order": [
+            1,
+            0
+          ],
+          "purpose": "strict_diagonal_dominance"
+        },
+        "convergence": {
+          "method": "jacobi",
+          "strict_diagonal_dominance": true,
+          "weak_diagonal_dominance": true,
+          "symmetric_positive_definite": true,
+          "symmetry_tolerance": 1.3322676295501878e-15,
+          "spectral": {
+            "status": "computed",
+            "radius": 0.5000000000000001
+          },
+          "assessment": "sufficient_condition",
+          "explanation": "Strict row diagonal dominance is a sufficient convergence condition."
+        }
+      },
+      {
+        "method": "gauss_seidel",
+        "eligible": true,
+        "code": "requires_row_reordering",
+        "reason": "Enable the indicated row-reordering option before solving.",
+        "requires_row_reordering": true,
+        "requires_risk_override": false,
+        "row_permutation": {
+          "order": [
+            1,
+            0
+          ],
+          "purpose": "strict_diagonal_dominance"
+        },
+        "convergence": {
+          "method": "gauss_seidel",
+          "strict_diagonal_dominance": true,
+          "weak_diagonal_dominance": true,
+          "symmetric_positive_definite": true,
+          "symmetry_tolerance": 1.3322676295501878e-15,
+          "spectral": {
+            "status": "computed",
+            "radius": 0.25
+          },
+          "assessment": "sufficient_condition",
+          "explanation": "Strict row diagonal dominance is a sufficient convergence condition."
+        }
+      }
+    ],
+    "warnings": []
+  },
+  "analysisPermutation": {
+    "status": "analyzed",
+    "request_id": "fixture-analysisPermutation",
+    "shape": {
+      "equations": 2,
+      "unknowns": 2
+    },
+    "is_square": true,
+    "classification": {
+      "shape": {
+        "equations": 2,
+        "unknowns": 2
+      },
+      "arithmetic_mode": "float64",
+      "rank_a": 2,
+      "rank_augmented": 2,
+      "classification": "unique",
+      "rank_tolerance": 2.6645352591003757e-15,
+      "tolerance_policy": "float64-coefficient-scale-v1"
+    },
+    "conditioning": {
+      "status": "finite",
+      "condition_number": 1.5000000000000002,
+      "approximate_digit_loss": 0.1760912590556813
+    },
+    "conditioning_arithmetic_mode": "float64",
+    "strict_diagonal_dominance": false,
+    "dominance_permutation": {
+      "order": [
+        1,
+        0
+      ],
+      "purpose": "strict_diagonal_dominance"
+    },
+    "nonzero_permutation": {
+      "order": [
+        1,
+        0
+      ],
+      "purpose": "nonzero_diagonal"
+    },
+    "methods": [
+      {
+        "method": "gaussian",
+        "eligible": true,
+        "code": "available",
+        "reason": "Direct row reduction supports every validated rectangular system.",
+        "requires_row_reordering": false,
+        "requires_risk_override": false,
+        "row_permutation": null,
+        "convergence": null
+      },
+      {
+        "method": "gauss_jordan",
+        "eligible": true,
+        "code": "available",
+        "reason": "Direct row reduction supports every validated rectangular system.",
+        "requires_row_reordering": false,
+        "requires_risk_override": false,
+        "row_permutation": null,
+        "convergence": null
+      },
+      {
+        "method": "jacobi",
+        "eligible": true,
+        "code": "requires_row_reordering",
+        "reason": "Enable the indicated row-reordering option before solving.",
+        "requires_row_reordering": true,
+        "requires_risk_override": false,
+        "row_permutation": {
+          "order": [
+            1,
+            0
+          ],
+          "purpose": "strict_diagonal_dominance"
+        },
+        "convergence": {
+          "method": "jacobi",
+          "strict_diagonal_dominance": true,
+          "weak_diagonal_dominance": true,
+          "symmetric_positive_definite": false,
+          "symmetry_tolerance": 1.7763568394002505e-15,
+          "spectral": {
+            "status": "computed",
+            "radius": 0.0
+          },
+          "assessment": "sufficient_condition",
+          "explanation": "Strict row diagonal dominance is a sufficient convergence condition."
+        }
+      },
+      {
+        "method": "gauss_seidel",
+        "eligible": true,
+        "code": "requires_row_reordering",
+        "reason": "Enable the indicated row-reordering option before solving.",
+        "requires_row_reordering": true,
+        "requires_risk_override": false,
+        "row_permutation": {
+          "order": [
+            1,
+            0
+          ],
+          "purpose": "strict_diagonal_dominance"
+        },
+        "convergence": {
+          "method": "gauss_seidel",
+          "strict_diagonal_dominance": true,
+          "weak_diagonal_dominance": true,
+          "symmetric_positive_definite": false,
+          "symmetry_tolerance": 1.7763568394002505e-15,
+          "spectral": {
+            "status": "computed",
+            "radius": 0.0
+          },
+          "assessment": "sufficient_condition",
+          "explanation": "Strict row diagonal dominance is a sufficient convergence condition."
+        }
+      }
+    ],
+    "warnings": []
+  },
+  "gaussian": {
+    "status": "completed",
+    "request_id": "fixture-gaussian",
+    "problem": {
+      "shape": {
+        "equations": 2,
+        "unknowns": 2
+      },
+      "is_square": true,
+      "arithmetic_mode": "float64",
+      "original_system": {
+        "a": [
+          [
+            4.0,
+            1.0
+          ],
+          [
+            2.0,
+            3.0
+          ]
+        ],
+        "b": [
+          1.0,
+          2.0
+        ]
+      }
+    },
+    "result": {
+      "method": "gaussian",
+      "arithmetic_mode": "float64",
+      "classification": {
+        "shape": {
+          "equations": 2,
+          "unknowns": 2
+        },
+        "arithmetic_mode": "float64",
+        "rank_a": 2,
+        "rank_augmented": 2,
+        "classification": "unique",
+        "rank_tolerance": 3.3306690738754696e-15,
+        "tolerance_policy": "float64-coefficient-scale-v1"
+      },
+      "form": "ref",
+      "matrix": [
+        [
+          4.0,
+          1.0,
+          1.0
+        ],
+        [
+          0.0,
+          2.5,
+          1.5
+        ]
+      ],
+      "pivot_columns": [
+        0,
+        1
+      ],
+      "free_columns": [],
+      "augmented_pivot_columns": [
+        0,
+        1
+      ],
+      "solution": [
+        0.1,
+        0.6
+      ],
+      "parametric_solution": null,
+      "contradictory_rows": [],
+      "row_tolerances": [
+        3.3306690738754696e-15,
+        4.9960036108132044e-15
+      ],
+      "trace": [
+        {
+          "index": 0,
+          "phase": "forward_elimination",
+          "operation_type": "row_add_scaled",
+          "target_row": 1,
+          "source_row": 0,
+          "pivot_column": 0,
+          "factor": -0.5,
+          "matrix_after": [
+            [
+              4.0,
+              1.0,
+              1.0
+            ],
+            [
+              0.0,
+              2.5,
+              1.5
+            ]
+          ],
+          "explanation": "Add the recorded multiple of row 1 to row 2 to eliminate column 1."
+        }
+      ],
+      "diagnostics": {
+        "residual_inf": 2.220446049250313e-16,
+        "backward_error": 4.4408920985006264e-17
+      },
+      "warnings": [
+        "Classification and reduced form use floating tolerances; tiny entries remain unrounded."
+      ]
+    },
+    "conditioning": {
+      "status": "finite",
+      "condition_number": 2.6180339887498945,
+      "approximate_digit_loss": 0.4179752804999574
+    },
+    "conditioning_arithmetic_mode": "float64",
+    "report": {
+      "schema_version": 1,
+      "solver_version": "0.1.0",
+      "method": "gaussian",
+      "options": {
+        "arithmetic_mode": "float64"
+      },
+      "display": {
+        "mode": "decimal",
+        "decimal_places": 6
+      },
+      "fraction_values": "approximate"
+    }
+  },
+  "gaussJordan": {
+    "status": "completed",
+    "request_id": "fixture-gaussJordan",
+    "problem": {
+      "shape": {
+        "equations": 2,
+        "unknowns": 2
+      },
+      "is_square": true,
+      "arithmetic_mode": "float64",
+      "original_system": {
+        "a": [
+          [
+            0.0,
+            2.0
+          ],
+          [
+            3.0,
+            1.0
+          ]
+        ],
+        "b": [
+          4.0,
+          5.0
+        ]
+      }
+    },
+    "result": {
+      "method": "gauss_jordan",
+      "arithmetic_mode": "float64",
+      "classification": {
+        "shape": {
+          "equations": 2,
+          "unknowns": 2
+        },
+        "arithmetic_mode": "float64",
+        "rank_a": 2,
+        "rank_augmented": 2,
+        "classification": "unique",
+        "rank_tolerance": 2.6645352591003757e-15,
+        "tolerance_policy": "float64-coefficient-scale-v1"
+      },
+      "form": "rref",
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          1.0
+        ],
+        [
+          0.0,
+          1.0,
+          2.0
+        ]
+      ],
+      "pivot_columns": [
+        0,
+        1
+      ],
+      "free_columns": [],
+      "augmented_pivot_columns": [
+        0,
+        1
+      ],
+      "solution": [
+        1.0,
+        2.0
+      ],
+      "parametric_solution": null,
+      "contradictory_rows": [],
+      "row_tolerances": [
+        1.3322676295501878e-15,
+        1.3322676295501878e-15
+      ],
+      "trace": [
+        {
+          "index": 0,
+          "phase": "forward_elimination",
+          "operation_type": "row_swap",
+          "target_row": 0,
+          "source_row": 1,
+          "pivot_column": 0,
+          "factor": null,
+          "matrix_after": [
+            [
+              3.0,
+              1.0,
+              5.0
+            ],
+            [
+              0.0,
+              2.0,
+              4.0
+            ]
+          ],
+          "explanation": "Swap rows 1 and 2."
+        },
+        {
+          "index": 1,
+          "phase": "backward_elimination",
+          "operation_type": "row_scale",
+          "target_row": 1,
+          "source_row": null,
+          "pivot_column": 1,
+          "factor": 0.5,
+          "matrix_after": [
+            [
+              3.0,
+              1.0,
+              5.0
+            ],
+            [
+              0.0,
+              1.0,
+              2.0
+            ]
+          ],
+          "explanation": "Scale row 2 to normalize its pivot in column 2."
+        },
+        {
+          "index": 2,
+          "phase": "backward_elimination",
+          "operation_type": "row_add_scaled",
+          "target_row": 0,
+          "source_row": 1,
+          "pivot_column": 1,
+          "factor": -1.0,
+          "matrix_after": [
+            [
+              3.0,
+              0.0,
+              3.0
+            ],
+            [
+              0.0,
+              1.0,
+              2.0
+            ]
+          ],
+          "explanation": "Add the recorded multiple of row 2 to row 1 to eliminate column 2."
+        },
+        {
+          "index": 3,
+          "phase": "backward_elimination",
+          "operation_type": "row_scale",
+          "target_row": 0,
+          "source_row": null,
+          "pivot_column": 0,
+          "factor": 0.3333333333333333,
+          "matrix_after": [
+            [
+              1.0,
+              0.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0,
+              2.0
+            ]
+          ],
+          "explanation": "Scale row 1 to normalize its pivot in column 1."
+        }
+      ],
+      "diagnostics": {
+        "residual_inf": 0.0,
+        "backward_error": 0.0
+      },
+      "warnings": [
+        "Classification and reduced form use floating tolerances; tiny entries remain unrounded."
+      ]
+    },
+    "conditioning": {
+      "status": "finite",
+      "condition_number": 1.7675918792439975,
+      "approximate_digit_loss": 0.24738199763814991
+    },
+    "conditioning_arithmetic_mode": "float64",
+    "report": {
+      "schema_version": 1,
+      "solver_version": "0.1.0",
+      "method": "gauss_jordan",
+      "options": {
+        "arithmetic_mode": "float64"
+      },
+      "display": {
+        "mode": "decimal",
+        "decimal_places": 6
+      },
+      "fraction_values": "approximate"
+    }
+  },
+  "infinite": {
+    "status": "completed",
+    "request_id": "fixture-infinite",
+    "problem": {
+      "shape": {
+        "equations": 2,
+        "unknowns": 3
+      },
+      "is_square": false,
+      "arithmetic_mode": "float64",
+      "original_system": {
+        "a": [
+          [
+            1.0,
+            1.0,
+            1.0
+          ],
+          [
+            0.0,
+            1.0,
+            2.0
+          ]
+        ],
+        "b": [
+          3.0,
+          4.0
+        ]
+      }
+    },
+    "result": {
+      "method": "gauss_jordan",
+      "arithmetic_mode": "float64",
+      "classification": {
+        "shape": {
+          "equations": 2,
+          "unknowns": 3
+        },
+        "arithmetic_mode": "float64",
+        "rank_a": 2,
+        "rank_augmented": 2,
+        "classification": "infinite",
+        "rank_tolerance": 2.6645352591003757e-15,
+        "tolerance_policy": "float64-coefficient-scale-v1"
+      },
+      "form": "rref",
+      "matrix": [
+        [
+          1.0,
+          0.0,
+          -1.0,
+          -1.0
+        ],
+        [
+          0.0,
+          1.0,
+          2.0,
+          4.0
+        ]
+      ],
+      "pivot_columns": [
+        0,
+        1
+      ],
+      "free_columns": [
+        2
+      ],
+      "augmented_pivot_columns": [
+        0,
+        1
+      ],
+      "solution": null,
+      "parametric_solution": {
+        "pivot_variables": [
+          0,
+          1
+        ],
+        "free_variables": [
+          2
+        ],
+        "expressions": [
+          {
+            "variable": "x1",
+            "constant": -1.0,
+            "terms": [
+              {
+                "parameter": "t1",
+                "coefficient": 1.0
+              }
+            ]
+          },
+          {
+            "variable": "x2",
+            "constant": 4.0,
+            "terms": [
+              {
+                "parameter": "t1",
+                "coefficient": -2.0
+              }
+            ]
+          },
+          {
+            "variable": "x3",
+            "constant": 0.0,
+            "terms": [
+              {
+                "parameter": "t1",
+                "coefficient": 1.0
+              }
+            ]
+          }
+        ]
+      },
+      "contradictory_rows": [],
+      "row_tolerances": [
+        5.329070518200751e-15,
+        2.6645352591003757e-15
+      ],
+      "trace": [
+        {
+          "index": 0,
+          "phase": "backward_elimination",
+          "operation_type": "row_add_scaled",
+          "target_row": 0,
+          "source_row": 1,
+          "pivot_column": 1,
+          "factor": -1.0,
+          "matrix_after": [
+            [
+              1.0,
+              0.0,
+              -1.0,
+              -1.0
+            ],
+            [
+              0.0,
+              1.0,
+              2.0,
+              4.0
+            ]
+          ],
+          "explanation": "Add the recorded multiple of row 2 to row 1 to eliminate column 2."
+        }
+      ],
+      "diagnostics": {
+        "residual_inf": 0.0,
+        "backward_error": 0.0
+      },
+      "warnings": [
+        "Classification and reduced form use floating tolerances; tiny entries remain unrounded."
+      ]
+    },
+    "conditioning": {
+      "status": "finite",
+      "condition_number": 2.923987610591257,
+      "approximate_digit_loss": 0.46597552811371257
+    },
+    "conditioning_arithmetic_mode": "float64",
+    "report": {
+      "schema_version": 1,
+      "solver_version": "0.1.0",
+      "method": "gauss_jordan",
+      "options": {
+        "arithmetic_mode": "float64"
+      },
+      "display": {
+        "mode": "decimal",
+        "decimal_places": 6
+      },
+      "fraction_values": "approximate"
+    }
+  },
+  "inconsistent": {
+    "status": "completed",
+    "request_id": "fixture-inconsistent",
+    "problem": {
+      "shape": {
+        "equations": 2,
+        "unknowns": 2
+      },
+      "is_square": true,
+      "arithmetic_mode": "float64",
+      "original_system": {
+        "a": [
+          [
+            1.0,
+            1.0
+          ],
+          [
+            1.0,
+            1.0
+          ]
+        ],
+        "b": [
+          2.0,
+          3.0
+        ]
+      }
+    },
+    "result": {
+      "method": "gauss_jordan",
+      "arithmetic_mode": "float64",
+      "classification": {
+        "shape": {
+          "equations": 2,
+          "unknowns": 2
+        },
+        "arithmetic_mode": "float64",
+        "rank_a": 1,
+        "rank_augmented": 2,
+        "classification": "inconsistent",
+        "rank_tolerance": 1.3322676295501878e-15,
+        "tolerance_policy": "float64-coefficient-scale-v1"
+      },
+      "form": "rref",
+      "matrix": [
+        [
+          1.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "pivot_columns": [
+        0
+      ],
+      "free_columns": [
+        1
+      ],
+      "augmented_pivot_columns": [
+        0,
+        2
+      ],
+      "solution": null,
+      "parametric_solution": null,
+      "contradictory_rows": [
+        1
+      ],
+      "row_tolerances": [
+        6.661338147750939e-15,
+        2.6645352591003757e-15
+      ],
+      "trace": [
+        {
+          "index": 0,
+          "phase": "forward_elimination",
+          "operation_type": "row_add_scaled",
+          "target_row": 1,
+          "source_row": 0,
+          "pivot_column": 0,
+          "factor": -1.0,
+          "matrix_after": [
+            [
+              1.0,
+              1.0,
+              2.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "explanation": "Add the recorded multiple of row 1 to row 2 to eliminate column 1."
+        },
+        {
+          "index": 1,
+          "phase": "backward_elimination",
+          "operation_type": "row_add_scaled",
+          "target_row": 0,
+          "source_row": 1,
+          "pivot_column": 2,
+          "factor": -2.0,
+          "matrix_after": [
+            [
+              1.0,
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "explanation": "Add the recorded multiple of row 2 to row 1 to eliminate column 3."
+        }
+      ],
+      "diagnostics": null,
+      "warnings": [
+        "Classification and reduced form use floating tolerances; tiny entries remain unrounded."
+      ]
+    },
+    "conditioning": {
+      "status": "singular",
+      "condition_number": null,
+      "approximate_digit_loss": null
+    },
+    "conditioning_arithmetic_mode": "float64",
+    "report": {
+      "schema_version": 1,
+      "solver_version": "0.1.0",
+      "method": "gauss_jordan",
+      "options": {
+        "arithmetic_mode": "float64"
+      },
+      "display": {
+        "mode": "decimal",
+        "decimal_places": 6
+      },
+      "fraction_values": "approximate"
+    }
+  },
+  "exact": {
+    "status": "completed",
+    "request_id": "fixture-exact",
+    "problem": {
+      "shape": {
+        "equations": 2,
+        "unknowns": 2
+      },
+      "is_square": true,
+      "arithmetic_mode": "exact",
+      "original_system": {
+        "a": [
+          [
+            {
+              "numerator": "4",
+              "denominator": "1"
+            },
+            {
+              "numerator": "1",
+              "denominator": "1"
+            }
+          ],
+          [
+            {
+              "numerator": "2",
+              "denominator": "1"
+            },
+            {
+              "numerator": "3",
+              "denominator": "1"
+            }
+          ]
+        ],
+        "b": [
+          {
+            "numerator": "1",
+            "denominator": "1"
+          },
+          {
+            "numerator": "2",
+            "denominator": "1"
+          }
+        ]
+      }
+    },
+    "result": {
+      "method": "gaussian",
+      "arithmetic_mode": "exact",
+      "classification": {
+        "shape": {
+          "equations": 2,
+          "unknowns": 2
+        },
+        "arithmetic_mode": "exact",
+        "rank_a": 2,
+        "rank_augmented": 2,
+        "classification": "unique",
+        "rank_tolerance": null,
+        "tolerance_policy": "exact-rational-v1"
+      },
+      "form": "ref",
+      "matrix": [
+        [
+          {
+            "numerator": "4",
+            "denominator": "1"
+          },
+          {
+            "numerator": "1",
+            "denominator": "1"
+          },
+          {
+            "numerator": "1",
+            "denominator": "1"
+          }
+        ],
+        [
+          {
+            "numerator": "0",
+            "denominator": "1"
+          },
+          {
+            "numerator": "5",
+            "denominator": "2"
+          },
+          {
+            "numerator": "3",
+            "denominator": "2"
+          }
+        ]
+      ],
+      "pivot_columns": [
+        0,
+        1
+      ],
+      "free_columns": [],
+      "augmented_pivot_columns": [
+        0,
+        1
+      ],
+      "solution": [
+        {
+          "numerator": "1",
+          "denominator": "10"
+        },
+        {
+          "numerator": "3",
+          "denominator": "5"
+        }
+      ],
+      "parametric_solution": null,
+      "contradictory_rows": [],
+      "row_tolerances": null,
+      "trace": [
+        {
+          "index": 0,
+          "phase": "forward_elimination",
+          "operation_type": "row_add_scaled",
+          "target_row": 1,
+          "source_row": 0,
+          "pivot_column": 0,
+          "factor": {
+            "numerator": "-1",
+            "denominator": "2"
+          },
+          "matrix_after": [
+            [
+              {
+                "numerator": "4",
+                "denominator": "1"
+              },
+              {
+                "numerator": "1",
+                "denominator": "1"
+              },
+              {
+                "numerator": "1",
+                "denominator": "1"
+              }
+            ],
+            [
+              {
+                "numerator": "0",
+                "denominator": "1"
+              },
+              {
+                "numerator": "5",
+                "denominator": "2"
+              },
+              {
+                "numerator": "3",
+                "denominator": "2"
+              }
+            ]
+          ],
+          "explanation": "Add the recorded multiple of row 1 to row 2 to eliminate column 1."
+        }
+      ],
+      "diagnostics": {
+        "residual_inf": {
+          "numerator": "0",
+          "denominator": "1"
+        },
+        "backward_error": {
+          "numerator": "0",
+          "denominator": "1"
+        }
+      },
+      "warnings": []
+    },
+    "conditioning": {
+      "status": "finite",
+      "condition_number": 2.6180339887498945,
+      "approximate_digit_loss": 0.4179752804999574
+    },
+    "conditioning_arithmetic_mode": "float64",
+    "report": {
+      "schema_version": 1,
+      "solver_version": "0.1.0",
+      "method": "gaussian",
+      "options": {
+        "arithmetic_mode": "exact"
+      },
+      "display": {
+        "mode": "decimal",
+        "decimal_places": 6
+      },
+      "fraction_values": "exact"
+    }
+  },
+  "jacobi": {
+    "status": "completed",
+    "request_id": "fixture-jacobi",
+    "problem": {
+      "shape": {
+        "equations": 2,
+        "unknowns": 2
+      },
+      "is_square": true,
+      "arithmetic_mode": "float64",
+      "original_system": {
+        "a": [
+          [
+            4.0,
+            1.0
+          ],
+          [
+            2.0,
+            3.0
+          ]
+        ],
+        "b": [
+          1.0,
+          2.0
+        ]
+      }
+    },
+    "result": {
+      "method": "jacobi",
+      "arithmetic_mode": "float64",
+      "classification": {
+        "shape": {
+          "equations": 2,
+          "unknowns": 2
+        },
+        "arithmetic_mode": "float64",
+        "rank_a": 2,
+        "rank_augmented": 2,
+        "classification": "unique",
+        "rank_tolerance": 3.3306690738754696e-15,
+        "tolerance_policy": "float64-coefficient-scale-v1"
+      },
+      "options": {
+        "tolerance": 1e-08,
+        "max_iterations": 25,
+        "initial_guess": null,
+        "auto_reorder_for_diagonal_dominance": true,
+        "auto_reorder_for_nonzero_diagonal": false,
+        "run_despite_convergence_risk": false
+      },
+      "initial_guess": [
+        0.0,
+        0.0
+      ],
+      "reordering": {
+        "permutation": {
+          "order": [
+            0,
+            1
+          ],
+          "purpose": "identity"
+        },
+        "dominance_search_attempted": false,
+        "dominance_matching_found": null,
+        "nonzero_search_attempted": false
+      },
+      "convergence": {
+        "method": "jacobi",
+        "strict_diagonal_dominance": true,
+        "weak_diagonal_dominance": true,
+        "symmetric_positive_definite": false,
+        "symmetry_tolerance": 2.220446049250313e-15,
+        "spectral": {
+          "status": "computed",
+          "radius": 0.408248290463863
+        },
+        "assessment": "sufficient_condition",
+        "explanation": "Strict row diagonal dominance is a sufficient convergence condition."
+      },
+      "conditioning": {
+        "status": "finite",
+        "condition_number": 2.6180339887498945,
+        "approximate_digit_loss": 0.4179752804999574
+      },
+      "status": "converged",
+      "last_iterate": [
+        0.0999999997243638,
+        0.5999999983461829
+      ],
+      "solution": [
+        0.0999999997243638,
+        0.5999999983461829
+      ],
+      "history": [
+        {
+          "residual_inf": 0.6666666666666665,
+          "backward_error": 0.12499999999999997,
+          "index": 1,
+          "vector": [
+            0.25,
+            0.6666666666666666
+          ],
+          "delta_inf": 0.6666666666666666,
+          "normalized_step_change": 0.6666666666666666,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.33333333333333326,
+          "backward_error": 0.07407407407407406,
+          "index": 2,
+          "vector": [
+            0.08333333333333334,
+            0.5
+          ],
+          "delta_inf": 0.16666666666666666,
+          "normalized_step_change": 0.16666666666666666,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.11111111111111116,
+          "backward_error": 0.02197802197802199,
+          "index": 3,
+          "vector": [
+            0.125,
+            0.611111111111111
+          ],
+          "delta_inf": 0.11111111111111105,
+          "normalized_step_change": 0.11111111111111105,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.05555555555555558,
+          "backward_error": 0.011299435028248593,
+          "index": 4,
+          "vector": [
+            0.09722222222222224,
+            0.5833333333333334
+          ],
+          "delta_inf": 0.027777777777777762,
+          "normalized_step_change": 0.027777777777777762,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.0185185185185186,
+          "backward_error": 0.0036968576709796837,
+          "index": 5,
+          "vector": [
+            0.10416666666666666,
+            0.6018518518518519
+          ],
+          "delta_inf": 0.01851851851851849,
+          "normalized_step_change": 0.01851851851851849,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.009259259259259522,
+          "backward_error": 0.0018570102135562275,
+          "index": 6,
+          "vector": [
+            0.09953703703703703,
+            0.5972222222222222
+          ],
+          "delta_inf": 0.00462962962962965,
+          "normalized_step_change": 0.00462962962962965,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.0030864197530864335,
+          "backward_error": 0.0006170934896636869,
+          "index": 7,
+          "vector": [
+            0.10069444444444445,
+            0.6003086419753086
+          ],
+          "delta_inf": 0.0030864197530864335,
+          "normalized_step_change": 0.0030864197530864335,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.0015432098765431057,
+          "backward_error": 0.00030878493129533197,
+          "index": 8,
+          "vector": [
+            0.09992283950617284,
+            0.5995370370370371
+          ],
+          "delta_inf": 0.0007716049382716084,
+          "normalized_step_change": 0.0007716049382716084,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.0005144032921808872,
+          "backward_error": 0.00010287536649345659,
+          "index": 9,
+          "vector": [
+            0.10011574074074073,
+            0.6000514403292181
+          ],
+          "delta_inf": 0.0005144032921809982,
+          "normalized_step_change": 0.0005144032921809982,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.0002572016460904436,
+          "backward_error": 5.1444298685579895e-05,
+          "index": 10,
+          "vector": [
+            0.09998713991769548,
+            0.5999228395061729
+          ],
+          "delta_inf": 0.00012860082304524956,
+          "normalized_step_change": 0.00012860082304524956,
+          "converged": false
+        },
+        {
+          "residual_inf": 8.573388203014787e-05,
+          "backward_error": 1.714662940131934e-05,
+          "index": 11,
+          "vector": [
+            0.10001929012345678,
+            0.600008573388203
+          ],
+          "delta_inf": 8.573388203014787e-05,
+          "normalized_step_change": 8.573388203014787e-05,
+          "converged": false
+        },
+        {
+          "residual_inf": 4.2866941015073934e-05,
+          "backward_error": 8.573498458910606e-06,
+          "index": 12,
+          "vector": [
+            0.09999785665294925,
+            0.5999871399176955
+          ],
+          "delta_inf": 2.1433470507536967e-05,
+          "normalized_step_change": 2.1433470507536967e-05,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.4288980338506008e-05,
+          "backward_error": 2.857791984207854e-06,
+          "index": 13,
+          "vector": [
+            0.10000321502057613,
+            0.6000014288980339
+          ],
+          "delta_inf": 1.4288980338394985e-05,
+          "normalized_step_change": 1.4288980338394985e-05,
+          "converged": false
+        },
+        {
+          "residual_inf": 7.144490169030959e-06,
+          "backward_error": 1.4289010964371428e-06,
+          "index": 14,
+          "vector": [
+            0.09999964277549153,
+            0.5999978566529492
+          ],
+          "delta_inf": 3.572245084626502e-06,
+          "normalized_step_change": 3.572245084626502e-06,
+          "converged": false
+        },
+        {
+          "residual_inf": 2.381496722936305e-06,
+          "backward_error": 4.7629923115675516e-07,
+          "index": 15,
+          "vector": [
+            0.10000053583676269,
+            0.6000002381496723
+          ],
+          "delta_inf": 2.381496723047327e-06,
+          "normalized_step_change": 2.381496723047327e-06,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.1907483612461078e-06,
+          "backward_error": 2.3814975732215155e-07,
+          "index": 16,
+          "vector": [
+            0.09999994046258193,
+            0.5999996427754916
+          ],
+          "delta_inf": 5.953741807618318e-07,
+          "normalized_step_change": 5.953741807618318e-07,
+          "converged": false
+        },
+        {
+          "residual_inf": 3.969161204153693e-07,
+          "backward_error": 7.938322093222586e-08,
+          "index": 17,
+          "vector": [
+            0.10000008930612711,
+            0.600000039691612
+          ],
+          "delta_inf": 3.969161204153693e-07,
+          "normalized_step_change": 3.969161204153693e-07,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.9845806042972924e-07,
+          "backward_error": 3.96916144490821e-08,
+          "index": 18,
+          "vector": [
+            0.099999990077097,
+            0.5999999404625819
+          ],
+          "delta_inf": 9.922903010384232e-08,
+          "normalized_step_change": 9.922903010384232e-08,
+          "converged": false
+        },
+        {
+          "residual_inf": 6.615268688392462e-08,
+          "backward_error": 1.3230537289261364e-08,
+          "index": 19,
+          "vector": [
+            0.10000001488435453,
+            0.6000000066152686
+          ],
+          "delta_inf": 6.615268677290231e-08,
+          "normalized_step_change": 6.615268677290231e-08,
+          "converged": false
+        },
+        {
+          "residual_inf": 3.307634344196231e-08,
+          "backward_error": 6.615268754035132e-09,
+          "index": 20,
+          "vector": [
+            0.09999999834618284,
+            0.599999990077097
+          ],
+          "delta_inf": 1.653817169322558e-08,
+          "normalized_step_change": 1.653817169322558e-08,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.10254476659577e-08,
+          "backward_error": 2.2050895307603296e-09,
+          "index": 21,
+          "vector": [
+            0.10000000248072574,
+            0.6000000011025448
+          ],
+          "delta_inf": 1.1025447776980002e-08,
+          "normalized_step_change": 1.1025447776980002e-08,
+          "converged": false
+        },
+        {
+          "residual_inf": 5.51272383297885e-09,
+          "backward_error": 1.1025447684191771e-09,
+          "index": 22,
+          "vector": [
+            0.0999999997243638,
+            0.5999999983461829
+          ],
+          "delta_inf": 2.7563619442450005e-09,
+          "normalized_step_change": 2.7563619442450005e-09,
+          "converged": true
+        }
+      ],
+      "diagnostics": {
+        "residual_inf": 5.51272383297885e-09,
+        "backward_error": 1.1025447684191771e-09
+      },
+      "breakdown_reason": null,
+      "warnings": []
+    },
+    "conditioning": {
+      "status": "finite",
+      "condition_number": 2.6180339887498945,
+      "approximate_digit_loss": 0.4179752804999574
+    },
+    "conditioning_arithmetic_mode": "float64",
+    "report": {
+      "schema_version": 1,
+      "solver_version": "0.1.0",
+      "method": "jacobi",
+      "options": {
+        "initial_guess": null,
+        "tolerance": 1e-08,
+        "max_iterations": 25,
+        "auto_reorder_for_diagonal_dominance": true,
+        "auto_reorder_for_nonzero_diagonal": false,
+        "run_despite_convergence_risk": false
+      },
+      "display": {
+        "mode": "decimal",
+        "decimal_places": 6
+      },
+      "fraction_values": "approximate"
+    }
+  },
+  "seidel": {
+    "status": "completed",
+    "request_id": "fixture-seidel",
+    "problem": {
+      "shape": {
+        "equations": 2,
+        "unknowns": 2
+      },
+      "is_square": true,
+      "arithmetic_mode": "float64",
+      "original_system": {
+        "a": [
+          [
+            4.0,
+            1.0
+          ],
+          [
+            2.0,
+            3.0
+          ]
+        ],
+        "b": [
+          1.0,
+          2.0
+        ]
+      }
+    },
+    "result": {
+      "method": "gauss_seidel",
+      "arithmetic_mode": "float64",
+      "classification": {
+        "shape": {
+          "equations": 2,
+          "unknowns": 2
+        },
+        "arithmetic_mode": "float64",
+        "rank_a": 2,
+        "rank_augmented": 2,
+        "classification": "unique",
+        "rank_tolerance": 3.3306690738754696e-15,
+        "tolerance_policy": "float64-coefficient-scale-v1"
+      },
+      "options": {
+        "tolerance": 1e-08,
+        "max_iterations": 25,
+        "initial_guess": null,
+        "auto_reorder_for_diagonal_dominance": true,
+        "auto_reorder_for_nonzero_diagonal": false,
+        "run_despite_convergence_risk": false
+      },
+      "initial_guess": [
+        0.0,
+        0.0
+      ],
+      "reordering": {
+        "permutation": {
+          "order": [
+            0,
+            1
+          ],
+          "purpose": "identity"
+        },
+        "dominance_search_attempted": false,
+        "dominance_matching_found": null,
+        "nonzero_search_attempted": false
+      },
+      "convergence": {
+        "method": "gauss_seidel",
+        "strict_diagonal_dominance": true,
+        "weak_diagonal_dominance": true,
+        "symmetric_positive_definite": false,
+        "symmetry_tolerance": 2.220446049250313e-15,
+        "spectral": {
+          "status": "computed",
+          "radius": 0.16666666666666666
+        },
+        "assessment": "sufficient_condition",
+        "explanation": "Strict row diagonal dominance is a sufficient convergence condition."
+      },
+      "conditioning": {
+        "status": "finite",
+        "condition_number": 2.6180339887498945,
+        "approximate_digit_loss": 0.4179752804999574
+      },
+      "status": "converged",
+      "last_iterate": [
+        0.10000000041345428,
+        0.5999999997243638
+      ],
+      "solution": [
+        0.10000000041345428,
+        0.5999999997243638
+      ],
+      "history": [
+        {
+          "residual_inf": 0.5,
+          "backward_error": 0.1111111111111111,
+          "index": 1,
+          "vector": [
+            0.25,
+            0.5
+          ],
+          "delta_inf": 0.5,
+          "normalized_step_change": 0.5,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.08333333333333348,
+          "backward_error": 0.01694915254237291,
+          "index": 2,
+          "vector": [
+            0.125,
+            0.5833333333333334
+          ],
+          "delta_inf": 0.125,
+          "normalized_step_change": 0.125,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.01388888888888884,
+          "backward_error": 0.0027855153203342523,
+          "index": 3,
+          "vector": [
+            0.10416666666666666,
+            0.5972222222222222
+          ],
+          "delta_inf": 0.020833333333333343,
+          "normalized_step_change": 0.020833333333333343,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.0023148148148148806,
+          "backward_error": 0.00046317739694304235,
+          "index": 4,
+          "vector": [
+            0.10069444444444445,
+            0.5995370370370371
+          ],
+          "delta_inf": 0.00347222222222221,
+          "normalized_step_change": 0.00347222222222221,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.0003858024691356654,
+          "backward_error": 7.716644802836984e-05,
+          "index": 5,
+          "vector": [
+            0.10011574074074073,
+            0.5999228395061729
+          ],
+          "delta_inf": 0.0005787037037037202,
+          "normalized_step_change": 0.0005787037037037202,
+          "converged": false
+        },
+        {
+          "residual_inf": 6.43004115226109e-05,
+          "backward_error": 1.2860247688365908e-05,
+          "index": 6,
+          "vector": [
+            0.10001929012345678,
+            0.5999871399176955
+          ],
+          "delta_inf": 9.64506172839441e-05,
+          "normalized_step_change": 9.64506172839441e-05,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0716735253879506e-05,
+          "backward_error": 2.1433516447223277e-06,
+          "index": 7,
+          "vector": [
+            0.10000321502057613,
+            0.5999978566529492
+          ],
+          "delta_inf": 1.6075102880652725e-05,
+          "normalized_step_change": 1.6075102880652725e-05,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.786122542313251e-06,
+          "backward_error": 3.5722463607204524e-07,
+          "index": 8,
+          "vector": [
+            0.10000053583676269,
+            0.5999996427754916
+          ],
+          "delta_inf": 2.679183813442121e-06,
+          "normalized_step_change": 2.679183813442121e-06,
+          "converged": false
+        },
+        {
+          "residual_inf": 2.9768709031152696e-07,
+          "backward_error": 5.953742160700976e-08,
+          "index": 9,
+          "vector": [
+            0.10000008930612711,
+            0.5999999404625819
+          ],
+          "delta_inf": 4.4653063557831274e-07,
+          "normalized_step_change": 4.4653063557831274e-07,
+          "converged": false
+        },
+        {
+          "residual_inf": 4.961451516294346e-08,
+          "backward_error": 9.922903131052699e-09,
+          "index": 10,
+          "vector": [
+            0.10000001488435453,
+            0.599999990077097
+          ],
+          "delta_inf": 7.442177257788174e-08,
+          "normalized_step_change": 7.442177257788174e-08,
+          "converged": false
+        },
+        {
+          "residual_inf": 8.269085860490577e-09,
+          "backward_error": 1.6538171748332264e-09,
+          "index": 11,
+          "vector": [
+            0.10000000248072574,
+            0.5999999983461829
+          ],
+          "delta_inf": 1.2403628790735866e-08,
+          "normalized_step_change": 1.2403628790735866e-08,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.3781809027335612e-09,
+          "backward_error": 2.7563618062268754e-10,
+          "index": 12,
+          "vector": [
+            0.10000000041345428,
+            0.5999999997243638
+          ],
+          "delta_inf": 2.0672714651226443e-09,
+          "normalized_step_change": 2.0672714651226443e-09,
+          "converged": true
+        }
+      ],
+      "diagnostics": {
+        "residual_inf": 1.3781809027335612e-09,
+        "backward_error": 2.7563618062268754e-10
+      },
+      "breakdown_reason": null,
+      "warnings": []
+    },
+    "conditioning": {
+      "status": "finite",
+      "condition_number": 2.6180339887498945,
+      "approximate_digit_loss": 0.4179752804999574
+    },
+    "conditioning_arithmetic_mode": "float64",
+    "report": {
+      "schema_version": 1,
+      "solver_version": "0.1.0",
+      "method": "gauss_seidel",
+      "options": {
+        "initial_guess": null,
+        "tolerance": 1e-08,
+        "max_iterations": 25,
+        "auto_reorder_for_diagonal_dominance": true,
+        "auto_reorder_for_nonzero_diagonal": false,
+        "run_despite_convergence_risk": false
+      },
+      "display": {
+        "mode": "decimal",
+        "decimal_places": 6
+      },
+      "fraction_values": "approximate"
+    }
+  },
+  "limit": {
+    "status": "completed",
+    "request_id": "fixture-limit",
+    "problem": {
+      "shape": {
+        "equations": 2,
+        "unknowns": 2
+      },
+      "is_square": true,
+      "arithmetic_mode": "float64",
+      "original_system": {
+        "a": [
+          [
+            1.0,
+            0.9999
+          ],
+          [
+            0.9999,
+            1.0
+          ]
+        ],
+        "b": [
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "result": {
+      "method": "jacobi",
+      "arithmetic_mode": "float64",
+      "classification": {
+        "shape": {
+          "equations": 2,
+          "unknowns": 2
+        },
+        "arithmetic_mode": "float64",
+        "rank_a": 2,
+        "rank_augmented": 2,
+        "classification": "unique",
+        "rank_tolerance": 1.3322010161687103e-15,
+        "tolerance_policy": "float64-coefficient-scale-v1"
+      },
+      "options": {
+        "tolerance": 1e-08,
+        "max_iterations": 60,
+        "initial_guess": null,
+        "auto_reorder_for_diagonal_dominance": true,
+        "auto_reorder_for_nonzero_diagonal": false,
+        "run_despite_convergence_risk": false
+      },
+      "initial_guess": [
+        0.0,
+        0.0
+      ],
+      "reordering": {
+        "permutation": {
+          "order": [
+            0,
+            1
+          ],
+          "purpose": "identity"
+        },
+        "dominance_search_attempted": false,
+        "dominance_matching_found": null,
+        "nonzero_search_attempted": false
+      },
+      "convergence": {
+        "method": "jacobi",
+        "strict_diagonal_dominance": true,
+        "weak_diagonal_dominance": true,
+        "symmetric_positive_definite": true,
+        "symmetry_tolerance": 8.881340107791402e-16,
+        "spectral": {
+          "status": "computed",
+          "radius": 0.9999
+        },
+        "assessment": "sufficient_condition",
+        "explanation": "Strict row diagonal dominance is a sufficient convergence condition."
+      },
+      "conditioning": {
+        "status": "finite",
+        "condition_number": 19998.999999980093,
+        "approximate_digit_loss": 4.301008280396568
+      },
+      "status": "max_iterations_reached",
+      "last_iterate": [
+        0.002991316651477227,
+        0.002991316651477227
+      ],
+      "solution": null,
+      "history": [
+        {
+          "residual_inf": 0.9999,
+          "backward_error": 0.33331111037034566,
+          "index": 1,
+          "vector": [
+            1.0,
+            1.0
+          ],
+          "delta_inf": 1.0,
+          "normalized_step_change": 1.0,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9998000100000001,
+          "backward_error": 0.9996000999760059,
+          "index": 2,
+          "vector": [
+            9.999999999998899e-05,
+            9.999999999998899e-05
+          ],
+          "delta_inf": 0.9999,
+          "normalized_step_change": 0.9999,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.999700029999,
+          "backward_error": 0.3332666666671111,
+          "index": 3,
+          "vector": [
+            0.9999000100000001,
+            0.9999000100000001
+          ],
+          "delta_inf": 0.9998000100000001,
+          "normalized_step_change": 0.9998000100000001,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9996000599960002,
+          "backward_error": 0.9992004397681228,
+          "index": 4,
+          "vector": [
+            0.00019998000099996638,
+            0.00019998000099996638
+          ],
+          "delta_inf": 0.9997000299990001,
+          "normalized_step_change": 0.9997000299990001,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9995000999900006,
+          "backward_error": 0.3332222259280247,
+          "index": 5,
+          "vector": [
+            0.9998000399970002,
+            0.9998000399970002
+          ],
+          "delta_inf": 0.9996000599960002,
+          "normalized_step_change": 0.9996000599960002,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9994001499800017,
+          "backward_error": 0.9988010191686789,
+          "index": 6,
+          "vector": [
+            0.0002999400069995106,
+            0.0002999400069995106
+          ],
+          "delta_inf": 0.9995000999900007,
+          "normalized_step_change": 0.9995000999900007,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9993002099650039,
+          "backward_error": 0.33317778815367866,
+          "index": 7,
+          "vector": [
+            0.9997000899870012,
+            0.9997000899870012
+          ],
+          "delta_inf": 0.9994001499800017,
+          "normalized_step_change": 0.9994001499800017,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9992002799440074,
+          "backward_error": 0.9984018379702427,
+          "index": 8,
+          "vector": [
+            0.000399880021997423,
+            0.000399880021997423
+          ],
+          "delta_inf": 0.9993002099650038,
+          "normalized_step_change": 0.9993002099650038,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9991003599160131,
+          "backward_error": 0.333133353344665,
+          "index": 9,
+          "vector": [
+            0.9996001599660048,
+            0.9996001599660048
+          ],
+          "delta_inf": 0.9992002799440074,
+          "normalized_step_change": 0.9992002799440074,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9990004498800216,
+          "backward_error": 0.9980028959656203,
+          "index": 10,
+          "vector": [
+            0.0004998000499917277,
+            0.0004998000499917277
+          ],
+          "delta_inf": 0.9991003599160131,
+          "normalized_step_change": 0.9991003599160131,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9989005498350336,
+          "backward_error": 0.3330889215015757,
+          "index": 11,
+          "vector": [
+            0.9995002499300133,
+            0.9995002499300133
+          ],
+          "delta_inf": 0.9990004498800216,
+          "normalized_step_change": 0.9990004498800216,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9988006597800502,
+          "backward_error": 0.9976041929478571,
+          "index": 12,
+          "vector": [
+            0.0005997000949796716,
+            0.0005997000949796716
+          ],
+          "delta_inf": 0.9989005498350336,
+          "normalized_step_change": 0.9989005498350336,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9987007797140723,
+          "backward_error": 0.3330444926250024,
+          "index": 13,
+          "vector": [
+            0.9994003598750298,
+            0.9994003598750298
+          ],
+          "delta_inf": 0.9988006597800502,
+          "normalized_step_change": 0.9988006597800502,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9986009096361008,
+          "backward_error": 0.9972057287102373,
+          "index": 14,
+          "vector": [
+            0.0006995801609576136,
+            0.0006995801609576136
+          ],
+          "delta_inf": 0.9987007797140722,
+          "normalized_step_change": 0.9987007797140722,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9985010495451372,
+          "backward_error": 0.3330000667155366,
+          "index": 15,
+          "vector": [
+            0.9993004897970584,
+            0.9993004897970584
+          ],
+          "delta_inf": 0.9986009096361008,
+          "normalized_step_change": 0.9986009096361008,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9984011994401827,
+          "backward_error": 0.9968075030462822,
+          "index": 16,
+          "vector": [
+            0.0007994402519212462,
+            0.0007994402519212462
+          ],
+          "delta_inf": 0.9985010495451372,
+          "normalized_step_change": 0.9985010495451372,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9983013593202386,
+          "backward_error": 0.3329556437737696,
+          "index": 17,
+          "vector": [
+            0.9992006396921039,
+            0.9992006396921039
+          ],
+          "delta_inf": 0.9984011994401827,
+          "normalized_step_change": 0.9984011994401827,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9982015291843067,
+          "backward_error": 0.9964095157497517,
+          "index": 18,
+          "vector": [
+            0.0008992803718652631,
+            0.0008992803718652631
+          ],
+          "delta_inf": 0.9983013593202387,
+          "normalized_step_change": 0.9983013593202387,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9981017090313884,
+          "backward_error": 0.33291122380029264,
+          "index": 19,
+          "vector": [
+            0.999100809556172,
+            0.999100809556172
+          ],
+          "delta_inf": 0.9982015291843067,
+          "normalized_step_change": 0.9982015291843067,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9980018988604853,
+          "backward_error": 0.9960117666146425,
+          "index": 20,
+          "vector": [
+            0.0009991005247835805,
+            0.0009991005247835805
+          ],
+          "delta_inf": 0.9981017090313884,
+          "normalized_step_change": 0.9981017090313884,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9979020986705991,
+          "backward_error": 0.33286680679569636,
+          "index": 21,
+          "vector": [
+            0.9990009993852689,
+            0.9990009993852689
+          ],
+          "delta_inf": 0.9980018988604853,
+          "normalized_step_change": 0.9980018988604853,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9978023084607321,
+          "backward_error": 0.9956142554351878,
+          "index": 22,
+          "vector": [
+            0.0010989007146696705,
+            0.0010989007146696705
+          ],
+          "delta_inf": 0.9979020986705992,
+          "normalized_step_change": 0.9979020986705992,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9977025282298861,
+          "backward_error": 0.3328223927605718,
+          "index": 23,
+          "vector": [
+            0.9989012091754018,
+            0.9989012091754018
+          ],
+          "delta_inf": 0.9978023084607321,
+          "normalized_step_change": 0.9978023084607321,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9976027579770632,
+          "backward_error": 0.9952169820058584,
+          "index": 24,
+          "vector": [
+            0.0011986809455156733,
+            0.0011986809455156733
+          ],
+          "delta_inf": 0.9977025282298861,
+          "normalized_step_change": 0.9977025282298861,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9975029977012655,
+          "backward_error": 0.33277798169550915,
+          "index": 25,
+          "vector": [
+            0.9988014389225789,
+            0.9988014389225789
+          ],
+          "delta_inf": 0.9976027579770632,
+          "normalized_step_change": 0.9976027579770632,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9974032474014953,
+          "backward_error": 0.9948199461213604,
+          "index": 26,
+          "vector": [
+            0.0012984412213133956,
+            0.0012984412213133956
+          ],
+          "delta_inf": 0.9975029977012655,
+          "normalized_step_change": 0.9975029977012655,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9973035070767553,
+          "backward_error": 0.33273357360109884,
+          "index": 27,
+          "vector": [
+            0.9987016886228087,
+            0.9987016886228087
+          ],
+          "delta_inf": 0.9974032474014953,
+          "normalized_step_change": 0.9974032474014953,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9972037767260475,
+          "backward_error": 0.9944231475766366,
+          "index": 28,
+          "vector": [
+            0.001398181546053534,
+            0.001398181546053534
+          ],
+          "delta_inf": 0.9973035070767552,
+          "normalized_step_change": 0.9973035070767552,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9971040563483751,
+          "backward_error": 0.33268916847793106,
+          "index": 29,
+          "vector": [
+            0.9986019582721011,
+            0.9986019582721011
+          ],
+          "delta_inf": 0.9972037767260475,
+          "normalized_step_change": 0.9972037767260475,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9970043459427401,
+          "backward_error": 0.9940265861668652,
+          "index": 30,
+          "vector": [
+            0.0014979019237261193,
+            0.0014979019237261193
+          ],
+          "delta_inf": 0.997104056348375,
+          "normalized_step_change": 0.997104056348375,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9969046455081458,
+          "backward_error": 0.33264476632659556,
+          "index": 31,
+          "vector": [
+            0.9985022478664662,
+            0.9985022478664662
+          ],
+          "delta_inf": 0.9970043459427401,
+          "normalized_step_change": 0.9970043459427401,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.996804955043595,
+          "backward_error": 0.9936302616874593,
+          "index": 32,
+          "vector": [
+            0.0015976023583204046,
+            0.0015976023583204046
+          ],
+          "delta_inf": 0.9969046455081458,
+          "normalized_step_change": 0.9969046455081458,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9967052745480907,
+          "backward_error": 0.3326003671476822,
+          "index": 33,
+          "vector": [
+            0.9984025574019154,
+            0.9984025574019154
+          ],
+          "delta_inf": 0.996804955043595,
+          "normalized_step_change": 0.996804955043595,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9966056040206359,
+          "backward_error": 0.9932341739340671,
+          "index": 34,
+          "vector": [
+            0.0016972828538247553,
+            0.0016972828538247553
+          ],
+          "delta_inf": 0.9967052745480907,
+          "normalized_step_change": 0.9967052745480907,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9965059434602339,
+          "backward_error": 0.3325559709417804,
+          "index": 35,
+          "vector": [
+            0.9983028868744607,
+            0.9983028868744607
+          ],
+          "delta_inf": 0.9966056040206359,
+          "normalized_step_change": 0.9966056040206359,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9964062928658879,
+          "backward_error": 0.9928383227025718,
+          "index": 36,
+          "vector": [
+            0.0017969434142267593,
+            0.0017969434142267593
+          ],
+          "delta_inf": 0.9965059434602339,
+          "normalized_step_change": 0.9965059434602339,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9963066522366013,
+          "backward_error": 0.3325115777094796,
+          "index": 37,
+          "vector": [
+            0.9982032362801146,
+            0.9982032362801146
+          ],
+          "delta_inf": 0.9964062928658879,
+          "normalized_step_change": 0.9964062928658879,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9962070215713776,
+          "backward_error": 0.99244270778909,
+          "index": 38,
+          "vector": [
+            0.0018965840435133385,
+            0.0018965840435133385
+          ],
+          "delta_inf": 0.9963066522366013,
+          "normalized_step_change": 0.9963066522366013,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9961074008692203,
+          "backward_error": 0.3324671874513687,
+          "index": 39,
+          "vector": [
+            0.998103605614891,
+            0.998103605614891
+          ],
+          "delta_inf": 0.9962070215713776,
+          "normalized_step_change": 0.9962070215713776,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9960077901291335,
+          "backward_error": 0.992047328989973,
+          "index": 40,
+          "vector": [
+            0.0019962047456705267,
+            0.0019962047456705267
+          ],
+          "delta_inf": 0.9961074008692204,
+          "normalized_step_change": 0.9961074008692204,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9959081893501207,
+          "backward_error": 0.332422800168037,
+          "index": 41,
+          "vector": [
+            0.9980039948748041,
+            0.9980039948748041
+          ],
+          "delta_inf": 0.9960077901291335,
+          "normalized_step_change": 0.9960077901291335,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9958085985311858,
+          "backward_error": 0.9916521861018058,
+          "index": 42,
+          "vector": [
+            0.0020958055246833585,
+            0.0020958055246833585
+          ],
+          "delta_inf": 0.9959081893501207,
+          "normalized_step_change": 0.9959081893501207,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9957090176713326,
+          "backward_error": 0.3323784158600729,
+          "index": 43,
+          "vector": [
+            0.9979044040558691,
+            0.9979044040558691
+          ],
+          "delta_inf": 0.9958085985311858,
+          "normalized_step_change": 0.9958085985311858,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9956094467695656,
+          "backward_error": 0.9912572789214056,
+          "index": 44,
+          "vector": [
+            0.002195386384536424,
+            0.002195386384536424
+          ],
+          "delta_inf": 0.9957090176713327,
+          "normalized_step_change": 0.9957090176713327,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9955098858248888,
+          "backward_error": 0.33233403452806504,
+          "index": 45,
+          "vector": [
+            0.9978048331541021,
+            0.9978048331541021
+          ],
+          "delta_inf": 0.9956094467695656,
+          "normalized_step_change": 0.9956094467695656,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9954103348363063,
+          "backward_error": 0.9908626072458234,
+          "index": 46,
+          "vector": [
+            0.002294947329213315,
+            0.002294947329213315
+          ],
+          "delta_inf": 0.9955098858248888,
+          "normalized_step_change": 0.9955098858248888,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9953107938028225,
+          "backward_error": 0.3322896561726017,
+          "index": 47,
+          "vector": [
+            0.9977052821655196,
+            0.9977052821655196
+          ],
+          "delta_inf": 0.9954103348363063,
+          "normalized_step_change": 0.9954103348363063,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9952112627234424,
+          "backward_error": 0.9904681708723422,
+          "index": 48,
+          "vector": [
+            0.002394488362696956,
+            0.002394488362696956
+          ],
+          "delta_inf": 0.9953107938028226,
+          "normalized_step_change": 0.9953107938028226,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.99511174159717,
+          "backward_error": 0.33224528079427107,
+          "index": 49,
+          "vector": [
+            0.9976057510861394,
+            0.9976057510861394
+          ],
+          "delta_inf": 0.9952112627234424,
+          "normalized_step_change": 0.9952112627234424,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9950122304230103,
+          "backward_error": 0.9900739695984778,
+          "index": 50,
+          "vector": [
+            0.002494009488969273,
+            0.002494009488969273
+          ],
+          "delta_inf": 0.9951117415971701,
+          "normalized_step_change": 0.9951117415971701,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9949127291999682,
+          "backward_error": 0.3322009083936611,
+          "index": 51,
+          "vector": [
+            0.9975062399119796,
+            0.9975062399119796
+          ],
+          "delta_inf": 0.9950122304230103,
+          "normalized_step_change": 0.9950122304230103,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9948132379270481,
+          "backward_error": 0.9896800032219776,
+          "index": 52,
+          "vector": [
+            0.0025935107120115264,
+            0.0025935107120115264
+          ],
+          "delta_inf": 0.9949127291999681,
+          "normalized_step_change": 0.9949127291999681,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9947137566032556,
+          "backward_error": 0.33215653897135944,
+          "index": 53,
+          "vector": [
+            0.9974067486390596,
+            0.9974067486390596
+          ],
+          "delta_inf": 0.9948132379270481,
+          "normalized_step_change": 0.9948132379270481,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9946142852275952,
+          "backward_error": 0.9892862715408206,
+          "index": 54,
+          "vector": [
+            0.002692992035804198,
+            0.002692992035804198
+          ],
+          "delta_inf": 0.9947137566032555,
+          "normalized_step_change": 0.9947137566032555,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9945148237990726,
+          "backward_error": 0.3321121725279538,
+          "index": 55,
+          "vector": [
+            0.9973072772633994,
+            0.9973072772633994
+          ],
+          "delta_inf": 0.9946142852275952,
+          "normalized_step_change": 0.9946142852275952,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9944153723166926,
+          "backward_error": 0.988892774353217,
+          "index": 56,
+          "vector": [
+            0.002792453464326883,
+            0.002792453464326883
+          ],
+          "delta_inf": 0.9945148237990725,
+          "normalized_step_change": 0.9945148237990725,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9943159307794609,
+          "backward_error": 0.3320678090640312,
+          "index": 57,
+          "vector": [
+            0.9972078257810195,
+            0.9972078257810195
+          ],
+          "delta_inf": 0.9944153723166926,
+          "normalized_step_change": 0.9944153723166926,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9942164991863829,
+          "backward_error": 0.9884995114576077,
+          "index": 58,
+          "vector": [
+            0.0028918950015586198,
+            0.0028918950015586198
+          ],
+          "delta_inf": 0.9943159307794609,
+          "normalized_step_change": 0.9943159307794609,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9941170775364643,
+          "backward_error": 0.33202344858017907,
+          "index": 59,
+          "vector": [
+            0.9971083941879415,
+            0.9971083941879415
+          ],
+          "delta_inf": 0.9942164991863829,
+          "normalized_step_change": 0.9942164991863829,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.9940176658287107,
+          "backward_error": 0.9881064826526652,
+          "index": 60,
+          "vector": [
+            0.002991316651477227,
+            0.002991316651477227
+          ],
+          "delta_inf": 0.9941170775364643,
+          "normalized_step_change": 0.9941170775364643,
+          "converged": false
+        }
+      ],
+      "diagnostics": {
+        "residual_inf": 0.9940176658287107,
+        "backward_error": 0.9881064826526652
+      },
+      "breakdown_reason": null,
+      "warnings": []
+    },
+    "conditioning": {
+      "status": "finite",
+      "condition_number": 19998.999999980093,
+      "approximate_digit_loss": 4.301008280396568
+    },
+    "conditioning_arithmetic_mode": "float64",
+    "report": {
+      "schema_version": 1,
+      "solver_version": "0.1.0",
+      "method": "jacobi",
+      "options": {
+        "initial_guess": null,
+        "tolerance": 1e-08,
+        "max_iterations": 60,
+        "auto_reorder_for_diagonal_dominance": true,
+        "auto_reorder_for_nonzero_diagonal": false,
+        "run_despite_convergence_risk": false
+      },
+      "display": {
+        "mode": "decimal",
+        "decimal_places": 6
+      },
+      "fraction_values": "approximate"
+    }
+  },
+  "declined": {
+    "status": "completed",
+    "request_id": "fixture-declined",
+    "problem": {
+      "shape": {
+        "equations": 2,
+        "unknowns": 2
+      },
+      "is_square": true,
+      "arithmetic_mode": "float64",
+      "original_system": {
+        "a": [
+          [
+            1.0,
+            2.0
+          ],
+          [
+            2.0,
+            1.0
+          ]
+        ],
+        "b": [
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "result": {
+      "method": "jacobi",
+      "arithmetic_mode": "float64",
+      "classification": {
+        "shape": {
+          "equations": 2,
+          "unknowns": 2
+        },
+        "arithmetic_mode": "float64",
+        "rank_a": 2,
+        "rank_augmented": 2,
+        "classification": "unique",
+        "rank_tolerance": 1.9984014443252818e-15,
+        "tolerance_policy": "float64-coefficient-scale-v1"
+      },
+      "options": {
+        "tolerance": 1e-08,
+        "max_iterations": 25,
+        "initial_guess": null,
+        "auto_reorder_for_diagonal_dominance": false,
+        "auto_reorder_for_nonzero_diagonal": false,
+        "run_despite_convergence_risk": false
+      },
+      "initial_guess": [
+        0.0,
+        0.0
+      ],
+      "reordering": {
+        "permutation": {
+          "order": [
+            0,
+            1
+          ],
+          "purpose": "identity"
+        },
+        "dominance_search_attempted": false,
+        "dominance_matching_found": null,
+        "nonzero_search_attempted": false
+      },
+      "convergence": {
+        "method": "jacobi",
+        "strict_diagonal_dominance": false,
+        "weak_diagonal_dominance": false,
+        "symmetric_positive_definite": false,
+        "symmetry_tolerance": 1.3322676295501878e-15,
+        "spectral": {
+          "status": "computed",
+          "radius": 2.0000000000000004
+        },
+        "assessment": "convergence_risk",
+        "explanation": "Computed spectral radius is at least one; convergence is not guaranteed."
+      },
+      "conditioning": {
+        "status": "finite",
+        "condition_number": 2.9999999999999996,
+        "approximate_digit_loss": 0.4771212547196624
+      },
+      "status": "convergence_risk_declined",
+      "last_iterate": [
+        0.0,
+        0.0
+      ],
+      "solution": null,
+      "history": [],
+      "diagnostics": {
+        "residual_inf": 1.0,
+        "backward_error": 1.0
+      },
+      "breakdown_reason": null,
+      "warnings": [
+        "Computed spectral radius is at least one; convergence is not guaranteed."
+      ]
+    },
+    "conditioning": {
+      "status": "finite",
+      "condition_number": 2.9999999999999996,
+      "approximate_digit_loss": 0.4771212547196624
+    },
+    "conditioning_arithmetic_mode": "float64",
+    "report": {
+      "schema_version": 1,
+      "solver_version": "0.1.0",
+      "method": "jacobi",
+      "options": {
+        "initial_guess": null,
+        "tolerance": 1e-08,
+        "max_iterations": 25,
+        "auto_reorder_for_diagonal_dominance": false,
+        "auto_reorder_for_nonzero_diagonal": false,
+        "run_despite_convergence_risk": false
+      },
+      "display": {
+        "mode": "decimal",
+        "decimal_places": 6
+      },
+      "fraction_values": "approximate"
+    }
+  },
+  "breakdown": {
+    "status": "completed",
+    "request_id": "fixture-breakdown",
+    "problem": {
+      "shape": {
+        "equations": 2,
+        "unknowns": 2
+      },
+      "is_square": true,
+      "arithmetic_mode": "float64",
+      "original_system": {
+        "a": [
+          [
+            1.0,
+            100.0
+          ],
+          [
+            100.0,
+            1.0
+          ]
+        ],
+        "b": [
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "result": {
+      "method": "jacobi",
+      "arithmetic_mode": "float64",
+      "classification": {
+        "shape": {
+          "equations": 2,
+          "unknowns": 2
+        },
+        "arithmetic_mode": "float64",
+        "rank_a": 2,
+        "rank_augmented": 2,
+        "classification": "unique",
+        "rank_tolerance": 6.727951529228449e-14,
+        "tolerance_policy": "float64-coefficient-scale-v1"
+      },
+      "options": {
+        "tolerance": 1e-08,
+        "max_iterations": 500,
+        "initial_guess": null,
+        "auto_reorder_for_diagonal_dominance": false,
+        "auto_reorder_for_nonzero_diagonal": false,
+        "run_despite_convergence_risk": true
+      },
+      "initial_guess": [
+        0.0,
+        0.0
+      ],
+      "reordering": {
+        "permutation": {
+          "order": [
+            0,
+            1
+          ],
+          "purpose": "identity"
+        },
+        "dominance_search_attempted": false,
+        "dominance_matching_found": null,
+        "nonzero_search_attempted": false
+      },
+      "convergence": {
+        "method": "jacobi",
+        "strict_diagonal_dominance": false,
+        "weak_diagonal_dominance": false,
+        "symmetric_positive_definite": false,
+        "symmetry_tolerance": 4.4853010194856324e-14,
+        "spectral": {
+          "status": "computed",
+          "radius": 100.0
+        },
+        "assessment": "convergence_risk",
+        "explanation": "Computed spectral radius is at least one; convergence is not guaranteed."
+      },
+      "conditioning": {
+        "status": "finite",
+        "condition_number": 1.02020202020202,
+        "approximate_digit_loss": 0.00868617918509262
+      },
+      "status": "numeric_breakdown",
+      "last_iterate": [
+        -9.900990099009906e+305,
+        -9.900990099009906e+305
+      ],
+      "solution": null,
+      "history": [
+        {
+          "residual_inf": 100.0,
+          "backward_error": 0.9803921568627451,
+          "index": 1,
+          "vector": [
+            1.0,
+            1.0
+          ],
+          "delta_inf": 1.0,
+          "normalized_step_change": 1.0,
+          "converged": false
+        },
+        {
+          "residual_inf": 10000.0,
+          "backward_error": 1.0,
+          "index": 2,
+          "vector": [
+            -99.0,
+            -99.0
+          ],
+          "delta_inf": 100.0,
+          "normalized_step_change": 1.0101010101010102,
+          "converged": false
+        },
+        {
+          "residual_inf": 1000000.0,
+          "backward_error": 0.999998000004,
+          "index": 3,
+          "vector": [
+            9901.0,
+            9901.0
+          ],
+          "delta_inf": 10000.0,
+          "normalized_step_change": 1.00999899000101,
+          "converged": false
+        },
+        {
+          "residual_inf": 100000000.0,
+          "backward_error": 1.0,
+          "index": 4,
+          "vector": [
+            -990099.0,
+            -990099.0
+          ],
+          "delta_inf": 1000000.0,
+          "normalized_step_change": 1.0100000101000002,
+          "converged": false
+        },
+        {
+          "residual_inf": 10000000000.0,
+          "backward_error": 0.9999999998,
+          "index": 5,
+          "vector": [
+            99009901.0,
+            99009901.0
+          ],
+          "delta_inf": 100000000.0,
+          "normalized_step_change": 1.009999999899,
+          "converged": false
+        },
+        {
+          "residual_inf": 1000000000000.0,
+          "backward_error": 1.0,
+          "index": 6,
+          "vector": [
+            -9900990099.0,
+            -9900990099.0
+          ],
+          "delta_inf": 10000000000.0,
+          "normalized_step_change": 1.01000000000101,
+          "converged": false
+        },
+        {
+          "residual_inf": 100000000000000.0,
+          "backward_error": 0.99999999999998,
+          "index": 7,
+          "vector": [
+            990099009901.0,
+            990099009901.0
+          ],
+          "delta_inf": 1000000000000.0,
+          "normalized_step_change": 1.0099999999999898,
+          "converged": false
+        },
+        {
+          "residual_inf": 1e+16,
+          "backward_error": 1.0,
+          "index": 8,
+          "vector": [
+            -99009900990099.0,
+            -99009900990099.0
+          ],
+          "delta_inf": 100000000000000.0,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 9.999999999999999e+17,
+          "backward_error": 1.0,
+          "index": 9,
+          "vector": [
+            9900990099009900.0,
+            9900990099009900.0
+          ],
+          "delta_inf": 1e+16,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 9.999999999999998e+19,
+          "backward_error": 1.0,
+          "index": 10,
+          "vector": [
+            -9.9009900990099e+17,
+            -9.9009900990099e+17
+          ],
+          "delta_inf": 9.999999999999999e+17,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1e+22,
+          "backward_error": 1.0000000000000002,
+          "index": 11,
+          "vector": [
+            9.9009900990099e+19,
+            9.9009900990099e+19
+          ],
+          "delta_inf": 9.999999999999998e+19,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 9.999999999999998e+23,
+          "backward_error": 1.0,
+          "index": 12,
+          "vector": [
+            -9.9009900990099e+21,
+            -9.9009900990099e+21
+          ],
+          "delta_inf": 1e+22,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 9.999999999999999e+25,
+          "backward_error": 1.0,
+          "index": 13,
+          "vector": [
+            9.9009900990099e+23,
+            9.9009900990099e+23
+          ],
+          "delta_inf": 9.999999999999998e+23,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 9.999999999999997e+27,
+          "backward_error": 1.0,
+          "index": 14,
+          "vector": [
+            -9.900990099009899e+25,
+            -9.900990099009899e+25
+          ],
+          "delta_inf": 9.999999999999999e+25,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 9.999999999999999e+29,
+          "backward_error": 1.0000000000000002,
+          "index": 15,
+          "vector": [
+            9.900990099009899e+27,
+            9.900990099009899e+27
+          ],
+          "delta_inf": 9.999999999999997e+27,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 9.999999999999997e+31,
+          "backward_error": 0.9999999999999998,
+          "index": 16,
+          "vector": [
+            -9.900990099009899e+29,
+            -9.900990099009899e+29
+          ],
+          "delta_inf": 9.999999999999999e+29,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 9.999999999999998e+33,
+          "backward_error": 1.0,
+          "index": 17,
+          "vector": [
+            9.900990099009899e+31,
+            9.900990099009899e+31
+          ],
+          "delta_inf": 9.999999999999997e+31,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 9.999999999999999e+35,
+          "backward_error": 1.0,
+          "index": 18,
+          "vector": [
+            -9.900990099009899e+33,
+            -9.900990099009899e+33
+          ],
+          "delta_inf": 9.999999999999998e+33,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1e+38,
+          "backward_error": 1.0,
+          "index": 19,
+          "vector": [
+            9.9009900990099e+35,
+            9.9009900990099e+35
+          ],
+          "delta_inf": 9.999999999999999e+35,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1e+40,
+          "backward_error": 1.0,
+          "index": 20,
+          "vector": [
+            -9.9009900990099e+37,
+            -9.9009900990099e+37
+          ],
+          "delta_inf": 1e+38,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1e+42,
+          "backward_error": 1.0,
+          "index": 21,
+          "vector": [
+            9.900990099009901e+39,
+            9.900990099009901e+39
+          ],
+          "delta_inf": 1e+40,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1e+44,
+          "backward_error": 1.0,
+          "index": 22,
+          "vector": [
+            -9.900990099009901e+41,
+            -9.900990099009901e+41
+          ],
+          "delta_inf": 1e+42,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000001e+46,
+          "backward_error": 1.0,
+          "index": 23,
+          "vector": [
+            9.900990099009902e+43,
+            9.900990099009902e+43
+          ],
+          "delta_inf": 1e+44,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000002e+48,
+          "backward_error": 1.0,
+          "index": 24,
+          "vector": [
+            -9.900990099009903e+45,
+            -9.900990099009903e+45
+          ],
+          "delta_inf": 1.0000000000000001e+46,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+50,
+          "backward_error": 1.0,
+          "index": 25,
+          "vector": [
+            9.900990099009903e+47,
+            9.900990099009903e+47
+          ],
+          "delta_inf": 1.0000000000000002e+48,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+52,
+          "backward_error": 1.0,
+          "index": 26,
+          "vector": [
+            -9.900990099009903e+49,
+            -9.900990099009903e+49
+          ],
+          "delta_inf": 1.0000000000000003e+50,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000002e+54,
+          "backward_error": 1.0,
+          "index": 27,
+          "vector": [
+            9.900990099009903e+51,
+            9.900990099009903e+51
+          ],
+          "delta_inf": 1.0000000000000003e+52,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+56,
+          "backward_error": 1.0000000000000002,
+          "index": 28,
+          "vector": [
+            -9.900990099009903e+53,
+            -9.900990099009903e+53
+          ],
+          "delta_inf": 1.0000000000000002e+54,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+58,
+          "backward_error": 1.0000000000000002,
+          "index": 29,
+          "vector": [
+            9.900990099009903e+55,
+            9.900990099009903e+55
+          ],
+          "delta_inf": 1.0000000000000003e+56,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+60,
+          "backward_error": 1.0,
+          "index": 30,
+          "vector": [
+            -9.900990099009904e+57,
+            -9.900990099009904e+57
+          ],
+          "delta_inf": 1.0000000000000004e+58,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+62,
+          "backward_error": 0.9999999999999999,
+          "index": 31,
+          "vector": [
+            9.900990099009904e+59,
+            9.900990099009904e+59
+          ],
+          "delta_inf": 1.0000000000000003e+60,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+64,
+          "backward_error": 1.0,
+          "index": 32,
+          "vector": [
+            -9.900990099009904e+61,
+            -9.900990099009904e+61
+          ],
+          "delta_inf": 1.0000000000000003e+62,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+66,
+          "backward_error": 1.0,
+          "index": 33,
+          "vector": [
+            9.900990099009904e+63,
+            9.900990099009904e+63
+          ],
+          "delta_inf": 1.0000000000000003e+64,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000002e+68,
+          "backward_error": 0.9999999999999999,
+          "index": 34,
+          "vector": [
+            -9.900990099009904e+65,
+            -9.900990099009904e+65
+          ],
+          "delta_inf": 1.0000000000000003e+66,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000002e+70,
+          "backward_error": 1.0,
+          "index": 35,
+          "vector": [
+            9.900990099009903e+67,
+            9.900990099009903e+67
+          ],
+          "delta_inf": 1.0000000000000002e+68,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+72,
+          "backward_error": 1.0,
+          "index": 36,
+          "vector": [
+            -9.900990099009904e+69,
+            -9.900990099009904e+69
+          ],
+          "delta_inf": 1.0000000000000002e+70,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+74,
+          "backward_error": 1.0000000000000002,
+          "index": 37,
+          "vector": [
+            9.900990099009903e+71,
+            9.900990099009903e+71
+          ],
+          "delta_inf": 1.0000000000000003e+72,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+76,
+          "backward_error": 1.0,
+          "index": 38,
+          "vector": [
+            -9.900990099009904e+73,
+            -9.900990099009904e+73
+          ],
+          "delta_inf": 1.0000000000000003e+74,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+78,
+          "backward_error": 1.0000000000000002,
+          "index": 39,
+          "vector": [
+            9.900990099009904e+75,
+            9.900990099009904e+75
+          ],
+          "delta_inf": 1.0000000000000004e+76,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+80,
+          "backward_error": 0.9999999999999999,
+          "index": 40,
+          "vector": [
+            -9.900990099009905e+77,
+            -9.900990099009905e+77
+          ],
+          "delta_inf": 1.0000000000000004e+78,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+82,
+          "backward_error": 1.0,
+          "index": 41,
+          "vector": [
+            9.900990099009904e+79,
+            9.900990099009904e+79
+          ],
+          "delta_inf": 1.0000000000000003e+80,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+84,
+          "backward_error": 1.0,
+          "index": 42,
+          "vector": [
+            -9.900990099009905e+81,
+            -9.900990099009905e+81
+          ],
+          "delta_inf": 1.0000000000000003e+82,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+86,
+          "backward_error": 1.0,
+          "index": 43,
+          "vector": [
+            9.900990099009905e+83,
+            9.900990099009905e+83
+          ],
+          "delta_inf": 1.0000000000000003e+84,
+          "normalized_step_change": 1.0099999999999998,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000005e+88,
+          "backward_error": 1.0000000000000002,
+          "index": 44,
+          "vector": [
+            -9.900990099009905e+85,
+            -9.900990099009905e+85
+          ],
+          "delta_inf": 1.0000000000000004e+86,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+90,
+          "backward_error": 1.0,
+          "index": 45,
+          "vector": [
+            9.900990099009905e+87,
+            9.900990099009905e+87
+          ],
+          "delta_inf": 1.0000000000000005e+88,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000005e+92,
+          "backward_error": 1.0000000000000002,
+          "index": 46,
+          "vector": [
+            -9.900990099009905e+89,
+            -9.900990099009905e+89
+          ],
+          "delta_inf": 1.0000000000000004e+90,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+94,
+          "backward_error": 1.0,
+          "index": 47,
+          "vector": [
+            9.900990099009905e+91,
+            9.900990099009905e+91
+          ],
+          "delta_inf": 1.0000000000000005e+92,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+96,
+          "backward_error": 1.0,
+          "index": 48,
+          "vector": [
+            -9.900990099009904e+93,
+            -9.900990099009904e+93
+          ],
+          "delta_inf": 1.0000000000000004e+94,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+98,
+          "backward_error": 1.0,
+          "index": 49,
+          "vector": [
+            9.900990099009904e+95,
+            9.900990099009904e+95
+          ],
+          "delta_inf": 1.0000000000000003e+96,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000002e+100,
+          "backward_error": 1.0,
+          "index": 50,
+          "vector": [
+            -9.900990099009904e+97,
+            -9.900990099009904e+97
+          ],
+          "delta_inf": 1.0000000000000003e+98,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000002e+102,
+          "backward_error": 1.0,
+          "index": 51,
+          "vector": [
+            9.900990099009904e+99,
+            9.900990099009904e+99
+          ],
+          "delta_inf": 1.0000000000000002e+100,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+104,
+          "backward_error": 1.0,
+          "index": 52,
+          "vector": [
+            -9.900990099009904e+101,
+            -9.900990099009904e+101
+          ],
+          "delta_inf": 1.0000000000000002e+102,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+106,
+          "backward_error": 1.0,
+          "index": 53,
+          "vector": [
+            9.900990099009903e+103,
+            9.900990099009903e+103
+          ],
+          "delta_inf": 1.0000000000000003e+104,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+108,
+          "backward_error": 1.0,
+          "index": 54,
+          "vector": [
+            -9.900990099009904e+105,
+            -9.900990099009904e+105
+          ],
+          "delta_inf": 1.0000000000000003e+106,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+110,
+          "backward_error": 1.0000000000000002,
+          "index": 55,
+          "vector": [
+            9.900990099009904e+107,
+            9.900990099009904e+107
+          ],
+          "delta_inf": 1.0000000000000003e+108,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000001e+112,
+          "backward_error": 0.9999999999999998,
+          "index": 56,
+          "vector": [
+            -9.900990099009904e+109,
+            -9.900990099009904e+109
+          ],
+          "delta_inf": 1.0000000000000004e+110,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000002e+114,
+          "backward_error": 1.0,
+          "index": 57,
+          "vector": [
+            9.900990099009903e+111,
+            9.900990099009903e+111
+          ],
+          "delta_inf": 1.0000000000000001e+112,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000002e+116,
+          "backward_error": 1.0,
+          "index": 58,
+          "vector": [
+            -9.900990099009903e+113,
+            -9.900990099009903e+113
+          ],
+          "delta_inf": 1.0000000000000002e+114,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000002e+118,
+          "backward_error": 1.0,
+          "index": 59,
+          "vector": [
+            9.900990099009903e+115,
+            9.900990099009903e+115
+          ],
+          "delta_inf": 1.0000000000000002e+116,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000001e+120,
+          "backward_error": 1.0,
+          "index": 60,
+          "vector": [
+            -9.900990099009902e+117,
+            -9.900990099009902e+117
+          ],
+          "delta_inf": 1.0000000000000002e+118,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000002e+122,
+          "backward_error": 1.0,
+          "index": 61,
+          "vector": [
+            9.900990099009903e+119,
+            9.900990099009903e+119
+          ],
+          "delta_inf": 1.0000000000000001e+120,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000002e+124,
+          "backward_error": 1.0,
+          "index": 62,
+          "vector": [
+            -9.900990099009903e+121,
+            -9.900990099009903e+121
+          ],
+          "delta_inf": 1.0000000000000002e+122,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000002e+126,
+          "backward_error": 1.0,
+          "index": 63,
+          "vector": [
+            9.900990099009903e+123,
+            9.900990099009903e+123
+          ],
+          "delta_inf": 1.0000000000000002e+124,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1e+128,
+          "backward_error": 1.0,
+          "index": 64,
+          "vector": [
+            -9.900990099009903e+125,
+            -9.900990099009903e+125
+          ],
+          "delta_inf": 1.0000000000000002e+126,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000002e+130,
+          "backward_error": 1.0,
+          "index": 65,
+          "vector": [
+            9.900990099009903e+127,
+            9.900990099009903e+127
+          ],
+          "delta_inf": 1e+128,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000001e+132,
+          "backward_error": 1.0,
+          "index": 66,
+          "vector": [
+            -9.900990099009903e+129,
+            -9.900990099009903e+129
+          ],
+          "delta_inf": 1.0000000000000002e+130,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000001e+134,
+          "backward_error": 1.0,
+          "index": 67,
+          "vector": [
+            9.900990099009903e+131,
+            9.900990099009903e+131
+          ],
+          "delta_inf": 1.0000000000000001e+132,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000002e+136,
+          "backward_error": 1.0000000000000002,
+          "index": 68,
+          "vector": [
+            -9.900990099009902e+133,
+            -9.900990099009902e+133
+          ],
+          "delta_inf": 1.0000000000000001e+134,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000002e+138,
+          "backward_error": 1.0,
+          "index": 69,
+          "vector": [
+            9.900990099009903e+135,
+            9.900990099009903e+135
+          ],
+          "delta_inf": 1.0000000000000002e+136,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+140,
+          "backward_error": 1.0,
+          "index": 70,
+          "vector": [
+            -9.900990099009903e+137,
+            -9.900990099009903e+137
+          ],
+          "delta_inf": 1.0000000000000002e+138,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+142,
+          "backward_error": 1.0,
+          "index": 71,
+          "vector": [
+            9.900990099009904e+139,
+            9.900990099009904e+139
+          ],
+          "delta_inf": 1.0000000000000003e+140,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+144,
+          "backward_error": 1.0,
+          "index": 72,
+          "vector": [
+            -9.900990099009905e+141,
+            -9.900990099009905e+141
+          ],
+          "delta_inf": 1.0000000000000003e+142,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+146,
+          "backward_error": 1.0,
+          "index": 73,
+          "vector": [
+            9.900990099009904e+143,
+            9.900990099009904e+143
+          ],
+          "delta_inf": 1.0000000000000004e+144,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+148,
+          "backward_error": 1.0,
+          "index": 74,
+          "vector": [
+            -9.900990099009904e+145,
+            -9.900990099009904e+145
+          ],
+          "delta_inf": 1.0000000000000004e+146,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+150,
+          "backward_error": 1.0,
+          "index": 75,
+          "vector": [
+            9.900990099009904e+147,
+            9.900990099009904e+147
+          ],
+          "delta_inf": 1.0000000000000003e+148,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+152,
+          "backward_error": 1.0,
+          "index": 76,
+          "vector": [
+            -9.900990099009904e+149,
+            -9.900990099009904e+149
+          ],
+          "delta_inf": 1.0000000000000003e+150,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+154,
+          "backward_error": 1.0,
+          "index": 77,
+          "vector": [
+            9.900990099009904e+151,
+            9.900990099009904e+151
+          ],
+          "delta_inf": 1.0000000000000003e+152,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+156,
+          "backward_error": 1.0,
+          "index": 78,
+          "vector": [
+            -9.900990099009904e+153,
+            -9.900990099009904e+153
+          ],
+          "delta_inf": 1.0000000000000003e+154,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+158,
+          "backward_error": 1.0,
+          "index": 79,
+          "vector": [
+            9.900990099009904e+155,
+            9.900990099009904e+155
+          ],
+          "delta_inf": 1.0000000000000004e+156,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+160,
+          "backward_error": 1.0,
+          "index": 80,
+          "vector": [
+            -9.900990099009904e+157,
+            -9.900990099009904e+157
+          ],
+          "delta_inf": 1.0000000000000003e+158,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000001e+162,
+          "backward_error": 0.9999999999999998,
+          "index": 81,
+          "vector": [
+            9.900990099009903e+159,
+            9.900990099009903e+159
+          ],
+          "delta_inf": 1.0000000000000003e+160,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+164,
+          "backward_error": 1.0,
+          "index": 82,
+          "vector": [
+            -9.900990099009903e+161,
+            -9.900990099009903e+161
+          ],
+          "delta_inf": 1.0000000000000001e+162,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+166,
+          "backward_error": 1.0,
+          "index": 83,
+          "vector": [
+            9.900990099009904e+163,
+            9.900990099009904e+163
+          ],
+          "delta_inf": 1.0000000000000003e+164,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+168,
+          "backward_error": 1.0000000000000002,
+          "index": 84,
+          "vector": [
+            -9.900990099009903e+165,
+            -9.900990099009903e+165
+          ],
+          "delta_inf": 1.0000000000000003e+166,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+170,
+          "backward_error": 1.0,
+          "index": 85,
+          "vector": [
+            9.900990099009904e+167,
+            9.900990099009904e+167
+          ],
+          "delta_inf": 1.0000000000000004e+168,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+172,
+          "backward_error": 1.0,
+          "index": 86,
+          "vector": [
+            -9.900990099009903e+169,
+            -9.900990099009903e+169
+          ],
+          "delta_inf": 1.0000000000000003e+170,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1e+174,
+          "backward_error": 0.9999999999999998,
+          "index": 87,
+          "vector": [
+            9.900990099009903e+171,
+            9.900990099009903e+171
+          ],
+          "delta_inf": 1.0000000000000003e+172,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000001e+176,
+          "backward_error": 1.0,
+          "index": 88,
+          "vector": [
+            -9.900990099009903e+173,
+            -9.900990099009903e+173
+          ],
+          "delta_inf": 1e+174,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1e+178,
+          "backward_error": 0.9999999999999998,
+          "index": 89,
+          "vector": [
+            9.900990099009902e+175,
+            9.900990099009902e+175
+          ],
+          "delta_inf": 1.0000000000000001e+176,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000001e+180,
+          "backward_error": 1.0,
+          "index": 90,
+          "vector": [
+            -9.900990099009902e+177,
+            -9.900990099009902e+177
+          ],
+          "delta_inf": 1e+178,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000002e+182,
+          "backward_error": 1.0,
+          "index": 91,
+          "vector": [
+            9.900990099009902e+179,
+            9.900990099009902e+179
+          ],
+          "delta_inf": 1.0000000000000001e+180,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000002e+184,
+          "backward_error": 1.0,
+          "index": 92,
+          "vector": [
+            -9.900990099009903e+181,
+            -9.900990099009903e+181
+          ],
+          "delta_inf": 1.0000000000000002e+182,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000002e+186,
+          "backward_error": 1.0,
+          "index": 93,
+          "vector": [
+            9.900990099009903e+183,
+            9.900990099009903e+183
+          ],
+          "delta_inf": 1.0000000000000002e+184,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000002e+188,
+          "backward_error": 1.0,
+          "index": 94,
+          "vector": [
+            -9.900990099009903e+185,
+            -9.900990099009903e+185
+          ],
+          "delta_inf": 1.0000000000000002e+186,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+190,
+          "backward_error": 1.0,
+          "index": 95,
+          "vector": [
+            9.900990099009903e+187,
+            9.900990099009903e+187
+          ],
+          "delta_inf": 1.0000000000000002e+188,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000002e+192,
+          "backward_error": 1.0,
+          "index": 96,
+          "vector": [
+            -9.900990099009903e+189,
+            -9.900990099009903e+189
+          ],
+          "delta_inf": 1.0000000000000003e+190,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+194,
+          "backward_error": 1.0000000000000002,
+          "index": 97,
+          "vector": [
+            9.900990099009903e+191,
+            9.900990099009903e+191
+          ],
+          "delta_inf": 1.0000000000000002e+192,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+196,
+          "backward_error": 1.0000000000000002,
+          "index": 98,
+          "vector": [
+            -9.900990099009903e+193,
+            -9.900990099009903e+193
+          ],
+          "delta_inf": 1.0000000000000003e+194,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+198,
+          "backward_error": 1.0000000000000002,
+          "index": 99,
+          "vector": [
+            9.900990099009904e+195,
+            9.900990099009904e+195
+          ],
+          "delta_inf": 1.0000000000000004e+196,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000005e+200,
+          "backward_error": 1.0000000000000002,
+          "index": 100,
+          "vector": [
+            -9.900990099009905e+197,
+            -9.900990099009905e+197
+          ],
+          "delta_inf": 1.0000000000000004e+198,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000006e+202,
+          "backward_error": 1.0000000000000002,
+          "index": 101,
+          "vector": [
+            9.900990099009905e+199,
+            9.900990099009905e+199
+          ],
+          "delta_inf": 1.0000000000000005e+200,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+204,
+          "backward_error": 1.0,
+          "index": 102,
+          "vector": [
+            -9.900990099009905e+201,
+            -9.900990099009905e+201
+          ],
+          "delta_inf": 1.0000000000000006e+202,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000006e+206,
+          "backward_error": 1.0000000000000002,
+          "index": 103,
+          "vector": [
+            9.900990099009906e+203,
+            9.900990099009906e+203
+          ],
+          "delta_inf": 1.0000000000000004e+204,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000006e+208,
+          "backward_error": 1.0,
+          "index": 104,
+          "vector": [
+            -9.900990099009906e+205,
+            -9.900990099009906e+205
+          ],
+          "delta_inf": 1.0000000000000006e+206,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000007e+210,
+          "backward_error": 1.0000000000000002,
+          "index": 105,
+          "vector": [
+            9.900990099009907e+207,
+            9.900990099009907e+207
+          ],
+          "delta_inf": 1.0000000000000006e+208,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000007e+212,
+          "backward_error": 1.0,
+          "index": 106,
+          "vector": [
+            -9.900990099009907e+209,
+            -9.900990099009907e+209
+          ],
+          "delta_inf": 1.0000000000000007e+210,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000007e+214,
+          "backward_error": 1.0,
+          "index": 107,
+          "vector": [
+            9.900990099009908e+211,
+            9.900990099009908e+211
+          ],
+          "delta_inf": 1.0000000000000007e+212,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000006e+216,
+          "backward_error": 1.0,
+          "index": 108,
+          "vector": [
+            -9.900990099009908e+213,
+            -9.900990099009908e+213
+          ],
+          "delta_inf": 1.0000000000000007e+214,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000007e+218,
+          "backward_error": 1.0,
+          "index": 109,
+          "vector": [
+            9.900990099009907e+215,
+            9.900990099009907e+215
+          ],
+          "delta_inf": 1.0000000000000006e+216,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000006e+220,
+          "backward_error": 1.0,
+          "index": 110,
+          "vector": [
+            -9.900990099009907e+217,
+            -9.900990099009907e+217
+          ],
+          "delta_inf": 1.0000000000000007e+218,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000005e+222,
+          "backward_error": 1.0,
+          "index": 111,
+          "vector": [
+            9.900990099009907e+219,
+            9.900990099009907e+219
+          ],
+          "delta_inf": 1.0000000000000006e+220,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000006e+224,
+          "backward_error": 1.0,
+          "index": 112,
+          "vector": [
+            -9.900990099009906e+221,
+            -9.900990099009906e+221
+          ],
+          "delta_inf": 1.0000000000000005e+222,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000005e+226,
+          "backward_error": 0.9999999999999999,
+          "index": 113,
+          "vector": [
+            9.900990099009907e+223,
+            9.900990099009907e+223
+          ],
+          "delta_inf": 1.0000000000000006e+224,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000006e+228,
+          "backward_error": 1.0,
+          "index": 114,
+          "vector": [
+            -9.900990099009906e+225,
+            -9.900990099009906e+225
+          ],
+          "delta_inf": 1.0000000000000005e+226,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000005e+230,
+          "backward_error": 1.0,
+          "index": 115,
+          "vector": [
+            9.900990099009907e+227,
+            9.900990099009907e+227
+          ],
+          "delta_inf": 1.0000000000000006e+228,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000005e+232,
+          "backward_error": 0.9999999999999999,
+          "index": 116,
+          "vector": [
+            -9.900990099009907e+229,
+            -9.900990099009907e+229
+          ],
+          "delta_inf": 1.0000000000000005e+230,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000005e+234,
+          "backward_error": 1.0,
+          "index": 117,
+          "vector": [
+            9.900990099009906e+231,
+            9.900990099009906e+231
+          ],
+          "delta_inf": 1.0000000000000005e+232,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000006e+236,
+          "backward_error": 1.0,
+          "index": 118,
+          "vector": [
+            -9.900990099009907e+233,
+            -9.900990099009907e+233
+          ],
+          "delta_inf": 1.0000000000000005e+234,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000006e+238,
+          "backward_error": 1.0,
+          "index": 119,
+          "vector": [
+            9.900990099009907e+235,
+            9.900990099009907e+235
+          ],
+          "delta_inf": 1.0000000000000006e+236,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000006e+240,
+          "backward_error": 0.9999999999999998,
+          "index": 120,
+          "vector": [
+            -9.900990099009908e+237,
+            -9.900990099009908e+237
+          ],
+          "delta_inf": 1.0000000000000006e+238,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000005e+242,
+          "backward_error": 1.0,
+          "index": 121,
+          "vector": [
+            9.900990099009907e+239,
+            9.900990099009907e+239
+          ],
+          "delta_inf": 1.0000000000000006e+240,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000005e+244,
+          "backward_error": 1.0,
+          "index": 122,
+          "vector": [
+            -9.900990099009907e+241,
+            -9.900990099009907e+241
+          ],
+          "delta_inf": 1.0000000000000005e+242,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000005e+246,
+          "backward_error": 1.0,
+          "index": 123,
+          "vector": [
+            9.900990099009906e+243,
+            9.900990099009906e+243
+          ],
+          "delta_inf": 1.0000000000000005e+244,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+248,
+          "backward_error": 1.0,
+          "index": 124,
+          "vector": [
+            -9.900990099009905e+245,
+            -9.900990099009905e+245
+          ],
+          "delta_inf": 1.0000000000000005e+246,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+250,
+          "backward_error": 1.0,
+          "index": 125,
+          "vector": [
+            9.900990099009905e+247,
+            9.900990099009905e+247
+          ],
+          "delta_inf": 1.0000000000000004e+248,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+252,
+          "backward_error": 0.9999999999999998,
+          "index": 126,
+          "vector": [
+            -9.900990099009906e+249,
+            -9.900990099009906e+249
+          ],
+          "delta_inf": 1.0000000000000004e+250,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+254,
+          "backward_error": 1.0,
+          "index": 127,
+          "vector": [
+            9.900990099009905e+251,
+            9.900990099009905e+251
+          ],
+          "delta_inf": 1.0000000000000003e+252,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+256,
+          "backward_error": 1.0,
+          "index": 128,
+          "vector": [
+            -9.900990099009905e+253,
+            -9.900990099009905e+253
+          ],
+          "delta_inf": 1.0000000000000003e+254,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000005e+258,
+          "backward_error": 1.0,
+          "index": 129,
+          "vector": [
+            9.900990099009905e+255,
+            9.900990099009905e+255
+          ],
+          "delta_inf": 1.0000000000000004e+256,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000006e+260,
+          "backward_error": 1.0000000000000002,
+          "index": 130,
+          "vector": [
+            -9.900990099009906e+257,
+            -9.900990099009906e+257
+          ],
+          "delta_inf": 1.0000000000000005e+258,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000005e+262,
+          "backward_error": 1.0,
+          "index": 131,
+          "vector": [
+            9.900990099009907e+259,
+            9.900990099009907e+259
+          ],
+          "delta_inf": 1.0000000000000006e+260,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000006e+264,
+          "backward_error": 1.0,
+          "index": 132,
+          "vector": [
+            -9.900990099009906e+261,
+            -9.900990099009906e+261
+          ],
+          "delta_inf": 1.0000000000000005e+262,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000006e+266,
+          "backward_error": 1.0,
+          "index": 133,
+          "vector": [
+            9.900990099009907e+263,
+            9.900990099009907e+263
+          ],
+          "delta_inf": 1.0000000000000006e+264,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000007e+268,
+          "backward_error": 1.0,
+          "index": 134,
+          "vector": [
+            -9.900990099009907e+265,
+            -9.900990099009907e+265
+          ],
+          "delta_inf": 1.0000000000000006e+266,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000006e+270,
+          "backward_error": 1.0,
+          "index": 135,
+          "vector": [
+            9.900990099009907e+267,
+            9.900990099009907e+267
+          ],
+          "delta_inf": 1.0000000000000007e+268,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000007e+272,
+          "backward_error": 1.0,
+          "index": 136,
+          "vector": [
+            -9.900990099009907e+269,
+            -9.900990099009907e+269
+          ],
+          "delta_inf": 1.0000000000000006e+270,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000007e+274,
+          "backward_error": 1.0,
+          "index": 137,
+          "vector": [
+            9.900990099009908e+271,
+            9.900990099009908e+271
+          ],
+          "delta_inf": 1.0000000000000007e+272,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000005e+276,
+          "backward_error": 0.9999999999999999,
+          "index": 138,
+          "vector": [
+            -9.900990099009907e+273,
+            -9.900990099009907e+273
+          ],
+          "delta_inf": 1.0000000000000007e+274,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000006e+278,
+          "backward_error": 1.0,
+          "index": 139,
+          "vector": [
+            9.900990099009907e+275,
+            9.900990099009907e+275
+          ],
+          "delta_inf": 1.0000000000000005e+276,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+280,
+          "backward_error": 1.0,
+          "index": 140,
+          "vector": [
+            -9.900990099009906e+277,
+            -9.900990099009906e+277
+          ],
+          "delta_inf": 1.0000000000000006e+278,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+282,
+          "backward_error": 0.9999999999999999,
+          "index": 141,
+          "vector": [
+            9.900990099009906e+279,
+            9.900990099009906e+279
+          ],
+          "delta_inf": 1.0000000000000004e+280,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+284,
+          "backward_error": 1.0,
+          "index": 142,
+          "vector": [
+            -9.900990099009906e+281,
+            -9.900990099009906e+281
+          ],
+          "delta_inf": 1.0000000000000004e+282,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000005e+286,
+          "backward_error": 1.0,
+          "index": 143,
+          "vector": [
+            9.900990099009905e+283,
+            9.900990099009905e+283
+          ],
+          "delta_inf": 1.0000000000000004e+284,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000005e+288,
+          "backward_error": 1.0000000000000002,
+          "index": 144,
+          "vector": [
+            -9.900990099009906e+285,
+            -9.900990099009906e+285
+          ],
+          "delta_inf": 1.0000000000000005e+286,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+290,
+          "backward_error": 0.9999999999999998,
+          "index": 145,
+          "vector": [
+            9.900990099009906e+287,
+            9.900990099009906e+287
+          ],
+          "delta_inf": 1.0000000000000005e+288,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000005e+292,
+          "backward_error": 1.0,
+          "index": 146,
+          "vector": [
+            -9.900990099009906e+289,
+            -9.900990099009906e+289
+          ],
+          "delta_inf": 1.0000000000000004e+290,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+294,
+          "backward_error": 0.9999999999999999,
+          "index": 147,
+          "vector": [
+            9.900990099009906e+291,
+            9.900990099009906e+291
+          ],
+          "delta_inf": 1.0000000000000005e+292,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+296,
+          "backward_error": 1.0,
+          "index": 148,
+          "vector": [
+            -9.900990099009905e+293,
+            -9.900990099009905e+293
+          ],
+          "delta_inf": 1.0000000000000004e+294,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+298,
+          "backward_error": 1.0,
+          "index": 149,
+          "vector": [
+            9.900990099009905e+295,
+            9.900990099009905e+295
+          ],
+          "delta_inf": 1.0000000000000003e+296,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000003e+300,
+          "backward_error": 1.0,
+          "index": 150,
+          "vector": [
+            -9.900990099009905e+297,
+            -9.900990099009905e+297
+          ],
+          "delta_inf": 1.0000000000000004e+298,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000005e+302,
+          "backward_error": 1.0,
+          "index": 151,
+          "vector": [
+            9.900990099009905e+299,
+            9.900990099009905e+299
+          ],
+          "delta_inf": 1.0000000000000003e+300,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+304,
+          "backward_error": 1.0,
+          "index": 152,
+          "vector": [
+            -9.900990099009905e+301,
+            -9.900990099009905e+301
+          ],
+          "delta_inf": 1.0000000000000005e+302,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000005e+306,
+          "backward_error": 1.0,
+          "index": 153,
+          "vector": [
+            9.900990099009905e+303,
+            9.900990099009905e+303
+          ],
+          "delta_inf": 1.0000000000000004e+304,
+          "normalized_step_change": 1.01,
+          "converged": false
+        },
+        {
+          "residual_inf": 1.0000000000000004e+308,
+          "backward_error": 1.0,
+          "index": 154,
+          "vector": [
+            -9.900990099009906e+305,
+            -9.900990099009906e+305
+          ],
+          "delta_inf": 1.0000000000000005e+306,
+          "normalized_step_change": 1.01,
+          "converged": false
+        }
+      ],
+      "diagnostics": {
+        "residual_inf": 1.0000000000000004e+308,
+        "backward_error": 1.0
+      },
+      "breakdown_reason": "A row operation or diagnostic overflowed float64.",
+      "warnings": [
+        "Computed spectral radius is at least one; convergence is not guaranteed."
+      ]
+    },
+    "conditioning": {
+      "status": "finite",
+      "condition_number": 1.02020202020202,
+      "approximate_digit_loss": 0.00868617918509262
+    },
+    "conditioning_arithmetic_mode": "float64",
+    "report": {
+      "schema_version": 1,
+      "solver_version": "0.1.0",
+      "method": "jacobi",
+      "options": {
+        "initial_guess": null,
+        "tolerance": 1e-08,
+        "max_iterations": 500,
+        "auto_reorder_for_diagonal_dominance": false,
+        "auto_reorder_for_nonzero_diagonal": false,
+        "run_despite_convergence_risk": true
+      },
+      "display": {
+        "mode": "decimal",
+        "decimal_places": 6
+      },
+      "fraction_values": "approximate"
+    }
+  },
+  "permuted": {
+    "status": "completed",
+    "request_id": "fixture-permuted",
+    "problem": {
+      "shape": {
+        "equations": 2,
+        "unknowns": 2
+      },
+      "is_square": true,
+      "arithmetic_mode": "float64",
+      "original_system": {
+        "a": [
+          [
+            0.0,
+            4.0
+          ],
+          [
+            3.0,
+            1.0
+          ]
+        ],
+        "b": [
+          8.0,
+          5.0
+        ]
+      }
+    },
+    "result": {
+      "method": "jacobi",
+      "arithmetic_mode": "float64",
+      "classification": {
+        "shape": {
+          "equations": 2,
+          "unknowns": 2
+        },
+        "arithmetic_mode": "float64",
+        "rank_a": 2,
+        "rank_augmented": 2,
+        "classification": "unique",
+        "rank_tolerance": 2.6645352591003757e-15,
+        "tolerance_policy": "float64-coefficient-scale-v1"
+      },
+      "options": {
+        "tolerance": 1e-08,
+        "max_iterations": 25,
+        "initial_guess": null,
+        "auto_reorder_for_diagonal_dominance": true,
+        "auto_reorder_for_nonzero_diagonal": false,
+        "run_despite_convergence_risk": false
+      },
+      "initial_guess": [
+        0.0,
+        0.0
+      ],
+      "reordering": {
+        "permutation": {
+          "order": [
+            1,
+            0
+          ],
+          "purpose": "strict_diagonal_dominance"
+        },
+        "dominance_search_attempted": true,
+        "dominance_matching_found": true,
+        "nonzero_search_attempted": false
+      },
+      "convergence": {
+        "method": "jacobi",
+        "strict_diagonal_dominance": true,
+        "weak_diagonal_dominance": true,
+        "symmetric_positive_definite": false,
+        "symmetry_tolerance": 1.7763568394002505e-15,
+        "spectral": {
+          "status": "computed",
+          "radius": 0.0
+        },
+        "assessment": "sufficient_condition",
+        "explanation": "Strict row diagonal dominance is a sufficient convergence condition."
+      },
+      "conditioning": {
+        "status": "finite",
+        "condition_number": 1.5000000000000002,
+        "approximate_digit_loss": 0.1760912590556813
+      },
+      "status": "converged",
+      "last_iterate": [
+        1.0,
+        2.0
+      ],
+      "solution": [
+        1.0,
+        2.0
+      ],
+      "history": [
+        {
+          "residual_inf": 2.0,
+          "backward_error": 0.125,
+          "index": 1,
+          "vector": [
+            1.6666666666666667,
+            2.0
+          ],
+          "delta_inf": 2.0,
+          "normalized_step_change": 1.0,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.0,
+          "backward_error": 0.0,
+          "index": 2,
+          "vector": [
+            1.0,
+            2.0
+          ],
+          "delta_inf": 0.6666666666666667,
+          "normalized_step_change": 0.33333333333333337,
+          "converged": false
+        },
+        {
+          "residual_inf": 0.0,
+          "backward_error": 0.0,
+          "index": 3,
+          "vector": [
+            1.0,
+            2.0
+          ],
+          "delta_inf": 0.0,
+          "normalized_step_change": 0.0,
+          "converged": true
+        }
+      ],
+      "diagnostics": {
+        "residual_inf": 0.0,
+        "backward_error": 0.0
+      },
+      "breakdown_reason": null,
+      "warnings": []
+    },
+    "conditioning": {
+      "status": "finite",
+      "condition_number": 1.5000000000000002,
+      "approximate_digit_loss": 0.1760912590556813
+    },
+    "conditioning_arithmetic_mode": "float64",
+    "report": {
+      "schema_version": 1,
+      "solver_version": "0.1.0",
+      "method": "jacobi",
+      "options": {
+        "initial_guess": null,
+        "tolerance": 1e-08,
+        "max_iterations": 25,
+        "auto_reorder_for_diagonal_dominance": true,
+        "auto_reorder_for_nonzero_diagonal": false,
+        "run_despite_convergence_risk": false
+      },
+      "display": {
+        "mode": "decimal",
+        "decimal_places": 6
+      },
+      "fraction_values": "approximate"
+    }
+  },
+  "zeroStep": {
+    "status": "completed",
+    "request_id": "fixture-zeroStep",
+    "problem": {
+      "shape": {
+        "equations": 1,
+        "unknowns": 1
+      },
+      "is_square": true,
+      "arithmetic_mode": "float64",
+      "original_system": {
+        "a": [
+          [
+            1.0
+          ]
+        ],
+        "b": [
+          0.0
+        ]
+      }
+    },
+    "result": {
+      "method": "jacobi",
+      "arithmetic_mode": "float64",
+      "classification": {
+        "shape": {
+          "equations": 1,
+          "unknowns": 1
+        },
+        "arithmetic_mode": "float64",
+        "rank_a": 1,
+        "rank_augmented": 1,
+        "classification": "unique",
+        "rank_tolerance": 4.440892098500626e-16,
+        "tolerance_policy": "float64-coefficient-scale-v1"
+      },
+      "options": {
+        "tolerance": 1e-08,
+        "max_iterations": 25,
+        "initial_guess": null,
+        "auto_reorder_for_diagonal_dominance": true,
+        "auto_reorder_for_nonzero_diagonal": false,
+        "run_despite_convergence_risk": false
+      },
+      "initial_guess": [
+        0.0
+      ],
+      "reordering": {
+        "permutation": {
+          "order": [
+            0
+          ],
+          "purpose": "identity"
+        },
+        "dominance_search_attempted": false,
+        "dominance_matching_found": null,
+        "nonzero_search_attempted": false
+      },
+      "convergence": {
+        "method": "jacobi",
+        "strict_diagonal_dominance": true,
+        "weak_diagonal_dominance": true,
+        "symmetric_positive_definite": true,
+        "symmetry_tolerance": 2.220446049250313e-16,
+        "spectral": {
+          "status": "computed",
+          "radius": 0.0
+        },
+        "assessment": "sufficient_condition",
+        "explanation": "Strict row diagonal dominance is a sufficient convergence condition."
+      },
+      "conditioning": {
+        "status": "finite",
+        "condition_number": 1.0,
+        "approximate_digit_loss": 0.0
+      },
+      "status": "converged",
+      "last_iterate": [
+        0.0
+      ],
+      "solution": [
+        0.0
+      ],
+      "history": [
+        {
+          "residual_inf": 0.0,
+          "backward_error": 0.0,
+          "index": 1,
+          "vector": [
+            0.0
+          ],
+          "delta_inf": 0.0,
+          "normalized_step_change": 0.0,
+          "converged": true
+        }
+      ],
+      "diagnostics": {
+        "residual_inf": 0.0,
+        "backward_error": 0.0
+      },
+      "breakdown_reason": null,
+      "warnings": []
+    },
+    "conditioning": {
+      "status": "finite",
+      "condition_number": 1.0,
+      "approximate_digit_loss": 0.0
+    },
+    "conditioning_arithmetic_mode": "float64",
+    "report": {
+      "schema_version": 1,
+      "solver_version": "0.1.0",
+      "method": "jacobi",
+      "options": {
+        "initial_guess": null,
+        "tolerance": 1e-08,
+        "max_iterations": 25,
+        "auto_reorder_for_diagonal_dominance": true,
+        "auto_reorder_for_nonzero_diagonal": false,
+        "run_despite_convergence_risk": false
+      },
+      "display": {
+        "mode": "decimal",
+        "decimal_places": 6
+      },
+      "fraction_values": "approximate"
+    }
+  }
+}

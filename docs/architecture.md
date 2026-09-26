@@ -154,3 +154,24 @@ use LF endings on Windows and Linux for reproducible comparisons.
 
 The local backend and Next.js development proxy continue to use port 18000.
 No frontend workflow or deployment work is included in Phase 2.
+
+## Phase 3 frontend workflow
+
+Server-rendered route shells compose the client solver workspace. Its reducer
+tracks dimensions, matrix input, analysis, method selection/configuration, solve,
+and results. AbortController and request sequence ownership prevent canceled or
+superseded responses from changing the current draft. Session storage retains
+validated drafts within a tab; convergence-risk consent is reset on restoration.
+
+`lib/api` derives HTTP types exclusively from `api.generated.ts`. Runtime response
+validation follows the generated OpenAPI schemas. Mathematical HTTP 200 outcomes
+remain distinct from validation, server, network, and protocol failures. Correlation
+IDs accompany requests and remain visible in diagnostics and error messages.
+
+The browser validates token syntax for feedback while preserving strings for the
+backend's authoritative parsing, magnitude checks, and numerical decisions.
+Direct inspectors replay returned snapshots; iterative inspectors plot returned
+backward error and normalized step change. Formatting never alters these values.
+Exact rational formatting uses BigInt, including decimal rounding, and approximate
+fraction displays are explicitly marked. A lightweight SVG convergence chart avoids
+loading Plotly; geometric plots and report downloads remain Phase 4 work.

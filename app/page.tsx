@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { SiteHeader } from "../components/site-header";
+
 const methods = [
   ["01", "Gaussian elimination", "Reduce a system to row-echelon form, then use back substitution."],
   ["02", "Gauss-Jordan elimination", "Reduce a system further to reveal pivots, free variables, and contradictions."],
@@ -8,10 +11,7 @@ const methods = [
 export default function Home() {
   return (
     <main id="main" className="page-shell">
-      <header className="masthead">
-        <span className="wordmark">TULYA<span aria-hidden="true">.</span></span>
-        <span className="eyebrow">A study in linear systems</span>
-      </header>
+      <SiteHeader />
       <section className="intro" aria-labelledby="title">
         <p className="eyebrow">Mathematics / Made visible</p>
         <h1 id="title">Linear equations,<br /><span>understood.</span></h1>
@@ -19,7 +19,7 @@ export default function Home() {
           An answer is only the beginning. Understand how equations relate,
           how methods work, and what each step tells you.
         </p>
-        <a className="primary-link" href="#methods">Explore the four methods <span aria-hidden="true">↗</span></a>
+        <div className="action-row"><Link className="primary-link" href="/solve">Start solving <span aria-hidden="true">↗</span></Link><a className="secondary-link" href="#methods">Explore the four methods <span aria-hidden="true">↓</span></a></div>
       </section>
       <section id="methods" className="method-section" aria-labelledby="methods-title">
         <div className="section-heading">

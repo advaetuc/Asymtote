@@ -1,5 +1,34 @@
 @import "tailwindcss";
 
+.geometry-panel, .report-tools { margin-top: 2rem; border-top: 1px solid #3a4149; padding-top: 1.5rem; }
+.geometry-content { margin-top: 1rem; }
+.geometry-canvas { width: 100%; min-height: 460px; overflow: hidden; }
+.report-preview { margin-top: 2rem; padding: 1.25rem; background: #fff; color: #111; overflow-wrap: anywhere; }
+.report-preview h3 { border-top: 1px solid #ccc; margin-top: 2rem; padding-top: 1rem; }
+.report-preview p { font-size: 0.9rem; }
+.report-math { overflow-x: auto; padding: 0.4rem 0; }
+.report-math .katex-display { margin: 0.5rem 0; }
+
+@media print {
+  @page { size: A4; margin: 15mm; }
+  html, body { background: white !important; color: black !important; }
+  body:has(.report-preview) header, body:has(.report-preview) footer,
+  body:has(.report-preview) .skip-link, body:has(.report-preview) nextjs-portal,
+  body:has(.report-preview) .solver-workflow > :not(.workspace-columns),
+  body:has(.report-preview) .workspace-columns > :first-child,
+  body:has(.report-preview) .result-column > :not(.result-panel),
+  body:has(.report-preview) .result-panel > :not(.report-tools),
+  body:has(.report-preview) .report-tools > :not(.report-preview) { display: none !important; }
+  body:has(.report-preview) main, body:has(.report-preview) .workspace-columns,
+  body:has(.report-preview) .result-column, body:has(.report-preview) .result-panel,
+  body:has(.report-preview) .report-tools, .report-preview { display: block !important; width: 100% !important; max-width: none !important; margin: 0 !important; padding: 0 !important; border: 0 !important; box-shadow: none !important; background: white !important; color: black !important; }
+  .report-preview { font-size: 10pt; }
+  .report-preview h3 { break-after: avoid; font-size: 13pt; }
+  .report-preview p { font-size: 9pt; line-height: 1.4; }
+  .report-math { break-inside: avoid; overflow: visible; font-size: 8pt; }
+  .report-math .katex { font-size: 1em; }
+}
+
 :root {
   color-scheme: dark;
   --bg: #0d0d0f;

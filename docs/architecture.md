@@ -175,3 +175,37 @@ backward error and normalized step change. Formatting never alters these values.
 Exact rational formatting uses BigInt, including decimal rounding, and approximate
 fraction displays are explicitly marked. A lightweight SVG convergence chart avoids
 loading Plotly; geometric plots and report downloads remain Phase 4 work.
+
+## Phase 4 reporting and geometric views
+
+`lib/reports/render.ts` builds one deterministic document from the generated
+solve/analysis contracts. Markdown, standalone LaTeX source, and the KaTeX print
+view share this ordered content. JSON exports sort object keys while retaining
+array order, every returned float, and exact numerator/denominator strings. The
+current display preference is stored separately from the submitted preference.
+All elimination snapshots or completed iterations are exported, independent of
+the inspector's selected step or history page. Backend data is never mutated.
+
+`lib/geometry/derive.ts` converts values only for approximate plotting. It clips
+equations against a bounded square or cube; it never computes ranks or replaces
+the backend solution. Solution-family lines derive from returned parametric
+expressions. Zero equations, full-space families, coincident planes, inconsistent
+systems, and off-window values receive explicit explanations. Per the Phase 4
+user request, geometry is limited to exactly 2 × 2 or 3 × 3 systems.
+
+The client-only geometric component loads on expansion. Only Plotly core and the
+scatter, scatter3d, and mesh3d modules are registered. Every effect owns a separate
+DOM plot element, so a late completion after React Strict Mode cleanup cannot
+erase its successor. Resize observers and plots are released on unmount. The
+existing SVG convergence chart remains lightweight and independent of Plotly.
+
+KaTeX is loaded with the printable report; all formulas are application-generated
+and rendered with trust disabled. Print CSS isolates the complete report from
+interactive controls. No server-side TeX compiler or reporting endpoint was added.
+
+Playwright now runs the workflow suite on desktop and mobile Chromium. Local runs
+reuse verified services or start them at fixed ports; CI requires fresh services.
+The frontend command explicitly binds 3000 and the backend 18000, preventing
+silent port fallback. Preflight checks verify direct and proxied API health.
+Behavior follows the official [Playwright web-server guidance](https://playwright.dev/docs/test-webserver)
+and the plot lifecycle follows [Plotly's function reference](https://plotly.com/javascript/plotlyjs-function-reference/).

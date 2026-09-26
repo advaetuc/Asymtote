@@ -39,5 +39,12 @@ jobs:
         run: npm run contracts:check
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
-      - name: Local integration smoke test
+      - name: Desktop and mobile workflow tests
         run: npm run test:e2e
+      - name: Preserve browser failure evidence
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-test-results
+          path: test-results/
+          retention-days: 7

@@ -10,6 +10,9 @@ analysis/solve endpoints, correlated request logs, and generated API contracts.
 Phase 3 adds the interactive `/solve` workspace and `/learn` primer, with typed
 requests, editable matrices, analysis, method settings, and educational results.
 See [Phase 3 verification](docs/phase-3-completion-report.md) for coverage and scope.
+Phase 4 adds deterministic Markdown/LaTeX/JSON downloads, complete printable
+reports, and interactive 2D/3D geometry loaded on demand. See
+[Phase 4 verification](docs/phase-4-completion-report.md).
 
 ## Requirements
 
@@ -91,13 +94,31 @@ npx playwright install chromium
 npm run test:e2e
 ```
 
-The browser smoke test starts its own frontend and backend; stop other processes
-on ports 3000 and 18000 first. It checks the landing page and same-origin health
-route. It is a local integration check, not a Vercel preview test.
+The Playwright suite exercises Chromium at desktop and mobile widths. It starts
+Next.js on port 3000 and FastAPI on port 18000, or reuses healthy local servers.
+A preflight verifies both Python health and the same-origin proxy. An unrelated
+service on either port fails clearly; Next.js cannot silently choose another port.
+CI always starts fresh servers. Set `$env:E2E_REUSE_SERVERS = "0"` to require fresh
+servers locally too. Stop your development servers before using that setting.
+These are local integration tests, not Vercel preview tests.
+
+For this workspace's existing browser cache, set the following before E2E runs
+(use the same setting when installing browsers on another machine):
+
+```powershell
+$env:PLAYWRIGHT_BROWSERS_PATH = "$PWD\.tools\browsers"
+npm run test:e2e
+```
+
+From a completed result, use **Show geometry**, **Download Markdown/LaTeX/JSON**,
+or **Open printable report** followed by **Print / Save as PDF**. Report files are
+generated locally from the returned result. No TeX compiler runs on the server.
+Geometry supports exactly 2 × 2 and 3 × 3 systems; 3D requires browser WebGL.
+Plots are bounded approximations and do not replace backend rank diagnostics.
 
 `.github/workflows/ci.yml` installs locked dependencies, runs Python and frontend
-checks, builds Next.js, and runs the Chromium integration smoke test. CI expands
-to numerical, contract-generation, and full workflow gates in later phases.
+checks, verifies generated contracts, builds Next.js, and runs both browser projects.
+On failure, browser traces and diagnostic artifacts are retained for seven days.
 
 ## Dependency maintenance
 

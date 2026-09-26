@@ -7,6 +7,9 @@ export const METHODS: Record<Method, { name: string; category: string; descripti
   gauss_seidel: { name: "Gauss–Seidel", category: "Iterative", description: "Use each newly updated component immediately within the same sweep.", benefit: "SPD matrices give a sufficient convergence condition.", limitation: "Requires a square, unique system and safe diagonal; it is not always faster than Jacobi." },
 };
 export const PRESETS: { id: string; name: string; note: string; system: SystemInput; method: Method; reorder?: boolean }[] = [
+  { id: "planes", name: "3D · three planes meet", note: "Three independent planes meet at (1, 2, 3).", system: { a: [["4", "1", "0"], ["1", "4", "1"], ["0", "1", "4"]], b: ["6", "12", "14"] }, method: "gauss_jordan" },
+  { id: "line3d", name: "3D · a line of solutions", note: "Two independent constraints leave a line of common intersections.", system: { a: [["1", "1", "0"], ["0", "1", "1"], ["1", "2", "1"]], b: ["2", "3", "5"] }, method: "gauss_jordan" },
+  { id: "coincident", name: "2D · coincident lines", note: "Both equations describe the same line; every point on it is a solution.", system: { a: [["1", "1"], ["2", "2"]], b: ["2", "4"] }, method: "gauss_jordan" },
   { id: "unique", name: "Unique · a gentle start", note: "Two independent equations; the solution is x₁ = 0.1, x₂ = 0.6.", system: { a: [["4", "1"], ["2", "3"]], b: ["1", "2"] }, method: "gaussian" },
   { id: "infinite", name: "Infinite · a free variable", note: "Two equations, three unknowns. Explore a family of solutions.", system: { a: [["1", "1", "1"], ["0", "1", "2"]], b: ["3", "4"] }, method: "gauss_jordan" },
   { id: "inconsistent", name: "Inconsistent · a contradiction", note: "The same left side cannot equal both 2 and 3.", system: { a: [["1", "1"], ["1", "1"]], b: ["2", "3"] }, method: "gauss_jordan" },

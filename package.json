@@ -21,6 +21,8 @@
     "test:python": "uv run pytest",
     "lint:python": "uv run ruff check . && uv run ruff format --check .",
     "typecheck:python": "uv run mypy",
+    "contracts:generate": "uv run python scripts/export_openapi.py && openapi-typescript docs/openapi.json -o lib/contracts/api.generated.ts --default-non-nullable false",
+    "contracts:check": "uv run python scripts/export_openapi.py --check && openapi-typescript docs/openapi.json -o lib/contracts/api.generated.ts --default-non-nullable false --check",
     "test:e2e": "playwright test",
     "check": "npm run lint && npm run typecheck && npm test && npm run build"
   },

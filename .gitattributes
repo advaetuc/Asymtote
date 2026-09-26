@@ -1,2 +1,6 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Generated contracts must be byte-stable for stale checks on Windows and CI.
+docs/openapi.json text eol=lf
+lib/contracts/api.generated.ts text eol=lf

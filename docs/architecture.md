@@ -121,3 +121,36 @@ imports neither FastAPI nor API models. It accepts typed values and reports
 transport-independent errors. The future Phase 2 boundary will parse user tokens,
 map domain outcomes to HTTP contracts, and generate frontend types. Phase 4 will
 render report data into Markdown and LaTeX. No solver HTTP routes were added here.
+
+## Phase 2 API boundary
+
+`api/index.py` remains the thin application-factory entrypoint. `api_app` composes
+the health, analyze, and solve routes. Synchronous numerical handlers run through
+FastAPI's worker-thread dispatch. `services.py` adapts validated string-token
+requests to the independent numerical core. Mathematical classifications and
+iteration outcomes stay in typed HTTP 200 results; invalid input and resource
+policies use 422, and unexpected failures use a generic 500 envelope.
+
+`api_models/requests.py` discriminates solve requests by method and delegates all
+numeric grammar checks to the existing parser. `responses.py` reuses core result
+models for full traces and structured exact values. Problem metadata holds the
+original system; report metadata adds options and display preferences without
+duplicating the result's trace. Exact classification and floating conditioning
+are explicitly distinguished.
+
+Pure ASGI middleware bounds request bodies before JSON parsing, assigns or
+validates a correlation ID, attaches it to every HTTP response, and emits one
+JSON metadata event per request. It also catches unexpected exceptions before
+response transmission. Matrices, vectors, rejected token values, and exception
+messages are excluded from those logs. Context is stored per request, not in
+shared solver state.
+
+FastAPI/Pydantic owns the contract. `scripts/export_openapi.py` writes deterministic
+OpenAPI; the pinned `openapi-typescript` creates the TypeScript contract. Check
+modes fail without modifying stale files, and CI runs both checks. Type-level
+examples in `tests/contracts/api-contracts.ts` verify default options, method
+discrimination, exact integer strings, and outcome narrowing. Generated files
+use LF endings on Windows and Linux for reproducible comparisons.
+
+The local backend and Next.js development proxy continue to use port 18000.
+No frontend workflow or deployment work is included in Phase 2.

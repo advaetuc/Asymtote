@@ -1,4 +1,4 @@
-name: Phase 0 quality gates
+name: Quality and API contract gates
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 jobs:
-  scaffold:
+  quality:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -35,6 +35,8 @@ jobs:
           uv run pytest
       - name: Frontend lint, typing, tests, and production build
         run: npm run check
+      - name: Generated OpenAPI and TypeScript contracts must be current
+        run: npm run contracts:check
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
       - name: Local integration smoke test

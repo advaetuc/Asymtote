@@ -5,8 +5,9 @@ Phase 1 foundations now include strict numeric parsing, immutable domain models,
 resource bounds, and tolerance policy. Gaussian elimination, Gauss-Jordan RREF,
 and rank classification are implemented and tested in float64 and exact modes.
 Phase 1 now also includes row matching, float64 Jacobi and Gauss-Seidel, convergence
-diagnostics, complete traces, and structured report data. The solver API and
-interactive UI await their approved phases.
+diagnostics, complete traces, and structured report data. Phase 2 adds typed
+analysis/solve endpoints, correlated request logs, and generated API contracts.
+The interactive solver UI awaits Phase 3.
 
 ## Requirements
 
@@ -51,6 +52,20 @@ npm run dev
 Visit `http://localhost:3000`. The development proxy makes
 `http://localhost:3000/api/health` reach Python at port 18000 without browser CORS.
 The Python health endpoint is also accessible at `http://127.0.0.1:18000/api/health`.
+
+API documentation is at `http://127.0.0.1:18000/api/docs`. See
+[API contracts](docs/api-contracts.md) for request examples and outcome handling.
+After changing a backend schema, regenerate both committed contract artifacts:
+
+```powershell
+npm run contracts:generate
+npm run contracts:check
+npm run typecheck
+```
+
+OpenAPI is generated into `docs/openapi.json`, and `openapi-typescript` generates
+`lib/contracts/api.generated.ts`. CI rejects stale artifacts and compiles the
+generated types alongside the project. Do not edit generated contracts manually.
 
 Deployment-parity development requires a separately installed, security-reviewed
 Vercel CLI and linking the intended Vercel project:

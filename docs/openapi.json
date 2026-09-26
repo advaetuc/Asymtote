@@ -1,0 +1,1957 @@
+{
+  "components": {
+    "schemas": {
+      "AnalyzeOutcome": {
+        "discriminator": {
+          "mapping": {
+            "analyzed": "#/components/schemas/AnalyzeResponse",
+            "numeric_breakdown": "#/components/schemas/NumericalFailure"
+          },
+          "propertyName": "status"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/AnalyzeResponse"
+          },
+          {
+            "$ref": "#/components/schemas/NumericalFailure"
+          }
+        ]
+      },
+      "AnalyzeRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "arithmetic_mode": {
+            "default": "float64",
+            "enum": [
+              "float64",
+              "exact"
+            ],
+            "title": "Arithmetic Mode",
+            "type": "string"
+          },
+          "system": {
+            "$ref": "#/components/schemas/SystemInput"
+          }
+        },
+        "required": [
+          "system"
+        ],
+        "title": "AnalyzeRequest",
+        "type": "object"
+      },
+      "AnalyzeResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "classification": {
+            "$ref": "#/components/schemas/ClassificationResult"
+          },
+          "conditioning": {
+            "$ref": "#/components/schemas/ConditionDiagnostic"
+          },
+          "conditioning_arithmetic_mode": {
+            "const": "float64",
+            "default": "float64",
+            "title": "Conditioning Arithmetic Mode",
+            "type": "string"
+          },
+          "dominance_permutation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RowPermutation"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "is_square": {
+            "title": "Is Square",
+            "type": "boolean"
+          },
+          "methods": {
+            "items": {
+              "$ref": "#/components/schemas/MethodEligibility"
+            },
+            "title": "Methods",
+            "type": "array"
+          },
+          "nonzero_permutation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RowPermutation"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "request_id": {
+            "title": "Request Id",
+            "type": "string"
+          },
+          "shape": {
+            "$ref": "#/components/schemas/SystemShape"
+          },
+          "status": {
+            "const": "analyzed",
+            "default": "analyzed",
+            "title": "Status",
+            "type": "string"
+          },
+          "strict_diagonal_dominance": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Strict Diagonal Dominance"
+          },
+          "warnings": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Warnings",
+            "type": "array"
+          }
+        },
+        "required": [
+          "status",
+          "request_id",
+          "shape",
+          "is_square",
+          "classification",
+          "conditioning",
+          "conditioning_arithmetic_mode",
+          "strict_diagonal_dominance",
+          "dominance_permutation",
+          "nonzero_permutation",
+          "methods",
+          "warnings"
+        ],
+        "title": "AnalyzeResponse",
+        "type": "object"
+      },
+      "ArithmeticMode": {
+        "enum": [
+          "float64",
+          "exact"
+        ],
+        "title": "ArithmeticMode",
+        "type": "string"
+      },
+      "ClassificationKind": {
+        "enum": [
+          "unique",
+          "infinite",
+          "inconsistent"
+        ],
+        "title": "ClassificationKind",
+        "type": "string"
+      },
+      "ClassificationResult": {
+        "additionalProperties": false,
+        "properties": {
+          "arithmetic_mode": {
+            "$ref": "#/components/schemas/ArithmeticMode"
+          },
+          "classification": {
+            "$ref": "#/components/schemas/ClassificationKind"
+          },
+          "rank_a": {
+            "minimum": 0.0,
+            "title": "Rank A",
+            "type": "integer"
+          },
+          "rank_augmented": {
+            "minimum": 0.0,
+            "title": "Rank Augmented",
+            "type": "integer"
+          },
+          "rank_tolerance": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rank Tolerance"
+          },
+          "shape": {
+            "$ref": "#/components/schemas/SystemShape"
+          },
+          "tolerance_policy": {
+            "title": "Tolerance Policy",
+            "type": "string"
+          }
+        },
+        "required": [
+          "shape",
+          "arithmetic_mode",
+          "rank_a",
+          "rank_augmented",
+          "classification",
+          "rank_tolerance",
+          "tolerance_policy"
+        ],
+        "title": "ClassificationResult",
+        "type": "object"
+      },
+      "ConditionDiagnostic": {
+        "additionalProperties": false,
+        "properties": {
+          "approximate_digit_loss": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/NonnegativeFloat"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "condition_number": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/NonnegativeFloat"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "enum": [
+              "finite",
+              "singular",
+              "unavailable"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "title": "ConditionDiagnostic",
+        "type": "object"
+      },
+      "ConvergenceDiagnostics": {
+        "additionalProperties": false,
+        "properties": {
+          "assessment": {
+            "enum": [
+              "sufficient_condition",
+              "spectral_radius_below_one",
+              "convergence_risk"
+            ],
+            "title": "Assessment",
+            "type": "string"
+          },
+          "explanation": {
+            "title": "Explanation",
+            "type": "string"
+          },
+          "method": {
+            "$ref": "#/components/schemas/IterativeMethod"
+          },
+          "spectral": {
+            "$ref": "#/components/schemas/SpectralDiagnostic"
+          },
+          "strict_diagonal_dominance": {
+            "title": "Strict Diagonal Dominance",
+            "type": "boolean"
+          },
+          "symmetric_positive_definite": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Symmetric Positive Definite"
+          },
+          "symmetry_tolerance": {
+            "$ref": "#/components/schemas/NonnegativeFloat"
+          },
+          "weak_diagonal_dominance": {
+            "title": "Weak Diagonal Dominance",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "method",
+          "strict_diagonal_dominance",
+          "weak_diagonal_dominance",
+          "symmetric_positive_definite",
+          "symmetry_tolerance",
+          "spectral",
+          "assessment",
+          "explanation"
+        ],
+        "title": "ConvergenceDiagnostics",
+        "type": "object"
+      },
+      "DirectDiagnostics": {
+        "additionalProperties": false,
+        "description": "Measured on the original system and the returned solution/particular point.",
+        "properties": {
+          "backward_error": {
+            "$ref": "#/components/schemas/NumericValue"
+          },
+          "residual_inf": {
+            "$ref": "#/components/schemas/NumericValue"
+          }
+        },
+        "required": [
+          "residual_inf",
+          "backward_error"
+        ],
+        "title": "DirectDiagnostics",
+        "type": "object"
+      },
+      "DirectOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "arithmetic_mode": {
+            "default": "float64",
+            "enum": [
+              "float64",
+              "exact"
+            ],
+            "title": "Arithmetic Mode",
+            "type": "string"
+          }
+        },
+        "title": "DirectOptions",
+        "type": "object"
+      },
+      "DirectResult": {
+        "additionalProperties": false,
+        "properties": {
+          "arithmetic_mode": {
+            "$ref": "#/components/schemas/ArithmeticMode"
+          },
+          "augmented_pivot_columns": {
+            "items": {
+              "type": "integer"
+            },
+            "title": "Augmented Pivot Columns",
+            "type": "array"
+          },
+          "classification": {
+            "$ref": "#/components/schemas/ClassificationResult"
+          },
+          "contradictory_rows": {
+            "items": {
+              "type": "integer"
+            },
+            "title": "Contradictory Rows",
+            "type": "array"
+          },
+          "diagnostics": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DirectDiagnostics"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "form": {
+            "enum": [
+              "ref",
+              "rref"
+            ],
+            "title": "Form",
+            "type": "string"
+          },
+          "free_columns": {
+            "items": {
+              "type": "integer"
+            },
+            "title": "Free Columns",
+            "type": "array"
+          },
+          "matrix": {
+            "$ref": "#/components/schemas/NumericMatrix"
+          },
+          "method": {
+            "enum": [
+              "gaussian",
+              "gauss_jordan"
+            ],
+            "title": "Method",
+            "type": "string"
+          },
+          "parametric_solution": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ParametricSolution"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "pivot_columns": {
+            "items": {
+              "type": "integer"
+            },
+            "title": "Pivot Columns",
+            "type": "array"
+          },
+          "row_tolerances": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Row Tolerances"
+          },
+          "solution": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/NumericVector"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "trace": {
+            "items": {
+              "$ref": "#/components/schemas/RowOperation"
+            },
+            "title": "Trace",
+            "type": "array"
+          },
+          "warnings": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Warnings",
+            "type": "array"
+          }
+        },
+        "required": [
+          "method",
+          "arithmetic_mode",
+          "classification",
+          "form",
+          "matrix",
+          "pivot_columns",
+          "free_columns",
+          "augmented_pivot_columns",
+          "solution",
+          "parametric_solution",
+          "contradictory_rows",
+          "row_tolerances",
+          "trace",
+          "diagnostics"
+        ],
+        "title": "DirectResult",
+        "type": "object"
+      },
+      "DirectSolveRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "display": {
+            "$ref": "#/components/schemas/DisplayPreferences"
+          },
+          "method": {
+            "enum": [
+              "gaussian",
+              "gauss_jordan"
+            ],
+            "title": "Method",
+            "type": "string"
+          },
+          "options": {
+            "$ref": "#/components/schemas/DirectOptions"
+          },
+          "system": {
+            "$ref": "#/components/schemas/SystemInput"
+          }
+        },
+        "required": [
+          "system",
+          "method"
+        ],
+        "title": "DirectSolveRequest",
+        "type": "object"
+      },
+      "DisplayPreferences": {
+        "additionalProperties": false,
+        "properties": {
+          "decimal_places": {
+            "default": 6,
+            "maximum": 12.0,
+            "minimum": 0.0,
+            "title": "Decimal Places",
+            "type": "integer"
+          },
+          "mode": {
+            "default": "decimal",
+            "enum": [
+              "decimal",
+              "fraction"
+            ],
+            "title": "Mode",
+            "type": "string"
+          }
+        },
+        "title": "DisplayPreferences",
+        "type": "object"
+      },
+      "ErrorResponse": {
+        "additionalProperties": false,
+        "properties": {
+          "details": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/Issue"
+            },
+            "title": "Details",
+            "type": "array"
+          },
+          "error": {
+            "$ref": "#/components/schemas/Issue"
+          },
+          "request_id": {
+            "title": "Request Id",
+            "type": "string"
+          },
+          "status": {
+            "const": "error",
+            "default": "error",
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "request_id",
+          "error",
+          "details"
+        ],
+        "title": "ErrorResponse",
+        "type": "object"
+      },
+      "ExactScalar": {
+        "$ref": "#/components/schemas/RationalValue"
+      },
+      "ExactSystem": {
+        "additionalProperties": false,
+        "description": "Exact coefficients with bounded integer growth and structured JSON output.",
+        "properties": {
+          "a": {
+            "items": {
+              "items": {
+                "$ref": "#/components/schemas/ExactScalar"
+              },
+              "type": "array"
+            },
+            "title": "A",
+            "type": "array"
+          },
+          "b": {
+            "items": {
+              "$ref": "#/components/schemas/ExactScalar"
+            },
+            "title": "B",
+            "type": "array"
+          }
+        },
+        "required": [
+          "a",
+          "b"
+        ],
+        "title": "ExactSystem",
+        "type": "object"
+      },
+      "FloatScalar": {
+        "type": "number"
+      },
+      "FloatSystem": {
+        "additionalProperties": false,
+        "description": "Finite binary64 coefficients and RHS; no rounding or mutable arrays.",
+        "properties": {
+          "a": {
+            "items": {
+              "items": {
+                "$ref": "#/components/schemas/FloatScalar"
+              },
+              "type": "array"
+            },
+            "title": "A",
+            "type": "array"
+          },
+          "b": {
+            "items": {
+              "$ref": "#/components/schemas/FloatScalar"
+            },
+            "title": "B",
+            "type": "array"
+          }
+        },
+        "required": [
+          "a",
+          "b"
+        ],
+        "title": "FloatSystem",
+        "type": "object"
+      },
+      "HealthResponse": {
+        "additionalProperties": false,
+        "description": "Health describes the API process, not numerical feature availability.",
+        "properties": {
+          "api_version": {
+            "title": "Api Version",
+            "type": "string"
+          },
+          "status": {
+            "const": "ok",
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "api_version"
+        ],
+        "title": "HealthResponse",
+        "type": "object"
+      },
+      "InputRow": {
+        "items": {
+          "$ref": "#/components/schemas/NumericToken"
+        },
+        "maxItems": 12,
+        "minItems": 1,
+        "type": "array"
+      },
+      "Issue": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "location": {
+            "default": [],
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "location"
+        ],
+        "title": "Issue",
+        "type": "object"
+      },
+      "IterationMetrics": {
+        "additionalProperties": false,
+        "properties": {
+          "backward_error": {
+            "$ref": "#/components/schemas/NonnegativeFloat"
+          },
+          "residual_inf": {
+            "$ref": "#/components/schemas/NonnegativeFloat"
+          }
+        },
+        "required": [
+          "residual_inf",
+          "backward_error"
+        ],
+        "title": "IterationMetrics",
+        "type": "object"
+      },
+      "IterationOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "auto_reorder_for_diagonal_dominance": {
+            "default": true,
+            "title": "Auto Reorder For Diagonal Dominance",
+            "type": "boolean"
+          },
+          "auto_reorder_for_nonzero_diagonal": {
+            "default": false,
+            "title": "Auto Reorder For Nonzero Diagonal",
+            "type": "boolean"
+          },
+          "initial_guess": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/FloatScalar"
+                },
+                "maxItems": 12,
+                "minItems": 1,
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Initial Guess"
+          },
+          "max_iterations": {
+            "default": 25,
+            "maximum": 500.0,
+            "minimum": 1.0,
+            "title": "Max Iterations",
+            "type": "integer"
+          },
+          "run_despite_convergence_risk": {
+            "default": false,
+            "title": "Run Despite Convergence Risk",
+            "type": "boolean"
+          },
+          "tolerance": {
+            "default": 1e-08,
+            "maximum": 0.01,
+            "minimum": 1e-14,
+            "title": "Tolerance",
+            "type": "number"
+          }
+        },
+        "title": "IterationOptions",
+        "type": "object"
+      },
+      "IterationRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "backward_error": {
+            "$ref": "#/components/schemas/NonnegativeFloat"
+          },
+          "converged": {
+            "title": "Converged",
+            "type": "boolean"
+          },
+          "delta_inf": {
+            "$ref": "#/components/schemas/NonnegativeFloat"
+          },
+          "index": {
+            "maximum": 500.0,
+            "minimum": 1.0,
+            "title": "Index",
+            "type": "integer"
+          },
+          "normalized_step_change": {
+            "$ref": "#/components/schemas/NonnegativeFloat"
+          },
+          "residual_inf": {
+            "$ref": "#/components/schemas/NonnegativeFloat"
+          },
+          "vector": {
+            "$ref": "#/components/schemas/solver_core__models__FloatVector__2"
+          }
+        },
+        "required": [
+          "residual_inf",
+          "backward_error",
+          "index",
+          "vector",
+          "delta_inf",
+          "normalized_step_change",
+          "converged"
+        ],
+        "title": "IterationRecord",
+        "type": "object"
+      },
+      "IterationStatus": {
+        "enum": [
+          "converged",
+          "max_iterations_reached",
+          "numeric_breakdown",
+          "convergence_risk_declined"
+        ],
+        "title": "IterationStatus",
+        "type": "string"
+      },
+      "IterativeMethod": {
+        "enum": [
+          "jacobi",
+          "gauss_seidel"
+        ],
+        "type": "string"
+      },
+      "IterativeOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "auto_reorder_for_diagonal_dominance": {
+            "default": true,
+            "title": "Auto Reorder For Diagonal Dominance",
+            "type": "boolean"
+          },
+          "auto_reorder_for_nonzero_diagonal": {
+            "default": false,
+            "title": "Auto Reorder For Nonzero Diagonal",
+            "type": "boolean"
+          },
+          "initial_guess": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/NumericToken"
+                },
+                "maxItems": 12,
+                "minItems": 1,
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Initial Guess"
+          },
+          "max_iterations": {
+            "default": 25,
+            "maximum": 500.0,
+            "minimum": 1.0,
+            "title": "Max Iterations",
+            "type": "integer"
+          },
+          "run_despite_convergence_risk": {
+            "default": false,
+            "title": "Run Despite Convergence Risk",
+            "type": "boolean"
+          },
+          "tolerance": {
+            "default": 1e-08,
+            "maximum": 0.01,
+            "minimum": 1e-14,
+            "title": "Tolerance",
+            "type": "number"
+          }
+        },
+        "title": "IterativeOptions",
+        "type": "object"
+      },
+      "IterativeResult": {
+        "additionalProperties": false,
+        "properties": {
+          "arithmetic_mode": {
+            "const": "float64",
+            "default": "float64",
+            "title": "Arithmetic Mode",
+            "type": "string"
+          },
+          "breakdown_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Breakdown Reason"
+          },
+          "classification": {
+            "$ref": "#/components/schemas/ClassificationResult"
+          },
+          "conditioning": {
+            "$ref": "#/components/schemas/ConditionDiagnostic"
+          },
+          "convergence": {
+            "$ref": "#/components/schemas/ConvergenceDiagnostics"
+          },
+          "diagnostics": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/IterationMetrics"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "history": {
+            "items": {
+              "$ref": "#/components/schemas/IterationRecord"
+            },
+            "maxItems": 500,
+            "title": "History",
+            "type": "array"
+          },
+          "initial_guess": {
+            "$ref": "#/components/schemas/solver_core__models__FloatVector__1"
+          },
+          "last_iterate": {
+            "$ref": "#/components/schemas/solver_core__models__FloatVector__1"
+          },
+          "method": {
+            "$ref": "#/components/schemas/IterativeMethod"
+          },
+          "options": {
+            "$ref": "#/components/schemas/IterationOptions"
+          },
+          "reordering": {
+            "$ref": "#/components/schemas/ReorderingDiagnostics"
+          },
+          "solution": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/solver_core__models__FloatVector__1"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "$ref": "#/components/schemas/IterationStatus"
+          },
+          "warnings": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Warnings",
+            "type": "array"
+          }
+        },
+        "required": [
+          "method",
+          "classification",
+          "options",
+          "initial_guess",
+          "reordering",
+          "convergence",
+          "conditioning",
+          "status",
+          "last_iterate",
+          "solution",
+          "history",
+          "diagnostics"
+        ],
+        "title": "IterativeResult",
+        "type": "object"
+      },
+      "IterativeSolveRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "display": {
+            "$ref": "#/components/schemas/DisplayPreferences"
+          },
+          "method": {
+            "enum": [
+              "jacobi",
+              "gauss_seidel"
+            ],
+            "title": "Method",
+            "type": "string"
+          },
+          "options": {
+            "$ref": "#/components/schemas/IterativeOptions"
+          },
+          "system": {
+            "$ref": "#/components/schemas/SystemInput"
+          }
+        },
+        "required": [
+          "system",
+          "method"
+        ],
+        "title": "IterativeSolveRequest",
+        "type": "object"
+      },
+      "Method": {
+        "enum": [
+          "gaussian",
+          "gauss_jordan",
+          "jacobi",
+          "gauss_seidel"
+        ],
+        "type": "string"
+      },
+      "MethodEligibility": {
+        "additionalProperties": false,
+        "description": "Eligible means available subject to the stated reordering and risk requirements.",
+        "properties": {
+          "code": {
+            "enum": [
+              "available",
+              "requires_square",
+              "requires_unique",
+              "requires_float64",
+              "unsafe_diagonal",
+              "requires_row_reordering",
+              "convergence_risk",
+              "numeric_breakdown"
+            ],
+            "title": "Code",
+            "type": "string"
+          },
+          "convergence": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ConvergenceDiagnostics"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "eligible": {
+            "title": "Eligible",
+            "type": "boolean"
+          },
+          "method": {
+            "$ref": "#/components/schemas/Method"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "requires_risk_override": {
+            "default": false,
+            "title": "Requires Risk Override",
+            "type": "boolean"
+          },
+          "requires_row_reordering": {
+            "default": false,
+            "title": "Requires Row Reordering",
+            "type": "boolean"
+          },
+          "row_permutation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RowPermutation"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "method",
+          "eligible",
+          "code",
+          "reason",
+          "requires_row_reordering",
+          "requires_risk_override",
+          "row_permutation",
+          "convergence"
+        ],
+        "title": "MethodEligibility",
+        "type": "object"
+      },
+      "NonnegativeFloat": {
+        "$ref": "#/components/schemas/FloatScalar",
+        "ge": 0
+      },
+      "NumericMatrix": {
+        "items": {
+          "$ref": "#/components/schemas/NumericVector"
+        },
+        "type": "array"
+      },
+      "NumericToken": {
+        "maxLength": 48,
+        "minLength": 1,
+        "type": "string"
+      },
+      "NumericValue": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/ExactScalar"
+          },
+          {
+            "$ref": "#/components/schemas/FloatScalar"
+          }
+        ]
+      },
+      "NumericVector": {
+        "items": {
+          "$ref": "#/components/schemas/NumericValue"
+        },
+        "type": "array"
+      },
+      "NumericalFailure": {
+        "additionalProperties": false,
+        "description": "A controlled numerical limitation, without an invented classification or solution.",
+        "properties": {
+          "arithmetic_mode": {
+            "$ref": "#/components/schemas/ArithmeticMode"
+          },
+          "error": {
+            "$ref": "#/components/schemas/Issue"
+          },
+          "method": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Method"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "request_id": {
+            "title": "Request Id",
+            "type": "string"
+          },
+          "shape": {
+            "$ref": "#/components/schemas/SystemShape"
+          },
+          "status": {
+            "const": "numeric_breakdown",
+            "default": "numeric_breakdown",
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "request_id",
+          "method",
+          "arithmetic_mode",
+          "shape",
+          "error"
+        ],
+        "title": "NumericalFailure",
+        "type": "object"
+      },
+      "ParameterTerm": {
+        "additionalProperties": false,
+        "properties": {
+          "coefficient": {
+            "$ref": "#/components/schemas/NumericValue"
+          },
+          "parameter": {
+            "title": "Parameter",
+            "type": "string"
+          }
+        },
+        "required": [
+          "parameter",
+          "coefficient"
+        ],
+        "title": "ParameterTerm",
+        "type": "object"
+      },
+      "ParametricSolution": {
+        "additionalProperties": false,
+        "properties": {
+          "expressions": {
+            "items": {
+              "$ref": "#/components/schemas/VariableExpression"
+            },
+            "title": "Expressions",
+            "type": "array"
+          },
+          "free_variables": {
+            "items": {
+              "type": "integer"
+            },
+            "title": "Free Variables",
+            "type": "array"
+          },
+          "pivot_variables": {
+            "items": {
+              "type": "integer"
+            },
+            "title": "Pivot Variables",
+            "type": "array"
+          }
+        },
+        "required": [
+          "pivot_variables",
+          "free_variables",
+          "expressions"
+        ],
+        "title": "ParametricSolution",
+        "type": "object"
+      },
+      "ProblemMetadata": {
+        "additionalProperties": false,
+        "properties": {
+          "arithmetic_mode": {
+            "$ref": "#/components/schemas/ArithmeticMode"
+          },
+          "is_square": {
+            "title": "Is Square",
+            "type": "boolean"
+          },
+          "original_system": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FloatSystem"
+              },
+              {
+                "$ref": "#/components/schemas/ExactSystem"
+              }
+            ],
+            "title": "Original System"
+          },
+          "shape": {
+            "$ref": "#/components/schemas/SystemShape"
+          }
+        },
+        "required": [
+          "shape",
+          "is_square",
+          "arithmetic_mode",
+          "original_system"
+        ],
+        "title": "ProblemMetadata",
+        "type": "object"
+      },
+      "RationalValue": {
+        "additionalProperties": false,
+        "description": "Canonical exact rational; JSON integers are strings to prevent JS loss.",
+        "properties": {
+          "denominator": {
+            "title": "Denominator",
+            "type": "string"
+          },
+          "numerator": {
+            "title": "Numerator",
+            "type": "string"
+          }
+        },
+        "required": [
+          "numerator",
+          "denominator"
+        ],
+        "title": "RationalValue",
+        "type": "object"
+      },
+      "ReorderingDiagnostics": {
+        "additionalProperties": false,
+        "properties": {
+          "dominance_matching_found": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dominance Matching Found"
+          },
+          "dominance_search_attempted": {
+            "title": "Dominance Search Attempted",
+            "type": "boolean"
+          },
+          "nonzero_search_attempted": {
+            "title": "Nonzero Search Attempted",
+            "type": "boolean"
+          },
+          "permutation": {
+            "$ref": "#/components/schemas/RowPermutation"
+          }
+        },
+        "required": [
+          "permutation",
+          "dominance_search_attempted",
+          "dominance_matching_found",
+          "nonzero_search_attempted"
+        ],
+        "title": "ReorderingDiagnostics",
+        "type": "object"
+      },
+      "ReportMetadata": {
+        "additionalProperties": false,
+        "description": "Use problem + result + this metadata; traces are never duplicated.",
+        "properties": {
+          "display": {
+            "$ref": "#/components/schemas/DisplayPreferences"
+          },
+          "fraction_values": {
+            "enum": [
+              "exact",
+              "approximate"
+            ],
+            "title": "Fraction Values",
+            "type": "string"
+          },
+          "method": {
+            "$ref": "#/components/schemas/Method"
+          },
+          "options": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DirectOptions"
+              },
+              {
+                "$ref": "#/components/schemas/IterativeOptions"
+              }
+            ],
+            "title": "Options"
+          },
+          "schema_version": {
+            "const": 1,
+            "default": 1,
+            "title": "Schema Version",
+            "type": "integer"
+          },
+          "solver_version": {
+            "const": "0.1.0",
+            "default": "0.1.0",
+            "title": "Solver Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "solver_version",
+          "method",
+          "options",
+          "display",
+          "fraction_values"
+        ],
+        "title": "ReportMetadata",
+        "type": "object"
+      },
+      "RowOperation": {
+        "additionalProperties": false,
+        "properties": {
+          "explanation": {
+            "title": "Explanation",
+            "type": "string"
+          },
+          "factor": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/NumericValue"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "index": {
+            "minimum": 0.0,
+            "title": "Index",
+            "type": "integer"
+          },
+          "matrix_after": {
+            "$ref": "#/components/schemas/NumericMatrix"
+          },
+          "operation_type": {
+            "enum": [
+              "row_swap",
+              "row_add_scaled",
+              "row_scale"
+            ],
+            "title": "Operation Type",
+            "type": "string"
+          },
+          "phase": {
+            "enum": [
+              "forward_elimination",
+              "backward_elimination"
+            ],
+            "title": "Phase",
+            "type": "string"
+          },
+          "pivot_column": {
+            "minimum": 0.0,
+            "title": "Pivot Column",
+            "type": "integer"
+          },
+          "source_row": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Row"
+          },
+          "target_row": {
+            "minimum": 0.0,
+            "title": "Target Row",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "index",
+          "phase",
+          "operation_type",
+          "target_row",
+          "source_row",
+          "pivot_column",
+          "factor",
+          "matrix_after",
+          "explanation"
+        ],
+        "title": "RowOperation",
+        "type": "object"
+      },
+      "RowPermutation": {
+        "additionalProperties": false,
+        "description": "order[j] is the original equation moved to row j; variables never move.",
+        "properties": {
+          "order": {
+            "items": {
+              "type": "integer"
+            },
+            "maxItems": 12,
+            "minItems": 1,
+            "title": "Order",
+            "type": "array"
+          },
+          "purpose": {
+            "enum": [
+              "identity",
+              "strict_diagonal_dominance",
+              "nonzero_diagonal"
+            ],
+            "title": "Purpose",
+            "type": "string"
+          }
+        },
+        "required": [
+          "order",
+          "purpose"
+        ],
+        "title": "RowPermutation",
+        "type": "object"
+      },
+      "SolveOutcome": {
+        "discriminator": {
+          "mapping": {
+            "completed": "#/components/schemas/SolveResponse",
+            "numeric_breakdown": "#/components/schemas/NumericalFailure"
+          },
+          "propertyName": "status"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/SolveResponse"
+          },
+          {
+            "$ref": "#/components/schemas/NumericalFailure"
+          }
+        ]
+      },
+      "SolveResponse": {
+        "additionalProperties": false,
+        "description": "Completed means the computation returned a result, not that it converged.\n\nInspect result.classification for direct methods and result.status for iteration.\nConditioning always estimates the original coefficient matrix in float64.",
+        "properties": {
+          "conditioning": {
+            "$ref": "#/components/schemas/ConditionDiagnostic"
+          },
+          "conditioning_arithmetic_mode": {
+            "const": "float64",
+            "default": "float64",
+            "title": "Conditioning Arithmetic Mode",
+            "type": "string"
+          },
+          "problem": {
+            "$ref": "#/components/schemas/ProblemMetadata"
+          },
+          "report": {
+            "$ref": "#/components/schemas/ReportMetadata"
+          },
+          "request_id": {
+            "title": "Request Id",
+            "type": "string"
+          },
+          "result": {
+            "discriminator": {
+              "mapping": {
+                "gauss_jordan": "#/components/schemas/DirectResult",
+                "gauss_seidel": "#/components/schemas/IterativeResult",
+                "gaussian": "#/components/schemas/DirectResult",
+                "jacobi": "#/components/schemas/IterativeResult"
+              },
+              "propertyName": "method"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/DirectResult"
+              },
+              {
+                "$ref": "#/components/schemas/IterativeResult"
+              }
+            ],
+            "title": "Result"
+          },
+          "status": {
+            "const": "completed",
+            "default": "completed",
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "request_id",
+          "problem",
+          "result",
+          "conditioning",
+          "conditioning_arithmetic_mode",
+          "report"
+        ],
+        "title": "SolveResponse",
+        "type": "object"
+      },
+      "SpectralDiagnostic": {
+        "additionalProperties": false,
+        "properties": {
+          "radius": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/NonnegativeFloat"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "enum": [
+              "computed",
+              "unavailable"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "title": "SpectralDiagnostic",
+        "type": "object"
+      },
+      "SystemInput": {
+        "additionalProperties": false,
+        "properties": {
+          "a": {
+            "items": {
+              "$ref": "#/components/schemas/InputRow"
+            },
+            "maxItems": 12,
+            "minItems": 1,
+            "title": "A",
+            "type": "array"
+          },
+          "b": {
+            "items": {
+              "$ref": "#/components/schemas/NumericToken"
+            },
+            "maxItems": 12,
+            "minItems": 1,
+            "title": "B",
+            "type": "array"
+          }
+        },
+        "required": [
+          "a",
+          "b"
+        ],
+        "title": "SystemInput",
+        "type": "object"
+      },
+      "SystemShape": {
+        "additionalProperties": false,
+        "properties": {
+          "equations": {
+            "maximum": 12.0,
+            "minimum": 1.0,
+            "title": "Equations",
+            "type": "integer"
+          },
+          "unknowns": {
+            "maximum": 12.0,
+            "minimum": 1.0,
+            "title": "Unknowns",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "equations",
+          "unknowns"
+        ],
+        "title": "SystemShape",
+        "type": "object"
+      },
+      "VariableExpression": {
+        "additionalProperties": false,
+        "properties": {
+          "constant": {
+            "$ref": "#/components/schemas/NumericValue"
+          },
+          "terms": {
+            "items": {
+              "$ref": "#/components/schemas/ParameterTerm"
+            },
+            "title": "Terms",
+            "type": "array"
+          },
+          "variable": {
+            "title": "Variable",
+            "type": "string"
+          }
+        },
+        "required": [
+          "variable",
+          "constant",
+          "terms"
+        ],
+        "title": "VariableExpression",
+        "type": "object"
+      },
+      "solver_core__models__FloatVector__1": {
+        "items": {
+          "$ref": "#/components/schemas/FloatScalar"
+        },
+        "type": "array"
+      },
+      "solver_core__models__FloatVector__2": {
+        "items": {
+          "$ref": "#/components/schemas/FloatScalar"
+        },
+        "maxItems": 12,
+        "minItems": 1,
+        "type": "array"
+      }
+    }
+  },
+  "info": {
+    "title": "TULYA API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/health": {
+      "get": {
+        "description": "Report process health without claiming solver readiness.",
+        "operationId": "health",
+        "parameters": [
+          {
+            "description": "Optional correlation ID (1–64 ASCII letters, digits, '-' or '_'). Invalid values are replaced; the final ID is returned in X-Request-ID.",
+            "in": "header",
+            "name": "x-request-id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional correlation ID (1–64 ASCII letters, digits, '-' or '_'). Invalid values are replaced; the final ID is returned in X-Request-ID.",
+              "title": "X-Request-Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            },
+            "description": "Successful Response",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Request correlation ID.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Invalid input or resource-policy violation.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Request correlation ID.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unexpected internal error with correlation ID.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Request correlation ID.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Health",
+        "tags": [
+          "health"
+        ]
+      }
+    },
+    "/api/v1/analyze": {
+      "post": {
+        "description": "Classify a system and explain conditional eligibility for all four methods.",
+        "operationId": "analyze_system",
+        "parameters": [
+          {
+            "description": "Optional correlation ID (1–64 ASCII letters, digits, '-' or '_'). Invalid values are replaced; the final ID is returned in X-Request-ID.",
+            "in": "header",
+            "name": "x-request-id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional correlation ID (1–64 ASCII letters, digits, '-' or '_'). Invalid values are replaced; the final ID is returned in X-Request-ID.",
+              "title": "X-Request-Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnalyzeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalyzeOutcome"
+                }
+              }
+            },
+            "description": "Successful Response",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Request correlation ID.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Invalid input or resource-policy violation.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Request correlation ID.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unexpected internal error with correlation ID.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Request correlation ID.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Analyze System",
+        "tags": [
+          "solver"
+        ]
+      }
+    },
+    "/api/v1/solve": {
+      "post": {
+        "description": "Return full results, including mathematical non-success outcomes at HTTP 200.",
+        "operationId": "solve_system",
+        "parameters": [
+          {
+            "description": "Optional correlation ID (1–64 ASCII letters, digits, '-' or '_'). Invalid values are replaced; the final ID is returned in X-Request-ID.",
+            "in": "header",
+            "name": "x-request-id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional correlation ID (1–64 ASCII letters, digits, '-' or '_'). Invalid values are replaced; the final ID is returned in X-Request-ID.",
+              "title": "X-Request-Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "discriminator": {
+                  "mapping": {
+                    "gauss_jordan": "#/components/schemas/DirectSolveRequest",
+                    "gauss_seidel": "#/components/schemas/IterativeSolveRequest",
+                    "gaussian": "#/components/schemas/DirectSolveRequest",
+                    "jacobi": "#/components/schemas/IterativeSolveRequest"
+                  },
+                  "propertyName": "method"
+                },
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/DirectSolveRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/IterativeSolveRequest"
+                  }
+                ],
+                "title": "Payload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SolveOutcome"
+                }
+              }
+            },
+            "description": "Successful Response",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Request correlation ID.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Invalid input or resource-policy violation.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Request correlation ID.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unexpected internal error with correlation ID.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Request correlation ID.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Solve System",
+        "tags": [
+          "solver"
+        ]
+      }
+    }
+  }
+}

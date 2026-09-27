@@ -174,14 +174,23 @@ test("canceling an in-flight request preserves editable input", async ({ page })
 
 test("Plotly is fetched only after opening geometry, and reopening draws a fresh plot", async ({ page }) => {
   const plotRequests: string[] = [];
-  page.on("request", request => { if (/plotly/i.test(request.url()) && request.resourceType() === "script") plotRequests.push(request.url()); });
+  // Production strips banners and hashes names; inspect the large vendor's trace types.
+  const scripts: Promise<void>[] = [];
+  page.on("response", response => {
+    if (response.request().resourceType() === "script") scripts.push(response.text().then(text => {
+      if (text.length > 1_000_000 && text.includes("scatter3d") && text.includes("mesh3d")) plotRequests.push(response.url());
+    }).catch(() => {}));
+  });
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+  await Promise.all(scripts);
   expect(plotRequests).toEqual([]);
   await preset(page); await analyze(page); await solve(page);
+  await Promise.all(scripts);
   expect(plotRequests).toEqual([]);
   await page.getByRole("button", { name: "Show geometry" }).click();
   await expect(page.getByText("Interactive geometry ready", { exact: true })).toBeVisible();
+  await Promise.all(scripts);
   expect(plotRequests.length).toBeGreaterThan(0);
   await page.getByRole("button", { name: "Hide geometry" }).click();
   await page.getByRole("button", { name: "Show geometry" }).click();

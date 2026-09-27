@@ -2,6 +2,7 @@
 
 import math
 
+from solver_core.budget import check_budget
 from solver_core.classification import classify_system
 from solver_core.convergence import convergence_diagnostics, iteration_record
 from solver_core.diagnostics import condition_diagnostic, finite_float, float_metrics
@@ -61,6 +62,7 @@ def _reorder(
 
 
 def _sweep(system: FloatSystem, previous: FloatVector, method: IterativeMethod) -> FloatVector:
+    check_budget()
     # Python float is IEEE binary64 on the supported CPython 3.12 runtime.
     # A distinct buffer enforces Jacobi's old-vector-only dependency graph.
     next_vector = list(previous)

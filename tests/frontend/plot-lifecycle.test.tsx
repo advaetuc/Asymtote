@@ -7,10 +7,7 @@ import type { CompletedSolve } from "../../lib/reports/render";
 import fixtures from "./fixtures/api.json";
 
 const plot = vi.hoisted(() => ({ newPlot: vi.fn(), purge: vi.fn(), register: vi.fn(), Plots: { resize: vi.fn() } }));
-vi.mock("plotly.js/lib/core", () => ({ default: plot }));
-vi.mock("plotly.js/lib/scatter", () => ({ default: {} }));
-vi.mock("plotly.js/lib/scatter3d", () => ({ default: {} }));
-vi.mock("plotly.js/lib/mesh3d", () => ({ default: {} }));
+vi.mock("plotly.js/dist/plotly-strict.min.js", () => ({ default: plot }));
 afterEach(() => { vi.unstubAllGlobals(); vi.clearAllMocks(); });
 
 test("late completion from a Strict Mode remount cannot erase the current plot", async () => {

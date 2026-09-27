@@ -8,10 +8,14 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   quality:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -35,12 +39,21 @@ jobs:
           uv run pytest
       - name: Frontend lint, typing, tests, and production build
         run: npm run check
+        env:
+          TULYA_LOCAL_API_PROXY: '1'
+      - name: Runtime dependency and bundle budget
+        run: npm run audit:runtime
+      - name: Dependency vulnerability audit
+        run: npm audit --audit-level=high
       - name: Generated OpenAPI and TypeScript contracts must be current
         run: npm run contracts:check
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
-      - name: Desktop and mobile workflow tests
+      - name: Production desktop, mobile, accessibility, and CSP gates
         run: npm run test:e2e
+        env:
+          E2E_PRODUCTION: '1'
+          E2E_REUSE_SERVERS: '0'
       - name: Preserve browser failure evidence
         if: failure()
         uses: actions/upload-artifact@v4

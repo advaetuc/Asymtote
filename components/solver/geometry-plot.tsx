@@ -1,14 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Plotly from "plotly.js/lib/core";
-import scatter from "plotly.js/lib/scatter";
-import scatter3d from "plotly.js/lib/scatter3d";
-import mesh3d from "plotly.js/lib/mesh3d";
+import Plotly from "plotly.js/dist/plotly-strict.min.js";
 import type { Data, Layout } from "plotly.js";
 import type { Geometry } from "../../lib/geometry/derive";
 
-Plotly.register([scatter, scatter3d, mesh3d]);
 
 export default function GeometryPlot({ geometry }: { geometry: Geometry }) {
   const host = useRef<HTMLDivElement>(null);
@@ -30,11 +26,11 @@ export default function GeometryPlot({ geometry }: { geometry: Geometry }) {
     });
     const axis = (title: string) => ({ title: { text: title }, range: [-bound, bound] as [number, number], gridcolor: "#343b43", zerolinecolor: "#73818d" });
     const layout: Partial<Layout> = { autosize: true, height: 460, paper_bgcolor: "#11151b", plot_bgcolor: "#11151b", font: { color: "#edf3f5" }, margin: { t: 24, r: 20, b: 80, l: 52 }, legend: { orientation: "h", y: -0.2 }, xaxis: { ...axis("x1"), constrain: "domain" }, yaxis: { ...axis("x2"), scaleanchor: "x", scaleratio: 1 }, scene: { xaxis: axis("x1"), yaxis: axis("x2"), zaxis: axis("x3"), aspectmode: "cube" } };
-    const drawing = Plotly.newPlot(element, data, layout, { responsive: true, displaylogo: false, scrollZoom: false });
+    const drawing = Plotly.newPlot(element, data, layout, { responsive: true, displaylogo: false, scrollZoom: false, modeBarButtonsToRemove: ["sendChartToCloud"] });
     drawing.then(() => { if (canceled) Plotly.purge(element); else setReady(true); }).catch(() => { if (!canceled) setFailure(true); });
     const observer = new ResizeObserver(() => { if (!canceled) void drawing.then(() => { if (!canceled) void Plotly.Plots.resize(element); }).catch(() => {}); });
     observer.observe(container);
     return () => { canceled = true; observer.disconnect(); Plotly.purge(element); element.remove(); };
   }, [geometry]);
-  return <><p role="status">{failure ? "The interactive plot could not be displayed. The algebraic result and equation descriptions remain available; 3D requires WebGL." : ready ? "Interactive geometry ready" : "Drawing geometry…"}</p><div ref={host} className="geometry-canvas" role="img" aria-label={`${geometry.dimension}D equation geometry, ${geometry.classification} system`} /></>;
+  return <><p role="status">{failure ? "The interactive plot could not be displayed. The algebraic result and equation descriptions remain available; 3D requires WebGL." : ready ? "Interactive geometry ready" : "Drawing geometry…"}</p><div ref={host} className="geometry-canvas" role="region" aria-label={`${geometry.dimension}D equation geometry, ${geometry.classification} system`} /></>;
 }

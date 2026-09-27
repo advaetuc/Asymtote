@@ -16,12 +16,14 @@ export default defineConfig({
   ],
   webServer: [
     {
-      command: "uv run uvicorn api.index:app --host 127.0.0.1 --port 18000",
+      command: "uv run uvicorn api.index:app --host 127.0.0.1 --port 18000 --no-access-log",
       url: "http://127.0.0.1:18000/api/health",
       reuseExistingServer: !process.env.CI && process.env.E2E_REUSE_SERVERS !== "0",
     },
     {
-      command: "npm run dev -- --hostname 127.0.0.1 --port 3000",
+      command: process.env.E2E_PRODUCTION === "1"
+        ? "npm run start -- --hostname 127.0.0.1 --port 3000"
+        : "npm run dev -- --hostname 127.0.0.1 --port 3000",
       url: "http://127.0.0.1:3000/solve",
       reuseExistingServer: !process.env.CI && process.env.E2E_REUSE_SERVERS !== "0",
       timeout: 120_000,

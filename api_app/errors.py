@@ -9,6 +9,13 @@ from api_app.observability import context, error_response
 from api_models.responses import Issue
 from solver_core.errors import InputError, ResourceLimitError, SolverError
 
+_SAFE_LOCATIONS = frozenset(
+    "body header query path system a b method options display arithmetic_mode mode "
+    "decimal_places initial_guess tolerance max_iterations "
+    "auto_reorder_for_diagonal_dominance auto_reorder_for_nonzero_diagonal "
+    "run_despite_convergence_risk gaussian gauss_jordan jacobi gauss_seidel x-request-id".split()
+)
+
 
 def install_error_handlers(app: FastAPI) -> None:
     @app.exception_handler(RequestValidationError)
@@ -22,7 +29,12 @@ def install_error_handlers(app: FastAPI) -> None:
                     message=cause.message
                     if isinstance(cause, SolverError)
                     else "Invalid or missing request field.",
-                    location=tuple(item["loc"]),
+                    location=tuple(
+                        part
+                        if isinstance(part, int) or part in _SAFE_LOCATIONS
+                        else "unknown_field"
+                        for part in item["loc"]
+                    ),
                 )
             )
         return error_response(

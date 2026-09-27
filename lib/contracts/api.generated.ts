@@ -689,6 +689,28 @@ export interface operations {
                     "application/json": components["schemas"]["HealthResponse"];
                 };
             };
+            /** @description Cross-origin browser request rejected. */
+            403: {
+                headers: {
+                    /** @description Request correlation ID. */
+                    "X-Request-ID"?: string;
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Request body reception deadline exceeded. */
+            408: {
+                headers: {
+                    /** @description Request correlation ID. */
+                    "X-Request-ID"?: string;
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
             /** @description Invalid input or resource-policy violation. */
             422: {
                 headers: {
@@ -702,6 +724,17 @@ export interface operations {
             };
             /** @description Unexpected internal error with correlation ID. */
             500: {
+                headers: {
+                    /** @description Request correlation ID. */
+                    "X-Request-ID"?: string;
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Solver request deadline exceeded. */
+            504: {
                 headers: {
                     /** @description Request correlation ID. */
                     "X-Request-ID"?: string;
@@ -740,6 +773,28 @@ export interface operations {
                     "application/json": components["schemas"]["AnalyzeOutcome"];
                 };
             };
+            /** @description Cross-origin browser request rejected. */
+            403: {
+                headers: {
+                    /** @description Request correlation ID. */
+                    "X-Request-ID"?: string;
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Request body reception deadline exceeded. */
+            408: {
+                headers: {
+                    /** @description Request correlation ID. */
+                    "X-Request-ID"?: string;
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
             /** @description Invalid input or resource-policy violation. */
             422: {
                 headers: {
@@ -753,6 +808,17 @@ export interface operations {
             };
             /** @description Unexpected internal error with correlation ID. */
             500: {
+                headers: {
+                    /** @description Request correlation ID. */
+                    "X-Request-ID"?: string;
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Solver request deadline exceeded. */
+            504: {
                 headers: {
                     /** @description Request correlation ID. */
                     "X-Request-ID"?: string;
@@ -791,6 +857,28 @@ export interface operations {
                     "application/json": components["schemas"]["SolveOutcome"];
                 };
             };
+            /** @description Cross-origin browser request rejected. */
+            403: {
+                headers: {
+                    /** @description Request correlation ID. */
+                    "X-Request-ID"?: string;
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Request body reception deadline exceeded. */
+            408: {
+                headers: {
+                    /** @description Request correlation ID. */
+                    "X-Request-ID"?: string;
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
             /** @description Invalid input or resource-policy violation. */
             422: {
                 headers: {
@@ -804,6 +892,17 @@ export interface operations {
             };
             /** @description Unexpected internal error with correlation ID. */
             500: {
+                headers: {
+                    /** @description Request correlation ID. */
+                    "X-Request-ID"?: string;
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Solver request deadline exceeded. */
+            504: {
                 headers: {
                     /** @description Request correlation ID. */
                     "X-Request-ID"?: string;

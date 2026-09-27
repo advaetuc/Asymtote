@@ -1701,6 +1701,42 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Cross-origin browser request rejected.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Request correlation ID.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "408": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Request body reception deadline exceeded.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Request correlation ID.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "422": {
             "content": {
               "application/json": {
@@ -1728,6 +1764,24 @@
               }
             },
             "description": "Unexpected internal error with correlation ID.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Request correlation ID.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "504": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Solver request deadline exceeded.",
             "headers": {
               "X-Request-ID": {
                 "description": "Request correlation ID.",
@@ -1797,6 +1851,42 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Cross-origin browser request rejected.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Request correlation ID.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "408": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Request body reception deadline exceeded.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Request correlation ID.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "422": {
             "content": {
               "application/json": {
@@ -1824,6 +1914,24 @@
               }
             },
             "description": "Unexpected internal error with correlation ID.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Request correlation ID.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "504": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Solver request deadline exceeded.",
             "headers": {
               "X-Request-ID": {
                 "description": "Request correlation ID.",
@@ -1910,6 +2018,42 @@
               }
             }
           },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Cross-origin browser request rejected.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Request correlation ID.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "408": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Request body reception deadline exceeded.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Request correlation ID.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "422": {
             "content": {
               "application/json": {
@@ -1937,6 +2081,24 @@
               }
             },
             "description": "Unexpected internal error with correlation ID.",
+            "headers": {
+              "X-Request-ID": {
+                "description": "Request correlation ID.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "504": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Solver request deadline exceeded.",
             "headers": {
               "X-Request-ID": {
                 "description": "Request correlation ID.",

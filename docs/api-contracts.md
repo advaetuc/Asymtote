@@ -128,8 +128,11 @@ report rendering; trace snapshots are not repeated in report metadata.
 | 200 | `analyzed` | Classification and eligibility available |
 | 200 | `completed` | Full solver result, including inconsistency or non-convergence |
 | 200 | `numeric_breakdown` | Controlled numerical limitation before a full result could be produced |
+| 403 | `error` with `origin_rejected` | Browser request must come from the same website |
+| 408 | `error` with `request_timeout` | Request body reception exceeded five seconds |
 | 422 | `error` | Invalid shape/token/options, ineligible method, or resource-policy violation |
 | 500 | `error` with `internal_error` | Unexpected failure; generic message and correlation ID |
+| 504 | `error` with `solver_timeout` | Cooperative computation or whole-request deadline exceeded |
 
 A top-level `numeric_breakdown` includes shape, arithmetic mode, optional selected
 method, and a stable domain error code such as `rank_uncertain`. No classification
@@ -139,7 +142,8 @@ resource exhaustion returns a controlled 422, with a safe remediation message.
 
 Errors contain `request_id`, an `error` object (`code`, `message`, `location`), and
 `details`. Request validation includes up to 32 field issues with locations;
-rejected values and exception internals are excluded. Unknown routes and wrong
+rejected values and exception internals are excluded. Unknown field-name locations
+are replaced with `unknown_field`. Unknown routes and wrong
 HTTP methods also receive this error envelope with their normal 404/405 status.
 
 ## Correlation and logs
@@ -171,5 +175,6 @@ included in the serialized contract. Files use LF endings for reproducible
 Windows/Linux checks. `scripts/export_openapi.py --output <path> --check` supports
 checking another target and works independently of the current directory.
 
-Phase 2 delivers the API and contracts. The interactive UI remains Phase 3;
-Markdown/LaTeX report rendering remains Phase 4.
+Security and deployment limits are documented in [the runbook](deployment.md).
+The platform's own timeout or rejection may have a non-contract response body;
+the client treats such responses as generic HTTP/protocol errors with a retry path.

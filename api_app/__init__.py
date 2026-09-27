@@ -1,5 +1,6 @@
 """HTTP application composition; numerical algorithms belong in solver_core."""
 
+import os
 from typing import Annotated
 
 from fastapi import FastAPI, Header, Request
@@ -10,6 +11,7 @@ from api_app.observability import RequestMiddleware, configure_logging, context
 from api_models.health import HealthResponse
 from api_models.requests import AnalyzeRequest, SolveRequest
 from api_models.responses import AnalyzeOutcome, ErrorResponse, SolveOutcome
+from solver_core.budget import computation_budget
 
 type CorrelationHeader = Annotated[
     str | None,
@@ -29,7 +31,7 @@ def create_app() -> FastAPI:
     app = FastAPI(
         title="TULYA API",
         version="0.1.0",
-        docs_url="/api/docs",
+        docs_url=None if os.environ.get("VERCEL") else "/api/docs",
         redoc_url=None,
         openapi_url="/api/openapi.json",
     )
@@ -51,6 +53,16 @@ def create_app() -> FastAPI:
             "headers": CORRELATION_RESPONSE_HEADERS,
         },
     }
+    for status, description in {
+        403: "Cross-origin browser request rejected.",
+        408: "Request body reception deadline exceeded.",
+        504: "Solver request deadline exceeded.",
+    }.items():
+        errors[status] = {
+            "model": ErrorResponse,
+            "description": description,
+            "headers": CORRELATION_RESPONSE_HEADERS,
+        }
 
     @app.get(
         "/api/health",
@@ -74,7 +86,8 @@ def create_app() -> FastAPI:
         payload: AnalyzeRequest, request: Request, x_request_id: CorrelationHeader = None
     ) -> AnalyzeOutcome:
         """Classify a system and explain conditional eligibility for all four methods."""
-        return services.analyze(payload, context(request))
+        with computation_budget():
+            return services.analyze(payload, context(request))
 
     @app.post(
         "/api/v1/solve",
@@ -87,6 +100,7 @@ def create_app() -> FastAPI:
         payload: SolveRequest, request: Request, x_request_id: CorrelationHeader = None
     ) -> SolveOutcome:
         """Return full results, including mathematical non-success outcomes at HTTP 200."""
-        return services.solve(payload, context(request))
+        with computation_budget():
+            return services.solve(payload, context(request))
 
     return app

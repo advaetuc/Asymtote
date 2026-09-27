@@ -10,6 +10,7 @@ from dataclasses import dataclass, field
 from fractions import Fraction
 from typing import Literal
 
+from solver_core.budget import check_budget
 from solver_core.constants import MAX_RATIONAL_BITS, MAX_TRACE_VALUE_CHARS
 from solver_core.errors import ErrorCode, NumericBreakdownError, ResourceLimitError
 from solver_core.models import ExactSystem, FloatSystem, RowOperation
@@ -22,6 +23,7 @@ type System = FloatSystem | ExactSystem
 
 def checked(value: Scalar) -> Scalar:
     """Guard every arithmetic intermediate, not just stored row snapshots."""
+    check_budget()
     if isinstance(value, Fraction):
         if max(value.numerator.bit_length(), value.denominator.bit_length()) > MAX_RATIONAL_BITS:
             raise ResourceLimitError(

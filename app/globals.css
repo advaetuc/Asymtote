@@ -1,4 +1,7 @@
-@import "tailwindcss";
+@import "tailwindcss" source(none);
+@source ".";
+@source "../components";
+@source "../lib";
 
 .geometry-panel, .report-tools { margin-top: 2rem; border-top: 1px solid #3a4149; padding-top: 1.5rem; }
 .geometry-content { margin-top: 1rem; }
@@ -45,7 +48,7 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; background: var(--bg); }
 body { margin: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; }
 a { color: inherit; }
 a:focus-visible { outline: 3px solid var(--focus); outline-offset: 6px; }
@@ -78,6 +81,20 @@ footer { margin-top: 64px; padding: 24px 0; color: var(--text-muted); font-size:
   .method-grid { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+@media (forced-colors: active) {
+  :root {
+    --bg: Canvas; --surface: Canvas; --surface-strong: Canvas;
+    --text: CanvasText; --text-muted: CanvasText; --border: CanvasText;
+    --accent: LinkText; --focus: Highlight; --danger: CanvasText;
+    --warning: CanvasText; --success: CanvasText;
+  }
+  .glass-panel { background: Canvas; backdrop-filter: none; }
+  .primary-link { color: LinkText; background: Canvas; border: 1px solid LinkText; }
+  button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible {
+    outline-color: Highlight;
+  }
+}
 
 /* Solver workspace: aligned controls, restrained panels, and visible numerical structure. */
 button, input, select { font: inherit; }
@@ -126,6 +143,11 @@ code, .numeric-table, .matrix-editor input, .solution-vector dd { font-family: "
 .action-row { display: flex; gap: 12px 24px; align-items: center; flex-wrap: wrap; margin-top: 24px; }
 .primary-button { background: var(--accent); color: #0d0d0f; border-color: transparent; min-width: 150px; }
 .primary-button:hover:not(:disabled) { background: #71f1ff; color: #0d0d0f; }
+@media (forced-colors: active) {
+  .primary-button, .primary-button:hover:not(:disabled) {
+    background: ButtonFace; color: ButtonText; border-color: ButtonText;
+  }
+}
 .table-scroll { max-width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; padding: 6px 4px 12px; scrollbar-color: #566270 #17191e; }
 .table-scroll table { border-collapse: separate; border-spacing: 0; text-align: right; width: max-content; min-width: 100%; }
 th, td { padding: 10px 12px; }
@@ -213,3 +235,17 @@ tbody th { text-align: left; font-size: 12px; white-space: nowrap; }
   .control-row { gap: 12px; } .action-row .primary-button { width: 100%; } .workflow-status { font-size: 12px; } .result-placeholder { padding: 28px; }
 }
 @media (prefers-reduced-motion: reduce) { button { transition: none; } }
+
+@media (forced-colors: active) {
+  .diagnostic-line, .warning-note, .error-note { color: CanvasText; }
+  .warning-note, .error-note, .info-banner, .operation-summary,
+  .answer-block, .panel, .method-choice.selected { background: Canvas; }
+  .method-choice.selected { border: 2px solid Highlight; }
+  .target-row td, .target-row th, .source-row td, .source-row th {
+    background: Canvas; border-bottom: 2px solid Highlight;
+  }
+  .convergence-chart svg { background: Canvas; }
+  .convergence-chart text { fill: CanvasText; }
+  .chart-grid { stroke: GrayText; }
+  .target-line { stroke: CanvasText; }
+}

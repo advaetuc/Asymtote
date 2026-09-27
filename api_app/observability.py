@@ -1,5 +1,6 @@
 """One privacy-preserving JSON log event and one correlation ID per HTTP request."""
 
+import asyncio
 import logging
 import re
 import time
@@ -10,11 +11,14 @@ from starlette.requests import Request
 from starlette.responses import Response
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
+from api_app.security import API_CSP, SECURITY_HEADERS, cross_origin
 from api_models.requests import Method
 from api_models.responses import ErrorResponse, Issue
 from solver_core.models import DomainModel
 
 MAX_REQUEST_BODY_BYTES = 65_536
+BODY_TIMEOUT_SECONDS = 5.0
+REQUEST_TIMEOUT_SECONDS = 10.0
 LOGGER = logging.getLogger("tulya.requests")
 _REQUEST_ID = re.compile(r"[A-Za-z0-9_-]{1,64}\Z")
 
@@ -88,22 +92,48 @@ class RequestMiddleware:
             nonlocal status, response_started
             if message["type"] == "http.response.start":
                 status, response_started = message["status"], True
+                enforced = {**SECURITY_HEADERS, b"x-request-id": ctx.request_id.encode("ascii")}
+                if scope["path"] != "/api/docs" or status >= 400:
+                    enforced[b"content-security-policy"] = API_CSP
                 headers = [
-                    (k, v) for k, v in message.get("headers", []) if k.lower() != b"x-request-id"
+                    (k, v) for k, v in message.get("headers", []) if k.lower() not in enforced
                 ]
                 message = {
                     **message,
-                    "headers": [*headers, (b"x-request-id", ctx.request_id.encode("ascii"))],
+                    "headers": [*headers, *enforced.items()],
                 }
             await send(message)
 
         try:
+            if scope["method"] in ("POST", "PUT", "PATCH", "DELETE") and cross_origin(
+                Request(scope)
+            ):
+                response = error_response(
+                    ctx,
+                    403,
+                    Issue(code="origin_rejected", message="Use the solver from the same website."),
+                )
+                await response(scope, receive, send_with_id)
+                return
             # Bound bytes before JSON decoding, including chunked bodies with no length header.
             body = bytearray()
             body_received = False
             if scope["method"] in ("POST", "PUT", "PATCH"):
                 while True:
-                    message = await receive()
+                    remaining = BODY_TIMEOUT_SECONDS - (time.perf_counter() - started)
+                    try:
+                        async with asyncio.timeout(max(0, remaining)):
+                            message = await receive()
+                    except TimeoutError:
+                        response = error_response(
+                            ctx,
+                            408,
+                            Issue(
+                                code="request_timeout", message="Request body reception timed out."
+                            ),
+                        )
+                        await response(scope, receive, send_with_id)
+                        return
                     if message["type"] == "http.disconnect":
                         ctx.result_status, status = "client_disconnected", 499
                         return
@@ -132,12 +162,28 @@ class RequestMiddleware:
                     return {"type": "http.request", "body": bytes(body), "more_body": False}
                 return await receive()
 
-            await self.app(scope, bounded_receive, send_with_id)
+            async with asyncio.timeout(
+                max(0, REQUEST_TIMEOUT_SECONDS - (time.perf_counter() - started))
+            ):
+                await self.app(scope, bounded_receive, send_with_id)
+        except TimeoutError:
+            if not response_started:
+                response = error_response(
+                    ctx,
+                    504,
+                    Issue(
+                        code="solver_timeout",
+                        message="The solver time limit was reached. "
+                        "Try a smaller system or float64 arithmetic.",
+                    ),
+                )
+                await response(scope, receive, send_with_id)
         except Exception as exc:
             ctx.exception_type = type(exc).__name__
             ctx.error_code, ctx.result_status = "internal_error", "error"
             if response_started:
-                raise
+                # A response already sent cannot be replaced; never rethrow payload-bearing errors.
+                return
             response = error_response(
                 ctx,
                 500,
@@ -162,7 +208,9 @@ class RequestMiddleware:
             event = RequestEvent(
                 request_id=ctx.request_id,
                 route=route,
-                http_method=scope["method"],
+                http_method=scope["method"]
+                if scope["method"] in {"GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"}
+                else "<unmatched>",
                 method=ctx.method,
                 equations=ctx.equations,
                 unknowns=ctx.unknowns,

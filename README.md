@@ -1,140 +1,98 @@
 # TULYA
 
-Educational linear equation solver. Phase 0 provides the application scaffold.
-Phase 1 foundations now include strict numeric parsing, immutable domain models,
-resource bounds, and tolerance policy. Gaussian elimination, Gauss-Jordan RREF,
-and rank classification are implemented and tested in float64 and exact modes.
-Phase 1 now also includes row matching, float64 Jacobi and Gauss-Seidel, convergence
-diagnostics, complete traces, and structured report data. Phase 2 adds typed
-analysis/solve endpoints, correlated request logs, and generated API contracts.
-Phase 3 adds the interactive `/solve` workspace and `/learn` primer, with typed
-requests, editable matrices, analysis, method settings, and educational results.
-See [Phase 3 verification](docs/phase-3-completion-report.md) for coverage and scope.
-Phase 4 adds deterministic Markdown/LaTeX/JSON downloads, complete printable
-reports, and interactive 2D/3D geometry loaded on demand. See
-[Phase 4 verification](docs/phase-4-completion-report.md).
+An educational linear-equation solver built with Next.js 16, React 19,
+TypeScript, FastAPI, and Python 3.12. Gaussian and Gauss–Jordan methods support
+bounded exact rational arithmetic and float64 partial pivoting. Jacobi and
+Gauss–Seidel use unrounded float64 iteration with residual and step-change tests.
 
-## Requirements
-
-- Python 3.12.x (`requires-python = "~=3.12.0"`).
-- Node 22.23.3 and npm 10.9.9 (`.nvmrc`, `package.json`).
-- uv 0.12.19 for the Python lock workflow.
+The workspace supports 1–12 equations and unknowns, rank and conditioning
+analysis, explicit row reordering, replayable traces, deterministic report
+exports, printable KaTeX reports, and lazy interactive 2D/3D geometry.
+No account, database, API key, background worker, or application WebSocket is required.
 
 ## Windows setup
 
-Run from the repository root with Node 22/npm available on PATH:
+Install Python 3.12, Node 22.23.3, npm 10.9.9, and uv 0.12.19. From the repository root:
 
 ```powershell
-.\scripts\scaffold.ps1
 py -3.12 -m venv .tools\bootstrap
 .\.tools\bootstrap\Scripts\python.exe -m pip install uv==0.12.19
-$env:Path = "$(Join-Path $PWD '.tools\bootstrap\Scripts');$env:Path"
+$env:Path = "$PWD\.tools\bootstrap\Scripts;$env:Path"
 uv sync --locked
 npm ci
 ```
 
-If using the project-local Node installed during Phase 0 in this workspace:
+This workspace also has an ignored local Node installation. If needed:
 
 ```powershell
-$env:Path = "$(Join-Path $PWD '.tools\node-v22.23.3-win-x64');$env:Path"
+$env:Path = "$PWD\.tools\node-v22.23.3-win-x64;$env:Path"
+$env:UV_CACHE_DIR = "$PWD\.tools\uv-cache"
 ```
 
-That ignored tool directory is not part of a clean checkout; install the version
-in `.nvmrc` through your normal Node installation workflow on other machines.
+In separate terminals, run `npm run dev:api` and `npm run dev`. Open
+`http://localhost:3000`. The local `/api/*` proxy reaches FastAPI on
+`127.0.0.1:18000`; there is no browser CORS configuration. Interactive API docs
+are available locally at `http://127.0.0.1:18000/api/docs`.
 
-For focused development, open two PowerShell terminals with the same environment:
-
-```powershell
-# Terminal 1
-npm run dev:api
-```
-
-```powershell
-# Terminal 2
-npm run dev
-```
-
-Visit `http://localhost:3000`. The development proxy makes
-`http://localhost:3000/api/health` reach Python at port 18000 without browser CORS.
-The Python health endpoint is also accessible at `http://127.0.0.1:18000/api/health`.
-
-API documentation is at `http://127.0.0.1:18000/api/docs`. See
-[API contracts](docs/api-contracts.md) for request examples and outcome handling.
-After changing a backend schema, regenerate both committed contract artifacts:
-
-```powershell
-npm run contracts:generate
-npm run contracts:check
-npm run typecheck
-```
-
-OpenAPI is generated into `docs/openapi.json`, and `openapi-typescript` generates
-`lib/contracts/api.generated.ts`. CI rejects stale artifacts and compiles the
-generated types alongside the project. Do not edit generated contracts manually.
-
-Deployment-parity development requires a separately installed, security-reviewed
-Vercel CLI and linking the intended Vercel project:
-
-```powershell
-npm run dev:integrated
-```
-
-The CLI is deliberately outside application dependencies. Version 60.0.1's
-transitive security findings must be addressed or an appropriate alternative
-version selected during deployment work; no Vercel account was linked here.
-
-## Checks
+## Release verification
 
 ```powershell
 npm run lint:python
 npm run typecheck:python
 npm run test:python
+npm run contracts:check
+npm run audit:runtime
+npm audit --audit-level=high
+# Build a production frontend with a LOCAL integration proxy.
+$env:TULYA_LOCAL_API_PROXY = "1"
 npm run check
 npx playwright install chromium
+$env:E2E_PRODUCTION = "1"
+$env:E2E_REUSE_SERVERS = "0"
 npm run test:e2e
+Remove-Item Env:TULYA_LOCAL_API_PROXY, Env:E2E_PRODUCTION, Env:E2E_REUSE_SERVERS
 ```
 
-The Playwright suite exercises Chromium at desktop and mobile widths. It starts
-Next.js on port 3000 and FastAPI on port 18000, or reuses healthy local servers.
-A preflight verifies both Python health and the same-origin proxy. An unrelated
-service on either port fails clearly; Next.js cannot silently choose another port.
-CI always starts fresh servers. Set `$env:E2E_REUSE_SERVERS = "0"` to require fresh
-servers locally too. Stop your development servers before using that setting.
-These are local integration tests, not Vercel preview tests.
+Stop development servers before requiring fresh test servers. Playwright owns
+ports 3000 and 18000 and fails on collisions; it never silently changes ports.
+For this workspace's existing browser cache, set
+`$env:PLAYWRIGHT_BROWSERS_PATH = "$PWD\.tools\browsers"` before installing or testing.
+For development-mode tests, omit `E2E_PRODUCTION`; healthy existing TULYA servers
+can be reused when `E2E_REUSE_SERVERS` is not `0`. A health preflight checks both
+backend and frontend API routes.
 
-For this workspace's existing browser cache, set the following before E2E runs
-(use the same setting when installing browsers on another machine):
+CI installs locked dependencies, checks Python lint/types/tests, frontend
+lint/types/unit tests, generated contracts, runtime size, dependency audit,
+production build, and desktop/mobile Playwright workflows plus accessibility
+and CSP checks. Browser failure artifacts are retained for seven days. The
+workflow does not deploy. Branch protection must require its `quality` job.
 
-```powershell
-$env:PLAYWRIGHT_BROWSERS_PATH = "$PWD\.tools\browsers"
-npm run test:e2e
-```
+## Contracts and dependency maintenance
 
-From a completed result, use **Show geometry**, **Download Markdown/LaTeX/JSON**,
-or **Open printable report** followed by **Print / Save as PDF**. Report files are
-generated locally from the returned result. No TeX compiler runs on the server.
-Geometry supports exactly 2 × 2 and 3 × 3 systems; 3D requires browser WebGL.
-Plots are bounded approximations and do not replace backend rank diagnostics.
+FastAPI/Pydantic owns `docs/openapi.json`. Run `npm run contracts:generate` after
+schema changes, then `npm run contracts:check`. The client imports the generated
+`lib/contracts/api.generated.ts`; do not hand-edit it. Mathematical outcomes
+use HTTP 200, validation failures 422, browser origin failures 403, reception
+timeouts 408, computation deadlines 504, and unexpected failures generic 500.
+Each response carries `X-Request-ID`.
 
-`.github/workflows/ci.yml` installs locked dependencies, runs Python and frontend
-checks, verifies generated contracts, builds Next.js, and runs both browser projects.
-On failure, browser traces and diagnostic artifacts are retained for seven days.
+Retain `package-lock.json` and `uv.lock`. Direct dependencies have exact pins.
+Use `npm ci` and `uv sync --locked` for reproducible installs. Runtime Python
+dependencies are only FastAPI, Pydantic, NumPy, and required transitive packages.
+A second `requirements.txt` is unnecessary: Vercel supports the root
+`pyproject.toml` and `uv.lock`.
 
-## Dependency maintenance
+## Deployment
 
-Use npm only and retain `package-lock.json`. Update exact manifest versions and
-regenerate the lock with `npm install`; use `npm ci` for reproducible installs.
-Use `uv lock` when editing Python dependencies and `uv sync --locked` otherwise.
-Keep `pyproject.toml` authoritative. Vercel installs runtime dependencies from
-root Python metadata; the development group is not required by the function.
+One Vercel project serves Next.js and the thin `api/index.py` FastAPI function.
+Production rewrites belong to `vercel.json`; Vercel builds always disable the
+local backend proxy. No environment secrets are required. See `.env.example`
+and the [deployment runbook](docs/deployment.md) for configuration, preview
+verification, production promotion, logs, and rollback.
 
-## Vercel target
+**No external deployment has been performed.** Preview validation and production
+promotion require the owner's manual authorization. Local production E2E tests
+cannot establish that Vercel's built artifact and routing work remotely.
 
-One project serves Next.js at `/` and the FastAPI function under `/api/*`.
-`vercel.json` selects Next.js and routes the API prefix to `api/index.py`.
-The Python entrypoint exposes `app`; there is no persistent backend state.
-Use Python 3.12 and Node 22 in project settings. No API keys are required.
-Preview deployment and routing verification are deferred to Phase 5; Phase 0
-does not claim a deployed or production-ready numerical application.
-
-See [architecture](docs/architecture.md) and [numerical policy](docs/numerical-policy.md).
+See [architecture](docs/architecture.md), [numerical policy](docs/numerical-policy.md),
+[API contracts](docs/api-contracts.md), and [Phase 5 verification](docs/phase-5-completion-report.md).

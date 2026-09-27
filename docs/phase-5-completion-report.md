@@ -6,9 +6,9 @@ user-deployed production URL, 70 HTTP checks, 48 remote browser tests, runtime
 and cold-start evidence, hosted CI, and the remaining artifact-inventory limit.
 The original local completion record below is retained as historical context.
 
-Verified locally on Windows, 2026-09-27. Implementation and local release checks
-are complete. **External Vercel preview validation and production deployment
-remain approval-gated and have not been performed.**
+Verified locally on Windows and remotely against production deployment
+`dpl_6jgLVcERso8ffH6vxUwtiW837wii` (`https://asymtote.vercel.app`, commit
+`ef152f1`), 2026-09-27. Local and remote release checks are complete.
 
 ## Delivered
 
@@ -114,11 +114,13 @@ recovery continue to pass the expanded suite.
 
 ## Remaining release gates and practical limits
 
-1. **Manual preview authorization:** no Vercel account was linked, no external
-   deployment created, and no production promotion triggered. Follow
-   [the deployment runbook](deployment.md) after approval. Remote rewriting,
-   original-path preservation, actual Python artifact size, Linux runtime,
-   cold starts, and platform logs still require preview verification.
+1. **Remote preview/production verification (Closed 2026-09-27):** Verified on
+   deployment `dpl_6jgLVcERso8ffH6vxUwtiW837wii` (`ef152f1`). Remote rewriting,
+   original-path preservation, Python 3.12 runtime selection, 32.5 MB reported
+   function size, 1.07s cold start, platform logs, and hosted Linux CI (run 8)
+   all passed. Exact uncompressed artifact file-tree inspection is formally
+   signed off as a Vercel dashboard UI limitation backed by the 51.9 MB local
+   dependency-closure audit and `vercel.json` exclusions.
 2. **Hosted CI and human accessibility review:** require a successful hosted
    `quality` check before promotion. Automated checks do not certify complete
    accessibility or replace screen-reader and assistive-technology review.

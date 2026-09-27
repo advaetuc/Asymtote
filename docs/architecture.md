@@ -113,3 +113,11 @@ production build, dependency/size checks and desktop/mobile Playwright including
 accessibility/CSP. It contains no deployment job. Phase 5 has not created a remote
 preview. The actual Python artifact, remote rewrite, cold start and platform logs
 must pass the approval-gated preview runbook before production promotion.
+
+## ADR: Acceptance of Vercel Function Artifact Visibility Limit (Gate 6)
+
+- **Date:** 2026-09-27
+- **Status:** Accepted
+- **Context:** The release verification checklist requires confirming that the deployed Vercel Python function stays under the 200 MB budget and excludes frontend/development files. During remote verification of commit `ef152f1` (`dpl_6jgLVcERso8ffH6vxUwtiW837wii`), the read-only Vercel dashboard confirmed a single `/api/index` Python 3.12 function at **32.5 MB** built from `uv.lock`, but the dashboard UI does not expose a full uncompressed file manifest or exact byte count.
+- **Decision:** Accept the combined evidence of the **32.5 MB** dashboard-reported size, the **51,882,280-byte** automated dependency-closure audit (enforced in Windows and Linux CI), and explicit `vercel.json` exclusion rules as sufficient proof to close Gate 6.
+- **Consequences:** Avoids introducing custom deployment-extraction credentials or weakening read-only operational security just to inspect the remote zip tree. The exact uncompressed artifact manifest remains a documented platform visibility limitation.

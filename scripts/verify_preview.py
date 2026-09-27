@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import math
+import os
 import re
 import time
 import urllib.error
@@ -15,6 +16,7 @@ from pathlib import Path
 from uuid import uuid4
 
 ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_ORIGIN = "https://augmentr.vercel.app"
 SYSTEM = {"a": [["4", "1"], ["2", "3"]], "b": ["1", "2"]}
 HEADERS = {
     "x-content-type-options": "nosniff",
@@ -39,14 +41,25 @@ def number(value):
     return float(value)
 
 
-def main() -> int:
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("origin")
+    parser.add_argument(
+        "origin",
+        nargs="?",
+        default=os.environ.get("AUGMENTR_PREVIEW_URL", DEFAULT_ORIGIN),
+        help="Authorized HTTPS origin; defaults to AUGMENTR_PREVIEW_URL or %(default)s.",
+    )
     parser.add_argument("--output", type=Path, required=True)
-    args = parser.parse_args()
-    origin = args.origin.rstrip("/")
-    if not re.fullmatch(r"https://[A-Za-z0-9.-]+", origin):
+    args = parser.parse_args(argv)
+    args.origin = args.origin.rstrip("/")
+    if not re.fullmatch(r"https://[A-Za-z0-9.-]+", args.origin):
         parser.error("Use the authorized HTTPS origin without a path or credentials.")
+    return args
+
+
+def main() -> int:
+    args = parse_args()
+    origin = args.origin
     results = []
 
     def request(label, path, *, payload=None, status=200, extra_headers=None, raw=None):

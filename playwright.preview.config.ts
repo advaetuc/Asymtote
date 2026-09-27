@@ -1,9 +1,16 @@
 import { defineConfig } from "@playwright/test";
 import local from "./playwright.config";
 
-const target = process.env.TULYA_PREVIEW_URL;
-if (!target || new URL(target).protocol !== "https:") {
-  throw new Error("Set TULYA_PREVIEW_URL to the explicitly authorized HTTPS preview origin.");
+const target = process.env.AUGMENTR_PREVIEW_URL ?? "https://augmentr.vercel.app";
+let origin: string;
+try {
+  const url = new URL(target);
+  if (url.protocol !== "https:" || url.username || url.password || url.pathname !== "/" || url.search || url.hash) {
+    throw new Error("Invalid origin");
+  }
+  origin = url.origin;
+} catch {
+  throw new Error("Set AUGMENTR_PREVIEW_URL to an authorized HTTPS origin without credentials, a path, query, or fragment (default: https://augmentr.vercel.app).");
 }
 
 export default defineConfig({
@@ -17,5 +24,5 @@ export default defineConfig({
   timeout: 90_000,
   outputDir: "test-results/preview",
   reporter: [["list"], ["json", { outputFile: "test-results/preview-results.json" }]],
-  use: { ...local.use, baseURL: new URL(target).origin },
+  use: { ...local.use, baseURL: origin },
 });

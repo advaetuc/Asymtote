@@ -46,6 +46,7 @@ and [Python metadata support](https://vercel.com/docs/functions/runtimes/python)
 | `E2E_REUSE_SERVERS=0` | Require fresh test servers; occupied ports fail immediately. CI always requires fresh servers. |
 | `PLAYWRIGHT_BROWSERS_PATH` | Optional local browser cache location. |
 | `UV_CACHE_DIR` | Optional local Python package cache location. |
+| `AUGMENTR_PREVIEW_URL` | Explicit HTTPS origin override for the remote HTTP/browser tools. Both default to `https://augmentr.vercel.app`. Run only after the owner confirms deployment and authorizes remote verification. |
 
 No secrets, credentials, `NEXT_PUBLIC_API_URL`, or CORS origin list are needed.
 Do not upload local environment files. `.vercelignore` retains the frontend's
@@ -121,6 +122,31 @@ Add new UI source directories to the stylesheet's `@source` list when needed.
 
 ## Approval-gated preview verification
 
+The owner selected `https://augmentr.vercel.app` and will retire
+`https://asymtote.vercel.app` entirely. Alias removal belongs in the Vercel
+dashboard: the application does not contain a hostname allowlist. Its API guard
+rejects cross-site/same-site Fetch Metadata and otherwise checks Origin against
+the request scheme and Host; browser same-origin metadata supports local rewrites.
+The CSP uses `connect-src 'self'` and `frame-ancestors 'none'`, so neither directive
+needs a hostname substitution. Do not add cross-alias CORS or framing permission.
+Leaving the old Vercel alias mapped would continue serving it; this code does not
+implement alias retirement or redirects.
+
+After the owner pushes through GitHub Desktop, confirms that Vercel has deployed,
+and authorizes remote checks, run the following. These are future remote commands,
+not part of the local-only Gate 5a verification:
+
+```powershell
+$env:AUGMENTR_PREVIEW_URL = 'https://augmentr.vercel.app'
+uv run python scripts/verify_preview.py --output .tools/augmentr-http-results.json
+npx playwright test --config playwright.preview.config.ts
+```
+
+The HTTP tool also accepts an explicit positional HTTPS origin, which overrides
+the environment variable. The browser tool uses the environment variable or its
+Augmentr default. Historical commands/results in the earlier remote audit retain
+the origin actually tested; use the commands above for the rebranded deployment.
+
 After explicit authorization, use the Vercel dashboard to import the intended
 repository/project and create a **Preview** deployment. Keep automatic production
 deployments disabled until the release is approved. An external, reviewed CLI
@@ -154,6 +180,12 @@ adapter; this behavior requires platform validation, not an assumption based
 on the local proxy.
 
 ## Promotion, monitoring, and rollback
+
+Renaming the project or changing an alias does not change the existing deployment
+ID `dpl_6jgLVcERso8ffH6vxUwtiW837wii`. It remains the recorded historical rollback
+candidate. A new code deployment may have its own ID, but do not invent a new ID
+for the old deployment after a rename. Check the alias mapping separately when
+rolling back; this gate has not changed any deployment or alias mapping.
 
 Present the preview URL, commit, gate results, and limitations to the owner.
 Promote that tested deployment only after explicit production approval. After

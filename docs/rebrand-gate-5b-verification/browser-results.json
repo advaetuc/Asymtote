@@ -1,0 +1,1773 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\Advaet\\Documents\\Projects\\TULYA\\.tools\\node-v22.23.3-win-x64\\node.exe",
+      "C:\\Users\\Advaet\\Documents\\Projects\\TULYA\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "playwright.preview.config.ts"
+    ],
+    "configFile": "C:\\Users\\Advaet\\Documents\\Projects\\TULYA\\playwright.preview.config.ts",
+    "rootDir": "C:/Users/Advaet/Documents/Projects/TULYA/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/Advaet/Documents/Projects/TULYA/test-results/preview",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/Advaet/Documents/Projects/TULYA/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "e2e/**/*.spec.ts",
+          "preview/**/*.spec.ts"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "C:/Users/Advaet/Documents/Projects/TULYA/test-results/preview",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "mobile-chromium",
+        "name": "mobile-chromium",
+        "testDir": "C:/Users/Advaet/Documents/Projects/TULYA/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "e2e/**/*.spec.ts",
+          "preview/**/*.spec.ts"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/preview-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 2,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "e2e\\accessibility.spec.ts",
+      "file": "e2e/accessibility.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "accessible page, keyboard skip link and security headers: /",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8356,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:16:13.462Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "cb4d96879b22e77d8b2c-7d62e4dfebf58b2d4e98",
+          "file": "e2e/accessibility.spec.ts",
+          "line": 10,
+          "column": 7
+        },
+        {
+          "title": "accessible page, keyboard skip link and security headers: /solve",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1350,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:16:21.884Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "cb4d96879b22e77d8b2c-6cf90cb0f48ce88762f3",
+          "file": "e2e/accessibility.spec.ts",
+          "line": 10,
+          "column": 7
+        },
+        {
+          "title": "accessible page, keyboard skip link and security headers: /learn",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1086,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:16:23.239Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "cb4d96879b22e77d8b2c-3e30971ad851af2d7dbd",
+          "file": "e2e/accessibility.spec.ts",
+          "line": 10,
+          "column": 7
+        },
+        {
+          "title": "matrix errors, direct replay and complete report remain accessible",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6525,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:16:24.331Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "cb4d96879b22e77d8b2c-aa9084b2c0363c06feca",
+          "file": "e2e/accessibility.spec.ts",
+          "line": 29,
+          "column": 5
+        },
+        {
+          "title": "iterative table and geometry descriptions remain accessible",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5682,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:16:30.866Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "cb4d96879b22e77d8b2c-3546257f3fa8324f82cf",
+          "file": "e2e/accessibility.spec.ts",
+          "line": 50,
+          "column": 5
+        },
+        {
+          "title": "fresh script nonces and CSP-compatible 3D WebGL and KaTeX",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6072,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:16:36.553Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "cb4d96879b22e77d8b2c-46a407ce4147294065fd",
+          "file": "e2e/accessibility.spec.ts",
+          "line": 65,
+          "column": 5
+        },
+        {
+          "title": "accessible page, keyboard skip link and security headers: /",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1081,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:16:54.265Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "cb4d96879b22e77d8b2c-1d069b4ecb4e756dc5c8",
+          "file": "e2e/accessibility.spec.ts",
+          "line": 10,
+          "column": 7
+        },
+        {
+          "title": "accessible page, keyboard skip link and security headers: /solve",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1261,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:16:55.419Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "cb4d96879b22e77d8b2c-fcd5e824a9b2ec40dccd",
+          "file": "e2e/accessibility.spec.ts",
+          "line": 10,
+          "column": 7
+        },
+        {
+          "title": "accessible page, keyboard skip link and security headers: /learn",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1147,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:16:56.686Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "cb4d96879b22e77d8b2c-b22e31964649804511cd",
+          "file": "e2e/accessibility.spec.ts",
+          "line": 10,
+          "column": 7
+        },
+        {
+          "title": "matrix errors, direct replay and complete report remain accessible",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5678,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:16:57.838Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "cb4d96879b22e77d8b2c-3a413d136da27efd1eed",
+          "file": "e2e/accessibility.spec.ts",
+          "line": 29,
+          "column": 5
+        },
+        {
+          "title": "iterative table and geometry descriptions remain accessible",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4920,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:17:03.521Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "cb4d96879b22e77d8b2c-982ca1e8ec9c1548c404",
+          "file": "e2e/accessibility.spec.ts",
+          "line": 50,
+          "column": 5
+        },
+        {
+          "title": "fresh script nonces and CSP-compatible 3D WebGL and KaTeX",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5853,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:17:08.446Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "cb4d96879b22e77d8b2c-6a86c03086be98337c0f",
+          "file": "e2e/accessibility.spec.ts",
+          "line": 65,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "e2e\\scaffold.spec.ts",
+      "file": "e2e/scaffold.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "landing renders and the same-origin Python health endpoint responds",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 9386,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:16:13.434Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f21a53d2f507289bef4b-16e0825b79db018563c9",
+          "file": "e2e/scaffold.spec.ts",
+          "line": 3,
+          "column": 5
+        },
+        {
+          "title": "landing renders and the same-origin Python health endpoint responds",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2125,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:17:14.306Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f21a53d2f507289bef4b-26fbdef6d353c10d7cd7",
+          "file": "e2e/scaffold.spec.ts",
+          "line": 3,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "e2e\\workflow.spec.ts",
+      "file": "e2e/workflow.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "matrix editing, keyboard navigation, validation recovery and Gaussian replay",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 3480,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:16:22.909Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-ebc922116518fa165e43",
+          "file": "e2e/workflow.spec.ts",
+          "line": 22,
+          "column": 5
+        },
+        {
+          "title": "server validation 422 recovers after a bounded-value correction",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2428,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:16:26.399Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-887d6a5fd48931dab371",
+          "file": "e2e/workflow.spec.ts",
+          "line": 43,
+          "column": 5
+        },
+        {
+          "title": "exact Gauss-Jordan row swaps and deterministic full report downloads",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 5682,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:16:28.833Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-c9d44b4c97a101a3a639",
+          "file": "e2e/workflow.spec.ts",
+          "line": 52,
+          "column": 5
+        },
+        {
+          "title": "Jacobi iteration applies row permutation and draws an iteration trajectory",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 4652,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:16:34.520Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-0db81a65bf4cd66e2a4a",
+          "file": "e2e/workflow.spec.ts",
+          "line": 85,
+          "column": 7
+        },
+        {
+          "title": "Jacobi iteration declines risk, then honors explicit consent without claiming convergence",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 3982,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:16:39.178Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-803f67e3bd7075ccad66",
+          "file": "e2e/workflow.spec.ts",
+          "line": 97,
+          "column": 7
+        },
+        {
+          "title": "Gauss–Seidel iteration applies row permutation and draws an iteration trajectory",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 4315,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:16:43.165Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-89fc08d040b48cb3e5ee",
+          "file": "e2e/workflow.spec.ts",
+          "line": 85,
+          "column": 7
+        },
+        {
+          "title": "Gauss–Seidel iteration declines risk, then honors explicit consent without claiming convergence",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 3981,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:16:47.485Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-473e13230c2c071be9c4",
+          "file": "e2e/workflow.spec.ts",
+          "line": 97,
+          "column": 7
+        },
+        {
+          "title": "infinite rectangular system explains eligibility and unavailable geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1122,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:16:51.471Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-931069068b4449a1f872",
+          "file": "e2e/workflow.spec.ts",
+          "line": 108,
+          "column": 5
+        },
+        {
+          "title": "geometry renders inconsistent and toggles cleanly",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 4159,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:16:52.598Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-7dde8e291a14d38d3f69",
+          "file": "e2e/workflow.spec.ts",
+          "line": 117,
+          "column": 7
+        },
+        {
+          "title": "geometry renders coincident and toggles cleanly",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 4746,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:16:56.763Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-d350a8166d25b49c853a",
+          "file": "e2e/workflow.spec.ts",
+          "line": 117,
+          "column": 7
+        },
+        {
+          "title": "geometry renders planes and toggles cleanly",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 5277,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:17:01.514Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-f8f4768b7e81d5015029",
+          "file": "e2e/workflow.spec.ts",
+          "line": 117,
+          "column": 7
+        },
+        {
+          "title": "geometry renders line3d and toggles cleanly",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 5342,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:17:06.796Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-85212be7529b497211df",
+          "file": "e2e/workflow.spec.ts",
+          "line": 117,
+          "column": 7
+        },
+        {
+          "title": "network failure and 500 can be retried without losing the matrix",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1173,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:17:12.143Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-f76813fdcee9beda13b9",
+          "file": "e2e/workflow.spec.ts",
+          "line": 131,
+          "column": 5
+        },
+        {
+          "title": "non-zero diagonal fallback is explicit and supports a bounded risky run",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 6065,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:17:13.321Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-646e429ad688b57181ae",
+          "file": "e2e/workflow.spec.ts",
+          "line": 147,
+          "column": 5
+        },
+        {
+          "title": "canceling an in-flight request preserves editable input",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 698,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:17:19.392Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-9cd81a86dcb68a8543e7",
+          "file": "e2e/workflow.spec.ts",
+          "line": 164,
+          "column": 5
+        },
+        {
+          "title": "Plotly is fetched only after opening geometry, and reopening draws a fresh plot",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 5061,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:17:20.095Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-f4795b4d8d97e05cb48e",
+          "file": "e2e/workflow.spec.ts",
+          "line": 177,
+          "column": 5
+        },
+        {
+          "title": "matrix editing, keyboard navigation, validation recovery and Gaussian replay",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2690,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:17:16.442Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-9e746714c726a3913df2",
+          "file": "e2e/workflow.spec.ts",
+          "line": 22,
+          "column": 5
+        },
+        {
+          "title": "server validation 422 recovers after a bounded-value correction",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1962,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:17:19.139Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-08053a5fcdf9bca2c79d",
+          "file": "e2e/workflow.spec.ts",
+          "line": 43,
+          "column": 5
+        },
+        {
+          "title": "exact Gauss-Jordan row swaps and deterministic full report downloads",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5373,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:17:21.107Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-e4818755a3c39f408284",
+          "file": "e2e/workflow.spec.ts",
+          "line": 52,
+          "column": 5
+        },
+        {
+          "title": "Jacobi iteration applies row permutation and draws an iteration trajectory",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4719,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:17:26.486Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-cfe9ca5203a22ea71c37",
+          "file": "e2e/workflow.spec.ts",
+          "line": 85,
+          "column": 7
+        },
+        {
+          "title": "Jacobi iteration declines risk, then honors explicit consent without claiming convergence",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4386,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:17:31.209Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-1a8dfce72506fe092d67",
+          "file": "e2e/workflow.spec.ts",
+          "line": 97,
+          "column": 7
+        },
+        {
+          "title": "Gauss–Seidel iteration applies row permutation and draws an iteration trajectory",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4588,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:17:35.600Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-34167a08da402949afa8",
+          "file": "e2e/workflow.spec.ts",
+          "line": 85,
+          "column": 7
+        },
+        {
+          "title": "Gauss–Seidel iteration declines risk, then honors explicit consent without claiming convergence",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4618,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:17:40.192Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-79040b629317ec3a2521",
+          "file": "e2e/workflow.spec.ts",
+          "line": 97,
+          "column": 7
+        },
+        {
+          "title": "infinite rectangular system explains eligibility and unavailable geometry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1279,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:17:44.814Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-71551c3632d22ca591e1",
+          "file": "e2e/workflow.spec.ts",
+          "line": 108,
+          "column": 5
+        },
+        {
+          "title": "geometry renders inconsistent and toggles cleanly",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4856,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:17:46.099Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-f9e3fb2ad79e8e7db92e",
+          "file": "e2e/workflow.spec.ts",
+          "line": 117,
+          "column": 7
+        },
+        {
+          "title": "geometry renders coincident and toggles cleanly",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4443,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:17:50.959Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-d76c3b8225d252c0fa0f",
+          "file": "e2e/workflow.spec.ts",
+          "line": 117,
+          "column": 7
+        },
+        {
+          "title": "geometry renders planes and toggles cleanly",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5084,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:17:55.407Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-cc4cf1fd6f1b4fde8574",
+          "file": "e2e/workflow.spec.ts",
+          "line": 117,
+          "column": 7
+        },
+        {
+          "title": "geometry renders line3d and toggles cleanly",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5126,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:18:00.495Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-d5b1e54873b603ed4298",
+          "file": "e2e/workflow.spec.ts",
+          "line": 117,
+          "column": 7
+        },
+        {
+          "title": "network failure and 500 can be retried without losing the matrix",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1173,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:18:05.625Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-d0a65502985f338b46fd",
+          "file": "e2e/workflow.spec.ts",
+          "line": 131,
+          "column": 5
+        },
+        {
+          "title": "non-zero diagonal fallback is explicit and supports a bounded risky run",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5476,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:18:06.802Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-2566c862d7f488265bd2",
+          "file": "e2e/workflow.spec.ts",
+          "line": 147,
+          "column": 5
+        },
+        {
+          "title": "canceling an in-flight request preserves editable input",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 664,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:18:12.283Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-d5e98853060f6ed7a8d7",
+          "file": "e2e/workflow.spec.ts",
+          "line": 164,
+          "column": 5
+        },
+        {
+          "title": "Plotly is fetched only after opening geometry, and reopening draws a fresh plot",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5081,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:18:12.951Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8683501b27637df59508-08158e63e5cc5073750a",
+          "file": "e2e/workflow.spec.ts",
+          "line": 177,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "preview\\observability.spec.ts",
+      "file": "preview/observability.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "live happy paths have same-origin API traffic and no browser errors",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11246,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:16:42.637Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "browser-observations",
+                      "contentType": "application/json",
+                      "body": "ewogICJvcmlnaW4iOiAiaHR0cHM6Ly9hdWdtZW50ci1zb2x2ci52ZXJjZWwuYXBwIiwKICAiZXJyb3JzIjogW10sCiAgIndhcm5pbmdzIjogWwogICAgIkNhbnZhczJEOiBNdWx0aXBsZSByZWFkYmFjayBvcGVyYXRpb25zIHVzaW5nIGdldEltYWdlRGF0YSBhcmUgZmFzdGVyIHdpdGggdGhlIHdpbGxSZWFkRnJlcXVlbnRseSBhdHRyaWJ1dGUgc2V0IHRvIHRydWUuIFNlZTogaHR0cHM6Ly9odG1sLnNwZWMud2hhdHdnLm9yZy9tdWx0aXBhZ2UvY2FudmFzLmh0bWwjY29uY2VwdC1jYW52YXMtd2lsbC1yZWFkLWZyZXF1ZW50bHkiCiAgXSwKICAiYXBpUmVxdWVzdHMiOiBbCiAgICAiaHR0cHM6Ly9hdWdtZW50ci1zb2x2ci52ZXJjZWwuYXBwL2FwaS92MS9hbmFseXplIiwKICAgICJodHRwczovL2F1Z21lbnRyLXNvbHZyLnZlcmNlbC5hcHAvYXBpL3YxL3NvbHZlIiwKICAgICJodHRwczovL2F1Z21lbnRyLXNvbHZyLnZlcmNlbC5hcHAvYXBpL3YxL2FuYWx5emUiLAogICAgImh0dHBzOi8vYXVnbWVudHItc29sdnIudmVyY2VsLmFwcC9hcGkvdjEvc29sdmUiLAogICAgImh0dHBzOi8vYXVnbWVudHItc29sdnIudmVyY2VsLmFwcC9hcGkvdjEvYW5hbHl6ZSIsCiAgICAiaHR0cHM6Ly9hdWdtZW50ci1zb2x2ci52ZXJjZWwuYXBwL2FwaS92MS9zb2x2ZSIsCiAgICAiaHR0cHM6Ly9hdWdtZW50ci1zb2x2ci52ZXJjZWwuYXBwL2FwaS92MS9hbmFseXplIiwKICAgICJodHRwczovL2F1Z21lbnRyLXNvbHZyLnZlcmNlbC5hcHAvYXBpL3YxL3NvbHZlIgogIF0KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "60e02971f14829f2a4cc-a3c3a0a52dace286578f",
+          "file": "preview/observability.spec.ts",
+          "line": 3,
+          "column": 5
+        },
+        {
+          "title": "live happy paths have same-origin API traffic and no browser errors",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile-chromium",
+              "projectName": "mobile-chromium",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 8670,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-27T17:17:25.534Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "browser-observations",
+                      "contentType": "application/json",
+                      "body": "ewogICJvcmlnaW4iOiAiaHR0cHM6Ly9hdWdtZW50ci1zb2x2ci52ZXJjZWwuYXBwIiwKICAiZXJyb3JzIjogW10sCiAgIndhcm5pbmdzIjogWwogICAgIkNhbnZhczJEOiBNdWx0aXBsZSByZWFkYmFjayBvcGVyYXRpb25zIHVzaW5nIGdldEltYWdlRGF0YSBhcmUgZmFzdGVyIHdpdGggdGhlIHdpbGxSZWFkRnJlcXVlbnRseSBhdHRyaWJ1dGUgc2V0IHRvIHRydWUuIFNlZTogaHR0cHM6Ly9odG1sLnNwZWMud2hhdHdnLm9yZy9tdWx0aXBhZ2UvY2FudmFzLmh0bWwjY29uY2VwdC1jYW52YXMtd2lsbC1yZWFkLWZyZXF1ZW50bHkiLAogICAgIlsuV2ViR0wtMHg1NzljMDBiNTkwMDBdR0wgRHJpdmVyIE1lc3NhZ2UgKE9wZW5HTCwgUGVyZm9ybWFuY2UsIEdMX0NMT1NFX1BBVEhfTlYsIEhpZ2gpOiBHUFUgc3RhbGwgZHVlIHRvIFJlYWRQaXhlbHMiLAogICAgIlsuV2ViR0wtMHg1NzljMDBiNTkwMDBdR0wgRHJpdmVyIE1lc3NhZ2UgKE9wZW5HTCwgUGVyZm9ybWFuY2UsIEdMX0NMT1NFX1BBVEhfTlYsIEhpZ2gpOiBHUFUgc3RhbGwgZHVlIHRvIFJlYWRQaXhlbHMiLAogICAgIlsuV2ViR0wtMHg1NzljMDBiNTkwMDBdR0wgRHJpdmVyIE1lc3NhZ2UgKE9wZW5HTCwgUGVyZm9ybWFuY2UsIEdMX0NMT1NFX1BBVEhfTlYsIEhpZ2gpOiBHUFUgc3RhbGwgZHVlIHRvIFJlYWRQaXhlbHMiLAogICAgIlsuV2ViR0wtMHg1NzljMDBiNTkwMDBdR0wgRHJpdmVyIE1lc3NhZ2UgKE9wZW5HTCwgUGVyZm9ybWFuY2UsIEdMX0NMT1NFX1BBVEhfTlYsIEhpZ2gpOiBHUFUgc3RhbGwgZHVlIHRvIFJlYWRQaXhlbHMgKHRoaXMgbWVzc2FnZSB3aWxsIG5vIGxvbmdlciByZXBlYXQpIgogIF0sCiAgImFwaVJlcXVlc3RzIjogWwogICAgImh0dHBzOi8vYXVnbWVudHItc29sdnIudmVyY2VsLmFwcC9hcGkvdjEvYW5hbHl6ZSIsCiAgICAiaHR0cHM6Ly9hdWdtZW50ci1zb2x2ci52ZXJjZWwuYXBwL2FwaS92MS9zb2x2ZSIsCiAgICAiaHR0cHM6Ly9hdWdtZW50ci1zb2x2ci52ZXJjZWwuYXBwL2FwaS92MS9hbmFseXplIiwKICAgICJodHRwczovL2F1Z21lbnRyLXNvbHZyLnZlcmNlbC5hcHAvYXBpL3YxL3NvbHZlIiwKICAgICJodHRwczovL2F1Z21lbnRyLXNvbHZyLnZlcmNlbC5hcHAvYXBpL3YxL2FuYWx5emUiLAogICAgImh0dHBzOi8vYXVnbWVudHItc29sdnIudmVyY2VsLmFwcC9hcGkvdjEvc29sdmUiLAogICAgImh0dHBzOi8vYXVnbWVudHItc29sdnIudmVyY2VsLmFwcC9hcGkvdjEvYW5hbHl6ZSIsCiAgICAiaHR0cHM6Ly9hdWdtZW50ci1zb2x2ci52ZXJjZWwuYXBwL2FwaS92MS9zb2x2ZSIKICBdCn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "60e02971f14829f2a4cc-55768a7e69ef75baba9b",
+          "file": "preview/observability.spec.ts",
+          "line": 3,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-27T17:16:13.125Z",
+    "duration": 125070.34599999999,
+    "expected": 48,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

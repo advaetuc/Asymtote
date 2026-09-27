@@ -2,8 +2,10 @@
 
 Repository: [advaetuc/Augmentr](https://github.com/advaetuc/Augmentr).
 Live-demo address: [augmentr-solvr.vercel.app](https://augmentr-solvr.vercel.app).
-The owner reports configuring the new domain; remote verification is pending.
-The historical audit below records the origin actually tested.
+Remote verification passed on 2026-09-27: see the
+[Gate 5b report](rebrand-gate-5b-completion-report.md) for 70 HTTP requests,
+48 browser tests and confirmation that the old alias is retired without a redirect.
+The historical audit below records the earlier origin actually tested.
 
 Latest remote audit: [2026-09-27 verification report](preview-verification/report.md).
 It records checks against the user-deployed production URL, repeatable remote

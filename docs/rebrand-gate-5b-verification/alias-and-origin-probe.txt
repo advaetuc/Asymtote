@@ -1,0 +1,68 @@
+import hashlib
+import json
+import urllib.error
+import urllib.request
+from datetime import UTC, datetime
+from pathlib import Path
+
+
+class NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+
+opener = urllib.request.build_opener(NoRedirect)
+records = []
+
+
+def probe(url, headers=None, payload=None):
+    request = urllib.request.Request(
+        url,
+        data=json.dumps(payload).encode() if payload is not None else None,
+        headers={"User-Agent": "Augmentr-Gate5b-Verification", **(headers or {})},
+    )
+    record = {"url": url, "method": request.get_method(), "checked_at": datetime.now(UTC).isoformat()}
+    try:
+        try:
+            response = opener.open(request, timeout=30)
+        except urllib.error.HTTPError as error:
+            response = error
+        with response:
+            body = response.read()
+            record.update(
+                status=response.status,
+                headers={k.lower(): v for k, v in response.headers.items()},
+                bytes=len(body),
+                sha256=hashlib.sha256(body).hexdigest(),
+                body=body.decode("utf-8", errors="replace"),
+            )
+    except (urllib.error.URLError, TimeoutError) as error:
+        record["error"] = str(error)
+    records.append(record)
+    print(json.dumps({k: v for k, v in record.items() if k not in {"headers", "body"}}), flush=True)
+    return record
+
+
+for path in ("/", "/solve", "/api/health"):
+    probe("https://asymtote.vercel.app" + path)
+
+target = "https://augmentr-solvr.vercel.app"
+payload = {"system": {"a": [["1"]], "b": ["2"]}, "method": "gaussian"}
+for origin, fetch_site, expected in (
+    (target, None, 200),
+    (target, "same-origin", 200),
+    ("https://asymtote.vercel.app", None, 403),
+    ("https://augmentr.vercel.app", "cross-site", 403),
+):
+    headers = {"Content-Type": "application/json", "Origin": origin}
+    if fetch_site:
+        headers["Sec-Fetch-Site"] = fetch_site
+    record = probe(target + "/api/v1/solve", headers, payload)
+    record["sent_origin"] = origin
+    record["sent_sec_fetch_site"] = fetch_site
+    record["expected_status"] = expected
+    record["passed"] = record.get("status") == expected
+
+Path("docs/rebrand-gate-5b-verification/alias-and-origin-results.json").write_text(
+    json.dumps({"redirects_followed": False, "results": records}, indent=2) + "\n", encoding="utf-8"
+)

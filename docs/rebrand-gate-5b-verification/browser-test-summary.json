@@ -1,0 +1,338 @@
+[
+  {
+    "title": "accessible page, keyboard skip link and security headers: /",
+    "project": "chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 8356
+  },
+  {
+    "title": "accessible page, keyboard skip link and security headers: /solve",
+    "project": "chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 1350
+  },
+  {
+    "title": "accessible page, keyboard skip link and security headers: /learn",
+    "project": "chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 1086
+  },
+  {
+    "title": "matrix errors, direct replay and complete report remain accessible",
+    "project": "chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 6525
+  },
+  {
+    "title": "iterative table and geometry descriptions remain accessible",
+    "project": "chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 5682
+  },
+  {
+    "title": "fresh script nonces and CSP-compatible 3D WebGL and KaTeX",
+    "project": "chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 6072
+  },
+  {
+    "title": "accessible page, keyboard skip link and security headers: /",
+    "project": "mobile-chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 1081
+  },
+  {
+    "title": "accessible page, keyboard skip link and security headers: /solve",
+    "project": "mobile-chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 1261
+  },
+  {
+    "title": "accessible page, keyboard skip link and security headers: /learn",
+    "project": "mobile-chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 1147
+  },
+  {
+    "title": "matrix errors, direct replay and complete report remain accessible",
+    "project": "mobile-chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 5678
+  },
+  {
+    "title": "iterative table and geometry descriptions remain accessible",
+    "project": "mobile-chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 4920
+  },
+  {
+    "title": "fresh script nonces and CSP-compatible 3D WebGL and KaTeX",
+    "project": "mobile-chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 5853
+  },
+  {
+    "title": "landing renders and the same-origin Python health endpoint responds",
+    "project": "chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 9386
+  },
+  {
+    "title": "landing renders and the same-origin Python health endpoint responds",
+    "project": "mobile-chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 2125
+  },
+  {
+    "title": "matrix editing, keyboard navigation, validation recovery and Gaussian replay",
+    "project": "chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 3480
+  },
+  {
+    "title": "server validation 422 recovers after a bounded-value correction",
+    "project": "chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 2428
+  },
+  {
+    "title": "exact Gauss-Jordan row swaps and deterministic full report downloads",
+    "project": "chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 5682
+  },
+  {
+    "title": "Jacobi iteration applies row permutation and draws an iteration trajectory",
+    "project": "chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 4652
+  },
+  {
+    "title": "Jacobi iteration declines risk, then honors explicit consent without claiming convergence",
+    "project": "chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 3982
+  },
+  {
+    "title": "Gauss\u2013Seidel iteration applies row permutation and draws an iteration trajectory",
+    "project": "chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 4315
+  },
+  {
+    "title": "Gauss\u2013Seidel iteration declines risk, then honors explicit consent without claiming convergence",
+    "project": "chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 3981
+  },
+  {
+    "title": "infinite rectangular system explains eligibility and unavailable geometry",
+    "project": "chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 1122
+  },
+  {
+    "title": "geometry renders inconsistent and toggles cleanly",
+    "project": "chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 4159
+  },
+  {
+    "title": "geometry renders coincident and toggles cleanly",
+    "project": "chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 4746
+  },
+  {
+    "title": "geometry renders planes and toggles cleanly",
+    "project": "chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 5277
+  },
+  {
+    "title": "geometry renders line3d and toggles cleanly",
+    "project": "chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 5342
+  },
+  {
+    "title": "network failure and 500 can be retried without losing the matrix",
+    "project": "chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 1173
+  },
+  {
+    "title": "non-zero diagonal fallback is explicit and supports a bounded risky run",
+    "project": "chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 6065
+  },
+  {
+    "title": "canceling an in-flight request preserves editable input",
+    "project": "chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 698
+  },
+  {
+    "title": "Plotly is fetched only after opening geometry, and reopening draws a fresh plot",
+    "project": "chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 5061
+  },
+  {
+    "title": "matrix editing, keyboard navigation, validation recovery and Gaussian replay",
+    "project": "mobile-chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 2690
+  },
+  {
+    "title": "server validation 422 recovers after a bounded-value correction",
+    "project": "mobile-chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 1962
+  },
+  {
+    "title": "exact Gauss-Jordan row swaps and deterministic full report downloads",
+    "project": "mobile-chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 5373
+  },
+  {
+    "title": "Jacobi iteration applies row permutation and draws an iteration trajectory",
+    "project": "mobile-chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 4719
+  },
+  {
+    "title": "Jacobi iteration declines risk, then honors explicit consent without claiming convergence",
+    "project": "mobile-chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 4386
+  },
+  {
+    "title": "Gauss\u2013Seidel iteration applies row permutation and draws an iteration trajectory",
+    "project": "mobile-chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 4588
+  },
+  {
+    "title": "Gauss\u2013Seidel iteration declines risk, then honors explicit consent without claiming convergence",
+    "project": "mobile-chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 4618
+  },
+  {
+    "title": "infinite rectangular system explains eligibility and unavailable geometry",
+    "project": "mobile-chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 1279
+  },
+  {
+    "title": "geometry renders inconsistent and toggles cleanly",
+    "project": "mobile-chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 4856
+  },
+  {
+    "title": "geometry renders coincident and toggles cleanly",
+    "project": "mobile-chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 4443
+  },
+  {
+    "title": "geometry renders planes and toggles cleanly",
+    "project": "mobile-chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 5084
+  },
+  {
+    "title": "geometry renders line3d and toggles cleanly",
+    "project": "mobile-chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 5126
+  },
+  {
+    "title": "network failure and 500 can be retried without losing the matrix",
+    "project": "mobile-chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 1173
+  },
+  {
+    "title": "non-zero diagonal fallback is explicit and supports a bounded risky run",
+    "project": "mobile-chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 5476
+  },
+  {
+    "title": "canceling an in-flight request preserves editable input",
+    "project": "mobile-chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 664
+  },
+  {
+    "title": "Plotly is fetched only after opening geometry, and reopening draws a fresh plot",
+    "project": "mobile-chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 5081
+  },
+  {
+    "title": "live happy paths have same-origin API traffic and no browser errors",
+    "project": "chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 11246
+  },
+  {
+    "title": "live happy paths have same-origin API traffic and no browser errors",
+    "project": "mobile-chromium",
+    "status": "expected",
+    "attempts": 1,
+    "duration_ms": 8670
+  }
+]

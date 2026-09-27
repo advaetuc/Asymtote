@@ -1,0 +1,42 @@
+[
+  {
+    "project": "chromium",
+    "origin": "https://augmentr-solvr.vercel.app",
+    "errors": [],
+    "warnings": [
+      "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently"
+    ],
+    "apiRequests": [
+      "https://augmentr-solvr.vercel.app/api/v1/analyze",
+      "https://augmentr-solvr.vercel.app/api/v1/solve",
+      "https://augmentr-solvr.vercel.app/api/v1/analyze",
+      "https://augmentr-solvr.vercel.app/api/v1/solve",
+      "https://augmentr-solvr.vercel.app/api/v1/analyze",
+      "https://augmentr-solvr.vercel.app/api/v1/solve",
+      "https://augmentr-solvr.vercel.app/api/v1/analyze",
+      "https://augmentr-solvr.vercel.app/api/v1/solve"
+    ]
+  },
+  {
+    "project": "mobile-chromium",
+    "origin": "https://augmentr-solvr.vercel.app",
+    "errors": [],
+    "warnings": [
+      "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "[.WebGL-0x579c00b59000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "[.WebGL-0x579c00b59000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "[.WebGL-0x579c00b59000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "[.WebGL-0x579c00b59000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+    ],
+    "apiRequests": [
+      "https://augmentr-solvr.vercel.app/api/v1/analyze",
+      "https://augmentr-solvr.vercel.app/api/v1/solve",
+      "https://augmentr-solvr.vercel.app/api/v1/analyze",
+      "https://augmentr-solvr.vercel.app/api/v1/solve",
+      "https://augmentr-solvr.vercel.app/api/v1/analyze",
+      "https://augmentr-solvr.vercel.app/api/v1/solve",
+      "https://augmentr-solvr.vercel.app/api/v1/analyze",
+      "https://augmentr-solvr.vercel.app/api/v1/solve"
+    ]
+  }
+]

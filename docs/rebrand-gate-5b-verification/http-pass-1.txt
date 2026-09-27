@@ -1,0 +1,39 @@
+first_observed_health: HTTP 200, 2213.41 ms
+repeat_health: HTTP 200, 409.54 ms
+html_/: HTTP 200, 461.06 ms
+html_/solve: HTTP 200, 408.51 ms
+html_/learn: HTTP 200, 301.68 ms
+html_/solve: HTTP 200, 362.73 ms
+openapi: HTTP 200, 358.26 ms
+disabled_or_absent_/api/docs: HTTP 404, 254.53 ms
+disabled_or_absent_/docs: HTTP 404, 359.19 ms
+disabled_or_absent_/api/absent: HTTP 404, 306.14 ms
+wrong_method: HTTP 405, 285.71 ms
+analyze_float64: HTTP 200, 379.69 ms
+analyze_exact: HTTP 200, 358.16 ms
+gaussian_float64: HTTP 200, 358.17 ms
+gaussian_exact: HTTP 200, 323.46 ms
+gauss_jordan_float64: HTTP 200, 256.22 ms
+gauss_jordan_exact: HTTP 200, 251.57 ms
+jacobi_float64: HTTP 200, 277.64 ms
+gauss_seidel_float64: HTTP 200, 322.32 ms
+analyze_inconsistent: HTTP 200, 250.63 ms
+gaussian_inconsistent: HTTP 200, 262.48 ms
+gauss_jordan_inconsistent: HTTP 200, 236.96 ms
+analyze_infinite: HTTP 200, 245.74 ms
+gaussian_infinite: HTTP 200, 248.67 ms
+gauss_jordan_infinite: HTTP 200, 261.94 ms
+jacobi_nonconvergence: HTTP 200, 250.66 ms
+gauss_seidel_nonconvergence: HTTP 200, 1802.3 ms
+analyze_12x12: HTTP 200, 332.12 ms
+gaussian_12x12: HTTP 200, 465.33 ms
+gauss_jordan_12x12: HTTP 200, 658.84 ms
+jacobi_12x12: HTTP 200, 279.76 ms
+gauss_seidel_12x12: HTTP 200, 319.04 ms
+invalid_token: HTTP 422, 279.19 ms
+foreign_origin: HTTP 403, 294.99 ms
+body_limit: HTTP 422, 716.55 ms
+{
+  "request_count": 35,
+  "failures": []
+}

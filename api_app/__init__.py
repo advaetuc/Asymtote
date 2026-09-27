@@ -29,7 +29,14 @@ CORRELATION_RESPONSE_HEADERS = {
 def create_app() -> FastAPI:
     """Create an independent stateless application instance."""
     app = FastAPI(
-        title="TULYA API",
+        title="Augmentr API",
+        description=(
+            "A linear system solver that shows its work: Gaussian and Gauss–Jordan "
+            "elimination, Jacobi and Gauss–Seidel iteration, with step traces, "
+            "rank classification, residuals, and condition diagnostics. "
+            "Direct methods support exact rational arithmetic and float64; "
+            "iterative methods use float64."
+        ),
         version="0.1.0",
         docs_url=None if os.environ.get("VERCEL") else "/api/docs",
         redoc_url=None,

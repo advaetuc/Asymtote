@@ -508,6 +508,17 @@ def test_unknown_routes_and_wrong_http_method_have_structured_errors(client):
 
 def test_openapi_describes_discriminators_bounds_exact_values_and_error_models(client):
     schema = client.get("/api/openapi.json").json()
+    assert schema["info"] == {
+        "title": "Augmentr API",
+        "description": (
+            "A linear system solver that shows its work: Gaussian and Gauss–Jordan "
+            "elimination, Jacobi and Gauss–Seidel iteration, with step traces, "
+            "rank classification, residuals, and condition diagnostics. "
+            "Direct methods support exact rational arithmetic and float64; "
+            "iterative methods use float64."
+        ),
+        "version": "0.1.0",
+    }
     schemas = schema["components"]["schemas"]
     request_schema = schema["paths"]["/api/v1/solve"]["post"]["requestBody"]["content"][
         "application/json"

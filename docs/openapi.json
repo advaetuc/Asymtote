@@ -1653,7 +1653,8 @@
     }
   },
   "info": {
-    "title": "TULYA API",
+    "description": "A linear system solver that shows its work: Gaussian and Gauss–Jordan elimination, Jacobi and Gauss–Seidel iteration, with step traces, rank classification, residuals, and condition diagnostics. Direct methods support exact rational arithmetic and float64; iterative methods use float64.",
+    "title": "Augmentr API",
     "version": "0.1.0"
   },
   "openapi": "3.1.0",

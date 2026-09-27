@@ -12,9 +12,10 @@ export function MatrixGrid({ system, onChange, errors }: { system: SystemInput; 
     onChange({ a, b });
   }
   return <div>
-    <p id="matrix-help" className="muted">Enter numbers or fractions such as 2/3. Arrow keys move between cells; Tab follows row order. Paste a rectangular block of tab- or space-separated values, including the final RHS column.</p>
+    <p id="matrix-help" className="muted">Integers, decimals, scientific notation, and simple fractions — <code>3</code>, <code>-2</code>, <code>0.125</code>, <code>1/3</code>, <code>2.5e-4</code>.</p>
+    <p className="muted">Enter linear equation coefficients and the right-hand side. Paste a rectangular block, including the final RHS column.</p>
     <div className="table-scroll" tabIndex={0} aria-label="Augmented matrix scroll area">
-      <table className="matrix-editor"><caption className="sr-only">Coefficient matrix and right-hand side</caption>
+      <table className="matrix-editor"><caption className="sr-only">Augmented matrix: linear equation coefficients and right-hand side</caption>
         <thead><tr><th scope="col">Equation</th>{Array.from({ length: n }, (_, j) => <th scope="col" key={j}>x<sub>{j + 1}</sub></th>)}<th scope="col" className="rhs-cell">RHS</th></tr></thead>
         <tbody>{system.a.map((row, i) => <tr key={i}><th scope="row">{i + 1}</th>{[...row, system.b[i]!].map((value, j) => {
           const key = cellKey(i, j), error = errors[key];

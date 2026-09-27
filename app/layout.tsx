@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { connection } from "next/server";
+import { SITE_DESCRIPTION } from "../components/site-copy";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "TULYA — Linear equations, understood",
-  description: "Explore the mathematics behind systems of linear equations.",
+  title: "Augmentr — Linear system solver",
+  description: SITE_DESCRIPTION,
+  openGraph: { title: "Augmentr", description: SITE_DESCRIPTION },
 };
 
 export default async function RootLayout({ children }: Readonly<{ children: ReactNode }>) {

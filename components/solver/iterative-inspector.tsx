@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Display, Model } from "../../lib/api/types";
 import { formatValue, metric } from "../../lib/solver/format";
+import { APPROXIMATE_FRACTION_COPY } from "../site-copy";
 
 export function ConvergenceChart({ history, tolerance }: { history: Model<"IterationRecord">[]; tolerance: number }) {
   if (!history.length) return <p>No completed iterations to plot.</p>;
@@ -35,7 +36,7 @@ export function IterativeInspector({ result, display }: { result: Model<"Iterati
     <h3>Iteration history</h3>
     {!result.history.length ? <p>No iterations were completed. The last iterate is the initial guess.</p> : <>
       <div className="step-controls"><button disabled={!page} onClick={() => setPage(p => p - 1)}>Earlier iterations</button><span>Page {page + 1} of {pages} · {result.history.length} iterations</span><button disabled={page + 1 >= pages} onClick={() => setPage(p => p + 1)}>Later iterations</button></div>
-      <div className="table-scroll" tabIndex={0} aria-label="Iteration history scroll area"><table className="numeric-table"><caption>Completed iterations; diagnostics use the original equations</caption><thead><tr><th scope="col">k</th>{result.last_iterate.map((_, i) => <th key={i} scope="col">x<sub>{i + 1}</sub></th>)}<th scope="col">Δ∞</th><th scope="col">Residual ∞</th><th scope="col">Backward error</th><th scope="col">Normalized step</th><th scope="col">Converged</th></tr></thead><tbody>{result.history.slice(page * perPage, (page + 1) * perPage).map(row => <tr key={row.index}><th scope="row">{row.index}</th>{row.vector.map((value, j) => <td key={j} title={String(value)}>{formatValue(value, display)}</td>)}<td title={String(row.delta_inf)}>{metric(row.delta_inf)}</td><td title={String(row.residual_inf)}>{metric(row.residual_inf)}</td><td title={String(row.backward_error)}>{metric(row.backward_error)}</td><td title={String(row.normalized_step_change)}>{metric(row.normalized_step_change)}</td><td>{row.converged ? "Yes · both tests" : "No"}</td></tr>)}</tbody></table></div>
+      <div className="table-scroll" tabIndex={0} aria-label="Iteration history scroll area"><table className="numeric-table"><caption>Completed iterations; diagnostics use the original equations</caption><thead><tr><th scope="col">k</th>{result.last_iterate.map((_, i) => <th key={i} scope="col">x<sub>{i + 1}</sub></th>)}<th scope="col">Δ∞</th><th scope="col">Residual ∞</th><th scope="col">Backward error</th><th scope="col">Normalized step</th><th scope="col">Converged</th></tr></thead><tbody>{result.history.slice(page * perPage, (page + 1) * perPage).map(row => <tr key={row.index}><th scope="row">{row.index}</th>{row.vector.map((value, j) => <td key={j} title={`${display.mode === "fraction" ? `${APPROXIMATE_FRACTION_COPY} Stored value: ` : ""}${String(value)}`}>{formatValue(value, display)}</td>)}<td title={String(row.delta_inf)}>{metric(row.delta_inf)}</td><td title={String(row.residual_inf)}>{metric(row.residual_inf)}</td><td title={String(row.backward_error)}>{metric(row.backward_error)}</td><td title={String(row.normalized_step_change)}>{metric(row.normalized_step_change)}</td><td>{row.converged ? "Yes · both tests" : "No"}</td></tr>)}</tbody></table></div>
     </>}
   </>;
 }

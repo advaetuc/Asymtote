@@ -4,7 +4,7 @@ import { useEffect, useReducer, useRef, useState } from "react";
 import { ApiError, analyzeSystem, solveSystem } from "../../lib/api/client";
 import type { Method } from "../../lib/api/types";
 import { serverCellErrors, validateGrid, type CellErrors } from "../../lib/solver/grid";
-import { PRESETS } from "../../lib/solver/presets";
+import { METHODS, PRESETS } from "../../lib/solver/presets";
 import { initialDraft, initialState, reducer, solveRequest, type Draft } from "../../lib/solver/state";
 import { loadDraft, saveDraft } from "../../lib/solver/storage";
 import { AnalysisPanel } from "./analysis-panel";
@@ -72,8 +72,20 @@ export function SolverWorkspace() {
   const eligibility = state.analysis?.status === "analyzed" ? state.analysis.methods.find(m => m.method === draft.method) : undefined;
   const canSolve = eligibility?.eligible && !configurationIssues(draft).length;
   const n = draft.system.a[0]!.length, m = draft.system.a.length;
+  const methodName = METHODS[draft.method].name;
+  const missingCells = draft.system.a.reduce((count, row, i) => count + [...row, draft.system.b[i]!].filter(value => value === "").length, 0);
+  const resultClassification = state.outcome?.status === "completed" ? state.outcome.result.classification.classification : null;
+  const stageCopy = {
+    DIMENSIONS: ["How many equations, how many unknowns?", "Pick counts from 1×1 up to 12×12 — this sets the grid you'll fill in next."],
+    MATRIX_INPUT: ["Enter your augmented matrix", "Coefficients for x₁ through xₙ, plus the right-hand side. Tab or arrow between cells; paste a tab- or newline-delimited block if you're bringing this from somewhere else."],
+    ANALYZING: ["Checking your system", "Rank, classification, and conditioning — before you pick a method, so you know what each one can actually do here."],
+    METHOD_SELECTION: ["Choose a method", "Each card shows what it needs, what it's good at, and whether it can run on the matrix you just entered."],
+    METHOD_CONFIGURATION: [`Configure ${methodName}`, draft.method === "jacobi" || draft.method === "gauss_seidel" ? "Set a starting guess, an iteration budget, and how results should display." : "Choose exact rational or float64 arithmetic and how results should display."],
+    SOLVING: ["Solving", `Running ${methodName} on your ${m}×${n} system.`],
+    RESULTS: ["Result", resultClassification ? `${resultClassification} — see Steps, Visualize, and Diagnostics for how Augmentr got here.` : "A numerical limitation prevented a result — review the returned explanation below."],
+  };
   return <div className="solver-workflow">
-    <div className="workspace-heading"><div><p className="eyebrow">Linear systems / Working notebook</p><h1>Make every<br /><span>step count.</span></h1></div><p className="lead">Enter your equations. Compare the methods. Follow the reasoning all the way to the result.</p></div>
+    <div className="workspace-heading"><div><p className="eyebrow">Linear systems / Augmented matrix</p><h1>{stageCopy[state.stage][0]}</h1></div><p className="lead">{stageCopy[state.stage][1]}</p></div>
     <div className="workflow-status" role="status" aria-live="polite"><span className={busy ? "busy-dot" : "status-dot"} aria-hidden="true" />{stageLabels[state.stage]}{busy && <button onClick={() => { const stage = state.stage === "ANALYZING" ? "MATRIX_INPUT" : "METHOD_CONFIGURATION"; abort(); dispatch({ type: "CANCEL", stage }); }}>Cancel request</button>}</div>
     <section className="panel" aria-labelledby="matrix-title"><div className="panel-heading"><div><p className="eyebrow">01 / Define the problem</p><h2 id="matrix-title">Your augmented matrix</h2></div><label className="preset-select">Explore an example<select value={preset} onChange={e => {
       const selected = PRESETS.find(p => p.id === e.target.value); if (!selected) return;
@@ -92,16 +104,17 @@ export function SolverWorkspace() {
         else dispatch({ type: "RESIZE", m, n: value });
       }}>{Array.from({ length: 12 }, (_, i) => <option key={i} value={i + 1}>{i + 1}</option>)}</select></label>
       <label>Arithmetic<select value={draft.mode} onChange={e => edit({ mode: e.target.value as Draft["mode"], method: e.target.value === "exact" && (draft.method === "jacobi" || draft.method === "gauss_seidel") ? "gaussian" : draft.method, risk: false }, true)}><option value="float64">Float64 · all methods</option><option value="exact">Exact rational · direct methods</option></select></label></div>
-      {state.stage === "DIMENSIONS" ? <button className="primary-button" onClick={() => dispatch({ type: "RESIZE", ...dimensions })}>Create matrix</button> : <>
+      {state.stage === "DIMENSIONS" ? <><p>Set your equation and unknown counts above, then fill in the augmented matrix to continue.</p><button className="primary-button" onClick={() => dispatch({ type: "RESIZE", ...dimensions })}>Create matrix</button></> : <>
         <MatrixGrid system={draft.system} errors={errors} onChange={system => { setPreset(""); edit({ system, risk: false }, true); }} />
+        {missingCells > 0 && <p className="muted">{missingCells} of {m * (n + 1)} cells still need a value before Augmentr can analyze this system.</p>}
         <div className="action-row"><button className="primary-button" disabled={busy} onClick={() => run("analyze")}>Analyze system</button><button disabled={busy} onClick={() => { setPreset(""); edit({ system: { a: draft.system.a.map(row => row.map(() => "")), b: draft.system.b.map(() => "") }, risk: false }, true); }}>Clear entries</button><span className="muted">{m} equations · {n} unknowns · draft saved for this tab</span></div>
         {!!Object.keys(errors).length && <p role="alert" className="error-note">Correct the highlighted matrix cells before continuing.</p>}
       </>}
     </section>
-    {state.error && <section role="alert" className="panel error-note"><h2>{state.error.status === 422 ? "Check your input" : state.error.status === 500 ? "The solver encountered an error" : "Request could not be completed"}</h2><p>{state.error.message}</p>{state.error.details.map((issue, i) => <p key={i}>{issue.location.join(" → ")}: {issue.message}</p>)}<p>Request {state.error.requestId}</p><button onClick={() => run(state.stage === "METHOD_CONFIGURATION" ? "solve" : "analyze")}>Retry request</button></section>}
+    {state.error && <section role="alert" className="panel error-note"><h2>{state.error.status === 422 ? "Check your input" : state.error.status === 500 ? "The solver encountered an error" : "Request could not be completed"}</h2><p>{state.error.kind === "network" ? "Couldn't reach the solver. Check your connection and try again — nothing you've entered has been lost." : state.error.status === 500 ? `Something failed on Augmentr's end (reference: ${state.error.requestId}). Your input is still here — try again, and include that reference if you report it.` : state.error.message}</p>{state.error.details.map((issue, i) => <p key={i}>{issue.location.join(" → ")}: {issue.message}</p>)}<p>Request {state.error.requestId}</p><button onClick={() => run(state.stage === "METHOD_CONFIGURATION" ? "solve" : "analyze")}>Retry request</button></section>}
     {state.analysis && <div className="workspace-columns"><div><AnalysisPanel analysis={state.analysis} method={draft.method} onSelect={chooseMethod} />{state.analysis.status === "analyzed" && <><Configuration draft={draft} onChange={patch => edit(patch)} /><div className="solve-action"><button className="primary-button" disabled={!canSolve || busy} onClick={() => run("solve")}>Solve system</button>{eligibility && !eligibility.eligible && <p className="warning-note">{eligibility.reason}</p>}</div></>}</div>
-      <div className="result-column"><section className="panel display-panel"><h2>Display preferences</h2><div className="control-row"><label>Number display<select value={draft.display.mode} onChange={e => edit({ display: { ...draft.display, mode: e.target.value as Draft["display"]["mode"] } })}><option value="decimal">Decimals</option><option value="fraction">Fractions</option></select></label><label>Decimal places<select value={draft.display.decimal_places} onChange={e => edit({ display: { ...draft.display, decimal_places: Number(e.target.value) } })}>{Array.from({ length: 13 }, (_, i) => <option key={i} value={i}>{i}</option>)}</select></label></div><p className="muted">Changes presentation only. No recalculation is needed.</p></section>
-      {state.outcome ? <ResultInspector outcome={state.outcome} display={draft.display} analysis={state.analysis} /> : <div className="result-placeholder panel"><span aria-hidden="true">A x = b</span><h2>{busy ? "Calculation in progress" : "The reasoning appears here"}</h2><p>Choose a method and solve to reveal the answer, steps, and diagnostics.</p></div>}</div>
+      <div className="result-column"><section className="panel display-panel"><h2>Display preferences</h2><div className="control-row"><label>Display as decimal or fraction<select value={draft.display.mode} onChange={e => edit({ display: { ...draft.display, mode: e.target.value as Draft["display"]["mode"] } })}><option value="decimal">Decimals</option><option value="fraction">Fractions</option></select></label><label>Decimal places<select value={draft.display.decimal_places} onChange={e => edit({ display: { ...draft.display, decimal_places: Number(e.target.value) } })}>{Array.from({ length: 13 }, (_, i) => <option key={i} value={i}>{i}</option>)}</select></label></div><p className="muted">Changes presentation only. No recalculation is needed.</p></section>
+      {state.outcome ? <ResultInspector outcome={state.outcome} display={draft.display} analysis={state.analysis} /> : <div className="result-placeholder panel"><span aria-hidden="true">A x = b</span><h2>{busy ? "Solving" : "Answer"}</h2><p>The solution, parametric form, or reason none exists.</p><p>{busy ? `Running ${methodName} on your ${m}×${n} system.` : "Choose an available method and solve to show its result here."}</p></div>}</div>
     </div>}
   </div>;
 }

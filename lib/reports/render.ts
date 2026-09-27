@@ -54,7 +54,7 @@ export function reportBlocks({ outcome, display, analysis }: ReportInput): Repor
   const num = (v: Numeric) => numberTex(v, display);
   const vector = (values: Numeric[]) => matrixTex(values.map(v => [v]), display);
   const system = outcome.problem.original_system, result = outcome.result;
-  heading("TULYA linear system report");
+  heading("Augmentr linear system report");
   text(`Method: ${result.method}. Arithmetic: ${outcome.problem.arithmetic_mode}. Request: ${outcome.request_id}. Solver: ${outcome.report.solver_version}.`);
   text("Exact rationals remain exact in this report regardless of decimal display settings. Floating values are approximations. Presentation rounding does not change computation; JSON retains every returned value.");
   heading("Original system");

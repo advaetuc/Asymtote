@@ -51,7 +51,7 @@ test("iterative table and geometry descriptions remain accessible", async ({ pag
   await page.goto("/solve");
   await page.getByLabel("Explore an example").selectOption("permutation");
   await page.getByRole("button", { name: "Analyze system", exact: true }).click();
-  await page.getByRole("radio", { name: "Jacobi", exact: true }).check();
+  await page.getByRole("radio", { name: "Jacobi iteration", exact: true }).check();
   await page.getByRole("button", { name: "Solve system", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Converged", exact: true })).toBeVisible();
   await audit(page);

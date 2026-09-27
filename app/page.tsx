@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { SiteHeader } from "../components/site-header";
+import { FOOTER_COPY } from "../components/site-copy";
 
-const methods = [
-  ["01", "Gaussian elimination", "Reduce a system to row-echelon form, then use back substitution."],
-  ["02", "Gauss-Jordan elimination", "Reduce a system further to reveal pivots, free variables, and contradictions."],
-  ["03", "Jacobi iteration", "Build each new approximation entirely from the previous iteration."],
-  ["04", "Gauss-Seidel iteration", "Use newly updated components as each iteration progresses."],
+const features = [
+  ["01", "Four methods, one system.", "Two direct (Gaussian, Gauss–Jordan) and two iterative (Jacobi, Gauss–Seidel), each with its own eligibility check against your matrix."],
+  ["02", "Every step, not just the answer.", 'Row operations, iteration tables, residuals, and condition numbers — all inspectable, none hidden behind a single "Solve" button.'],
+  ["03", "Exact when it matters.", "Arbitrary-precision rational arithmetic for direct methods when you need it; float64 with visible tolerances everywhere else."],
 ] as const;
 
 export default function Home() {
@@ -13,21 +13,20 @@ export default function Home() {
     <main id="main" className="page-shell">
       <SiteHeader />
       <section className="intro" aria-labelledby="title">
-        <p className="eyebrow">Mathematics / Made visible</p>
-        <h1 id="title">Linear equations,<br /><span>understood.</span></h1>
+        <p className="eyebrow">Linear system solver</p>
+        <h1 id="title">Augmentr</h1>
         <p className="lead">
-          An answer is only the beginning. Understand how equations relate,
-          how methods work, and what each step tells you.
+          Build an augmented matrix, pick a method, watch it get solved one row operation at a time.
         </p>
-        <div className="action-row"><Link className="primary-link" href="/solve">Start solving <span aria-hidden="true">↗</span></Link><a className="secondary-link" href="#methods">Explore the four methods <span aria-hidden="true">↓</span></a></div>
+        <div className="action-row"><Link className="primary-link" href="/solve">Start solving <span aria-hidden="true">→</span></Link><Link className="secondary-link" href="/learn">New to these methods? <span aria-hidden="true">→</span></Link></div>
       </section>
       <section id="methods" className="method-section" aria-labelledby="methods-title">
         <div className="section-heading">
-          <p className="eyebrow">Four perspectives</p>
-          <h2 id="methods-title">From equations to insight.</h2>
+          <p className="eyebrow">Methods, steps, and precision</p>
+          <h2 id="methods-title">Inspect your system.</h2>
         </div>
         <div className="method-grid">
-          {methods.map(([number, name, description]) => (
+          {features.map(([number, name, description]) => (
             <article className="glass-panel" key={number}>
               <span className="method-number" aria-hidden="true">{number}</span>
               <h3>{name}</h3>
@@ -35,8 +34,9 @@ export default function Home() {
             </article>
           ))}
         </div>
+        <p className="muted">Exact arithmetic remains subject to the solver’s input, intermediate-size, and runtime limits.</p>
       </section>
-      <footer>Precision in calculation. Clarity in explanation.</footer>
+      <footer>{FOOTER_COPY}</footer>
     </main>
   );
 }

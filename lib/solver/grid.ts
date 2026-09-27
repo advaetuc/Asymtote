@@ -14,7 +14,7 @@ export function tokenIssue(token: string): string | undefined {
   const rational = /^([+-]?\d+)\/([+-]?\d+)$/.exec(token);
   if (rational) return BigInt(rational[2]!) === BigInt(0) ? "A denominator cannot be zero." : undefined;
   const decimal = /^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE]([+-]?\d+))?$/.exec(token);
-  if (!decimal) return "Use an integer, decimal, scientific number, or fraction such as 2/3.";
+  if (!decimal) return `"${token}" isn't a number Augmentr recognizes — try an integer, decimal, or a/b fraction.`;
   if (decimal[1] && Math.abs(Number(decimal[1])) > 100) return "Use an exponent from −100 to 100.";
   return undefined; // The backend owns exact magnitude/rank policy, avoiding JS rounding decisions.
 }

@@ -11,7 +11,7 @@ async function analyze(page: Page) {
   const response = await pending;
   expect(response.status()).toBe(200);
   expect(response.headers()["x-request-id"]).toBeTruthy();
-  await expect(page.getByRole("heading", { name: "Method settings" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /^Configure /, level: 2 })).toBeVisible();
 }
 async function solve(page: Page, heading = "Unique solution") {
   const pending = page.waitForResponse(r => r.url().endsWith("/api/v1/solve") && r.request().method() === "POST");
@@ -29,7 +29,7 @@ test("matrix editing, keyboard navigation, validation recovery and Gaussian repl
   await expect(page.getByLabel("Row 1, x2", { exact: true })).toBeFocused();
   await page.keyboard.press("Tab");
   await expect(page.getByLabel("Row 1, right-hand side", { exact: true })).toBeFocused();
-  await expect(page.getByRole("heading", { name: "Method settings" })).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: /^Configure /, level: 2 })).toHaveCount(0);
   await analyze(page); await solve(page);
   await expect(page.getByRole("button", { name: "Previous step", exact: true })).toBeDisabled();
   await page.getByRole("button", { name: "Next step", exact: true }).click();
@@ -51,17 +51,17 @@ test("server validation 422 recovers after a bounded-value correction", async ({
 
 test("exact Gauss-Jordan row swaps and deterministic full report downloads", async ({ page }, testInfo) => {
   await preset(page, "permutation"); await page.getByRole("combobox", { name: "Arithmetic", exact: true }).selectOption("exact");
-  await analyze(page); await page.getByRole("radio", { name: "Gauss–Jordan", exact: true }).check();
+  await analyze(page); await page.getByRole("radio", { name: "Gauss–Jordan elimination", exact: true }).check();
   await solve(page); await page.getByRole("button", { name: "Next step", exact: true }).click();
   await expect(page.getByText("Swap equations", { exact: true })).toBeVisible();
   await page.getByRole("button", { name: "End", exact: true }).click();
   await expect(page.getByText("Scale a pivot row", { exact: true })).toBeVisible();
   const texts: Record<string, string> = {};
-  for (const [label, extension] of [["Markdown", "md"], ["LaTeX", "tex"], ["JSON", "json"]]) {
+  for (const [label, extension] of [[".md", "md"], [".tex", "tex"], ["JSON", "json"]]) {
     const downloadPromise = page.waitForEvent("download");
     await page.getByRole("button", { name: `Download ${label}` }).click();
     const download = await downloadPromise;
-    expect(download.suggestedFilename()).toBe(`tulya-gauss_jordan-report.${extension}`);
+    expect(download.suggestedFilename()).toBe(`augmentr-gauss_jordan-report.${extension}`);
     texts[extension!] = await readFile((await download.path())!, "utf8");
     await download.saveAs(testInfo.outputPath(`report.${extension}`));
   }
@@ -81,7 +81,7 @@ test("exact Gauss-Jordan row swaps and deterministic full report downloads", asy
   if (testInfo.project.name === "chromium") await page.pdf({ path: testInfo.outputPath("report.pdf"), format: "A4", printBackground: true });
 });
 
-for (const method of ["Jacobi", "Gauss–Seidel"]) {
+for (const method of ["Jacobi iteration", "Gauss–Seidel iteration"]) {
   test(`${method} applies row permutation and draws an iteration trajectory`, async ({ page }) => {
     await preset(page, "permutation"); await analyze(page);
     await page.getByRole("radio", { name: method, exact: true }).check();
@@ -99,7 +99,7 @@ for (const method of ["Jacobi", "Gauss–Seidel"]) {
     await page.getByRole("radio", { name: method, exact: true }).check();
     await solve(page, "Convergence risk declined");
     await page.getByLabel("Run even if convergence is not guaranteed").check();
-    await page.getByLabel("Maximum iterations", { exact: true }).fill("3");
+    await page.getByLabel("Iteration budget", { exact: true }).fill("3");
     await solve(page, "Iteration limit reached");
     await expect(page.getByRole("heading", { name: "Last iterate — not a converged solution" })).toBeVisible();
   });
@@ -107,10 +107,10 @@ for (const method of ["Jacobi", "Gauss–Seidel"]) {
 
 test("infinite rectangular system explains eligibility and unavailable geometry", async ({ page }) => {
   await preset(page, "infinite"); await analyze(page);
-  await expect(page.getByRole("radio", { name: "Jacobi", exact: true })).toBeDisabled();
+  await expect(page.getByRole("radio", { name: "Jacobi iteration", exact: true })).toBeDisabled();
   await solve(page, "Infinitely many solutions");
   await expect(page.getByRole("heading", { name: "Parametric solution" })).toBeVisible();
-  await expect(page.getByText(/Geometric plotting is available for 2 × 2 and 3 × 3/)).toBeVisible();
+  await expect(page.getByText(/A 2D or 3D plot only applies to 2 × 2 or 3 × 3/)).toBeVisible();
 });
 
 for (const [name, heading] of [["inconsistent", "Inconsistent system"], ["coincident", "Infinitely many solutions"], ["planes", "Unique solution"], ["line3d", "Infinitely many solutions"]]) {
@@ -133,12 +133,14 @@ test("network failure and 500 can be retried without losing the matrix", async (
   await page.route("**/api/v1/analyze", route => route.abort(), { times: 1 });
   await page.getByRole("button", { name: "Analyze system", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Request could not be completed" })).toBeVisible();
+  await expect(page.getByText("Couldn't reach the solver. Check your connection and try again — nothing you've entered has been lost.")).toBeVisible();
   await page.route("**/api/v1/analyze", route => route.fulfill({ status: 500, contentType: "application/json", headers: { "X-Request-ID": "e2e-500" }, body: JSON.stringify({ status: "error", request_id: "e2e-500", error: { code: "internal_error", message: "Internal server error.", location: [] }, details: [] }) }), { times: 1 });
   await page.getByRole("button", { name: "Retry request" }).click();
   await expect(page.getByRole("heading", { name: "The solver encountered an error" })).toBeVisible();
   await expect(page.getByText("Request e2e-500")).toBeVisible();
+  await expect(page.getByText("Something failed on Augmentr's end (reference: e2e-500). Your input is still here — try again, and include that reference if you report it.")).toBeVisible();
   await page.getByRole("button", { name: "Retry request" }).click();
-  await expect(page.getByRole("heading", { name: "Method settings" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /^Configure /, level: 2 })).toBeVisible();
   await expect(page.getByLabel("Row 1, x1", { exact: true })).toHaveValue("4");
 });
 
@@ -146,11 +148,11 @@ test("non-zero diagonal fallback is explicit and supports a bounded risky run", 
   await preset(page, "planes");
   const a = [[0,1,1],[1,1,1],[1,2,3]];
   for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) await page.getByLabel(`Row ${i + 1}, x${j + 1}`, { exact: true }).fill(String(a[i]![j]));
-  await analyze(page); await page.getByRole("radio", { name: "Jacobi", exact: true }).check();
-  await page.getByLabel("Seek strict diagonal dominance by reordering rows").uncheck();
+  await analyze(page); await page.getByRole("radio", { name: "Jacobi iteration", exact: true }).check();
+  await page.getByLabel("Attempt row reordering for diagonal dominance").uncheck();
   await page.getByLabel("Allow non-zero diagonal fallback").check();
   await page.getByLabel("Run even if convergence is not guaranteed").check();
-  await page.getByLabel("Maximum iterations", { exact: true }).fill("2");
+  await page.getByLabel("Iteration budget", { exact: true }).fill("2");
   await solve(page, "Iteration limit reached");
   await expect(page.getByText("Equations reordered", { exact: true })).toBeVisible();
   await expect(page.getByText(/Reason: nonzero diagonal/)).toBeVisible();
@@ -168,7 +170,7 @@ test("canceling an in-flight request preserves editable input", async ({ page })
   await page.getByRole("button", { name: "Cancel request", exact: true }).click();
   release();
   await page.getByLabel("Row 1, x1", { exact: true }).fill("5");
-  await expect(page.getByRole("heading", { name: "Method settings" })).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: /^Configure /, level: 2 })).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Analyze system", exact: true })).toBeEnabled();
 });
 

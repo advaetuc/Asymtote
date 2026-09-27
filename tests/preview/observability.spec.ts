@@ -16,7 +16,7 @@ test("live happy paths have same-origin API traffic and no browser errors", asyn
     expect((await page.goto(route))?.status()).toBe(200);
     await expect(page.getByRole("main")).toBeVisible();
   }
-  for (const method of ["Gaussian elimination", "Gauss–Jordan", "Jacobi", "Gauss–Seidel"]) {
+  for (const method of ["Gaussian elimination", "Gauss–Jordan elimination", "Jacobi iteration", "Gauss–Seidel iteration"]) {
     await page.getByLabel("Explore an example").selectOption("planes");
     const analyzed = page.waitForResponse(response => response.url().endsWith("/api/v1/analyze"));
     await page.getByRole("button", { name: "Analyze system", exact: true }).click();
@@ -25,7 +25,7 @@ test("live happy paths have same-origin API traffic and no browser errors", asyn
     const solved = page.waitForResponse(response => response.url().endsWith("/api/v1/solve"));
     await page.getByRole("button", { name: "Solve system", exact: true }).click();
     expect((await solved).status()).toBe(200);
-    await expect(page.getByRole("heading", { name: method.startsWith("Gauss") && method !== "Gauss–Seidel" ? "Unique solution" : "Converged", exact: true })).toBeVisible();
+    await expect(page.getByRole("heading", { name: method.startsWith("Gauss") && method !== "Gauss–Seidel iteration" ? "Unique solution" : "Converged", exact: true })).toBeVisible();
   }
   await page.getByRole("button", { name: "Show geometry" }).click();
   await expect(page.getByText("Interactive geometry ready", { exact: true })).toBeVisible({ timeout: 60_000 });

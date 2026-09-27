@@ -1,5 +1,6 @@
 import type { Draft } from "../../lib/solver/state";
 import { tokenIssue } from "../../lib/solver/grid";
+import { METHODS } from "../../lib/solver/presets";
 
 export function configurationIssues(draft: Draft): string[] {
   if (draft.method === "gaussian" || draft.method === "gauss_jordan") return [];
@@ -12,13 +13,14 @@ export function configurationIssues(draft: Draft): string[] {
 
 export function Configuration({ draft, onChange }: { draft: Draft; onChange: (patch: Partial<Draft>) => void }) {
   const iterative = draft.method === "jacobi" || draft.method === "gauss_seidel";
-  return <section className="panel" aria-labelledby="config-title"><p className="eyebrow">03 / Choose the calculation</p><h2 id="config-title">Method settings</h2>
+  return <section className="panel" aria-labelledby="config-title"><p className="eyebrow">03 / Choose the calculation</p><h2 id="config-title">Configure {METHODS[draft.method].name}</h2>
     {!iterative && <p>Direct methods find the solution structure by row reduction. Select float64 or exact rational arithmetic above the matrix.</p>}
     {iterative && <>
+      <p>Set a starting guess, an iteration budget, and how results should display.</p>
       <p className="muted">Iterations use unrounded float64 values. A solution is reported only when both backward error and normalized step change meet the tolerance.</p>
-      <fieldset><legend>Initial guess</legend><div className="guess-grid">{draft.guess.map((value, i) => <label key={i}>x<sub>{i + 1}</sub><input aria-label={`Initial guess x${i + 1}`} value={value} aria-invalid={!!tokenIssue(value)} onChange={event => onChange({ guess: draft.guess.map((v, j) => j === i ? event.target.value : v) })} />{tokenIssue(value) && <small className="error-note">{tokenIssue(value)}</small>}</label>)}</div></fieldset>
-      <div className="control-row"><label>Tolerance<input value={draft.tolerance} aria-invalid={configurationIssues(draft).some(v => v.startsWith("Tolerance"))} onChange={e => onChange({ tolerance: e.target.value })} /></label><label>Maximum iterations<input inputMode="numeric" value={draft.maxIterations} aria-invalid={configurationIssues(draft).some(v => v.startsWith("Maximum"))} onChange={e => onChange({ maxIterations: e.target.value })} /></label></div>
-      <label className="check-line"><input type="checkbox" checked={draft.dominance} onChange={e => onChange({ dominance: e.target.checked })} />Seek strict diagonal dominance by reordering rows</label>
+      <fieldset><legend>Initial approximation vector</legend><div className="guess-grid">{draft.guess.map((value, i) => <label key={i}>x<sub>{i + 1}</sub><input aria-label={`Initial guess x${i + 1}`} value={value} aria-invalid={!!tokenIssue(value)} onChange={event => onChange({ guess: draft.guess.map((v, j) => j === i ? event.target.value : v) })} />{tokenIssue(value) && <small className="error-note">{tokenIssue(value)}</small>}</label>)}</div></fieldset>
+      <div className="control-row"><label>Tolerance<input value={draft.tolerance} aria-invalid={configurationIssues(draft).some(v => v.startsWith("Tolerance"))} onChange={e => onChange({ tolerance: e.target.value })} /></label><label>Iteration budget<input inputMode="numeric" value={draft.maxIterations} aria-invalid={configurationIssues(draft).some(v => v.startsWith("Maximum"))} onChange={e => onChange({ maxIterations: e.target.value })} /></label></div>
+      <label className="check-line"><input type="checkbox" checked={draft.dominance} onChange={e => onChange({ dominance: e.target.checked })} />Attempt row reordering for diagonal dominance</label>
       <label className="check-line"><input type="checkbox" checked={draft.nonzero} onChange={e => onChange({ nonzero: e.target.checked })} />Allow non-zero diagonal fallback</label>
       <p className="muted">Fallback can make division possible; it does not guarantee convergence. Diagnostics from analysis describe the indicated candidate row order. The solve response evaluates your chosen settings.</p>
       <label className="check-line risk-control"><input type="checkbox" checked={draft.risk} onChange={e => onChange({ risk: e.target.checked })} />Run even if convergence is not guaranteed</label>

@@ -24,6 +24,7 @@ test("exact fractions never pass through floating conversion in text reports", (
 });
 test("reports preserve settings, current display and supplied analysis", () => {
   const document = reportMarkdown({ ...input(fixtures.gaussian), analysis: fixtures.analysisUnique as ReportInput["analysis"] });
+  expect(document).toContain("Augmentr linear system report");
   expect(document).toContain("Original system"); expect(document).toContain("exported\\_display.decimal\\_places: 3");
   expect(document).toContain("On-demand analysis"); expect(document).toContain("Rank and conditioning analysis");
   expect(document).toContain("Original-system residual diagnostics");
@@ -62,9 +63,9 @@ test("download triggers use deterministic filenames and surface failures", () =>
   render(<ReportTools input={input(fixtures.gaussian)} />);
   fireEvent.click(screen.getByRole("button", { name: "Download JSON" }));
   expect(create).toHaveBeenCalledWith(expect.any(Blob));
-  expect(filename).toBe("tulya-gaussian-report.json");
+  expect(filename).toBe("augmentr-gaussian-report.json");
   create.mockImplementationOnce(() => { throw Error("blocked"); });
-  fireEvent.click(screen.getByRole("button", { name: "Download Markdown" }));
+  fireEvent.click(screen.getByRole("button", { name: "Download .md" }));
   expect(screen.getByRole("alert")).toHaveTextContent("could not be downloaded");
   vi.runOnlyPendingTimers(); vi.useRealTimers(); vi.unstubAllGlobals();
 });

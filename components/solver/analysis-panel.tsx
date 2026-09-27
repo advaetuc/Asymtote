@@ -4,6 +4,7 @@ import { METHODS } from "../../lib/solver/presets";
 
 export function Conditioning({ value }: { value: Model<"ConditionDiagnostic"> }) {
   return <div><p>Condition number (float64): <strong>{value.status === "finite" ? metric(value.condition_number) : value.status}</strong></p>
+    {value.status === "finite" && <p>This system&apos;s condition number is {metric(value.condition_number)} — a large value means small changes in input can produce disproportionately large changes in the result. Treat the result&apos;s precision with that in mind.</p>}
     {value.status === "finite" && <p className="muted">Potential decimal digit loss: ≈ {value.approximate_digit_loss?.toFixed(2)}. This is a conditioning estimate, not an error bound.</p>}</div>;
 }
 
@@ -17,10 +18,11 @@ export function AnalysisPanel({ analysis, method, onSelect }: { analysis: Analyz
     {analysis.dominance_permutation && <p className="muted">Dominant row order available: {analysis.dominance_permutation.order.map(i => i + 1).join(" → ")}. This changes equations, not variables.</p>}
     {analysis.warnings.map(warning => <p className="warning-note" key={warning}>{warning}</p>)}
     <fieldset className="method-picker"><legend>Choose a method</legend>
+      <p>Each card shows what it needs, what it&apos;s good at, and whether it can run on the matrix you just entered.</p>
       {analysis.methods.map(item => { const info = METHODS[item.method]; return <label key={item.method} className={`method-choice ${method === item.method ? "selected" : ""}`}>
         <span className="method-choice-title"><input type="radio" name="method" aria-label={info.name} aria-describedby={`method-description-${item.method} method-reason-${item.method}`} value={item.method} checked={method === item.method} disabled={!item.eligible} onChange={() => onSelect(item.method)} /><strong>{info.name}</strong><span className="badge">{info.category}</span></span>
         <span id={`method-description-${item.method}`}>{info.description}</span><span className="muted">{info.benefit} {info.limitation}</span>
-        <span id={`method-reason-${item.method}`} className={!item.eligible || item.requires_risk_override ? "warning-text" : "muted"}>{item.reason}</span>
+        <span id={`method-reason-${item.method}`} className={!item.eligible || item.requires_risk_override ? "warning-text" : "muted"}>{item.code === "requires_square" ? `${info.name} requires a square system. This one has ${analysis.shape.equations} equations and ${analysis.shape.unknowns} unknowns — try a direct method instead.` : item.requires_risk_override && item.convergence?.spectral.radius != null && item.convergence.spectral.radius >= 1 ? `${info.name} is available, but the iteration matrix's spectral radius is ≥ 1 for this system. Convergence isn't expected from an arbitrary starting guess — you can still run it if you want to see what happens.` : item.reason}</span>
         {item.convergence && <span className="diagnostic-line">SPD: {item.convergence.symmetric_positive_definite === null ? "untested" : item.convergence.symmetric_positive_definite ? "yes" : "no"} · spectral radius: {metric(item.convergence.spectral.radius)}{item.requires_row_reordering ? " (candidate row order)" : " (original order)"}</span>}
       </label>; })}
     </fieldset><small className="muted">Analysis request {analysis.request_id}</small>

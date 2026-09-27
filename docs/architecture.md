@@ -1,4 +1,4 @@
-# TULYA architecture
+# Augmentr architecture
 
 ## Boundaries
 

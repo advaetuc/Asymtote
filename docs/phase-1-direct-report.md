@@ -1,6 +1,6 @@
 # Phase 1 — classification and direct solvers
 
-Implemented in the TULYA workspace, stopping before equation matching and
+Implemented in the Augmentr workspace, stopping before equation matching and
 iterative methods, as requested.
 
 ## Entry points

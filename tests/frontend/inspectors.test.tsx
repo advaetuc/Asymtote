@@ -30,10 +30,12 @@ test("free variables and contradiction witnesses have separate outcomes", () => 
   const { rerender } = render(<ResultInspector outcome={fixtures.infinite as SolveOutcome} display={display} />);
   expect(screen.getByRole("heading", { name: "Parametric solution" })).toBeInTheDocument();
   expect(screen.getByText(/Free variables: x3/)).toBeInTheDocument();
+  expect(screen.getByText("Rank falls short of the unknown count by 1 — 1 free parameter(s) describe the full solution set below.")).toBeInTheDocument();
   expect(screen.queryByRole("heading", { name: "Solution vector" })).not.toBeInTheDocument();
   rerender(<ResultInspector outcome={fixtures.inconsistent as SolveOutcome} display={display} />);
   expect(screen.getByRole("heading", { name: "Contradiction witnesses" })).toBeInTheDocument();
   expect(screen.getByText(/No vector satisfies all equations/)).toBeInTheDocument();
+  expect(screen.getByText("No values satisfy every equation at once — the augmented matrix's rank (2) is higher than the coefficient matrix's rank (1). This is a valid mathematical outcome, not an error.")).toBeInTheDocument();
 });
 test.each(["jacobi", "seidel", "limit", "declined", "breakdown", "permuted"] as const)("renders iterative contract %s without pretending failure is a solution", name => {
   render(<ResultInspector outcome={fixtures[name] as SolveOutcome} display={display} />);
@@ -43,6 +45,8 @@ test.each(["jacobi", "seidel", "limit", "declined", "breakdown", "permuted"] as 
   if (result.history.length) expect(screen.getByRole("img", { name: /Normalized backward error/ })).toBeInTheDocument();
   else expect(screen.getByText("No completed iterations to plot.")).toBeInTheDocument();
   if (name === "permuted") expect(screen.getByText("Equations reordered")).toBeInTheDocument();
+  if (name === "limit") expect(screen.getByText(/didn't converge within 60 iterations/)).toHaveTextContent("tolerance 1e-8 not met");
+  else expect(screen.queryByText(/didn't converge within/)).not.toBeInTheDocument();
 });
 test("long iteration history is paged without dropping records", () => {
   render(<ResultInspector outcome={fixtures.limit as SolveOutcome} display={display} />);
@@ -59,13 +63,16 @@ test("zero diagnostics produce finite chart coordinates and are labeled", () => 
   expect(screen.getByText(/Zero values sit at the lower edge/)).toBeInTheDocument();
 });
 test("exact values retain fractional precision", () => {
-  render(<ResultInspector outcome={fixtures.exact as SolveOutcome} display={{ mode: "fraction", decimal_places: 2 }} />);
+  const { rerender } = render(<ResultInspector outcome={fixtures.exact as SolveOutcome} display={{ mode: "fraction", decimal_places: 2 }} />);
   expect(screen.getByText("1/10")).toBeInTheDocument(); expect(screen.getByText(/Exact rational arithmetic/)).toBeInTheDocument();
+  expect(screen.queryByTitle(/Approximate — this iterative result/)).not.toBeInTheDocument();
+  rerender(<ResultInspector outcome={fixtures.jacobi as SolveOutcome} display={{ mode: "fraction", decimal_places: 2 }} />);
+  expect(screen.getAllByTitle(/Approximate — this iterative result was rounded to a bounded fraction for display; the underlying computation used float64 throughout/).length).toBeGreaterThan(2);
 });
 test("method incompatibilities and candidate SPD diagnostics are explained", () => {
   const { rerender } = render(<AnalysisPanel analysis={fixtures.analysisInfinite as AnalyzeOutcome} method="gaussian" onSelect={() => {}} />);
   expect(screen.getByRole("radio", { name: /Jacobi/ })).toBeDisabled();
-  expect(screen.getAllByText("Iteration requires a square matrix.")).toHaveLength(2);
+  expect(screen.getAllByText(/requires a square system\. This one has 2 equations and 3 unknowns/)).toHaveLength(2);
   rerender(<AnalysisPanel analysis={fixtures.analysisUnique as AnalyzeOutcome} method="gaussian" onSelect={() => {}} />);
   expect(screen.getAllByText(/SPD:.*spectral radius/)).toHaveLength(2);
 });

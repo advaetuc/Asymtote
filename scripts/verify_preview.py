@@ -119,7 +119,7 @@ def main() -> int:
     for path in ("/", "/solve", "/learn", "/solve"):
         html, record = request("html_" + path, path)
         checks = record["checks"]
-        checks["valid_html"] = isinstance(html, str) and "TULYA" in html and "<html" in html
+        checks["valid_html"] = isinstance(html, str) and "Augmentr" in html and "<html" in html
         policy = record["headers"].get("content-security-policy", "")
         script_policy = next(
             (part.strip() for part in policy.split(";") if part.strip().startswith("script-src ")),

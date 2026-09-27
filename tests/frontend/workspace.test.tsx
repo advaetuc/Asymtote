@@ -16,17 +16,19 @@ afterEach(() => { sessionStorage.clear(); });
 function preset(id = "unique") { fireEvent.change(screen.getByLabelText("Explore an example"), { target: { value: id } }); }
 async function analyzed(id = "unique", outcome: AnalyzeOutcome = fixtures.analysisUnique as AnalyzeOutcome) {
   analyze.mockResolvedValueOnce(outcome); preset(id); fireEvent.click(screen.getByRole("button", { name: "Analyze system" }));
-  await screen.findByRole("heading", { name: "Method settings" });
+  await screen.findByRole("heading", { name: /^Configure /, level: 2 });
 }
 
 test("dimensions are selected before constructing the 1–12 bounded grid", () => {
   render(<SolverWorkspace />);
+  expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("How many equations, how many unknowns?");
   expect(screen.queryByLabelText("Row 1, x1")).not.toBeInTheDocument();
   fireEvent.change(screen.getByLabelText("Equations"), { target: { value: "12" } });
   fireEvent.change(screen.getByLabelText("Unknowns"), { target: { value: "12" } });
   fireEvent.click(screen.getByRole("button", { name: "Create matrix" }));
   expect(screen.getByLabelText("Row 12, x12")).toBeInTheDocument();
   expect(screen.getAllByRole("textbox")).toHaveLength(156);
+  expect(screen.getByText("156 of 156 cells still need a value before Augmentr can analyze this system.")).toBeInTheDocument();
   fireEvent.change(screen.getByLabelText("Unknowns"), { target: { value: "1" } });
   fireEvent.change(screen.getByLabelText("Equations"), { target: { value: "1" } });
   expect(screen.getAllByRole("textbox")).toHaveLength(2);
@@ -35,6 +37,7 @@ test("dimensions are selected before constructing the 1–12 bounded grid", () =
 test("incomplete matrix highlights cells and never calls the API", () => {
   render(<SolverWorkspace />); fireEvent.click(screen.getByRole("button", { name: "Create matrix" }));
   fireEvent.change(screen.getByLabelText("Row 1, x1"), { target: { value: "2" } });
+  expect(screen.getByText("5 of 6 cells still need a value before Augmentr can analyze this system.")).toBeInTheDocument();
   expect(analyze).not.toHaveBeenCalled();
   fireEvent.click(screen.getByRole("button", { name: "Analyze system" }));
   expect(analyze).not.toHaveBeenCalled(); expect(screen.getByRole("alert")).toHaveTextContent(/highlighted/);
@@ -43,12 +46,14 @@ test("incomplete matrix highlights cells and never calls the API", () => {
 
 test.each(["gaussian", "gauss_jordan", "jacobi", "gauss_seidel"] as const)("completes the %s workflow with typed options", async method => {
   render(<SolverWorkspace />); await analyzed();
-  const names = { gaussian: "Gaussian elimination", gauss_jordan: "Gauss–Jordan", jacobi: "Jacobi", gauss_seidel: "Gauss–Seidel" };
+  const names = { gaussian: "Gaussian elimination", gauss_jordan: "Gauss–Jordan elimination", jacobi: "Jacobi iteration", gauss_seidel: "Gauss–Seidel iteration" };
   fireEvent.click(screen.getByRole("radio", { name: names[method] }));
   const data = { gaussian: fixtures.gaussian, gauss_jordan: fixtures.gaussJordan, jacobi: fixtures.jacobi, gauss_seidel: fixtures.seidel }[method];
   solve.mockResolvedValueOnce(data as SolveOutcome);
   fireEvent.click(screen.getByRole("button", { name: "Solve system" }));
   await screen.findByRole("heading", { name: /^(Unique solution|Converged)$/ });
+  expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Result");
+  expect(screen.getByText("unique — see Steps, Visualize, and Diagnostics for how Augmentr got here.")).toBeInTheDocument();
   expect(solve.mock.calls[0]![0].method).toBe(method);
   expect(solve.mock.calls[0]![0].system).toEqual({ a: [["4", "1"], ["2", "3"]], b: ["1", "2"] });
   fireEvent.change(screen.getByLabelText("Decimal places"), { target: { value: "2" } });
@@ -64,7 +69,7 @@ test("matrix edits discard old analysis/results and cancel in-flight work", asyn
   fireEvent.change(screen.getByLabelText("Row 1, x1"), { target: { value: "9" } });
   expect(signal.aborted).toBe(true);
   await act(async () => resolve(fixtures.analysisUnique as AnalyzeOutcome));
-  expect(screen.queryByRole("heading", { name: "Method settings" })).not.toBeInTheDocument();
+  expect(screen.queryByRole("heading", { name: /^Configure /, level: 2 })).not.toBeInTheDocument();
   expect(screen.getByLabelText("Row 1, x1")).toHaveValue("9");
 });
 
@@ -83,14 +88,14 @@ test("canceling solve keeps input/configuration and ignores a late response", as
 
 test("changing arithmetic invalidates analysis and exact requests stay direct", async () => {
   render(<SolverWorkspace />); await analyzed();
-  fireEvent.click(screen.getByRole("radio", { name: "Jacobi" }));
+  fireEvent.click(screen.getByRole("radio", { name: "Jacobi iteration" }));
   fireEvent.change(screen.getByLabelText("Arithmetic"), { target: { value: "exact" } });
-  expect(screen.queryByRole("heading", { name: "Method settings" })).not.toBeInTheDocument();
+  expect(screen.queryByRole("heading", { name: /^Configure /, level: 2 })).not.toBeInTheDocument();
   analyze.mockResolvedValueOnce(fixtures.analysisExact as AnalyzeOutcome);
   fireEvent.click(screen.getByRole("button", { name: "Analyze system" }));
-  await screen.findByRole("heading", { name: "Method settings" });
+  await screen.findByRole("heading", { name: /^Configure /, level: 2 });
   expect(analyze.mock.lastCall![0].arithmetic_mode).toBe("exact");
-  expect(screen.getByRole("radio", { name: "Jacobi" })).toBeDisabled();
+  expect(screen.getByRole("radio", { name: "Jacobi iteration" })).toBeDisabled();
   solve.mockResolvedValueOnce(fixtures.exact as SolveOutcome);
   fireEvent.click(screen.getByRole("button", { name: "Solve system" }));
   await screen.findByRole("heading", { name: "Unique solution" });
@@ -100,10 +105,10 @@ test("changing arithmetic invalidates analysis and exact requests stay direct", 
 test("explicit risk consent and reordering options are sent only when selected", async () => {
   render(<SolverWorkspace />); await analyzed("divergent", fixtures.analysisRisk as AnalyzeOutcome);
   expect(screen.getByRole("checkbox", { name: /Run even/ })).not.toBeChecked();
-  expect(screen.getByRole("checkbox", { name: /Seek strict/ })).not.toBeChecked();
+  expect(screen.getByRole("checkbox", { name: /Attempt row reordering/ })).not.toBeChecked();
   fireEvent.click(screen.getByRole("checkbox", { name: /Run even/ }));
   fireEvent.click(screen.getByRole("checkbox", { name: /Allow non-zero/ }));
-  fireEvent.change(screen.getByLabelText("Maximum iterations"), { target: { value: "500" } });
+  fireEvent.change(screen.getByLabelText("Iteration budget"), { target: { value: "500" } });
   solve.mockResolvedValueOnce(fixtures.breakdown as SolveOutcome);
   fireEvent.click(screen.getByRole("button", { name: "Solve system" }));
   await screen.findByRole("heading", { name: "Numerical breakdown" });
@@ -111,9 +116,9 @@ test("explicit risk consent and reordering options are sent only when selected",
 });
 
 test("invalid method options prevent solving and explain the bounds", async () => {
-  render(<SolverWorkspace />); await analyzed(); fireEvent.click(screen.getByRole("radio", { name: "Jacobi" }));
+  render(<SolverWorkspace />); await analyzed(); fireEvent.click(screen.getByRole("radio", { name: "Jacobi iteration" }));
   fireEvent.change(screen.getByLabelText("Tolerance"), { target: { value: "NaN" } });
-  fireEvent.change(screen.getByLabelText("Maximum iterations"), { target: { value: "501" } });
+  fireEvent.change(screen.getByLabelText("Iteration budget"), { target: { value: "501" } });
   expect(screen.getByRole("button", { name: "Solve system" })).toBeDisabled();
   expect(screen.getByText(/Tolerance must be between/)).toBeInTheDocument();
 });
@@ -126,7 +131,7 @@ test("API cell errors map to inputs, keep correlation ID, and can be retried", a
   expect(screen.getByText("Request validation-id")).toBeInTheDocument();
   analyze.mockResolvedValueOnce(fixtures.analysisUnique as AnalyzeOutcome);
   fireEvent.click(screen.getByRole("button", { name: "Retry request" }));
-  await screen.findByRole("heading", { name: "Method settings" });
+  await screen.findByRole("heading", { name: /^Configure /, level: 2 });
 });
 
 test.each(["http", "network"] as const)("%s errors remain separate from mathematical outcomes", async kind => {
@@ -142,5 +147,5 @@ test("drafts restore compatible data, never old results", async () => {
   await waitFor(() => expect(sessionStorage.getItem("tulya.draft.v1")).toContain('"3","4"'));
   unmount(); render(<SolverWorkspace />);
   expect(screen.getByLabelText("Row 1, x3")).toHaveValue("1");
-  expect(screen.queryByRole("heading", { name: "Method settings" })).not.toBeInTheDocument();
+  expect(screen.queryByRole("heading", { name: /^Configure /, level: 2 })).not.toBeInTheDocument();
 });

@@ -44,7 +44,11 @@ test("paste updates cells and rejects overflow without changing input", () => {
   expect(screen.getByRole("alert")).toHaveTextContent(/does not fit/); expect(first).toHaveValue("1");
 });
 test("invalid cells have text and programmatic error descriptions", () => {
-  render(<MatrixGrid system={blank} onChange={() => {}} errors={validateGrid(blank)} />);
+  const { rerender } = render(<MatrixGrid system={blank} onChange={() => {}} errors={validateGrid(blank)} />);
   const cell = screen.getByLabelText("Row 1, x1");
   expect(cell).toHaveAttribute("aria-invalid", "true"); expect(cell).toHaveAccessibleDescription("Enter a number.");
+  const malformed = { a: [["<script>", "2"], ["3", "4"]], b: ["5", "6"] };
+  rerender(<MatrixGrid system={malformed} onChange={() => {}} errors={validateGrid(malformed)} />);
+  expect(cell).toHaveAccessibleDescription('"<script>" isn\'t a number Augmentr recognizes — try an integer, decimal, or a/b fraction.');
+  expect(document.querySelector(".cell-error script")).toBeNull();
 });

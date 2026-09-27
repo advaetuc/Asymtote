@@ -1,4 +1,4 @@
-# TULYA
+# Augmentr
 
 An educational linear-equation solver built with Next.js 16, React 19,
 TypeScript, FastAPI, and Python 3.12. Gaussian and Gauss–Jordan methods support
@@ -57,7 +57,7 @@ Stop development servers before requiring fresh test servers. Playwright owns
 ports 3000 and 18000 and fails on collisions; it never silently changes ports.
 For this workspace's existing browser cache, set
 `$env:PLAYWRIGHT_BROWSERS_PATH = "$PWD\.tools\browsers"` before installing or testing.
-For development-mode tests, omit `E2E_PRODUCTION`; healthy existing TULYA servers
+For development-mode tests, omit `E2E_PRODUCTION`; healthy existing Augmentr servers
 can be reused when `E2E_REUSE_SERVERS` is not `0`. A health preflight checks both
 backend and frontend API routes.
 

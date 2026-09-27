@@ -41,7 +41,7 @@ and [Python metadata support](https://vercel.com/docs/functions/runtimes/python)
 | --- | --- |
 | `VERCEL` | Platform-provided. Disables local rewrites and interactive Swagger docs. Do not set locally for ordinary development. |
 | `NODE_ENV` | Set by Next.js. Only development permits debugging evaluation and hot reload connections. |
-| `TULYA_LOCAL_API_PROXY=1` | Local production integration build only. Adds the port-18000 rewrite to the build. Never configure on Vercel; the Vercel guard disables it regardless. |
+| `AUGMENTR_LOCAL_API_PROXY=1` | Local production integration build only. Adds the port-18000 rewrite to the build. Never configure on Vercel; the Vercel guard disables it regardless. |
 | `E2E_PRODUCTION=1` | Playwright starts `next start` using the previously built local integration build. |
 | `E2E_REUSE_SERVERS=0` | Require fresh test servers; occupied ports fail immediately. CI always requires fresh servers. |
 | `PLAYWRIGHT_BROWSERS_PATH` | Optional local browser cache location. |

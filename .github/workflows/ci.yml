@@ -40,7 +40,7 @@ jobs:
       - name: Frontend lint, typing, tests, and production build
         run: npm run check
         env:
-          TULYA_LOCAL_API_PROXY: '1'
+          AUGMENTR_LOCAL_API_PROXY: '1'
       - name: Runtime dependency and bundle budget
         run: npm run audit:runtime
       - name: Dependency vulnerability audit

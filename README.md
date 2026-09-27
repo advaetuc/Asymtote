@@ -47,13 +47,13 @@ npm run contracts:check
 npm run audit:runtime
 npm audit --audit-level=high
 # Build a production frontend with a LOCAL integration proxy.
-$env:TULYA_LOCAL_API_PROXY = "1"
+$env:AUGMENTR_LOCAL_API_PROXY = "1"
 npm run check
 npx playwright install chromium
 $env:E2E_PRODUCTION = "1"
 $env:E2E_REUSE_SERVERS = "0"
 npm run test:e2e
-Remove-Item Env:TULYA_LOCAL_API_PROXY, Env:E2E_PRODUCTION, Env:E2E_REUSE_SERVERS
+Remove-Item Env:AUGMENTR_LOCAL_API_PROXY, Env:E2E_PRODUCTION, Env:E2E_REUSE_SERVERS
 ```
 
 Stop development servers before requiring fresh test servers. Playwright owns

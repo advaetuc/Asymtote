@@ -1,0 +1,70 @@
+{
+  "observed_on": "2026-09-27",
+  "source": "Read-only authenticated Vercel and GitHub dashboard inspection",
+  "deployment_url": "https://asymtote-667zp49an-parthas.vercel.app",
+  "dashboard_url": "https://vercel.com/parthas/asymtote/6jgLVcERso8ffH6vxUwtiW837wii",
+  "deployment_id": "dpl_6jgLVcERso8ffH6vxUwtiW837wii",
+  "environment": "production",
+  "commit": "ef152f17c5f55a5481ffa6473c342e20f2529b52",
+  "status": "Ready",
+  "build_duration_seconds": 48,
+  "next_version": "16.3.6",
+  "node_version": "22.x",
+  "python_version": "3.12",
+  "python_builder": "uv 0.10.11; dependencies installed from uv.lock",
+  "python_function_count": 1,
+  "python_function": "/api/index",
+  "function_region": "iad1",
+  "python_function_max_duration_seconds": 15,
+  "python_function_dashboard_size": "32.5 MB",
+  "full_artifact_inventory_verified": false,
+  "artifact_limitation": "Dashboard reports function size but its Source/Output viewer does not expose a downloadable dependency/file inventory. Exact uncompressed byte count and exhaustive exclusion checks remain unverified.",
+  "hosted_ci": {
+    "url": "https://github.com/advaetuc/Asymtote/actions/runs/36287491411",
+    "workflow": "Quality and API contract gates",
+    "run_number": 8,
+    "status": "completed successfully",
+    "duration_seconds": 215,
+    "commit": "ef152f17c5f55a5481ffa6473c342e20f2529b52"
+  },
+  "cold_start": {
+    "confirmed": true,
+    "request_id": "preview-67c929f3b06047f998a42bfcef62c033",
+    "vercel_request_id": "wtkb9-1790490367603-9be7a01b2e69",
+    "invocation_id": "01M3GRNNQ7TPKW91PDKG6XBJBN",
+    "dashboard_start_type": "Cold (1.07s)",
+    "execution_seconds": 1.13,
+    "platform_response_seconds": 2.0,
+    "client_latency_ms": 2169.41,
+    "peak_memory_mb": 211,
+    "maximum_memory_mb": 2048,
+    "application_log_event_count": 1,
+    "repeat_health_client_latency_ms": 357.51
+  },
+  "inspected_logs": [
+    {
+      "request_id": "preview-be7c3111ba6e495e80f2a0ffb130d1c6",
+      "http_status": 422,
+      "error_code": "validation_error",
+      "application_log_event_count": 1,
+      "application_duration_ms": 0.971,
+      "platform_execution_ms": 6,
+      "contains_rejected_token": false,
+      "contains_stack_trace": false,
+      "contains_request_values": false
+    },
+    {
+      "request_id": "preview-a75aebc9e6824d03a0eb3ae97bb583ac",
+      "http_status": 200,
+      "method": "gaussian",
+      "equations": 12,
+      "unknowns": 12,
+      "result_status": "unique",
+      "application_log_event_count": 1,
+      "application_duration_ms": 111.136,
+      "platform_execution_ms": 116,
+      "contains_stack_trace": false,
+      "contains_request_values": false
+    }
+  ]
+}

@@ -1,0 +1,1997 @@
+{
+  "origin": "https://asymtote-667zp49an-parthas.vercel.app",
+  "verified_at": "2026-09-27T06:26:24.109628+00:00",
+  "cold_start_confirmed": false,
+  "cold_start_note": "First-observed latency is recorded; public responses cannot prove an instance was cold.",
+  "request_count": 35,
+  "failures": [],
+  "results": [
+    {
+      "label": "first_observed_health",
+      "method": "GET",
+      "path": "/api/health",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 2169.41,
+      "bytes": 37,
+      "sha256": "d099e5ba76ab72592770bffc7bc53559aa9f216b5e43c3ce5c073f63de973019",
+      "headers": {
+        "age": "0",
+        "cache-control": "no-store",
+        "content-length": "37",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:09 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-67c929f3b06047f998a42bfcef62c033",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::wtkb9-1790490367603-9be7a01b2e69",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "no_store": true,
+        "health_contract": true
+      }
+    },
+    {
+      "label": "repeat_health",
+      "method": "GET",
+      "path": "/api/health",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 357.51,
+      "bytes": 37,
+      "sha256": "d099e5ba76ab72592770bffc7bc53559aa9f216b5e43c3ce5c073f63de973019",
+      "headers": {
+        "age": "0",
+        "cache-control": "no-store",
+        "content-length": "37",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:09 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-049e6d6ca4404a5987fc865af06ec2b8",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::5mlnq-1790490369729-6119c45ba232",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "no_store": true
+      }
+    },
+    {
+      "label": "html_/",
+      "method": "GET",
+      "path": "/",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 1587.26,
+      "bytes": 12122,
+      "sha256": "49da65a662c191584cac3efb1d5ac9a03fac181934ddf8ef049d0b26c7b0045a",
+      "headers": {
+        "age": "0",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "content-security-policy": "default-src 'self'; script-src 'self' 'nonce-ZmQ3NzkwOGItMDVlNC00ZTExLWJiZTktYjEzZDQ0MzAxNjAx' 'strict-dynamic'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Sun, 27 Sep 2026 06:26:11 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::wtkb9-1790490370044-7c3bad9979b0",
+        "connection": "close",
+        "transfer-encoding": "chunked"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "valid_html": true,
+        "strict_scripts": true,
+        "frame_ancestors": true,
+        "html_not_publicly_cached": true,
+        "all_script_nonces_match": true
+      },
+      "script_count": 10
+    },
+    {
+      "label": "html_/solve",
+      "method": "GET",
+      "path": "/solve",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 409.27,
+      "bytes": 11223,
+      "sha256": "2055b1b728f8664a156d535e71d7dc9df84581561c0d3292b297049dc9a968e9",
+      "headers": {
+        "age": "0",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "content-security-policy": "default-src 'self'; script-src 'self' 'nonce-MjExMWQ3YzctY2NkYy00MjU1LThiMjEtYzhmYTRhZDczNTE0' 'strict-dynamic'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Sun, 27 Sep 2026 06:26:11 GMT",
+        "link": "</>; rel=preconnect; crossorigin=\"\"",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/solve",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::v6bzg-1790490371619-3086317e7cc5",
+        "connection": "close",
+        "transfer-encoding": "chunked"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "valid_html": true,
+        "strict_scripts": true,
+        "frame_ancestors": true,
+        "html_not_publicly_cached": true,
+        "all_script_nonces_match": true
+      },
+      "script_count": 11
+    },
+    {
+      "label": "html_/learn",
+      "method": "GET",
+      "path": "/learn",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 308.9,
+      "bytes": 16268,
+      "sha256": "e25889e9647639793d430b834cedde0f9275d03691155dff390c37c45df59e56",
+      "headers": {
+        "age": "0",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "content-security-policy": "default-src 'self'; script-src 'self' 'nonce-Nzg3YWUxMDUtNTkyNC00ODYzLThmMmUtOGRlOTNhMWZiMzEx' 'strict-dynamic'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Sun, 27 Sep 2026 06:26:12 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/learn",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::nhqq5-1790490372029-a1ea57081207",
+        "connection": "close",
+        "transfer-encoding": "chunked"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "valid_html": true,
+        "strict_scripts": true,
+        "frame_ancestors": true,
+        "html_not_publicly_cached": true,
+        "all_script_nonces_match": true
+      },
+      "script_count": 10
+    },
+    {
+      "label": "html_/solve",
+      "method": "GET",
+      "path": "/solve",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 304.11,
+      "bytes": 11223,
+      "sha256": "f4772eddaa84a766c009559b8f76213a63baa9a17456c8f019d8dee40afe1664",
+      "headers": {
+        "age": "0",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "content-security-policy": "default-src 'self'; script-src 'self' 'nonce-NDE0ODI2NjAtMDY3NC00YmNlLWEzMmQtMzI5MzA4ZDExYzNl' 'strict-dynamic'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Sun, 27 Sep 2026 06:26:12 GMT",
+        "link": "</>; rel=preconnect; crossorigin=\"\"",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/solve",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::smxd9-1790490372342-c643612823e5",
+        "connection": "close",
+        "transfer-encoding": "chunked"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "valid_html": true,
+        "strict_scripts": true,
+        "frame_ancestors": true,
+        "html_not_publicly_cached": true,
+        "all_script_nonces_match": true,
+        "nonce_rotated": true
+      },
+      "script_count": 11
+    },
+    {
+      "label": "openapi",
+      "method": "GET",
+      "path": "/api/openapi.json",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 358.01,
+      "bytes": 30508,
+      "sha256": "7bcbfcf6e6b22900890279a80114a8a84852e75d7ec0dd4e08bc17764eb640a3",
+      "headers": {
+        "age": "0",
+        "cache-control": "no-store",
+        "content-length": "30508",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:09 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-5737ef3aebf84263ad68761e23b342c9",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::kwtbj-1790490372633-6fe51271d03e",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "no_store": true,
+        "current_contract": true
+      }
+    },
+    {
+      "label": "disabled_or_absent_/api/docs",
+      "method": "GET",
+      "path": "/api/docs",
+      "status": 404,
+      "expected_status": 404,
+      "latency_ms": 305.7,
+      "bytes": 180,
+      "sha256": "8b94df2b1c12becb866cb11c292ddb565bb8f3b1af5ec03d9dec01ec5cfb3905",
+      "headers": {
+        "age": "0",
+        "cache-control": "no-store",
+        "content-length": "180",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:09 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-89e7134af8b6437b900383727232cba7",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::pkmd4-1790490372993-a3d99d3ca720",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "structured_404": true
+      },
+      "error_response": {
+        "status": "error",
+        "request_id": "preview-89e7134af8b6437b900383727232cba7",
+        "error": {
+          "code": "http_404",
+          "message": "The HTTP request could not be handled.",
+          "location": []
+        },
+        "details": []
+      }
+    },
+    {
+      "label": "disabled_or_absent_/docs",
+      "method": "GET",
+      "path": "/docs",
+      "status": 404,
+      "expected_status": 404,
+      "latency_ms": 361.97,
+      "bytes": 8679,
+      "sha256": "7ad8143e77225a30d71f937dd36e7544697cb26f01d814de8b4082bd3edcfbf1",
+      "headers": {
+        "age": "0",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "content-security-policy": "default-src 'self'; script-src 'self' 'nonce-NTg1NTk5OGQtZDlhZC00MjEyLWFjZjItZDAzMzcyNjZmYzgy' 'strict-dynamic'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Sun, 27 Sep 2026 06:26:13 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/_not-found",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::bbdf6-1790490373361-7483dee84321",
+        "connection": "close",
+        "transfer-encoding": "chunked"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true
+      }
+    },
+    {
+      "label": "disabled_or_absent_/api/absent",
+      "method": "GET",
+      "path": "/api/absent",
+      "status": 404,
+      "expected_status": 404,
+      "latency_ms": 354.64,
+      "bytes": 180,
+      "sha256": "f4fd2a2dc529e0581542973ed46f4820ba8e16ca68b9521f97e7c794981003e7",
+      "headers": {
+        "age": "0",
+        "cache-control": "no-store",
+        "content-length": "180",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:09 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-6d59e0d24c8a4ecd92891f225d4bd2a8",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::kwtbj-1790490373723-8afe6f2e606e",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "structured_404": true
+      },
+      "error_response": {
+        "status": "error",
+        "request_id": "preview-6d59e0d24c8a4ecd92891f225d4bd2a8",
+        "error": {
+          "code": "http_404",
+          "message": "The HTTP request could not be handled.",
+          "location": []
+        },
+        "details": []
+      }
+    },
+    {
+      "label": "wrong_method",
+      "method": "GET",
+      "path": "/api/v1/solve",
+      "status": 405,
+      "expected_status": 405,
+      "latency_ms": 324.82,
+      "bytes": 180,
+      "sha256": "5af330b6e82f657ad516b82cd002b15612f8de38ab107b523136d277d59f2192",
+      "headers": {
+        "age": "0",
+        "allow": "POST",
+        "cache-control": "no-store",
+        "content-length": "180",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:09 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-294802b5569a4c4f8c7572865984f4d6",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::fp96s-1790490374077-4ae4152f646f",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "structured_405": true,
+        "allow_post": true
+      },
+      "error_response": {
+        "status": "error",
+        "request_id": "preview-294802b5569a4c4f8c7572865984f4d6",
+        "error": {
+          "code": "http_405",
+          "message": "The HTTP request could not be handled.",
+          "location": []
+        },
+        "details": []
+      }
+    },
+    {
+      "label": "analyze_float64",
+      "method": "POST",
+      "path": "/api/v1/analyze",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 392.6,
+      "bytes": 2339,
+      "sha256": "0a74a6c0ad728c4f259fae7230bb1f5205674e7e58e117e8efea79c1d9146b19",
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "2339",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:09 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-19606751263748d4b4226c337fcd1755",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::sht7m-1790490374385-9736b4b550b0",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "correct_ranks": true,
+        "unique": true
+      }
+    },
+    {
+      "label": "analyze_exact",
+      "method": "POST",
+      "path": "/api/v1/analyze",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 306.39,
+      "bytes": 1713,
+      "sha256": "f0d51076073d6b52c494f1c8b4225ac57192066c32cca98bc10585f937e5be5f",
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "1713",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:09 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-1ecd90c9ed434c24b2e2d2fdec99a126",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::jpnds-1790490374747-d9a62df33086",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "correct_ranks": true,
+        "unique": true
+      }
+    },
+    {
+      "label": "gaussian_float64",
+      "method": "POST",
+      "path": "/api/v1/solve",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 267.92,
+      "bytes": 1606,
+      "sha256": "ca3d3c5a2a74bd6462bcd18298e16b376007cb9d1a646e8367c44b7acde20a94",
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "1606",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:09 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-849cf2869db14f9eae5a880df129ca81",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::wj82r-1790490375025-cab4932fe177",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "correct_solution": true
+      },
+      "result_summary": {
+        "method": "gaussian",
+        "arithmetic_mode": "float64",
+        "status": null,
+        "classification": {
+          "shape": {
+            "equations": 2,
+            "unknowns": 2
+          },
+          "arithmetic_mode": "float64",
+          "rank_a": 2,
+          "rank_augmented": 2,
+          "classification": "unique",
+          "rank_tolerance": 3.3306690738754696e-15,
+          "tolerance_policy": "float64-coefficient-scale-v1"
+        },
+        "solution": [
+          0.1,
+          0.6
+        ],
+        "diagnostics": {
+          "residual_inf": 2.220446049250313e-16,
+          "backward_error": 4.4408920985006264e-17
+        }
+      }
+    },
+    {
+      "label": "gaussian_exact",
+      "method": "POST",
+      "path": "/api/v1/solve",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 307.04,
+      "bytes": 2131,
+      "sha256": "68fe1d2482729dde798a3129ad05faab02a0cca18854fb889018b65df27c01cc",
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "2131",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:09 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-79cda3a5b59547039232559f885878c4",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::fp96s-1790490375321-150811932d5f",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "correct_solution": true
+      },
+      "result_summary": {
+        "method": "gaussian",
+        "arithmetic_mode": "exact",
+        "status": null,
+        "classification": {
+          "shape": {
+            "equations": 2,
+            "unknowns": 2
+          },
+          "arithmetic_mode": "exact",
+          "rank_a": 2,
+          "rank_augmented": 2,
+          "classification": "unique",
+          "rank_tolerance": null,
+          "tolerance_policy": "exact-rational-v1"
+        },
+        "solution": [
+          {
+            "numerator": "1",
+            "denominator": "10"
+          },
+          {
+            "numerator": "3",
+            "denominator": "5"
+          }
+        ],
+        "diagnostics": {
+          "residual_inf": {
+            "numerator": "0",
+            "denominator": "1"
+          },
+          "backward_error": {
+            "numerator": "0",
+            "denominator": "1"
+          }
+        }
+      }
+    },
+    {
+      "label": "gauss_jordan_float64",
+      "method": "POST",
+      "path": "/api/v1/solve",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 348.2,
+      "bytes": 2471,
+      "sha256": "cdf315cc5f15a75a011c5f43948b0a0178068c7311c4f805bc32c0df478b0627",
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "2471",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:15 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-c0df2953899644c3968db3fa00fe03d1",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::wd27w-1790490375646-3f0a9df86f96",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "correct_solution": true
+      },
+      "result_summary": {
+        "method": "gauss_jordan",
+        "arithmetic_mode": "float64",
+        "status": null,
+        "classification": {
+          "shape": {
+            "equations": 2,
+            "unknowns": 2
+          },
+          "arithmetic_mode": "float64",
+          "rank_a": 2,
+          "rank_augmented": 2,
+          "classification": "unique",
+          "rank_tolerance": 3.3306690738754696e-15,
+          "tolerance_policy": "float64-coefficient-scale-v1"
+        },
+        "solution": [
+          0.09999999999999998,
+          0.6000000000000001
+        ],
+        "diagnostics": {
+          "residual_inf": 0.0,
+          "backward_error": 0.0
+        }
+      }
+    },
+    {
+      "label": "gauss_jordan_exact",
+      "method": "POST",
+      "path": "/api/v1/solve",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 358.1,
+      "bytes": 3568,
+      "sha256": "786f71dc48e71611c84f1866f209b53560f9c1e30a8b4d694bc093079b6a80b8",
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "3568",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:15 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-1b0a23a2d2c94307bdc8dac26d09f73d",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::kwtbj-1790490376016-4fa314c9521b",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "correct_solution": true
+      },
+      "result_summary": {
+        "method": "gauss_jordan",
+        "arithmetic_mode": "exact",
+        "status": null,
+        "classification": {
+          "shape": {
+            "equations": 2,
+            "unknowns": 2
+          },
+          "arithmetic_mode": "exact",
+          "rank_a": 2,
+          "rank_augmented": 2,
+          "classification": "unique",
+          "rank_tolerance": null,
+          "tolerance_policy": "exact-rational-v1"
+        },
+        "solution": [
+          {
+            "numerator": "1",
+            "denominator": "10"
+          },
+          {
+            "numerator": "3",
+            "denominator": "5"
+          }
+        ],
+        "diagnostics": {
+          "residual_inf": {
+            "numerator": "0",
+            "denominator": "1"
+          },
+          "backward_error": {
+            "numerator": "0",
+            "denominator": "1"
+          }
+        }
+      }
+    },
+    {
+      "label": "jacobi_float64",
+      "method": "POST",
+      "path": "/api/v1/solve",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 306.98,
+      "bytes": 8238,
+      "sha256": "306012698e93ee3fc66771f8960429e85c673776bc29ef1b4a58508fbcf4b83d",
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "8238",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:15 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-e8e4884ec56b4d4d8c8cdda4b11aafaa",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::zcsrz-1790490376320-ac96038c2f4f",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "correct_solution": true
+      },
+      "result_summary": {
+        "method": "jacobi",
+        "arithmetic_mode": "float64",
+        "status": "converged",
+        "classification": {
+          "shape": {
+            "equations": 2,
+            "unknowns": 2
+          },
+          "arithmetic_mode": "float64",
+          "rank_a": 2,
+          "rank_augmented": 2,
+          "classification": "unique",
+          "rank_tolerance": 3.3306690738754696e-15,
+          "tolerance_policy": "float64-coefficient-scale-v1"
+        },
+        "solution": [
+          0.09999999999234344,
+          0.5999999999540606
+        ],
+        "diagnostics": {
+          "residual_inf": 1.5313128542970844e-10,
+          "backward_error": 3.0626257087348644e-11
+        }
+      }
+    },
+    {
+      "label": "gauss_seidel_float64",
+      "method": "POST",
+      "path": "/api/v1/solve",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 509.42,
+      "bytes": 5356,
+      "sha256": "de645184d8054588734e6b23611ef87598f726965a2bd9cbfdb6b62a534174d6",
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "5356",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:15 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-e7126875b41747208612348d6b641f9f",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::lbcfb-1790490376652-c882665b6ced",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "correct_solution": true
+      },
+      "result_summary": {
+        "method": "gauss_seidel",
+        "arithmetic_mode": "float64",
+        "status": "converged",
+        "classification": {
+          "shape": {
+            "equations": 2,
+            "unknowns": 2
+          },
+          "arithmetic_mode": "float64",
+          "rank_a": 2,
+          "rank_augmented": 2,
+          "classification": "unique",
+          "rank_tolerance": 3.3306690738754696e-15,
+          "tolerance_policy": "float64-coefficient-scale-v1"
+        },
+        "solution": [
+          0.10000000001148485,
+          0.5999999999923434
+        ],
+        "diagnostics": {
+          "residual_inf": 3.828271033512465e-11,
+          "backward_error": 7.656542067083551e-12
+        }
+      }
+    },
+    {
+      "label": "analyze_inconsistent",
+      "method": "POST",
+      "path": "/api/v1/analyze",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 255.82,
+      "bytes": 1639,
+      "sha256": "77580884eb5890757b6b0a73fed56dcd62eac5bf853ce3c5614fd04f8739979a",
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "1639",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:15 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-2c7aa7b7ff8841bba4dfcf66d7670b5b",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::n22xj-1790490377120-5bb6974c1373",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "classification": true
+      }
+    },
+    {
+      "label": "gaussian_inconsistent",
+      "method": "POST",
+      "path": "/api/v1/solve",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 298.88,
+      "bytes": 1940,
+      "sha256": "8a4c73b7cf8051197d6533db8659b74413523cf850124f84e0d9f643c3f186d6",
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "1940",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:15 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-b94a281570824180a0904ad468097642",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::n22xj-1790490377401-6794b8b23c59",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "mathematical_outcome": true,
+        "witness_or_parameters": true
+      },
+      "result_summary": {
+        "method": "gaussian",
+        "arithmetic_mode": "exact",
+        "status": null,
+        "classification": {
+          "shape": {
+            "equations": 2,
+            "unknowns": 2
+          },
+          "arithmetic_mode": "exact",
+          "rank_a": 1,
+          "rank_augmented": 2,
+          "classification": "inconsistent",
+          "rank_tolerance": null,
+          "tolerance_policy": "exact-rational-v1"
+        },
+        "solution": null,
+        "diagnostics": null
+      }
+    },
+    {
+      "label": "gauss_jordan_inconsistent",
+      "method": "POST",
+      "path": "/api/v1/solve",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 315.1,
+      "bytes": 2439,
+      "sha256": "0ec248d96fce0d4a3e81452fbf1b6bec0c2e821e64deda50aa69892373c53426",
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "2439",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:15 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-8a6e7e08b11847e4a3be858ac370b586",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::wd27w-1790490377699-42d8722652dc",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "mathematical_outcome": true,
+        "witness_or_parameters": true
+      },
+      "result_summary": {
+        "method": "gauss_jordan",
+        "arithmetic_mode": "exact",
+        "status": null,
+        "classification": {
+          "shape": {
+            "equations": 2,
+            "unknowns": 2
+          },
+          "arithmetic_mode": "exact",
+          "rank_a": 1,
+          "rank_augmented": 2,
+          "classification": "inconsistent",
+          "rank_tolerance": null,
+          "tolerance_policy": "exact-rational-v1"
+        },
+        "solution": null,
+        "diagnostics": null
+      }
+    },
+    {
+      "label": "analyze_infinite",
+      "method": "POST",
+      "path": "/api/v1/analyze",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 338.92,
+      "bytes": 1555,
+      "sha256": "cae366f35537a4aebacd448e79c0646cae60c1aee80980b4c321b7c57c424eba",
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "1555",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:15 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-d9cf79b8064b4761ae75e600d3973990",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::cp7gm-1790490378072-19107b819343",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "classification": true
+      }
+    },
+    {
+      "label": "gaussian_infinite",
+      "method": "POST",
+      "path": "/api/v1/solve",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 271.33,
+      "bytes": 3318,
+      "sha256": "b55adc0a0902c211b98e1e9eb7c1ae1d5f0828b1169b60900ecb8b1ac3a96c0d",
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "3318",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:15 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-e745a7518e0444319a71cea678dde7b1",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::td6s8-1790490378337-7a2cd0edcd4c",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "mathematical_outcome": true,
+        "witness_or_parameters": true
+      },
+      "result_summary": {
+        "method": "gaussian",
+        "arithmetic_mode": "exact",
+        "status": null,
+        "classification": {
+          "shape": {
+            "equations": 2,
+            "unknowns": 3
+          },
+          "arithmetic_mode": "exact",
+          "rank_a": 1,
+          "rank_augmented": 1,
+          "classification": "infinite",
+          "rank_tolerance": null,
+          "tolerance_policy": "exact-rational-v1"
+        },
+        "solution": null,
+        "diagnostics": {
+          "residual_inf": {
+            "numerator": "0",
+            "denominator": "1"
+          },
+          "backward_error": {
+            "numerator": "0",
+            "denominator": "1"
+          }
+        }
+      }
+    },
+    {
+      "label": "gauss_jordan_infinite",
+      "method": "POST",
+      "path": "/api/v1/solve",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 311.21,
+      "bytes": 3867,
+      "sha256": "6d9e56e5aa3f76afb58a389c9019346ba91ba8980ad099ba2f28be6897fc43ec",
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "3867",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:15 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-009109b4f512473997a0a67319076c67",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::n22xj-1790490378634-0e80bdcec647",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "mathematical_outcome": true,
+        "witness_or_parameters": true
+      },
+      "result_summary": {
+        "method": "gauss_jordan",
+        "arithmetic_mode": "exact",
+        "status": null,
+        "classification": {
+          "shape": {
+            "equations": 2,
+            "unknowns": 3
+          },
+          "arithmetic_mode": "exact",
+          "rank_a": 1,
+          "rank_augmented": 1,
+          "classification": "infinite",
+          "rank_tolerance": null,
+          "tolerance_policy": "exact-rational-v1"
+        },
+        "solution": null,
+        "diagnostics": {
+          "residual_inf": {
+            "numerator": "0",
+            "denominator": "1"
+          },
+          "backward_error": {
+            "numerator": "0",
+            "denominator": "1"
+          }
+        }
+      }
+    },
+    {
+      "label": "jacobi_nonconvergence",
+      "method": "POST",
+      "path": "/api/v1/solve",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 306.87,
+      "bytes": 2633,
+      "sha256": "80ad75f4a69d85cf8d6aec1c5cbe14cd7ebf394413fa153e28d2f6f25c632dc4",
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "2633",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:19 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-c30f867f3a5a400fa81d8c531ff6503d",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::t5cwg-1790490378944-e5270623c403",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "nonconverged_outcome": true
+      },
+      "result_summary": {
+        "method": "jacobi",
+        "arithmetic_mode": "float64",
+        "status": "max_iterations_reached",
+        "classification": {
+          "shape": {
+            "equations": 2,
+            "unknowns": 2
+          },
+          "arithmetic_mode": "float64",
+          "rank_a": 2,
+          "rank_augmented": 2,
+          "classification": "unique",
+          "rank_tolerance": 6.727951529228449e-14,
+          "tolerance_policy": "float64-coefficient-scale-v1"
+        },
+        "solution": null,
+        "diagnostics": {
+          "residual_inf": 1000000.0,
+          "backward_error": 0.999998000004
+        }
+      }
+    },
+    {
+      "label": "gauss_seidel_nonconvergence",
+      "method": "POST",
+      "path": "/api/v1/solve",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 307.24,
+      "bytes": 2674,
+      "sha256": "471eeb802c42a90773df54b01d5b651fd905196978ecb376db6e61734790409f",
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "2674",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:19 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-65079c98f04e43a8a84fa242d10d9989",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::dlcqr-1790490379248-3bad74d74a9a",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "nonconverged_outcome": true
+      },
+      "result_summary": {
+        "method": "gauss_seidel",
+        "arithmetic_mode": "float64",
+        "status": "max_iterations_reached",
+        "classification": {
+          "shape": {
+            "equations": 2,
+            "unknowns": 2
+          },
+          "arithmetic_mode": "float64",
+          "rank_a": 2,
+          "rank_augmented": 2,
+          "classification": "unique",
+          "rank_tolerance": 6.727951529228449e-14,
+          "tolerance_policy": "float64-coefficient-scale-v1"
+        },
+        "solution": null,
+        "diagnostics": {
+          "residual_inf": 990000000000.0,
+          "backward_error": 0.99
+        }
+      }
+    },
+    {
+      "label": "analyze_12x12",
+      "method": "POST",
+      "path": "/api/v1/analyze",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 358.18,
+      "bytes": 2388,
+      "sha256": "af6ee6917d937eaebd919452a4e98e840e0d13768f029373c59d6ddb9ce93d54",
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "2388",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:19 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-78db92f922eb4d718089de5361b4139a",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::5mlnq-1790490379608-ac8dac9a92c5",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "rank_12": true
+      }
+    },
+    {
+      "label": "gaussian_12x12",
+      "method": "POST",
+      "path": "/api/v1/solve",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 563.27,
+      "bytes": 165339,
+      "sha256": "eda8f4ad0af4a24acbebf92a588d65f0d2a982850a24353ff9932d9946e9fd05",
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "165339",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:19 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-a75aebc9e6824d03a0eb3ae97bb583ac",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::vpltn-1790490379962-7ea18028141a",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "solution_1_to_12": true
+      },
+      "result_summary": {
+        "method": "gaussian",
+        "arithmetic_mode": "float64",
+        "status": null,
+        "classification": {
+          "shape": {
+            "equations": 12,
+            "unknowns": 12
+          },
+          "arithmetic_mode": "float64",
+          "rank_a": 12,
+          "rank_augmented": 12,
+          "classification": "unique",
+          "rank_tolerance": 1.1834977442504169e-13,
+          "tolerance_policy": "float64-coefficient-scale-v1"
+        },
+        "solution": [
+          1.0,
+          2.0000000000000004,
+          3.0,
+          4.0,
+          4.999999999999999,
+          5.999999999999999,
+          7.000000000000001,
+          8.000000000000002,
+          9.000000000000002,
+          10.0,
+          11.000000000000002,
+          12.000000000000002
+        ],
+        "diagnostics": {
+          "residual_inf": 5.684341886080802e-14,
+          "backward_error": 6.192093557822224e-17
+        }
+      }
+    },
+    {
+      "label": "gauss_jordan_12x12",
+      "method": "POST",
+      "path": "/api/v1/solve",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 868.35,
+      "bytes": 305495,
+      "sha256": "ae278146d4173d3a7e57cfaf6dd760831f0cd10d81beb8296a57ccf6f62bde5d",
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "305495",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:19 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-80ed9ff5f5524881a5e322e99d47622a",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::swv2h-1790490380492-033a0e294723",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "solution_1_to_12": true
+      },
+      "result_summary": {
+        "method": "gauss_jordan",
+        "arithmetic_mode": "float64",
+        "status": null,
+        "classification": {
+          "shape": {
+            "equations": 12,
+            "unknowns": 12
+          },
+          "arithmetic_mode": "float64",
+          "rank_a": 12,
+          "rank_augmented": 12,
+          "classification": "unique",
+          "rank_tolerance": 1.1834977442504169e-13,
+          "tolerance_policy": "float64-coefficient-scale-v1"
+        },
+        "solution": [
+          1.0,
+          2.0000000000000004,
+          3.0000000000000004,
+          4.0,
+          4.999999999999999,
+          6.0,
+          7.000000000000002,
+          8.000000000000002,
+          9.0,
+          10.000000000000004,
+          11.000000000000002,
+          12.000000000000002
+        ],
+        "diagnostics": {
+          "residual_inf": 1.1368683772161603e-13,
+          "backward_error": 1.238418711564445e-16
+        }
+      }
+    },
+    {
+      "label": "jacobi_12x12",
+      "method": "POST",
+      "path": "/api/v1/solve",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 379.0,
+      "bytes": 13117,
+      "sha256": "9245389e5a320f316baa76f9749cae52182dd9fd831f52daa0fa430685086f74",
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "13117",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:19 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-94e4a5aa888b474d957e2eec176fa64a",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::bjzsc-1790490381400-fab1a15c42bb",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "solution_1_to_12": true
+      },
+      "result_summary": {
+        "method": "jacobi",
+        "arithmetic_mode": "float64",
+        "status": "converged",
+        "classification": {
+          "shape": {
+            "equations": 12,
+            "unknowns": 12
+          },
+          "arithmetic_mode": "float64",
+          "rank_a": 12,
+          "rank_augmented": 12,
+          "classification": "unique",
+          "rank_tolerance": 1.1834977442504169e-13,
+          "tolerance_policy": "float64-coefficient-scale-v1"
+        },
+        "solution": [
+          0.9999999997733127,
+          1.9999999997733127,
+          2.999999999773313,
+          3.999999999773313,
+          4.999999999773312,
+          5.999999999773312,
+          6.999999999773312,
+          7.999999999773312,
+          8.999999999773312,
+          9.999999999773312,
+          10.999999999773312,
+          11.999999999773312
+        ],
+        "diagnostics": {
+          "residual_inf": 9.294211622545845e-09,
+          "backward_error": 1.0124413532287518e-11
+        }
+      }
+    },
+    {
+      "label": "gauss_seidel_12x12",
+      "method": "POST",
+      "path": "/api/v1/solve",
+      "status": 200,
+      "expected_status": 200,
+      "latency_ms": 385.03,
+      "bytes": 7796,
+      "sha256": "82851f01d9836774acccc76bdc967c996344587f02ac081212f459d492b8b903",
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "7796",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:19 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-a85e9bb064264896b05530c9bc7d5f8b",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::hts4t-1790490381758-4d6d9a45e436",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "solution_1_to_12": true
+      },
+      "result_summary": {
+        "method": "gauss_seidel",
+        "arithmetic_mode": "float64",
+        "status": "converged",
+        "classification": {
+          "shape": {
+            "equations": 12,
+            "unknowns": 12
+          },
+          "arithmetic_mode": "float64",
+          "rank_a": 12,
+          "rank_augmented": 12,
+          "classification": "unique",
+          "rank_tolerance": 1.1834977442504169e-13,
+          "tolerance_policy": "float64-coefficient-scale-v1"
+        },
+        "solution": [
+          1.000000000005207,
+          2.0000000000117955,
+          3.000000000014327,
+          4.000000000013858,
+          5.000000000011514,
+          6.000000000008301,
+          7.000000000004997,
+          8.000000000002123,
+          8.999999999999947,
+          9.999999999998545,
+          10.99999999999785,
+          11.99999999999772
+        ],
+        "diagnostics": {
+          "residual_inf": 4.816911314264871e-10,
+          "backward_error": 5.247180080899087e-13
+        }
+      }
+    },
+    {
+      "label": "invalid_token",
+      "method": "POST",
+      "path": "/api/v1/solve",
+      "status": 422,
+      "expected_status": 422,
+      "latency_ms": 357.79,
+      "bytes": 336,
+      "sha256": "d2a7428b566ba849a65ae79995d14fb61f7737977d50bb82faa3aa23a888d0b1",
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "336",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:22 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-be7c3111ba6e495e80f2a0ffb130d1c6",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::8j522-1790490382168-d1e0f8b0eb38",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "safe_validation": true
+      },
+      "error_response": {
+        "status": "error",
+        "request_id": "preview-be7c3111ba6e495e80f2a0ffb130d1c6",
+        "error": {
+          "code": "validation_error",
+          "message": "Request validation failed.",
+          "location": []
+        },
+        "details": [
+          {
+            "code": "invalid_token",
+            "message": "Expected an ASCII integer, decimal, scientific decimal, or integer/integer.",
+            "location": [
+              "body",
+              "gaussian",
+              "system",
+              "a",
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "label": "foreign_origin",
+      "method": "POST",
+      "path": "/api/v1/solve",
+      "status": 403,
+      "expected_status": 403,
+      "latency_ms": 321.44,
+      "bytes": 186,
+      "sha256": "0073ab77581d734914dcfb13366be0914a7bf89727c2cc1097298b0a1fc2a082",
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "186",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:22 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-9c3b81f8fbdd4f428542a6af2efda1e0",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::bbdf6-1790490382527-613df5b7cd0f",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "origin_rejected": true
+      },
+      "error_response": {
+        "status": "error",
+        "request_id": "preview-9c3b81f8fbdd4f428542a6af2efda1e0",
+        "error": {
+          "code": "origin_rejected",
+          "message": "Use the solver from the same website.",
+          "location": []
+        },
+        "details": []
+      }
+    },
+    {
+      "label": "body_limit",
+      "method": "POST",
+      "path": "/api/v1/solve",
+      "status": 422,
+      "expected_status": 422,
+      "latency_ms": 907.05,
+      "bytes": 184,
+      "sha256": "808a06a45ac99bffd94f8db05cebbed77852fe39c09b4f2e08b7527931890d6c",
+      "headers": {
+        "cache-control": "no-store",
+        "content-length": "184",
+        "content-security-policy": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/json",
+        "date": "Sun, 27 Sep 2026 06:26:22 GMT",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "referrer-policy": "no-referrer",
+        "server": "Vercel",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY",
+        "x-matched-path": "/api",
+        "x-request-id": "preview-8fb048d3b111490ca1b9c3e696a0498e",
+        "x-robots-tag": "noindex",
+        "x-vercel-cache": "MISS",
+        "x-vercel-id": "bom1::iad1::xpmqb-1790490382834-27907db312d4",
+        "connection": "close"
+      },
+      "checks": {
+        "expected_status": true,
+        "no_redirect": true,
+        "x-content-type-options": true,
+        "x-frame-options": true,
+        "referrer-policy": true,
+        "permissions_policy": true,
+        "no_wildcard_cors": true,
+        "correlated_id": true,
+        "no_store": true,
+        "bounded_body": true
+      },
+      "error_response": {
+        "status": "error",
+        "request_id": "preview-8fb048d3b111490ca1b9c3e696a0498e",
+        "error": {
+          "code": "request_too_large",
+          "message": "Request body exceeds 65536 bytes.",
+          "location": []
+        },
+        "details": []
+      }
+    }
+  ]
+}

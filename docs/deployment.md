@@ -1,5 +1,9 @@
 # Deployment and release runbook
 
+Latest remote audit: [2026-09-27 verification report](preview-verification/report.md).
+It records checks against the user-deployed production URL, repeatable remote
+test commands, and the remaining packaged-file inventory verification limit.
+
 ## Release boundary
 
 Phase 5 prepares the source, security controls, CI gates, and this runbook.

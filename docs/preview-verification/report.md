@@ -44,7 +44,7 @@ Phase 5 completion report.
   18.29 seconds. Attachments contain observed API URLs and console messages.
 - [Platform observations](platform-evidence.json): runtime, size, logs, cold start,
   and CI evidence transcribed from authenticated read-only dashboard views.
-- [Hosted quality workflow run 8](https://github.com/advaetuc/Asymtote/actions/runs/36287491411):
+- [Hosted quality workflow run 8](https://github.com/advaetuc/Augmentr/actions/runs/36287491411):
   completed successfully in 3m 35s for `ef152f1`.
 - Verification-tool checks: Ruff lint/format, ESLint and TypeScript passed.
 

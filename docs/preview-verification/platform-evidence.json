@@ -20,7 +20,7 @@
   "full_artifact_inventory_verified": false,
   "artifact_limitation": "Dashboard reports function size but its Source/Output viewer does not expose a downloadable dependency/file inventory. Exact uncompressed byte count and exhaustive exclusion checks remain unverified.",
   "hosted_ci": {
-    "url": "https://github.com/advaetuc/Asymtote/actions/runs/36287491411",
+    "url": "https://github.com/advaetuc/Augmentr/actions/runs/36287491411",
     "workflow": "Quality and API contract gates",
     "run_number": 8,
     "status": "completed successfully",

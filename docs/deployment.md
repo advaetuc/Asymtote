@@ -1,5 +1,10 @@
 # Deployment and release runbook
 
+Repository: [advaetuc/Augmentr](https://github.com/advaetuc/Augmentr).
+Live-demo address: [augmentr.vercel.app](https://augmentr.vercel.app).
+The new domain's activation and remote verification are reserved for rebrand
+Gate 5; the historical audit below records the origin actually tested.
+
 Latest remote audit: [2026-09-27 verification report](preview-verification/report.md).
 It records checks against the user-deployed production URL, repeatable remote
 test commands, and the remaining packaged-file inventory verification limit.

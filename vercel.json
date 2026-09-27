@@ -5,7 +5,7 @@
   "functions": {
     "api/index.py": {
       "maxDuration": 15,
-      "excludeFiles": "{.tools/**,.venv/**,venv/**,node_modules/**,.next/**,.git/**,.github/**,.vercel/**,.env*,app/**,components/**,lib/**,public/**,tests/**,docs/**,scripts/**,playwright-report/**,test-results/**,**/__pycache__/**,.pytest_cache/**,.mypy_cache/**,.ruff_cache/**,.hypothesis/**}"
+      "excludeFiles": "{{.tools,.venv,venv,node_modules,.next,.git,.github,.vercel,app,components,lib,public,tests,docs,scripts,playwright-report,test-results,.pytest_cache,.mypy_cache,.ruff_cache,.hypothesis}/**,**/__pycache__/**,.env*}"
     }
   }
 }

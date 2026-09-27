@@ -28,7 +28,7 @@ CI enforces this same check — a PR that changes the backend schema without reg
 
 ## Domain & aliases
 
-Production alias: `augmentr.vercel.app`. Vercel supports multiple aliases pointed at the same deployment, which is useful during any future domain transition (see `rebranding-migration-plan.md` for how this was used during the Tulya/Asymtote → Augmentr rename).
+Production alias: `augmentr-solvr.vercel.app`. Vercel supports multiple aliases pointed at the same deployment, which is useful during any future domain transition (see `rebranding-migration-plan.md` for how this was used during the Tulya/Asymtote → Augmentr rename).
 
 **If you ever add or change a domain alias, update these in the same change or the deployment breaks for legitimate browsers, not just old links:**
 - The `Origin` / `Sec-Fetch-Site` allowlist the same-origin guard checks against (in `proxy.ts` / the API layer).

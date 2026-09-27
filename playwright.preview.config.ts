@@ -1,7 +1,7 @@
 import { defineConfig } from "@playwright/test";
 import local from "./playwright.config";
 
-const target = process.env.AUGMENTR_PREVIEW_URL ?? "https://augmentr.vercel.app";
+const target = process.env.AUGMENTR_PREVIEW_URL ?? "https://augmentr-solvr.vercel.app";
 let origin: string;
 try {
   const url = new URL(target);
@@ -10,7 +10,7 @@ try {
   }
   origin = url.origin;
 } catch {
-  throw new Error("Set AUGMENTR_PREVIEW_URL to an authorized HTTPS origin without credentials, a path, query, or fragment (default: https://augmentr.vercel.app).");
+  throw new Error("Set AUGMENTR_PREVIEW_URL to an authorized HTTPS origin without credentials, a path, query, or fragment (default: https://augmentr-solvr.vercel.app).");
 }
 
 export default defineConfig({

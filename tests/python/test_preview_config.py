@@ -16,7 +16,7 @@ def forbid_network_and_clear_target(monkeypatch):
 
 
 def test_preview_defaults_to_augmentr_without_contacting_it():
-    assert parse_args(["--output", "result.json"]).origin == "https://augmentr.vercel.app"
+    assert parse_args(["--output", "result.json"]).origin == "https://augmentr-solvr.vercel.app"
 
 
 def test_explicit_origin_overrides_environment(monkeypatch):
@@ -36,11 +36,11 @@ def test_environment_can_select_an_authorized_preview(monkeypatch):
     "origin",
     [
         "",
-        "http://augmentr.vercel.app",
-        "https://user:password@augmentr.vercel.app",
-        "https://augmentr.vercel.app/solve",
-        "https://augmentr.vercel.app?query=value",
-        "https://augmentr.vercel.app#fragment",
+        "http://augmentr-solvr.vercel.app",
+        "https://user:password@augmentr-solvr.vercel.app",
+        "https://augmentr-solvr.vercel.app/solve",
+        "https://augmentr-solvr.vercel.app?query=value",
+        "https://augmentr-solvr.vercel.app#fragment",
         "not-a-url",
     ],
 )

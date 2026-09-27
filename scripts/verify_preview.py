@@ -16,7 +16,7 @@ from pathlib import Path
 from uuid import uuid4
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_ORIGIN = "https://augmentr.vercel.app"
+DEFAULT_ORIGIN = "https://augmentr-solvr.vercel.app"
 SYSTEM = {"a": [["4", "1"], ["2", "3"]], "b": ["1", "2"]}
 HEADERS = {
     "x-content-type-options": "nosniff",

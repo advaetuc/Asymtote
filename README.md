@@ -1,7 +1,7 @@
 # Augmentr
 
 [GitHub repository](https://github.com/advaetuc/Augmentr) ·
-[Live demo](https://augmentr.vercel.app) (new domain; activation and verification pending rebrand Gate 5).
+[Live demo](https://augmentr-solvr.vercel.app) (owner-configured domain; remote verification pending).
 
 An educational linear-equation solver built with Next.js 16, React 19,
 TypeScript, FastAPI, and Python 3.12. Gaussian and Gauss–Jordan methods support

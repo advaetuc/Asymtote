@@ -1,9 +1,9 @@
 # Deployment and release runbook
 
 Repository: [advaetuc/Augmentr](https://github.com/advaetuc/Augmentr).
-Live-demo address: [augmentr.vercel.app](https://augmentr.vercel.app).
-The new domain's activation and remote verification are reserved for rebrand
-Gate 5; the historical audit below records the origin actually tested.
+Live-demo address: [augmentr-solvr.vercel.app](https://augmentr-solvr.vercel.app).
+The owner reports configuring the new domain; remote verification is pending.
+The historical audit below records the origin actually tested.
 
 Latest remote audit: [2026-09-27 verification report](preview-verification/report.md).
 It records checks against the user-deployed production URL, repeatable remote
@@ -46,7 +46,7 @@ and [Python metadata support](https://vercel.com/docs/functions/runtimes/python)
 | `E2E_REUSE_SERVERS=0` | Require fresh test servers; occupied ports fail immediately. CI always requires fresh servers. |
 | `PLAYWRIGHT_BROWSERS_PATH` | Optional local browser cache location. |
 | `UV_CACHE_DIR` | Optional local Python package cache location. |
-| `AUGMENTR_PREVIEW_URL` | Explicit HTTPS origin override for the remote HTTP/browser tools. Both default to `https://augmentr.vercel.app`. Run only after the owner confirms deployment and authorizes remote verification. |
+| `AUGMENTR_PREVIEW_URL` | Explicit HTTPS origin override for the remote HTTP/browser tools. Both default to `https://augmentr-solvr.vercel.app`. Run only after the owner confirms deployment and authorizes remote verification. |
 
 No secrets, credentials, `NEXT_PUBLIC_API_URL`, or CORS origin list are needed.
 Do not upload local environment files. `.vercelignore` retains the frontend's
@@ -122,7 +122,7 @@ Add new UI source directories to the stylesheet's `@source` list when needed.
 
 ## Approval-gated preview verification
 
-The owner selected `https://augmentr.vercel.app` and will retire
+The owner selected `https://augmentr-solvr.vercel.app` and will retire
 `https://asymtote.vercel.app` entirely. Alias removal belongs in the Vercel
 dashboard: the application does not contain a hostname allowlist. Its API guard
 rejects cross-site/same-site Fetch Metadata and otherwise checks Origin against
@@ -137,7 +137,7 @@ and authorizes remote checks, run the following. These are future remote command
 not part of the local-only Gate 5a verification:
 
 ```powershell
-$env:AUGMENTR_PREVIEW_URL = 'https://augmentr.vercel.app'
+$env:AUGMENTR_PREVIEW_URL = 'https://augmentr-solvr.vercel.app'
 uv run python scripts/verify_preview.py --output .tools/augmentr-http-results.json
 npx playwright test --config playwright.preview.config.ts
 ```

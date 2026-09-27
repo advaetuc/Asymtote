@@ -2,6 +2,11 @@
 
 Date: 2026-09-27
 
+Subsequent domain correction: the owner selected `https://augmentr-solvr.vercel.app`
+because the originally planned alias below belongs to another user. Current
+links/tool defaults use the corrected address; this Gate 4 URL inventory retains
+the choices recorded in that commit. Remote verification remains pending.
+
 Status: repository documentation updated for a local-only commit. The owner
 confirmed renaming `advaetuc/Asymtote` to `advaetuc/Augmentr` on GitHub and updating
 the local remote through GitHub Desktop. Neither operation was performed by this

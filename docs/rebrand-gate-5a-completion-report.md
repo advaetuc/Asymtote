@@ -4,9 +4,33 @@ Date: 2026-09-27
 
 Status: local code, tests and documentation complete. No push, deployment,
 dashboard change or remote verification was performed. The owner confirmed
-`https://augmentr.vercel.app` as the target and chose to retire the old
+`https://augmentr-solvr.vercel.app` as the target and chose to retire the old
 `https://asymtote.vercel.app` alias entirely, without retaining a redirect.
 Actual alias activation/removal remains an owner-operated Vercel dashboard step.
+
+## Domain correction follow-up
+
+The originally planned `augmentr.vercel.app` address belongs to another user.
+The owner reports configuring `https://augmentr-solvr.vercel.app` instead. All
+current demo links, remote-tool defaults, environment examples, and positive
+origin/configuration fixtures now use that address. The other user's domain is
+covered by an additional rejected-origin regression case. No new trust entry,
+CSP source or canonical URL was necessary; the host-relative policy is unchanged.
+
+Fresh local follow-up verification: **472 pytest tests and 139 Vitest tests
+passed**, along with Python Ruff lint/format, ESLint and TypeScript checks. The
+full Python run includes the unchanged 214-character exclusion-glob assertion.
+The earlier build and 46 local browser results below belong to the initial Gate
+5a verification; those checks were not rerun for this hostname-only correction.
+No public URL was contacted and the new domain's live behavior is unverified.
+
+This follow-up touches the eight files listed below, plus `README.md`,
+`docs/rebranding-verification/README.md`,
+`docs/rebranding-verification/deployment.md`, and
+`docs/rebrand-gate-4-completion-report.md` (12 files total). The Gate 4 report
+retains its historical URL inventory with a correction note. Remaining mentions
+of the unavailable hostname are historical explanations or rejection fixtures,
+not active targets. The recorded deployment ID is unchanged.
 
 ## Exact Origin-allowlist diff
 
@@ -22,7 +46,7 @@ the old alias was never an entry that could be removed.
 
 The same unchanged policy supports the new alias when Vercel routes its requests
 to this application. Local ASGI tests now prove matching-origin and CLI requests
-work on `augmentr.vercel.app`, while old-origin, foreign-origin, lookalike-domain,
+work on `augmentr-solvr.vercel.app`, while old-origin, foreign-origin, lookalike-domain,
 scheme/port mismatch and cross-site/same-site requests are rejected before solving.
 These tests do not contact either public hostname.
 
@@ -51,10 +75,10 @@ No domain substitution was needed:
 
 | File | Change |
 | --- | --- |
-| `scripts/verify_preview.py` | Default target is `https://augmentr.vercel.app`; optional `AUGMENTR_PREVIEW_URL` override; explicit positional origin has precedence. Argument parsing is independently testable without HTTP requests. `--output` remains required. |
-| `playwright.preview.config.ts` | Default target is `https://augmentr.vercel.app`; renamed the override from `TULYA_PREVIEW_URL` to `AUGMENTR_PREVIEW_URL`; validates HTTPS and rejects credentials, paths, queries and fragments. No local servers are started by this remote config. |
+| `scripts/verify_preview.py` | Default target is `https://augmentr-solvr.vercel.app`; optional `AUGMENTR_PREVIEW_URL` override; explicit positional origin has precedence. Argument parsing is independently testable without HTTP requests. `--output` remains required. |
+| `playwright.preview.config.ts` | Default target is `https://augmentr-solvr.vercel.app`; renamed the override from `TULYA_PREVIEW_URL` to `AUGMENTR_PREVIEW_URL`; validates HTTPS and rejects credentials, paths, queries and fragments. No local servers are started by this remote config. |
 | `.env.example` | Documents the optional remote-target override and post-deployment approval requirement. |
-| `tests/python/test_security.py` | Adds 13 in-process production-host origin regression cases. |
+| `tests/python/test_security.py` | Adds 14 in-process production-host origin regression cases, including the follow-up rejection of the unavailable domain. |
 | `tests/python/test_preview_config.py` | Adds 11 offline parsing/default/override/error tests with HTTP access forbidden. |
 | `tests/frontend/preview-config.test.ts` | Adds nine offline remote-config default/override/error tests. |
 | `docs/deployment.md` | Documents the confirmed alias/retirement plan, actual host-relative origin policy, future remote commands and deployment-ID rollback rule. |
@@ -73,7 +97,10 @@ HTTPS preview origin for future verification of other deployments.
 `test_python_function_exclude_glob_fits_vercel_limit` assertion was rerun both
 in the focused deployment/security checks and in the full Python suite.
 
-## Local verification
+## Initial Gate 5a local verification
+
+These are the initial Gate 5a results, before the domain correction documented
+above. The follow-up's fresh test results are recorded separately above.
 
 | Check | Result |
 | --- | --- |

@@ -2,7 +2,7 @@
 
 A linear system solver that shows its work. Enter an augmented matrix from 1×1 to 12×12, pick a method, and get back the full derivation — every row operation or iteration, the residual and backward error, rank and conditioning, and a 2D/3D visualization where the dimensions allow it — not just an answer.
 
-**Live:** [augmentr.vercel.app](https://augmentr.vercel.app)
+**Live:** [augmentr-solvr.vercel.app](https://augmentr-solvr.vercel.app)
 <!-- Update the badge URLs below to the renamed repo once Gate 4 of the rebrand is complete -->
 <!-- ![CI](https://github.com/advaetuc/Augmentr/actions/workflows/quality.yml/badge.svg) -->
 <!-- ![License](https://img.shields.io/github/license/advaetuc/Augmentr) -->

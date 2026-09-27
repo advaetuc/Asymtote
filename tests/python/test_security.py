@@ -64,12 +64,12 @@ def test_same_origin_and_command_line_requests_are_supported(headers):
     "headers",
     [
         {},
-        {"origin": "https://augmentr.vercel.app"},
-        {"origin": "https://augmentr.vercel.app", "sec-fetch-site": "same-origin"},
+        {"origin": "https://augmentr-solvr.vercel.app"},
+        {"origin": "https://augmentr-solvr.vercel.app", "sec-fetch-site": "same-origin"},
     ],
 )
 def test_augmentr_host_accepts_its_own_origin_and_cli_requests(headers):
-    client = TestClient(create_app(), base_url="https://augmentr.vercel.app")
+    client = TestClient(create_app(), base_url="https://augmentr-solvr.vercel.app")
     response = client.post("/api/v1/solve", json=PAYLOAD, headers=headers)
     assert response.status_code == 200
     assert response.json()["result"]["classification"]["classification"] == "unique"
@@ -81,20 +81,21 @@ def test_augmentr_host_accepts_its_own_origin_and_cli_requests(headers):
     "headers",
     [
         {"origin": "https://asymtote.vercel.app"},
+        {"origin": "https://augmentr.vercel.app"},
         {"origin": "https://asymtote.vercel.app", "sec-fetch-site": "cross-site"},
         {"origin": "https://asymtote.vercel.app", "sec-fetch-site": "same-site"},
         {"origin": "https://asymtote.vercel.app", "x-forwarded-host": "asymtote.vercel.app"},
         {"origin": "https://evil.example"},
-        {"origin": "https://augmentr.vercel.app.evil.example"},
-        {"origin": "http://augmentr.vercel.app"},
-        {"origin": "https://augmentr.vercel.app:444"},
-        {"origin": "https://augmentr.vercel.app", "sec-fetch-site": "cross-site"},
-        {"origin": "https://augmentr.vercel.app", "sec-fetch-site": "same-site"},
+        {"origin": "https://augmentr-solvr.vercel.app.evil.example"},
+        {"origin": "http://augmentr-solvr.vercel.app"},
+        {"origin": "https://augmentr-solvr.vercel.app:444"},
+        {"origin": "https://augmentr-solvr.vercel.app", "sec-fetch-site": "cross-site"},
+        {"origin": "https://augmentr-solvr.vercel.app", "sec-fetch-site": "same-site"},
     ],
 )
 def test_augmentr_host_rejects_other_origins_before_solving(headers, monkeypatch):
     monkeypatch.setattr(services, "solve", lambda *args: pytest.fail("Solver must not run"))
-    client = TestClient(create_app(), base_url="https://augmentr.vercel.app")
+    client = TestClient(create_app(), base_url="https://augmentr-solvr.vercel.app")
     response = client.post("/api/v1/solve", json=PAYLOAD, headers=headers)
     assert response.status_code == 403
     assert response.json()["error"]["code"] == "origin_rejected"

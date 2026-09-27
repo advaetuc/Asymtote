@@ -8,7 +8,7 @@ afterEach(() => vi.unstubAllEnvs());
 
 test("remote config defaults to Augmentr and starts no local servers", async () => {
   const { default: config } = await import("../../playwright.preview.config");
-  expect(config.use?.baseURL).toBe("https://augmentr.vercel.app");
+  expect(config.use?.baseURL).toBe("https://augmentr-solvr.vercel.app");
   expect(config.webServer).toEqual([]);
   expect(config.globalSetup).toBeUndefined();
 });
@@ -21,11 +21,11 @@ test("an explicit authorized HTTPS origin overrides the default", async () => {
 
 test.each([
   "",
-  "http://augmentr.vercel.app",
-  "https://user:password@augmentr.vercel.app",
-  "https://augmentr.vercel.app/solve",
-  "https://augmentr.vercel.app?query=value",
-  "https://augmentr.vercel.app#fragment",
+  "http://augmentr-solvr.vercel.app",
+  "https://user:password@augmentr-solvr.vercel.app",
+  "https://augmentr-solvr.vercel.app/solve",
+  "https://augmentr-solvr.vercel.app?query=value",
+  "https://augmentr-solvr.vercel.app#fragment",
   "not-a-url",
 ])("remote config rejects an invalid target: %s", async target => {
   vi.stubEnv("AUGMENTR_PREVIEW_URL", target);

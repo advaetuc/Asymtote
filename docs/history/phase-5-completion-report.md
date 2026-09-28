@@ -1,7 +1,7 @@
 # Phase 5 — Hardening and deployment readiness
 
 Subsequent remote audit (2026-09-27): see the
-[remote release verification report](preview-verification/report.md) for the
+[remote release verification report](../preview-verification/report.md) for the
 user-deployed production URL, 70 HTTP checks, 48 remote browser tests, runtime
 and cold-start evidence, hosted CI, and the remaining artifact-inventory limit.
 The original local completion record below is retained as historical context.

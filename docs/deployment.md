@@ -1,208 +1,89 @@
-# Deployment and release runbook
+# Deployment
 
-Repository: [advaetuc/Augmentr](https://github.com/advaetuc/Augmentr).
-Live-demo address: [augmentr-solvr.vercel.app](https://augmentr-solvr.vercel.app).
-Remote verification passed on 2026-09-27: see the
-[Gate 5b report](rebrand-gate-5b-completion-report.md) for 70 HTTP requests,
-48 browser tests and confirmation that the old alias is retired without a redirect.
-The historical audit below records the earlier origin actually tested.
+## Topology
 
-Latest remote audit: [2026-09-27 verification report](preview-verification/report.md).
-It records checks against the user-deployed production URL, repeatable remote
-test commands, and the remaining packaged-file inventory verification limit.
+One Vercel project. Next.js serves `/`, FastAPI serves `/api/*` via `vercel.json`'s `/api/:path*` rewrite to the single ASGI entrypoint `api/index.py` (`app = create_app()`, 15s max duration). There is no separate backend host.
 
-## Release boundary
+## Environments
 
-Phase 5 prepares the source, security controls, CI gates, and this runbook.
-No Vercel project has been linked or deployed by this work. Obtain the owner's
-manual confirmation before creating a preview or production deployment. A
-passing local build is not proof of the remote Python artifact or rewrite.
+| Environment | How it runs | API location |
+|---|---|---|
+| Local dev | `npm run dev:api` (Uvicorn on `127.0.0.1:18000`) + `npm run dev` | Proxied through Next.js |
+| Local production build | `npm run build`, then `npm start` | Proxied only if `AUGMENTR_LOCAL_API_PROXY=1` is set before building |
+| Vercel preview/production | Single deployment | Same-origin `/api/*` via the Vercel rewrite; `VERCEL` disables only the Next.js localhost rewrite and `/api/docs`. `/docs` is not configured |
 
-## Production topology and settings
+## Deploying
 
-Use one Vercel project, repository root as Root Directory, Next.js framework,
-Node 22.x, and Python 3.12. Keep `pyproject.toml`, `.python-version`, `uv.lock`,
-and `package-lock.json`. Install frontend dependencies with `npm ci`; build
-with `npm run build`. Leave the framework's Output Directory at its default.
-The Python builder consumes root Python metadata; do not add a competing
-requirements file or install the development group into the runtime.
+Deploys happen through Vercel's normal Git integration — push to the tracked branch, Vercel builds and deploys automatically. There is no separate manual deploy step for routine changes.
 
-`api/index.py` is the only Python file in `api/`, exporting the application
-factory's ASGI app. `vercel.json` explicitly selects Next.js and rewrites the
-entire `/api/:path*` prefix to the `/api` function route. That includes health,
-OpenAPI, `/api/v1/analyze`, `/api/v1/solve`, and unknown API paths (structured
-404s). The frontend proxy is disabled whenever `VERCEL` is set, including
-preview builds. There is no second API service URL or wildcard CORS rule.
-These choices follow Vercel's supported
-[file-based Python function mapping](https://vercel.com/docs/functions/runtimes/python/api-directory)
-and [Python metadata support](https://vercel.com/docs/functions/runtimes/python).
-
-## Environment variables
-
-| Variable | Use |
-| --- | --- |
-| `VERCEL` | Platform-provided. Disables local rewrites and interactive Swagger docs. Do not set locally for ordinary development. |
-| `NODE_ENV` | Set by Next.js. Only development permits debugging evaluation and hot reload connections. |
-| `AUGMENTR_LOCAL_API_PROXY=1` | Local production integration build only. Adds the port-18000 rewrite to the build. Never configure on Vercel; the Vercel guard disables it regardless. |
-| `E2E_PRODUCTION=1` | Playwright starts `next start` using the previously built local integration build. |
-| `E2E_REUSE_SERVERS=0` | Require fresh test servers; occupied ports fail immediately. CI always requires fresh servers. |
-| `PLAYWRIGHT_BROWSERS_PATH` | Optional local browser cache location. |
-| `UV_CACHE_DIR` | Optional local Python package cache location. |
-| `AUGMENTR_PREVIEW_URL` | Explicit HTTPS origin override for the remote HTTP/browser tools. Both default to `https://augmentr-solvr.vercel.app`. Run only after the owner confirms deployment and authorizes remote verification. |
-
-No secrets, credentials, `NEXT_PUBLIC_API_URL`, or CORS origin list are needed.
-Do not upload local environment files. `.vercelignore` retains the frontend's
-required `docs/openapi.json` while excluding other documents and test artifacts.
-
-## Security controls and limits
-
-HTML responses receive a fresh cryptographically random script nonce through
-Next.js `proxy.ts`. Dynamic rendering prevents cached HTML from reusing nonces.
-Production `script-src` uses `strict-dynamic` without `unsafe-eval` or script
-`unsafe-inline`; inline event handlers, plugins, framing, and off-origin form
-submissions are blocked. Connections are same-origin. HTTPS requests upgrade
-insecure subresources. Local HTTP tests do not force HTTPS.
-
-Inline **styles** remain allowed for KaTeX and Plotly's generated styles; this
-exception does not permit inline scripts. Plotly's strict distribution avoids
-WebGL function constructors and remains lazy-loaded. It is larger than the
-former three-trace bundle; CSP compatibility is the deliberate tradeoff. Its
-cloud-sharing control is removed. No external Plotly or math CDN is required.
-
-Next.js and Python responses both set `nosniff`, `no-referrer`, `DENY`, and a
-Permissions Policy disabling camera, microphone, location, payment, and USB.
-API responses are non-cacheable and use `default-src 'none'`. Swagger is local
-only; JSON OpenAPI remains available. Do not enable the Vercel preview toolbar
-or analytics injections without reviewing their CSP requirements; never solve
-an injected-script failure by adding production `unsafe-eval`.
-
-Python rejects cross-site and same-site browser mutations using Fetch Metadata
-and validates Origin when same-origin metadata is absent. Modern browser
-same-origin metadata survives the local proxy. No-Origin CLI requests remain
-supported. This is a browser origin policy, not authentication or rate limiting.
-Do not configure a permissive CORS middleware. Enable platform firewall/rate
-controls and spending alerts appropriate to the owner's public traffic policy.
-
-Limits apply before or during computation:
-
-- Actual request bytes: 65,536, including chunked uploads (422 when exceeded).
-- Total body reception: 5 seconds (408); whole ASGI request: 10 seconds (504).
-- Cooperative numerical budget: 5 seconds, checked during direct arithmetic and
-  iterative sweeps, and before/after the service call. Native NumPy operations
-  and Python worker threads cannot be forcibly interrupted by this guard;
-  matrix/resource caps bound their work. A 15-second Vercel function limit is
-  the final platform guard and can produce a platform-specific error body.
-- Dimensions 1–12, iterations at most 500, numeric token length 48, bounded
-  magnitudes/exponents, exact intermediates at most 4096 bits, and bounded traces.
-
-Application logs contain one JSON metadata event per request and never include
-matrices, rejected values or field names, query strings, or exception messages.
-Correlate errors using `X-Request-ID`; supplied IDs intentionally remain visible
-and must not contain secrets. Uvicorn access logs are disabled in local scripts
-and CI. Vercel's platform access logs are separate: do not put private values
-in URLs or headers, and set platform log retention/access according to policy.
-
-## Bundle checks
-
-`npm run audit:runtime` traverses installed runtime dependencies, excludes dev
-packages, includes numerical/API source, and enforces a conservative **200 MB**
-project budget. Its output is an installed-file estimate for the current host,
-not a Vercel artifact measurement. CI repeats it on Linux.
-
-The Python function excludes node_modules, frontend source, build output,
-tests, caches, local environments, environment files, and documentation.
-Vercel currently documents a [500 MB Python uncompressed limit](https://vercel.com/docs/functions/limitations);
-the project budget intentionally remains much lower. At preview time inspect
-the actual artifact, including runtime adapter/layers, and require it below
-the project budget. Verify that it includes no pytest, Ruff, mypy, SciPy,
-SymPy, local secrets, or frontend bundles. Verify build logs select Python 3.12.
-
-Next.js build/tracing roots are explicitly the project working directory (npm
-scripts set that directory). Tailwind scans only `app`, `components`, and `lib`,
-so clean source snapshots do not scan unrelated repositories or tool caches.
-Add new UI source directories to the stylesheet's `@source` list when needed.
-
-## Approval-gated preview verification
-
-The owner selected `https://augmentr-solvr.vercel.app` and will retire
-`https://asymtote.vercel.app` entirely. Alias removal belongs in the Vercel
-dashboard: the application does not contain a hostname allowlist. Its API guard
-rejects cross-site/same-site Fetch Metadata and otherwise checks Origin against
-the request scheme and Host; browser same-origin metadata supports local rewrites.
-The CSP uses `connect-src 'self'` and `frame-ancestors 'none'`, so neither directive
-needs a hostname substitution. Do not add cross-alias CORS or framing permission.
-Leaving the old Vercel alias mapped would continue serving it; this code does not
-implement alias retirement or redirects.
-
-After the owner pushes through GitHub Desktop, confirms that Vercel has deployed,
-and authorizes remote checks, run the following. These are future remote commands,
-not part of the local-only Gate 5a verification:
+Before any deploy that changes the API surface:
 
 ```powershell
-$env:AUGMENTR_PREVIEW_URL = 'https://augmentr-solvr.vercel.app'
-uv run python scripts/verify_preview.py --output .tools/augmentr-http-results.json
+uv run python scripts/export_openapi.py
+npx openapi-typescript docs/openapi.json -o lib/contracts/api.generated.ts --default-non-nullable false
+npm run contracts:check
+```
+
+CI enforces this same check — a PR that changes the backend schema without regenerating the frontend types fails the `quality` job in [the CI workflow](../.github/workflows/ci.yml) (display name: “Quality and API contract gates”). CI has no deployment job; deployment belongs to the owner-managed Vercel Git integration.
+
+## Domain & aliases
+
+Production: [augmentr-solvr.vercel.app](https://augmentr-solvr.vercel.app). Repository: [advaetuc/Augmentr](https://github.com/advaetuc/Augmentr). The owner confirmed that `augmentr.vercel.app` belongs to someone else; it is not an alias of this project. Always confirm the actual assigned domain rather than deriving it from a project name.
+
+The old `asymtote.vercel.app` alias was retired entirely. Gate 5b verified `/`, `/solve`, and `/api/health` returned HTTP 404 with `DEPLOYMENT_NOT_FOUND` and no `Location` header, with redirects disabled. See the [Gate 5b report](history/rebrand-gate-5b-completion-report.md) for the dated observations; this does not guarantee the domain can never be reassigned in the future.
+
+The current security and metadata configuration has no hardcoded production hostname:
+
+- The same-origin guard (`api_app/security.py`'s `cross_origin`) is **host-relative, not an allowlist**: it rejects `Sec-Fetch-Site: cross-site`/`same-site`, permits requests without `Origin`, and accepts `Sec-Fetch-Site: same-origin`. Otherwise it validates the Origin syntax and compares scheme/authority against the current request’s scheme/`Host`. There is no list of permitted hostnames to maintain — it self-adjusts to whatever domain Vercel actually routes the request to.
+- CSP uses `connect-src 'self'` and `frame-ancestors 'none'` — no domain named explicitly.
+- `app/layout.tsx` sets branded OG title/description but no `metadataBase`, absolute OG URL, or canonical URL — there's nothing there to point at a new domain either.
+
+What **does** still need updating on a domain change: `scripts/verify_preview.py` and `playwright.preview.config.ts`, which read their target from an `AUGMENTR_PREVIEW_URL` override (falling back to a hardcoded default) — update the default and/or the override value. Confirm the above still holds for your app rather than assuming it — the fact that no allowlist exists today is a property of this specific implementation, not a guarantee that stays true after future changes.
+
+## Rollback
+
+The baseline instant-rollback target is deployment `dpl_6jgLVcERso8ffH6vxUwtiW837wii` — a deployment ID is immutable and does not change when the project or domain alias is renamed. A rollback restores that build; it does **not** by itself restore whatever alias mapping was pointed at it at the time, so after any rollback, confirm the alias/domain assignment matches what you expect before considering the incident closed.
+
+## Remote verification suite
+
+Run after any deploy that touches the API surface, the CSP, or the deployment's domain:
+
+- Two independent passes of the 35-request HTTP suite (`scripts/verify_preview.py`) — 70 requests / 718 individual assertions total last confirmed run, covering `/`, `/solve`, `/learn`, health and OpenAPI, disabled Swagger, 422/403/404/405 handling, correlation IDs, script nonce rotation, and all four solvers at 12×12.
+- 48 remote Playwright E2E checks across desktop Chromium and mobile Pixel 7 viewports (24 each), including 12 accessibility/CSP/security cases with zero axe violations.
+- If retiring an old alias: a few no-redirect HTTPS probes against it confirming Vercel's `DEPLOYMENT_NOT_FOUND` with no `Location` header, rather than assuming the retirement took effect.
+- [Earlier platform evidence](preview-verification/platform-evidence.json) records the historical dashboard function size and runtime observations. A new release needs its own platform observations if platform verification is in scope; neither HTTP/browser success nor a local closure audit proves the current function artifact size. The accepted visibility limitation is documented in [D11](decisions.md#d11--accepted-platform-artifact-visibility-limit).
+
+Exact counts will drift slightly release to release as regression cases get added — treat the most recent gate/verification report as ground truth over any number hardcoded here.
+
+For a newly authorized remote verification, these commands reproduce the two HTTP passes and full browser suite without starting local servers:
+
+```powershell
+$env:AUGMENTR_PREVIEW_URL = "https://augmentr-solvr.vercel.app"
+uv run python scripts/verify_preview.py $env:AUGMENTR_PREVIEW_URL --output test-results/http-pass-1.json
+uv run python scripts/verify_preview.py $env:AUGMENTR_PREVIEW_URL --output test-results/http-pass-2.json
+$env:E2E_PRODUCTION = "1"
 npx playwright test --config playwright.preview.config.ts
 ```
 
-The HTTP tool also accepts an explicit positional HTTPS origin, which overrides
-the environment variable. The browser tool uses the environment variable or its
-Augmentr default. Historical commands/results in the earlier remote audit retain
-the origin actually tested; use the commands above for the rebranded deployment.
+Save the full command outputs and JSON evidence with each release report. The Gate 5b files and their hash manifest remain in [rebrand-gate-5b-verification](rebrand-gate-5b-verification/); the [archived report](history/rebrand-gate-5b-completion-report.md) contains exact commands and results. The local test/build procedure is in the [README](../README.md#testing).
 
-After explicit authorization, use the Vercel dashboard to import the intended
-repository/project and create a **Preview** deployment. Keep automatic production
-deployments disabled until the release is approved. An external, reviewed CLI
-is optional; it is intentionally not an application dependency.
+## Resource budgets to watch
 
-1. Run the README's complete verification from a clean checkout. Require the
-   GitHub Actions `quality` status before promotion. No deployment job is in CI.
-2. Confirm the build uses Next.js 16, Node 22, Python 3.12, one Python API
-   function, the 15-second duration, and the expected dependency/bundle sizes.
-3. On the preview origin, fetch `/`, `/solve`, `/learn`, `/api/health`, and
-   `/api/openapi.json`. All must succeed. `/api/absent` must return structured
-   JSON 404; `/api/v1/solve` with GET must return structured JSON 405.
-4. POST the documented example to both analyze and solve. Require JSON 200,
-   correct mathematical results, and matching header/body request IDs. Check
-   inconsistent and non-convergent systems still return HTTP 200; invalid
-   numeric input must return a safe 422. A foreign Origin must return 403.
-5. In the browser, use all four methods, a row-permutation preset, risk consent,
-   exact rationals, 2D and 3D geometry, report downloads, and print preview.
-   Check mobile layout, keyboard controls, and the browser console. Verify no
-   CSP violations and no requests to a different API origin.
-6. Inspect HTML headers and script nonces across two reloads. Verify the nonce
-   changes and production permits no script evaluation. Confirm the API has
-   independent security headers and no permissive CORS response headers.
-7. Inspect function logs: one metadata event per request, no request values or
-   stack traces. Exercise cold starts and a bounded 12 × 12 system. Record
-   latency, actual artifact size, preview URL, commit, and test results.
+- `vercel.json`'s `functions["api/index.py"].excludeFiles` glob: ≤256 characters. Any change to files/folders under `api/` should be followed by re-running the existing regression assertion that checks this.
+- Runtime closure: <200 MB (`npm run audit:runtime`; historically 32.5 MB reported by Vercel versus about 49.5 MiB in the local dependency audit; these measure different things and are not current artifact guarantees).
+- Request body: 65,536 bytes, enforced before JSON parsing.
+- Whole-request deadline: 10s (HTTP 504), inside Vercel's 15s platform ceiling.
 
-If rewritten requests lose their original path or reach Next.js instead of
-FastAPI, do not promote. Inspect the deployment's generated routing and Python
-adapter; this behavior requires platform validation, not an assumption based
-on the local proxy.
+## Still open (not blocking, tracked separately)
 
-## Promotion, monitoring, and rollback
+- Vercel Web Application Firewall (WAF) / rate limiting configuration.
+- Log retention window policy.
+- Billing/spending alerts.
+- Manual assistive-technology audit (NVDA/VoiceOver + keyboard/zoom) to complement the automated `@axe-core/playwright` WCAG A/AA suite.
+- A standalone local TeX Live/MiKTeX compiler path, if automated CLI `.tex → .pdf` verification is wanted alongside the existing KaTeX + headless-browser PDF export tests.
 
-Renaming the project or changing an alias does not change the existing deployment
-ID `dpl_6jgLVcERso8ffH6vxUwtiW837wii`. It remains the recorded historical rollback
-candidate. A new code deployment may have its own ID, but do not invent a new ID
-for the old deployment after a rename. Check the alias mapping separately when
-rolling back; this gate has not changed any deployment or alias mapping.
+These follow-ups are tracked in [backlog.md](backlog.md). Their current platform configuration must be confirmed by the owner; the rebrand does not claim to have configured WAF, retention, or alerts. TeX compilation is optional: existing LaTeX downloads and browser/KaTeX PDF rendering do not require a local TeX installation.
 
-Present the preview URL, commit, gate results, and limitations to the owner.
-Promote that tested deployment only after explicit production approval. After
-promotion repeat health, analyze, solve, headers, and one browser geometry/report
-flow on the production hostname. Record the previous known-good deployment.
+## Documentation close-out and owner release steps
 
-Monitor status counts, latency, solver timeouts, numeric-breakdown outcomes,
-and cost using metadata logs. Mathematical inconsistency/non-convergence are
-valid outcomes, not service failures. Investigate 500s by request ID without
-adding raw payload logging. For a regression, use Vercel's deployment rollback
-to restore the recorded known-good release and repeat smoke checks. There is
-no database or migration to roll back.
-
-Automated axe checks cover WCAG A/AA rules and key interaction states on desktop
-and mobile. They do not certify complete accessibility: human screen-reader,
-zoom, and assistive-technology testing remains part of release review. Geometry
-has an algebraic/text alternative and does not require pointer use to understand
-the mathematical result.
+The [rebrand summary](rebrand-summary-report.md) records the completed documentation pass and verification evidence. Review the local close-out commit, push through GitHub Desktop, spot-check the resulting `quality` CI job and Vercel deployment, then create the planned `v1.1.0` tag manually. Renaming an alias does not change deployment ID `dpl_6jgLVcERso8ffH6vxUwtiW837wii`; a later code build can have a different ID. Do not invent a replacement rollback ID from a project rename, and confirm the desired build and alias mapping in the dashboard before rollback.

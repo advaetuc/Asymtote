@@ -1,3 +1,5 @@
+> These workspace rename steps were prepared but intentionally never executed; the local TULYA directory was retained.
+
 # Augmentr Gate 3 — manual workspace relocation
 
 Prepared 2026-09-27. This is a command plan, not a completion report. The folder

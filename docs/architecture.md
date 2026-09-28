@@ -1,123 +1,78 @@
-# Augmentr architecture
+# Architecture
 
-## Boundaries
+## Deployment topology
 
-Browser → Next.js 16 route shell and client workspace → same-origin REST/JSON
-`/api/*` → `api/index.py` → FastAPI application factory → `solver_core`.
+Augmentr is a single Vercel project combining a Next.js frontend and a Python/FastAPI backend, deployed together rather than as two separately hosted services.
 
-The Python core imports neither HTTP models nor FastAPI/Vercel code. Its domain
-models use immutable Pydantic values; request and response contracts live in
-`api_models`. `api_app/services.py` parses string tokens, selects the numerical
-method, and adapts results. The entrypoint only constructs the ASGI application.
+- **Routing:** `vercel.json` maps `/api/:path*` to a single ASGI serverless entrypoint, `api/index.py` (`app = create_app()`), with a 15-second max duration.
+- **Local vs. remote proxy:** Local development runs FastAPI/Uvicorn on `127.0.0.1:18000` (`npm run dev:api`), proxied through Next.js. Local production E2E builds enable the port-18000 rewrite via `AUGMENTR_LOCAL_API_PROXY=1`. The presence of the `VERCEL` platform environment variable disables localhost rewrites and FastAPI’s interactive `/api/docs`; `/docs` is not configured. The production `/api/:path*` Vercel rewrite remains active.
+- **Why one project instead of a separate API host:** avoids a second hostname, avoids `Access-Control-Allow-Origin: *`, and lets the same-origin Fetch Metadata guard (`Sec-Fetch-Site` + `Origin` validation) protect all browser traffic while still allowing no-`Origin` CLI access. See [`decisions.md`](decisions.md) for the full reasoning and the alternative (Reflex + WebSocket state) that was considered and rejected.
 
-Every solve is synchronous and self-contained. No database, queue, accounts,
-application WebSocket, or persistent server calculation state is involved.
-Browser state uses a reducer and validated per-tab session storage; cancellation
-and request ownership prevent stale responses from replacing a newer draft.
+## Backend
 
-## Numerical dependency graph
+- **Runtime:** Python 3.12, pinned via `.python-version`, `pyproject.toml`, and `uv.lock`. FastAPI, Pydantic, and NumPy are the only direct production dependencies, alongside their required transitive dependencies — no SciPy, no database, no queue.
+- **Numerical core (`solver_core/`):** Portable, with zero Vercel coupling, so it can move to a container host without rewriting anything numerical. Implements:
+  - Exact rational arithmetic (`fractions.Fraction`) for a bounded direct-method mode, and float64 for everything else — computation precision and display precision are kept as separate concerns; a `≈` marker distinguishes an approximate display fraction from an exact result.
+  - Scale-aware tolerances for pivot detection, zero tests, residual evaluation, and rank calculation — never a single hardcoded epsilon threshold.
+  - Rank-based singularity/consistency classification (not determinant equality): `rank(A) == rank([A|b]) == n` → unique solution; `rank(A) == rank([A|b]) < n` → infinitely many; `rank(A) < rank([A|b])` → inconsistent.
+  - Partial pivoting by default for all floating-point elimination; the system never computes `A⁻¹` to solve.
+  - Row-permutation search for diagonal dominance, solved as a bipartite matching problem between rows and diagonal positions — the original equation order is always shown alongside any reordering, and only rows (not variables) are ever reordered.
+- **API layer (`api_models/`, `api_app/`):** `requests.py`, `responses.py`, `services.py`, `errors.py`, `observability.py`. Enforces token grammar, rejects unknown request properties, attaches an `X-Request-ID` correlation header, logs one structured JSON event per request, and applies cooperative timeouts.
+- **Cold start / bundle:** earlier platform verification reported a 32.5 MB function, a 1.07s cold start, and a ~111ms warm 12×12 Gaussian solve. These are historical observations, not current-build size guarantees or latency targets; see [platform evidence](preview-verification/platform-evidence.json) and the accepted visibility limit in [D11](decisions.md#d11--accepted-platform-artifact-visibility-limit).
 
-Limits and errors → immutable values → strict parser and tolerance policy →
-row-operation primitives/classification → direct methods and residuals.
+## Frontend
 
-Independent bipartite row matching supports the iterative engine. Convergence
-analysis provides method-specific iteration matrices and spectral diagnostics.
-Jacobi uses the previous complete vector; Gauss–Seidel uses updated components.
-Both require residual and step-change tests and retain unrounded float64 values.
-Row permutations change equations, never variable ordering.
+- **Framework:** Next.js 16 (App Router, Turbopack) with TypeScript and Tailwind CSS.
+- **Routes:** `/` (landing), `/learn` (method primer), `/solve` (the entire stateful solver workspace — matrix entry, method selection, configuration, and results all live in one client workflow to avoid route-level state synchronization).
+- **Solver workflow state machine:** explicit states, not a bag of booleans —
+  `DIMENSIONS → MATRIX_INPUT → ANALYZING → METHOD_SELECTION → METHOD_CONFIGURATION → SOLVING → RESULTS`, with support for moving back to an earlier stage without losing compatible data. Draft state persists to `sessionStorage` only — nothing solver-related is stored server-side.
+- **Rendering:** KaTeX for formula rendering and print/report views; lazy-loaded Plotly.js (strict distribution; historical Phase 5 measurement: ~4.95 MB raw / ~1.5 MB gzip) for CSP-compliant 2D/3D WebGL geometry — 2D for square 2×2 systems, 3D for square 3×3 systems, degenerate cases get an algebraic explanation instead of invented geometry. The iterative-method convergence/residual chart renders in the Steps panel alongside the iteration table, not in Visualize.
+- **Design system:** Swiss/International Typographic Style grid discipline (strong grid, flush-left text, controlled asymmetry) combined with restrained glassmorphism (low-opacity surfaces, subtle backdrop blur, thin borders) for major panels only. The implemented font stack is Arial/Helvetica/sans-serif for body text and Cascadia Code/SFMono-Regular/Consolas/monospace for code and numeric tokens; the proposed Space Grotesk/Inter fonts have not been introduced.
 
-Exact direct methods use Fraction values parsed from text; no float conversion
-is used to construct exact values. NumPy supplies float diagnostics, not the
-educational elimination algorithm. Rank uncertainty and arithmetic breakdown
-are explicit outcomes. Numerical thresholds are documented in
-[numerical-policy.md](numerical-policy.md).
+## API surface
 
-A framework-independent ContextVar budget optionally interrupts arithmetic and
-iteration at cooperative checkpoints. The API applies a five-second budget;
-standalone core calls have no imposed wall-clock deadline. NumPy native calls
-cannot be forcibly interrupted; small dimensions and platform limits bound work.
+- `GET /api/health` — health probe.
+- `GET /api/openapi.json` — live JSON OpenAPI schema.
+- `POST /api/v1/analyze` — matrix shape, numerical rank, system classification, condition number, diagonal dominance, SPD/spectral properties, and per-method eligibility with diagnostic reasons.
+- `POST /api/v1/solve` — discriminated-union endpoint executing the selected method: full elimination snapshots or iteration histories, applied row permutations, solution vectors / parametric free-variable forms / contradiction witnesses, and residual/backward-error diagnostics against the original (unreduced) system.
 
-## HTTP contract and privacy
+## Contract pipeline
 
-FastAPI/Pydantic owns deterministic OpenAPI and the generated TypeScript
-contract. The client uses those types plus schema-driven response validation.
-Mathematical outcomes, including inconsistent systems and non-convergence,
-remain HTTP 200. Validation/resource violations are 422, browser-origin failures
-403, reception deadlines 408, computational deadlines 504, and unexpected
-exceptions generic 500. Every response carries its request correlation ID.
+FastAPI/Pydantic is the single source of truth for the API schema — never maintain two manually duplicated type systems.
 
-Pure ASGI middleware limits actual request bytes before JSON parsing, bounds
-reception and request time, checks browser origin metadata, attaches security
-headers, and records one metadata log event. Known contract locations remain
-available for inline cell validation; unknown field names are sanitized.
-Rejected values, request bodies, queries, and exception messages never enter
-application logs. No wildcard CORS rule is installed.
+```
+create_app()  →  scripts/export_openapi.py  →  docs/openapi.json  →  openapi-typescript  →  lib/contracts/api.generated.ts
+```
 
-## Frontend, exports, and geometry
+`npm run contracts:check` runs in CI and fails the build if the generated TypeScript types have drifted from the current backend schema.
 
-Server-rendered shells compose the `/`, `/solve`, and `/learn` pages. Matrix
-inputs support bounded dimensions, keyboard navigation and bulk paste. Method
-settings, educational replay, iteration history, and residual panels consume
-backend results without duplicating solver decisions in TypeScript.
+## Testing & audit surface
 
-Reports share an ordered document model. Markdown, LaTeX and the KaTeX print
-view include the original system, settings, analysis, complete trace and final
-diagnostics. JSON preserves full returned precision and exact integer strings.
-Print and downloads are local browser operations; no server TeX installation
-or report storage is required.
+Counts below are the most recently confirmed figures (post-rebrand regression coverage), not a fixed target — they grow as gates and features add cases. Treat the latest completion/verification report as ground truth over this table.
 
-Geometry is limited to 2 × 2 and 3 × 3 systems. Data derivation clips original
-equations and returned solution families to bounded viewing regions; it never
-reclassifies a system. Degenerate cases have explicit text descriptions. The
-lazy plot component uses Plotly's strict distribution to support WebGL without
-production `unsafe-eval`. This increases the deferred chunk compared with the
-previous partial bundle. The initial landing and solver views do not fetch it;
-a production browser test inspects the vendor chunk to enforce that boundary.
+| Suite | Count (as of last confirmation) |
+|---|---|
+| Python (pytest: unit, property-based, concurrency, API) | 472 |
+| Vitest (unit/component) | 139 |
+| Playwright, local E2E (desktop Chromium + mobile Pixel 7) | 46 |
+| Playwright, remote E2E | 48 |
+| Remote HTTP verification | 70 requests / 718 assertions (two independent passes) |
+| `@axe-core/playwright` WCAG A/AA accessibility checks | included in the E2E suites, 0 violations |
+| `ruff`, `mypy --strict` (30 source files), `npm run audit:runtime` | clean / under the 200 MB runtime-closure budget |
 
-Each plot effect owns its DOM element and cleans up resize observers and WebGL
-resources, including late completions from React Strict Mode. The plot is a
-labeled region with controls, with an algebraic/text alternative. The iterative
-convergence chart remains lightweight SVG and does not load Plotly.
+## Non-negotiable resource and numeric bounds
 
-## Rendering security and accessibility
+- Request body: 65,536 bytes, enforced before JSON parsing (including chunked transfers — 65,537 bytes is verified to fail with HTTP 422).
+- Matrix dimensions: 1 to 12 equations/unknowns. Iterative iteration cap: 500. Token length: ≤48 characters. Exact rational intermediates: ≤4096 bits.
+- Timeouts: 5s body reception (HTTP 408), 5s cooperative numerical budget (checked during elimination and iterative sweeps), 10s whole-request deadline (HTTP 504), 15s Vercel platform ceiling.
+- `vercel.json`'s `functions["api/index.py"].excludeFiles` glob must stay ≤256 characters (currently a regression-tested brace-expansion string).
+- Runtime closure must stay under 200 MB (`npm run audit:runtime`); the earlier dashboard reported 32.5 MB, while the local dependency audit measured about 49.5 MiB. These are different measurements, not proof of the current deployed artifact’s exact contents.
+- Application logs and error responses never contain matrix coefficients, rejected input tokens, unknown validation field names, query strings, or stack traces.
 
-`proxy.ts` adds a new random nonce per HTML request and forwards the CSP to
-Next.js so framework scripts receive it. Root layout uses `connection()` for
-dynamic rendering; nonce-bearing HTML must not be statically cached. Production
-scripts require nonce authorization and do not allow dynamic evaluation. Inline
-styles are the documented KaTeX/Plotly compatibility exception. Next.js and API
-responses have independent security headers. Details and limitations are in
-[deployment.md](deployment.md).
+## Current identity and release evidence
 
-Automated axe checks cover routes and important solver states, plus keyboard
-skip links and forced-colors/reduced-motion pages. Visible focus outlines and
-system colors support keyboard and high-contrast use. Automated tests supplement,
-and do not replace, human screen-reader and assistive-technology review.
+The repository is [advaetuc/Augmentr](https://github.com/advaetuc/Augmentr), and production is [augmentr-solvr.vercel.app](https://augmentr-solvr.vercel.app). The local `TULYA` path is intentionally retained. The browser draft key `tulya.draft.v1` and Python request logger `tulya.requests` remain compatibility identifiers; the latter is not client storage.
 
-## Deployment and release gates
+The guard compares request metadata and the current request host; it has no domain allowlist. Production CSP uses `connect-src 'self'` and `frame-ancestors 'none'`. There is no configured `metadataBase`, absolute canonical URL, sitemap, or robots URL to rename. See [decisions](decisions.md) for the precise Origin fallback and inline-style exception.
 
-One Vercel project explicitly selects Next.js. The `/api/:path*` rewrite targets
-`/api`, which maps to the sole file-based Python function `api/index.py`.
-This retains the original project architecture rather than migrating to Vercel
-Services. Runtime Python dependencies are FastAPI, Pydantic and NumPy only;
-root `pyproject.toml` and `uv.lock` are authoritative. Python is pinned to 3.12.
-
-Local development proxies to port 18000. A separate explicit local production
-integration flag enables the same proxy for `next start` tests. The presence of
-`VERCEL` disables both local rewrite paths, even if that flag is mistakenly set.
-The Python function excludes frontend/build/test/cache files and has a 15-second
-platform duration. A runtime dependency audit enforces a 200 MB project budget.
-
-GitHub Actions runs locked installs, lint/types/tests, generated-contract checks,
-production build, dependency/size checks and desktop/mobile Playwright including
-accessibility/CSP. It contains no deployment job. Phase 5 has not created a remote
-preview. The actual Python artifact, remote rewrite, cold start and platform logs
-must pass the approval-gated preview runbook before production promotion.
-
-## ADR: Acceptance of Vercel Function Artifact Visibility Limit (Gate 6)
-
-- **Date:** 2026-09-27
-- **Status:** Accepted
-- **Context:** The release verification checklist requires confirming that the deployed Vercel Python function stays under the 200 MB budget and excludes frontend/development files. During remote verification of commit `ef152f1` (`dpl_6jgLVcERso8ffH6vxUwtiW837wii`), the read-only Vercel dashboard confirmed a single `/api/index` Python 3.12 function at **32.5 MB** built from `uv.lock`, but the dashboard UI does not expose a full uncompressed file manifest or exact byte count.
-- **Decision:** Accept the combined evidence of the **32.5 MB** dashboard-reported size, the **51,882,280-byte** automated dependency-closure audit (enforced in Windows and Linux CI), and explicit `vercel.json` exclusion rules as sufficient proof to close Gate 6.
-- **Consequences:** Avoids introducing custom deployment-extraction credentials or weakening read-only operational security just to inspect the remote zip tree. The exact uncompressed artifact manifest remains a documented platform visibility limitation.
+[Numerical policy](numerical-policy.md) describes the tolerance rules. [Release summary](rebrand-summary-report.md) distinguishes fresh local checks from the earlier remote verification. The [history index](history/README.md) preserves phase and rebrand provenance; [backlog](backlog.md) tracks operational follow-ups.

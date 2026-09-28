@@ -95,18 +95,18 @@ formatting warnings, retained in its console output.
 
 | Artifact | Contents |
 | --- | --- |
-| [http-pass-1.json](rebrand-gate-5b-verification/http-pass-1.json) | All 35 request records, headers, checks, response hashes, mathematical summaries and timings. |
-| [http-pass-2.json](rebrand-gate-5b-verification/http-pass-2.json) | Complete independent second HTTP pass. |
-| [http-pass-1.txt](rebrand-gate-5b-verification/http-pass-1.txt) | Unabridged first HTTP console output. |
-| [http-pass-2.txt](rebrand-gate-5b-verification/http-pass-2.txt) | Unabridged second HTTP console output. |
-| [browser-results.json](rebrand-gate-5b-verification/browser-results.json) | Complete Playwright JSON report, configuration, results, timings and embedded observations. |
-| [browser-results.txt](rebrand-gate-5b-verification/browser-results.txt) | Unabridged browser console output. |
-| [browser-test-summary.json](rebrand-gate-5b-verification/browser-test-summary.json) | All 48 test names, projects, attempt counts, outcomes and durations. |
-| [browser-observations.json](rebrand-gate-5b-verification/browser-observations.json) | Decoded desktop/mobile console errors, warnings and API request URLs. |
-| [alias-and-origin-results.json](rebrand-gate-5b-verification/alias-and-origin-results.json) | All seven supplemental responses, complete headers/bodies and Origin expectations. |
-| [alias-and-origin-results.txt](rebrand-gate-5b-verification/alias-and-origin-results.txt) | Unabridged supplemental-probe console output. |
-| [alias-and-origin-probe.txt](rebrand-gate-5b-verification/alias-and-origin-probe.txt) | Exact Python source of the supplemental no-redirect probe, archived as text. |
-| [sha256-manifest.json](rebrand-gate-5b-verification/sha256-manifest.json) | SHA-256 hashes of LF-normalized UTF-8 text for every evidence file listed above. |
+| [http-pass-1.json](../rebrand-gate-5b-verification/http-pass-1.json) | All 35 request records, headers, checks, response hashes, mathematical summaries and timings. |
+| [http-pass-2.json](../rebrand-gate-5b-verification/http-pass-2.json) | Complete independent second HTTP pass. |
+| [http-pass-1.txt](../rebrand-gate-5b-verification/http-pass-1.txt) | Unabridged first HTTP console output. |
+| [http-pass-2.txt](../rebrand-gate-5b-verification/http-pass-2.txt) | Unabridged second HTTP console output. |
+| [browser-results.json](../rebrand-gate-5b-verification/browser-results.json) | Complete Playwright JSON report, configuration, results, timings and embedded observations. |
+| [browser-results.txt](../rebrand-gate-5b-verification/browser-results.txt) | Unabridged browser console output. |
+| [browser-test-summary.json](../rebrand-gate-5b-verification/browser-test-summary.json) | All 48 test names, projects, attempt counts, outcomes and durations. |
+| [browser-observations.json](../rebrand-gate-5b-verification/browser-observations.json) | Decoded desktop/mobile console errors, warnings and API request URLs. |
+| [alias-and-origin-results.json](../rebrand-gate-5b-verification/alias-and-origin-results.json) | All seven supplemental responses, complete headers/bodies and Origin expectations. |
+| [alias-and-origin-results.txt](../rebrand-gate-5b-verification/alias-and-origin-results.txt) | Unabridged supplemental-probe console output. |
+| [alias-and-origin-probe.txt](../rebrand-gate-5b-verification/alias-and-origin-probe.txt) | Exact Python source of the supplemental no-redirect probe, archived as text. |
+| [sha256-manifest.json](../rebrand-gate-5b-verification/sha256-manifest.json) | SHA-256 hashes of LF-normalized UTF-8 text for every evidence file listed above. |
 
 The HTTP suite retains response hashes and parsed summaries rather than every
 raw HTML/JSON body; its complete native output is attached unchanged. The alias

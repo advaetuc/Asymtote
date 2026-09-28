@@ -2,7 +2,7 @@
 
 Date: 2026-09-27. Scope: visible branding, UI copy, documentation prose and
 matching test expectations. Source copy:
-[`rebranding-verification/ui-copy-rewrite.md`](rebranding-verification/ui-copy-rewrite.md).
+[`rebranding-verification/ui-copy-rewrite.md`](../rebranding-verification/ui-copy-rewrite.md).
 
 Status: **complete; all local verification passed. Stopped for owner verification.**
 

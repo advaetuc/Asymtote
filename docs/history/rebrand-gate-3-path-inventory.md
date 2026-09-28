@@ -1,3 +1,5 @@
+> These workspace rename steps were prepared but intentionally never executed; the local TULYA directory was retained.
+
 # Gate 3 — old absolute path inventory
 
 Snapshot taken 2026-09-27 before creating the Gate 3 instruction documents.

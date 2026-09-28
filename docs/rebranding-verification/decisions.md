@@ -82,7 +82,11 @@ Why Augmentr is built the way it is, and what was considered and rejected along 
 
 ### D9 — Same-origin rewrite, not a separate API host or permissive CORS
 
-**Decision:** No separate backend hostname; `Access-Control-Allow-Origin: *` rejected outright. All browser API traffic routes same-origin through `/api/:path*`, protected by `Sec-Fetch-Site` and `Origin` header validation, while still permitting no-`Origin` CLI access. See D1 for the deployment-topology reasoning this depends on.
+**Rejected (implicitly):** A hardcoded allowlist of permitted origin hostnames.
+
+**Decision:** No separate backend hostname; `Access-Control-Allow-Origin: *` rejected outright. All browser API traffic routes same-origin through `/api/:path*`. The guard itself (`cross_origin` in `api_app/security.py`) validates **host-relative, not against a domain list**: it parses the incoming `Origin` header and compares its scheme/authority directly to the current request's own scheme/`Host`, and separately rejects `Sec-Fetch-Site: cross-site`/`same-site` while still permitting no-`Origin` CLI access. See D1 for the deployment-topology reasoning this depends on.
+
+This paid off directly during the Tulya/Asymtote → Augmentr rename: renaming the Vercel project and changing its domain alias required zero changes to this guard, the CSP, or any canonical-URL setting — there was no hardcoded hostname anywhere to update. A domain rename that requires updating a security allowlist is a domain rename that can go wrong; one that doesn't, can't.
 
 ---
 

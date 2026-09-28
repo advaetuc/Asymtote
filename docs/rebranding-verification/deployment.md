@@ -28,13 +28,16 @@ CI enforces this same check — a PR that changes the backend schema without reg
 
 ## Domain & aliases
 
-Production alias: `augmentr-solvr.vercel.app`. Vercel supports multiple aliases pointed at the same deployment, which is useful during any future domain transition (see `rebranding-migration-plan.md` for how this was used during the Tulya/Asymtote → Augmentr rename).
+Production alias: `augmentr-solvr.vercel.app`. Note the `-solvr` suffix — the plain `augmentr.vercel.app` subdomain was already claimed by an unrelated Vercel account, discovered only when trying to claim it during the Tulya/Asymtote → Augmentr rename. **Renaming a Vercel project to `X` does not guarantee you get `X.vercel.app`** — Vercel doesn't reserve or auto-provision it if someone else already has it, and there's no warning until you try. Confirm the actual assigned subdomain in the dashboard before hardcoding it anywhere.
 
-**If you ever add or change a domain alias, update these in the same change or the deployment breaks for legitimate browsers, not just old links:**
-- The `Origin` / `Sec-Fetch-Site` allowlist the same-origin guard checks against (in `proxy.ts` / the API layer).
-- Any CSP `connect-src` / `frame-ancestors` directive that names the domain explicitly.
-- Any canonical-URL environment variable used for OG tags, sitemap, or `robots.txt`.
-- `scripts/verify_preview.py` and `playwright.preview.config.ts`, which target a specific domain for remote verification.
+Vercel supports multiple aliases pointed at the same deployment, which is useful during any future domain transition (see `rebranding-migration-plan.md` for how this was evaluated during the same rename — the retired `asymtote.vercel.app` alias was ultimately dropped entirely rather than kept as a redirect).
+
+**The good news for future domain changes:** none of the usual suspects hardcode a domain in this codebase, so a domain/alias change is close to a no-op on the code side —
+- The same-origin guard (`api_app/security.py`'s `cross_origin`) is **host-relative, not an allowlist**: it parses the incoming `Origin` header and compares its scheme/authority directly against the current request's own scheme/`Host`, and separately rejects `Sec-Fetch-Site: cross-site`/`same-site`. There is no list of permitted hostnames to maintain — it self-adjusts to whatever domain Vercel actually routes the request to.
+- CSP uses `connect-src 'self'` and `frame-ancestors 'none'` — no domain named explicitly.
+- `app/layout.tsx` sets branded OG title/description but no `metadataBase`, absolute OG URL, or canonical URL — there's nothing there to point at a new domain either.
+
+What **does** still need updating on a domain change: `scripts/verify_preview.py` and `playwright.preview.config.ts`, which read their target from an `AUGMENTR_PREVIEW_URL` override (falling back to a hardcoded default) — update the default and/or the override value. Confirm the above still holds for your app rather than assuming it — the fact that no allowlist exists today is a property of this specific implementation, not a guarantee that stays true after future changes.
 
 ## Rollback
 
@@ -42,11 +45,14 @@ The baseline instant-rollback target is deployment `dpl_6jgLVcERso8ffH6vxUwtiW83
 
 ## Remote verification suite
 
-Run after any deploy that touches the API surface, the CSP, or the Origin allowlist:
+Run after any deploy that touches the API surface, the CSP, or the deployment's domain:
 
-- 70 remote HTTP checks (`scripts/verify_preview.py` → `http-results.json`, `http-log-audit-results.json`)
-- 48 remote Playwright E2E checks across desktop Chromium and mobile Pixel 7 viewports (`browser-results.json`, `browser-observability-results.json`)
+- Two independent passes of the 35-request HTTP suite (`scripts/verify_preview.py`) — 70 requests / ~718 individual assertions total last confirmed run, covering `/`, `/solve`, `/learn`, health and OpenAPI, disabled Swagger, 422/403/404/405 handling, correlation IDs, script nonce rotation, and all four solvers at 12×12.
+- 48 remote Playwright E2E checks across desktop Chromium and mobile Pixel 7 viewports (24 each), including 12 accessibility/CSP/security cases with zero axe violations.
+- If retiring an old alias: a few no-redirect HTTPS probes against it confirming Vercel's `DEPLOYMENT_NOT_FOUND` with no `Location` header, rather than assuming the retirement took effect.
 - `platform-evidence.json` — captures the platform-level evidence (function size, cold start, bundle closure) used to sign off a deploy without needing to extract deployment credentials/artifacts directly from the Vercel dashboard.
+
+Exact counts will drift slightly release to release as regression cases get added — treat the most recent gate/verification report as ground truth over any number hardcoded here.
 
 ## Resource budgets to watch
 

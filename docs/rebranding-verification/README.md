@@ -3,7 +3,7 @@
 A linear system solver that shows its work. Enter an augmented matrix from 1×1 to 12×12, pick a method, and get back the full derivation — every row operation or iteration, the residual and backward error, rank and conditioning, and a 2D/3D visualization where the dimensions allow it — not just an answer.
 
 **Live:** [augmentr-solvr.vercel.app](https://augmentr-solvr.vercel.app)
-<!-- Update the badge URLs below to the renamed repo once Gate 4 of the rebrand is complete -->
+<!-- Update the badge URLs below to the renamed repo once Gate 4 of the rebrand is confirmed complete -->
 <!-- ![CI](https://github.com/advaetuc/Augmentr/actions/workflows/quality.yml/badge.svg) -->
 <!-- ![License](https://img.shields.io/github/license/advaetuc/Augmentr) -->
 
@@ -38,7 +38,7 @@ Prerequisites: Python 3.12 (pinned via `.python-version`), [`uv`](https://docs.a
 ```bash
 # Backend
 uv sync
-uv run uvicorn api.index:app --reload --port 18000
+npm run dev:api
 
 # Frontend (separate terminal)
 npm install
@@ -50,12 +50,13 @@ Next.js proxies `/api/*` to `127.0.0.1:18000` locally. Set `AUGMENTR_LOCAL_API_P
 ## Testing
 
 ```bash
-uv run pytest          # unit, property-based, concurrency, and API tests
-uv run ruff check .
-uv run mypy --strict .
-npm run test            # Vitest unit/component tests
-npm run test:e2e        # Playwright, desktop Chromium + mobile Pixel 7
-npm run contracts:check # fails if generated TS types have drifted from the OpenAPI schema
+npm run test:python      # pytest: unit, property-based, concurrency, and API tests
+npm run lint:python       # ruff
+npm run typecheck:python  # mypy --strict
+npm run check             # frontend lint, types, Vitest unit/component tests, and a production build
+npm run test:e2e          # Playwright, desktop Chromium + mobile Pixel 7
+npm run contracts:check   # fails if generated TS types have drifted from the OpenAPI schema
+npm run audit:runtime     # confirms the serverless function bundle stays under the 200 MB budget
 ```
 
 See [`docs/deployment.md`](docs/deployment.md) for the remote verification suite that runs against the live deployment.

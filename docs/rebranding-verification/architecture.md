@@ -48,10 +48,12 @@ create_app()  →  scripts/export_openapi.py  →  docs/openapi.json  →  opena
 
 ## Testing & audit surface
 
-| Suite | Count |
+Counts below are the most recently confirmed figures (post-rebrand regression coverage), not a fixed target — they grow as gates and features add cases. Treat the latest completion/verification report as ground truth over this table.
+
+| Suite | Count (as of last confirmation) |
 |---|---|
-| Python (pytest: unit, property-based, concurrency, API) | 447 |
-| Vitest (unit/component) | 130 |
+| Python (pytest: unit, property-based, concurrency, API) | 472 |
+| Vitest (unit/component) | 139 |
 | Playwright, local E2E (desktop Chromium + mobile Pixel 7) | 46 |
 | Playwright, remote E2E | 48 |
 | Remote HTTP verification checks | 70 |
